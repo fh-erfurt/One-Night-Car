@@ -36,6 +36,7 @@ public class Car {
         HYBRID,
         ELECTRIC;
     }
+    private int fuelLevel = 100;
     private double GPSLongitude = 0.00;
     private double GPSLatitude = 0.00;
 
@@ -60,4 +61,16 @@ public class Car {
         this.GPSLatitude = latitude;
     }
 
+    public double getGPS()
+    {
+     return this.GPSLatitude + this.GPSLongitude;
+    }
+    public int getFuelLevel ()
+    {
+        return this.fuelLevel;
+    }
+    public void setFuelLevel ()
+    {
+        // TODO: Verbrauch auf 100km * gefahrene Kilometer
+    }
 }
