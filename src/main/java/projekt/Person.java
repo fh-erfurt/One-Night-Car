@@ -3,37 +3,35 @@ package projekt;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class  Persons {
+public abstract class Person {
 
     /* /////////////////////Attributes///////////////////////// */
-    private int personID;
-    private static AtomicInteger atomicInteger = new AtomicInteger(0); // personId auto increment
-    private String surname;
-    private String firstName;
-    private String ZIP;
-    private String street;
-    private String housNumber;
-    private Date dateOfBirth;
+    protected int personID;
+    protected static AtomicInteger atomicInteger = new AtomicInteger(0); // personId auto increment
+    protected String surname;
+    protected String firstName;
+    protected String ZIP;
+    protected String street;
+    protected String houseNumber;
+    protected Date dateOfBirth;
 
     /* /////////////////////Methods/////////////////////////// */
 
 
-    public void Persons(String surname, String firstName, String ZIP, String street, String housNumber, Date dateOfBirth){
+    public void Persons(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth){
         this.personID = atomicInteger.incrementAndGet();
         this.surname= surname;
         this.firstName= firstName;
         this.ZIP = ZIP;
         this.street = street;
-        this.housNumber= housNumber;
+        this.houseNumber = this.houseNumber;
         this.dateOfBirth= dateOfBirth;
     }
-    public void modifyPersonalData(String surname, String firstName, String ZIP, String street, String housNumber, Date dateOfBirth)
+    public void modifyAddress( String ZIP, String street, String housNumber, Date dateOfBirth)
     {
-        this.firstName= firstName;
         this.ZIP = ZIP;
         this.street = street;
-        this.housNumber= housNumber;
-        this.dateOfBirth= dateOfBirth;
+        this.houseNumber = housNumber;
     }
 
     public int getPersonID()
@@ -58,8 +56,8 @@ public abstract class  Persons {
         return this.street;
     }
     public String setHousNumber(String housNumber){
-        this.housNumber= housNumber;
-        return this.housNumber;
+        this.houseNumber = housNumber;
+        return this.houseNumber;
     }
     public Date setDateOfBirth(Date dateOfBirth){
         this.dateOfBirth= dateOfBirth;
