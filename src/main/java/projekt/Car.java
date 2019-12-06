@@ -36,41 +36,74 @@ public class Car {
         HYBRID,
         ELECTRIC;
     }
-    private int fuelLevel = 100;
+    private float consumption;              //How many liters does the car need to do 1 KM
+    private float tankSize;                 //In liters
+    private float fuelLevel = 100;          // 100 is Full, 0 is Empty
+    private long odometer = 0;
     private double GPSLongitude = 0.00;
     private double GPSLatitude = 0.00;
+    private float price;                   //Price pro hour
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public Car(Type type, String brand, String model, State state, Transmission transmission, FuelType fuelType){
-        // A Car manager should be done and here somehow the ID should be given
+    public Car (Type type, String brand, String model, State state, Transmission transmission, FuelType fuelType,
+                float consumption, float price, float tankSize, List list) {
+        carID = list.getSizeOfCarsID();     //Creates a running counter of cars in list
+        list.carsID.add(carID);             //Adds the new car to the global list
         this.type = type;
         this.brand = brand;
         this.model = model;
         this.state = state;
         this.transmission = transmission;
         this.fuelType = fuelType;
+        this.consumption = consumption;
+        this.price = price;
+        this.tankSize = tankSize;
     }
 
-    public void changeCarState(State newCarState){
+    public void changeCarState (State newCarState) {
         this.state = newCarState;
     }
 
-    public void setNewGPSlocation(double longitude, double latitude){
+    public void setNewGPSLocation (double longitude, double latitude){
         this.GPSLongitude = longitude;
         this.GPSLatitude = latitude;
     }
 
-    public double getGPS()
-    {
-     return this.GPSLatitude + this.GPSLongitude;
+    public double getGPSLongitude () {
+     return this.GPSLongitude;
     }
-    public int getFuelLevel ()
-    {
+
+    public double getGPSLatitude ()  {
+        return this.GPSLatitude;
+    }
+
+    public float getFuelLevel () {
         return this.fuelLevel;
     }
-    public void setFuelLevel ()
-    {
-        // TODO: Verbrauch auf 100km * gefahrene Kilometer
+
+    public float calculateRemainingFuelInTank (Rental rental) {
+        return (tankSize - ((rental.getOdometerAfter() - this.odometer) * consumption));
     }
+
+    public void setFuelLevel (Rental rental) {
+        this.fuelLevel = (calculateRemainingFuelInTank(rental) * 100) / tankSize;
+    }
+
+    public float getPrice (){
+        return this.price;
+    }
+
+    public int getCarID (){
+        return this.carID;
+    }
+
+    public long getOdometer (){
+        return this.odometer;
+    }
+
+    public void setOdometer (Rental rental) {
+        this.odometer = rental.getOdometerAfter();
+    }
+
 }

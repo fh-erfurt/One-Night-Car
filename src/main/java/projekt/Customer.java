@@ -1,10 +1,10 @@
 package projekt;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Customer extends Person {
+
+    /* /////////////////////Attributes///////////////////////// */
 
     private CustomerType customerType;
     private enum CustomerType{
@@ -21,16 +21,8 @@ public class Customer extends Person {
     private String placeOfIssue;
 
 
-
-    // Array List of Customer
-    ArrayList<Integer> customersId = new ArrayList<Integer>();
-
-
     /* /////////////////////Methods/////////////////////////// */
-    public void signUp(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth, int cardNumber, String cardType, String placeOfIssue){
 
-        // Constructor for Customer with all variables
-    }
     public Customer(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth,CustomerType customerType, int cardNumber, CardType cardType, String placeOfIssue){
         super.surname = surname;
         super.firstName = firstName;

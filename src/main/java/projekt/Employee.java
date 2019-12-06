@@ -1,9 +1,11 @@
 package projekt;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Employee extends Person {
+
+    /* /////////////////////Attributes///////////////////////// */
+
     private float salary;
     private TypeOfActivity typeOfActivity;
     private enum TypeOfActivity{
@@ -12,11 +14,9 @@ public class Employee extends Person {
         BOSS;
     }
 
-    //  Array List of Employee
-    ArrayList<Integer> employeesId = new ArrayList<Integer>();
+    /* /////////////////////Methods/////////////////////////// */
 
-
-        // constructor for Employee
+    // constructor for Employee
     public Employee(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth,float salary, TypeOfActivity typeOfActivity) {
         super.surname = surname;
         super.firstName = firstName;
@@ -29,7 +29,7 @@ public class Employee extends Person {
     }
 
     public static void employeeHelpsCustomer(int customerId){
-        /* *********** we don'd know how to help our Customer ********** */
+        /* *********** we don't know how to help our Customer (yet) ********** */
     }
 
 

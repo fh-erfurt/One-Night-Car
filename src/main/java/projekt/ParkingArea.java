@@ -1,4 +1,5 @@
 package projekt;
+
 import java.util.*;
 
 public class ParkingArea {
@@ -17,8 +18,9 @@ public class ParkingArea {
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public ParkingArea(int parkZIP, String parkCity, String parkStreet, String parkHouseNumber) {
-        // A ParkingArea manager should be done and here somehow the ID should be given
+    public ParkingArea(int parkZIP, String parkCity, String parkStreet, String parkHouseNumber, List list) {
+        parkID = list.getSizeOfParkingAreasID();            //Creates a running counter of Parking Areas in list
+        list.parkingAreasID.add(parkID);                    //Adds the new Parking Area to the global list
         this.parkZIP = parkZIP;
         this.parkCity = parkCity;
         this.parkStreet = parkStreet;
