@@ -1,8 +1,11 @@
 package projekt;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Customer extends Person {
+
     private CustomerType customerType;
     private enum CustomerType{
         NEWUSER,
@@ -10,15 +13,25 @@ public class Customer extends Person {
         SUPERUSER;
     };
     private int cardNumber;
-    private String cardType;
+    private CardType cardType;
+    private enum CardType{
+        CREDITCARD,
+        DEPITCARD;
+    }
     private String placeOfIssue;
+
+
+
+    // Array List of Customer
+    ArrayList<Integer> customersId = new ArrayList<Integer>();
 
 
     /* /////////////////////Methods/////////////////////////// */
     public void signUp(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth, int cardNumber, String cardType, String placeOfIssue){
 
+        // Constructor for Customer with all variables
     }
-    public Customer(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth,CustomerType customerType, int cardNumber, String cardType, String placeOfIssue){
+    public Customer(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth,CustomerType customerType, int cardNumber, CardType cardType, String placeOfIssue){
         super.surname = surname;
         super.firstName = firstName;
         super.ZIP = ZIP;
@@ -30,6 +43,19 @@ public class Customer extends Person {
         this.cardType = cardType;
         this.placeOfIssue = placeOfIssue;
     }
+
+    public void modifyPaymentMethod(int cardNumber, CardType cardType, String placeOfIssue){
+        this.cardNumber = cardNumber;
+        this.cardType = cardType;
+        this.placeOfIssue = placeOfIssue;
+    }
+
+    public boolean customerNeedHelp(){
+        Employee.employeeHelpsCustomer(this.personID);
+        return true;
+    }
+
+
 
 
 

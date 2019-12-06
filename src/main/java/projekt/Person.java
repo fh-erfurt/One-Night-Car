@@ -27,11 +27,11 @@ public abstract class Person {
         this.houseNumber = this.houseNumber;
         this.dateOfBirth= dateOfBirth;
     }
-    public void modifyAddress( String ZIP, String street, String housNumber, Date dateOfBirth)
+    public void modifyAddress( String ZIP, String street, String houseNumber, Date dateOfBirth)
     {
         this.ZIP = ZIP;
         this.street = street;
-        this.houseNumber = housNumber;
+        this.houseNumber = houseNumber;
     }
 
     public int getPersonID()
@@ -55,8 +55,8 @@ public abstract class Person {
         this.street = street;
         return this.street;
     }
-    public String setHousNumber(String housNumber){
-        this.houseNumber = housNumber;
+    public String setHouseNumber(String houseNumber){
+        this.houseNumber = houseNumber;
         return this.houseNumber;
     }
     public Date setDateOfBirth(Date dateOfBirth){
