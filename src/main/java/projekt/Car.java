@@ -42,7 +42,7 @@ public class Car {
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public void Car(Type type, String brand, String model, State state, Transmission transmission, FuelType fuelType){
+    public Car(Type type, String brand, String model, State state, Transmission transmission, FuelType fuelType){
         // A Car manager should be done and here somehow the ID should be given
         this.type = type;
         this.brand = brand;
