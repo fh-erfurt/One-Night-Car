@@ -2,6 +2,7 @@ package projekt;
 
 public class Car {
 
+
     /* /////////////////////Attributes///////////////////////// */
 
     private int carID;
@@ -62,7 +63,13 @@ public class Car {
     }
 
     public void changeCarState (State newCarState) {
+
         this.state = newCarState;
+
+    }
+
+    public State getCarState(){
+        return this.state;
     }
 
     public void setNewGPSLocation (double longitude, double latitude){
@@ -106,4 +113,11 @@ public class Car {
         this.odometer = rental.getOdometerAfter();
     }
 
+    public FuelType getFuelType(){
+        return this.fuelType;
+    }
+
+    public float getTankSize(){
+        return this.tankSize;
+    }
 }

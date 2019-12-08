@@ -16,6 +16,7 @@ public class Rental {
     private Date date;
     private Time departureTime;
     private Time arrivalTime;
+    private float fuelAfter;
 
     /* /////////////////////Methods/////////////////////////// */
 
@@ -46,4 +47,9 @@ public class Rental {
     public long getOdometerAfter(){
         return this.odometerAfter;
     }
+
+    public float getFuelAfter(){
+        return this.fuelAfter;
+    }
+
 }
