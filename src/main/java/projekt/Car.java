@@ -21,9 +21,9 @@ public class Car {
     private String model;
     private State state;
     public enum State{
-        PERFECT,
-        OK,
-        DAMAGED;
+        PERFECT,        //Only when a car is New and never has been repaired
+        OK,             //The car works but it has been repaired
+        DAMAGED;        //the car doesn't works
     }
     private Transmission transmission;
     public enum Transmission{
@@ -49,8 +49,8 @@ public class Car {
 
     public Car (Type type, String brand, String model, State state, Transmission transmission, FuelType fuelType,
                 float consumption, float price, float tankSize, List list) {
-        carID = list.getSizeOfCarsID();     //Creates a running counter of cars in list
-        list.carsID.add(carID);             //Adds the new car to the global list
+        carID = list.getSizeOfCars();     //Creates a running counter of cars in list
+        list.cars.add(this);                //Adds the new car to the global list
         this.type = type;
         this.brand = brand;
         this.model = model;
@@ -63,9 +63,7 @@ public class Car {
     }
 
     public void changeCarState (State newCarState) {
-
         this.state = newCarState;
-
     }
 
     public State getCarState(){
@@ -119,5 +117,9 @@ public class Car {
 
     public float getTankSize(){
         return this.tankSize;
+    }
+
+    public void setCarStateToDamage(){
+        this.state = State.DAMAGED;
     }
 }

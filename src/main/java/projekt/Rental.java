@@ -21,8 +21,8 @@ public class Rental {
     /* /////////////////////Methods/////////////////////////// */
 
     public Rental(Car car, int customerID, Date date, Time departureTime, Time arrivalTime, List list){
-        rentalID = list.getSizeOfRentalsID();            //Creates a running counter of Rentals in list
-        list.rentalsID.add(rentalID);                   //Adds the new rental to the global list
+        rentalID = list.getSizeOfRentals();            //Creates a running counter of Rentals in list
+        list.rentals.add(this);                          //Adds the new rental to the global list
         this.carID = car.getCarID();
         this.customerID = customerID;
         this.rentalPrice = calculateElapsedHours() * car.getPrice();
@@ -52,4 +52,7 @@ public class Rental {
         return this.fuelAfter;
     }
 
+    public int getCarID() {
+        return this.carID;
+    }
 }

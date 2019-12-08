@@ -12,19 +12,22 @@ public class ParkingArea {
     private String parkStreet;
     private String parkHouseNumber;
     // ArrayList in case the number of cars in station changes
-    private ArrayList<Integer> stationCarIDList = new ArrayList<Integer>();
-    private ArrayList<Integer> availableCarIDList = new ArrayList<Integer>();
-    private ArrayList<Integer> notAvailableCarIDList = new ArrayList<Integer>();
+    private ArrayList<Integer> stationCarIDList;
+    private ArrayList<Integer> availableCarIDList;
+    private ArrayList<Integer> notAvailableCarIDList;
 
     /* /////////////////////Methods/////////////////////////// */
 
     public ParkingArea(int parkZIP, String parkCity, String parkStreet, String parkHouseNumber, List list) {
-        parkID = list.getSizeOfParkingAreasID();            //Creates a running counter of Parking Areas in list
-        list.parkingAreasID.add(parkID);                    //Adds the new Parking Area to the global list
+        parkID = list.getSizeOfParkingAreas();            //Creates a running counter of Parking Areas in list
+        list.parkingAreas.add(this);                        //Adds the new Parking Area to the global list
         this.parkZIP = parkZIP;
         this.parkCity = parkCity;
         this.parkStreet = parkStreet;
         this.parkHouseNumber = parkHouseNumber;
+        this.stationCarIDList = new ArrayList<Integer>();
+        this.availableCarIDList = new ArrayList<Integer>();
+        this.notAvailableCarIDList = new ArrayList<Integer>();
     }
 
     public void assignCarToStation (int carID){

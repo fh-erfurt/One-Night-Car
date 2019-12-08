@@ -1,11 +1,13 @@
 package projekt;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Employee extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
 
+    private int employeeID;
     private float salary;
     private TypeOfActivity typeOfActivity;
     private enum TypeOfActivity{
@@ -17,7 +19,10 @@ public class Employee extends Person {
     /* /////////////////////Methods/////////////////////////// */
 
     // constructor for Employee
-    public Employee(String surname, String firstName, String ZIP, String street, String houseNumber, Date dateOfBirth,float salary, TypeOfActivity typeOfActivity) {
+    public Employee(String surname, String firstName, String ZIP, String street, String houseNumber,
+                    Date dateOfBirth,float salary, TypeOfActivity typeOfActivity, List list) {
+        employeeID = list.getSizeOfEmployees();            //Creates a running counter of Employees in list
+        list.employees.add(this);                          //Adds the new employee to the global list
         super.surname = surname;
         super.firstName = firstName;
         super.ZIP = ZIP;
@@ -29,12 +34,29 @@ public class Employee extends Person {
     }
 
     public static void employeeHelpsCustomer(int customerId){
-        /* *********** we don't know how to help our Customer (yet) ********** */
+        /* *********** we don't know how to help our Customer (yet) **********
+        * the idea is to do something with an interface like start a chat or something like that*/
+    }
+
+    // Used to generate Random Booleans for employeeRepairsCar
+    public boolean getRandomBoolean(){
+        Random random = new Random();
+        return random.nextBoolean();
     }
 
     public void employeeRepairsCar(Car car){
         if(car.getCarState() == car.getCarState().DAMAGED){
-            /* *********** what does an Employee in this Situation ??? ********** */
+            boolean carSuccessfullyRepaired;
+            /* *********** Repairs with the magical powers of Employee ********** */
+            carSuccessfullyRepaired = getRandomBoolean();
+            if (carSuccessfullyRepaired == true){
+                System.out.println("We were able to fix the car");
+                car.changeCarState(Car.State.OK);
+            }
+            else{
+                System.out.println("Sorry the car is not repairable");
+                car.changeCarState(Car.State.DAMAGED);
+            }
         }
     }
 
@@ -46,7 +68,7 @@ public class Employee extends Person {
             else{
                System.out.println("Car fuel Type: "+car.getFuelType());
                System.out.println("Max Capacity: "+car.getTankSize());
-               System.out.println("current Fuel : "+rental.getFuelAfter());
+               System.out.println("Current Fuel : "+rental.getFuelAfter());
            }
        }
 
