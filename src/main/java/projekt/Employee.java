@@ -1,6 +1,7 @@
 package projekt;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 public class Employee extends Person {
@@ -20,7 +21,7 @@ public class Employee extends Person {
 
     // constructor for Employee
     public Employee(String surname, String firstName, String ZIP, String street, String houseNumber,
-                    Date dateOfBirth,float salary, TypeOfActivity typeOfActivity, List list) {
+                    GregorianCalendar dateOfBirth, float salary, TypeOfActivity typeOfActivity, List list) {
         employeeID = list.getSizeOfEmployees();            //Creates a running counter of Employees in list
         list.employees.add(this);                          //Adds the new employee to the global list
         super.surname = surname;

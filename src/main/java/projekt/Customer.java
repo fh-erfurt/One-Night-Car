@@ -1,33 +1,33 @@
 package projekt;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Customer extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
 
     private int customerID;
-    private CustomerType customerType;
-    private enum CustomerType{
+    protected CustomerType customerType;
+    protected enum CustomerType{
         NEWUSER,
         REGULARUSER,
         SUPERUSER;
     };
-    private String cardNumber;
-    private CardType cardType;
-    private enum CardType{
+    protected String cardNumber;
+    protected CardType cardType;
+    protected enum CardType{
         CREDITCARD,
         DEBITCARD;
     }
-    private Date validThrough;      //needed to do Online transactions
+    private GregorianCalendar validThrough;      //needed to do Online transactions
     private String CCV;             //code on the back of Cards
 
 
     /* /////////////////////Methods/////////////////////////// */
 
     public Customer(String surname, String firstName, String ZIP, String street,
-                    String houseNumber, Date dateOfBirth,CustomerType customerType,
-                    String cardNumber, CardType cardType, Date validThrough, String CCV,
+                    String houseNumber, GregorianCalendar dateOfBirth,CustomerType customerType,
+                    String cardNumber, CardType cardType, GregorianCalendar validThrough, String CCV,
                     List list){
         customerID = list.getSizeOfCustomers();            //Creates a running counter of Rentals in list
         list.customers.add(this);                          //Adds the new customer to the global list
@@ -44,7 +44,7 @@ public class Customer extends Person {
         this.CCV = CCV;
     }
 
-    public void modifyPaymentMethod(String cardNumber, CardType cardType, Date validThrough, String CCV){
+    public void modifyPaymentMethod(String cardNumber, CardType cardType, GregorianCalendar validThrough, String CCV){
         this.cardNumber = cardNumber;
         this.cardType = cardType;
         this.validThrough = validThrough;
@@ -68,9 +68,12 @@ public class Customer extends Person {
 
     public void customerDamagesCar(Rental rental, List list){
         if(getCarFromRental(rental, list) != null){
+
             getCarFromRental(rental, list).changeCarState(Car.State.DAMAGED);
         }
     }
+
+    public String getCardNumber() { return this.cardNumber; }
 
 
 

@@ -12,9 +12,9 @@ public class ParkingArea {
     private String parkStreet;
     private String parkHouseNumber;
     // ArrayList in case the number of cars in station changes
-    private ArrayList<Integer> stationCarIDList;
-    private ArrayList<Integer> availableCarIDList;
-    private ArrayList<Integer> notAvailableCarIDList;
+    protected ArrayList<Integer> stationCarIDList;         //Testing purposes
+    protected ArrayList<Integer> availableCarIDList;
+    protected ArrayList<Integer> notAvailableCarIDList;
 
     /* /////////////////////Methods/////////////////////////// */
 
@@ -35,7 +35,7 @@ public class ParkingArea {
         availableCarIDList.add(carID);
     }
 
-    private int getIndexInStationCarIDList (int carID){
+    protected int getIndexInStationCarIDList (int carID){                      //protected for Testing purposes
         int carIDIndex;
         for (carIDIndex = 0; carIDIndex < stationCarIDList.size(); carIDIndex++){
             if (carID == stationCarIDList.get(carIDIndex)){

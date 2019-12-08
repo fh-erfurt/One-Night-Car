@@ -1,6 +1,7 @@
 package projekt;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Person {
@@ -11,7 +12,7 @@ public abstract class Person {
     protected String ZIP;
     protected String street;
     protected String houseNumber;
-    protected Date dateOfBirth;
+    protected GregorianCalendar dateOfBirth;
 
     /* /////////////////////Methods/////////////////////////// */
 

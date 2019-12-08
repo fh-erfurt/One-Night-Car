@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.util.Date;
 import java.lang.Math;
 
-public class Rental {
+public class Rental{
     /* /////////////////////Attributes///////////////////////// */
 
     private int rentalID;
@@ -13,8 +13,8 @@ public class Rental {
     private float rentalPrice;
     private long odometerBefore;
     private long odometerAfter = 0;
-    private Date date;
-    private Time departureTime;
+    public Date date;
+    public Time departureTime;
     private Time arrivalTime;
     private float fuelAfter;
 
