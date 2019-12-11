@@ -3,11 +3,16 @@ package Car;
 import ZuLöschen.List;
 import Rental.Rental;
 
-public class Car {
-
-
-    /* /////////////////////Attributes///////////////////////// */
-
+/**
+ *  <h2> Car class </h2>
+ *  it has the common Information about the cars
+ *  it's the superclass of CombustionCar class and ElectricCar class
+ *
+ *  @author OneNightCar Team
+ *  @version 1.0
+ *  @since 2019-12-11
+ */
+public abstract class Car {
     private int carID;
     private Type type;
     public enum Type{
@@ -28,42 +33,14 @@ public class Car {
         OK,             //The car works but it has been repaired
         DAMAGED;        //the car doesn't works
     }
-    private Transmission transmission;
-    public enum Transmission{
-        MANUAL,
-        AUTOMATIC;
-    }
-    private FuelType fuelType;
-    public enum FuelType{
-        PETROL,
-        DIESEL,
-        HYBRID,
-        ELECTRIC;
-    }
-    private float consumption;              //How many liters does the car need to do 1 KM
-    private float tankSize;                 //In liters
-    private float fuelLevel = 100;          // 100 is Full, 0 is Empty
-    private long odometer = 0;
-    private double GPSLongitude = 0.00;
-    private double GPSLatitude = 0.00;
-    private float price;                   //Price pro hour
+    private Location location;
+    private long odometer;
+    private String permission; // which Customer can book this car (which customer Level)
+    private float price;       //Price pro hour
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public Car (Type type, String brand, String model, State state, Transmission transmission, FuelType fuelType,
-                float consumption, float price, float tankSize, List list) {
-        carID = list.getSizeOfCars();     //Creates a running counter of cars in list
-        list.cars.add(this);                //Adds the new car to the global list
-        this.type = type;
-        this.brand = brand;
-        this.model = model;
-        this.state = state;
-        this.transmission = transmission;
-        this.fuelType = fuelType;
-        this.consumption = consumption;
-        this.price = price;
-        this.tankSize = tankSize;
-    }
+
 
     public void changeCarState (State newCarState) {
         this.state = newCarState;
@@ -73,32 +50,17 @@ public class Car {
         return this.state;
     }
 
-    public void setNewGPSLocation (double longitude, double latitude){
-        this.GPSLongitude = longitude;
-        this.GPSLatitude = latitude;
-    }
+   public void setNewLocation(){
+        // TODO
+   }
 
-    public double getGPSLongitude () {
-     return this.GPSLongitude;
-    }
+   public double getGPS(){
+        //TODO
+       return 0;
+   }
 
-    public double getGPSLatitude ()  {
-        return this.GPSLatitude;
-    }
 
-    public float getFuelLevel () {
-        return this.fuelLevel;
-    }
-
-    public float calculateRemainingFuelInTank (Rental rental) {
-        return (tankSize - ((rental.getOdometerAfter() - this.odometer) * consumption));
-    }
-
-    public void setFuelLevel (Rental rental) {
-        this.fuelLevel = (calculateRemainingFuelInTank(rental) * 100) / tankSize;
-    }
-
-    public float getPrice (){
+    public float getPrice(){
         return this.price;
     }
 
@@ -111,19 +73,19 @@ public class Car {
     }
 
     public void setOdometer (Rental rental) {
+        //**************************************** bleibt das so ??
         this.odometer = rental.getOdometerAfter();
     }
 
-    public FuelType getFuelType(){
-        return this.fuelType;
+    /**
+     * this method is to change the car State
+     * @param state State*/
+    public void setCarState(State state){
+        this.state = state;
     }
 
-    public float getTankSize(){
-        return this.tankSize;
-    }
-
-    public void setCarStateToDamage(){
-        this.state = State.DAMAGED;
+    public void simulateDrive(){
+        // TODO
     }
 }
 
