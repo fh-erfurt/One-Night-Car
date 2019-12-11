@@ -1,9 +1,8 @@
-package projekt;
+package Car;
 
+import Car.Car;
+import ZuLöschen.List;
 import org.junit.jupiter.api.Test;
-
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 import static org.junit.jupiter.api.Assertions.*;
 

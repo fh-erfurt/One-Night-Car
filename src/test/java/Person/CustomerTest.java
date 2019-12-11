@@ -1,5 +1,7 @@
-package projekt;
+package Person;
 
+import Person.Customer;
+import ZuLöschen.List;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

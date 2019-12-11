@@ -1,0 +1,5 @@
+package Rental;
+
+class RentalTest {
+
+}

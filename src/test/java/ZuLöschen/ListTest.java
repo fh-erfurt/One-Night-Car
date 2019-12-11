@@ -1,4 +1,4 @@
-package projekt;
+package ZuLöschen;
 
 public class ListTest {
 }

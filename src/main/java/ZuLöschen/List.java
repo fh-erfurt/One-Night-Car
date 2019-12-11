@@ -1,4 +1,10 @@
-package projekt;
+package ZuLöschen;
+
+import Car.Car;
+import ParkingArea.ParkingArea;
+import Person.Customer;
+import Person.Employee;
+import Rental.Rental;
 
 import java.util.ArrayList;
 

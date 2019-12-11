@@ -1,5 +1,7 @@
-package projekt;
+package ParkingArea;
 
+import ParkingArea.ParkingArea;
+import ZuLöschen.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
