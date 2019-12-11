@@ -50,12 +50,12 @@ public abstract class Car {
         return this.state;
     }
 
-   public void setNewLocation(){
-        // TODO
+   public void setNewLocation(double GPSLatitude, double GPSLongitude){
+
    }
 
    public double getGPS(){
-        //TODO
+        // ************************ ???? ***********************
        return 0;
    }
 

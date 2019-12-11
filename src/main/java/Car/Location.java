@@ -12,9 +12,12 @@ public class Location {
     private double GPSLongitude;
 
 
-    public  void setGPS(double GPSLatitude, double GPSLongitude){
-        this.GPSLongitude=GPSLongitude;
-        this.GPSLatitude= GPSLatitude;
+    public  void setGPSLatitude(double latitude){
+        GPSLatitude= latitude;
+    }
+
+    public void setGPSLongitude(double longitude){
+        GPSLongitude= longitude;
     }
 
 /**
