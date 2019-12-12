@@ -1,6 +1,15 @@
 package Car;
 
 import Rental.Rental;
+/**
+ *  <h2> CombustionCar class </h2>
+ *  it has the common Information about the combustion cars
+ *  it's the superclass of @HybridCar class and @TraditionalCar class and @UtilitarianCar class
+ *
+ *  @author OneNightCar Team
+ *  @version 1.0
+ *  @since 2019-12-12
+ */
 
 public abstract class CombustionCar extends Car {
     private double tankSize;    // in liter

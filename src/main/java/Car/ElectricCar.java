@@ -16,35 +16,22 @@ public class ElectricCar extends Car {
     private float chargePercent;
 
 
-
+/**
+ * Constructor with Parameter for class ElectricCar*/
     public ElectricCar(Type type, String brand, String model, State state,
                        long odometer, double GPSLatitude, double GPSLongitude, String permission,
                        float price, float range, float chargePercent){
-        this.type = type;
-        this.brand = brand;
-        super.model= model;
-        super.state= state;
-        super.odometer= odometer;
-        Location location = new Location(GPSLatitude,GPSLongitude);
-        super.permission=permission;
-        super.price=price;
+        super(type, brand, model,state,GPSLatitude,GPSLongitude, odometer,permission,price);
         this.range=range;
         this.chargePercent=chargePercent;
 
 
-        // fragen: was ist richtiger this oder super?
-
     }
-
+/**
+ * default Constructor for test */
     public ElectricCar(){
-        this.type= type.MINI;
-        this.brand= "BMW";
-        this.model= "i3";
-        this.state= state.PERFECT;
-        this.odometer = 10999;
-        Location location = new Location(50.9787, 11.03283);
-        this.permission = "REGULARUSER";
-        this.price= 69.00f;
+        super(Type.MINI,"BMW","i3", state.PERFECT, 50.9787, 11.03283,
+                10999, "REGULARUSER", 69.00f);
         this.range= 200.00f;
         this.chargePercent= 100.00f;
 

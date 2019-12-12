@@ -33,13 +33,25 @@ public abstract class Car {
         OK,             //The car works but it has been repaired
         DAMAGED;        //the car doesn't works
     }
-    protected Location location;
+
     protected long odometer;
     protected String permission; // which Customer can book this car (which customer Level)
     protected float price;       //Price pro hour
 
     /* /////////////////////Methods/////////////////////////// */
+    public Car(Type type, String brand, String model, State state,
+               double GPSLatitude, double GPSLongitude, long odometer,
+               String permission, float price){
+        this.type= type;
+        this.brand=brand;
+        this.model=model;
+        this.state=state;
+        Location location = new Location(GPSLatitude,GPSLongitude);
+        this.odometer=odometer;
+        this.permission= permission;
+        this.price=price;
 
+    }
 
 
     public void changeCarState (State newCarState) {
@@ -51,13 +63,10 @@ public abstract class Car {
     }
 
    public void setNewLocation(double GPSLatitude, double GPSLongitude){
-
+        Location location= new Location(GPSLatitude,GPSLongitude);
    }
 
-   public double getGPS(){
-        // ************************ ???? ***********************
-       return 0;
-   }
+
 
 
     public float getPrice(){
@@ -79,13 +88,11 @@ public abstract class Car {
 
     /**
      * this method is to change the car State
-     * @param state State*/
+     * @param state State */
     public void setCarState(State state){
         this.state = state;
     }
 
-    public void simulateDrive(){
-        // TODO
-    }
+
 }
 
