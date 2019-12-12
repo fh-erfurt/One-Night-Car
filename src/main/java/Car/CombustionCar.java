@@ -16,6 +16,21 @@ public abstract class CombustionCar extends Car {
     private double fuelLevel;   // in percent
     private double consumption; // the Consumption in 100 Km
 
+    public CombustionCar(Type type, String brand, String model, State state,
+                         double GPSLatitude, double GPSLongitude, long odometer,
+                         String permission, float price, double tankSize,
+                         double fuelLevel, double consumption){
+        super(type, brand, model, state, GPSLatitude, GPSLongitude, odometer,
+                permission, price);
+        this.tankSize= tankSize;
+        this.fuelLevel= fuelLevel;
+        this.consumption=consumption;
+    }
+
+    public CombustionCar(){
+
+    }
+
    public double getFuelLevel(){
        return this.fuelLevel;
    }

@@ -53,6 +53,10 @@ public abstract class Car {
 
     }
 
+    public Car(){
+
+    }
+
 
     public void changeCarState (State newCarState) {
         this.state = newCarState;
