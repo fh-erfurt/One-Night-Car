@@ -14,7 +14,7 @@ import Rental.Rental;
  */
 public abstract class Car {
     private int carID;
-    private Type type;
+    protected Type type;
     public enum Type{
         MINI,
         LITTLE,
@@ -25,18 +25,18 @@ public abstract class Car {
         VAN,
         SUV;
     }
-    private String brand;
-    private String model;
-    private State state;
+    protected String brand;
+    protected String model;
+    protected State state;
     public enum State{
         PERFECT,        //Only when a car is New and never has been repaired
         OK,             //The car works but it has been repaired
         DAMAGED;        //the car doesn't works
     }
-    private Location location;
-    private long odometer;
-    private String permission; // which Customer can book this car (which customer Level)
-    private float price;       //Price pro hour
+    protected Location location;
+    protected long odometer;
+    protected String permission; // which Customer can book this car (which customer Level)
+    protected float price;       //Price pro hour
 
     /* /////////////////////Methods/////////////////////////// */
 

@@ -12,6 +12,11 @@ public class Location {
     private double GPSLongitude;
 
 
+    public Location(double GPSLatitude, double GPSLongitude){
+        this.GPSLatitude = GPSLatitude;
+        this.GPSLongitude = GPSLongitude;
+    }
+
     public  void setGPSLatitude(double latitude){
         GPSLatitude= latitude;
     }
