@@ -1,8 +1,7 @@
 package Person;
 
-import Car.Car;
+import Car.*;
 import ZuLöschen.List;
-import Rental.Rental;
 
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -22,20 +21,6 @@ public class Employee extends Person {
 
     /* /////////////////////Methods/////////////////////////// */
 
-    // constructor for Employee
-    public Employee(String surname, String firstName, String ZIP, String street, String houseNumber,
-                    GregorianCalendar dateOfBirth, float salary, TypeOfActivity typeOfActivity, List list) {
-        employeeID = list.getSizeOfEmployees();            //Creates a running counter of Employees in list
-        list.employees.add(this);                          //Adds the new employee to the global list
-        super.surname = surname;
-        super.firstName = firstName;
-        super.ZIP = ZIP;
-        super.street = street;
-        super.houseNumber = houseNumber;
-        super.dateOfBirth = dateOfBirth;
-        this.salary = salary;
-        this.typeOfActivity = typeOfActivity;
-    }
 
     public static void employeeHelpsCustomer(int customerId){
         /* *********** we don't know how to help our Customer (yet) **********
@@ -64,9 +49,24 @@ public class Employee extends Person {
         }
     }
 
-
-
+    /* public void employeeRepairsElectricCar(ElectricCar electricCar) {
+        if(ElectricCar.getCarState() == ElectricCar.getCarState().DAMAGED){
+            boolean carSuccessfullyRepaired;
+            // *********** Repairs with the magical powers of Employee **********
+            carSuccessfullyRepaired = getRandomBoolean();
+            if (carSuccessfullyRepaired == true){
+                System.out.println("We were able to fix the car");
+                car.changeCarState(Car.State.OK);
+            }
+            else{
+                System.out.println("Sorry the car is not repairable");
+                car.changeCarState(Car.State.DAMAGED);
+            }
+        }
     }
+    */
+
+}
 
 
 

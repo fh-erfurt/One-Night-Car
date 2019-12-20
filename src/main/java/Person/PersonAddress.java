@@ -29,6 +29,7 @@ public class PersonAddress {
         this.street = street;
         this.streetNumber = streetNumber;
     }
+
     /** Creates a PersonAddress with default Values.
      * It is used to increment speed of UnitTests.
      */
@@ -38,53 +39,60 @@ public class PersonAddress {
         this.street = "Altonaer Str.";
         this.streetNumber = "25";
     }
+
     /** Gets the Address ZIP.
      * @return A string representing the Address ZIP
      */
     public String getZIP(){
         return this.ZIP;
     }
+
     /** Gets the Address city.
      * @return A string representing the Address city
      */
     public String getCity(){
         return this.city;
     }
+
     /** Gets the Address Street.
      * @return A string representing the Address Street
      */
     public String getStreet(){
         return this.street;
     }
+
     /** Gets the Address Street.
      * @return A string representing the Address StreetNumber
      */
     public String getStreetNumber(){
         return this.streetNumber;
     }
+
     /** Sets the Address ZIP.
      * @param ZIP A String containing the Address ZIP
      */
     public void setZIP(String ZIP){
         this.ZIP = ZIP;
     }
+
     /** Sets the Address City.
      * @param city A String containing the Address ZIP
      */
     public void setCity(String city){
         this.city = city;
     }
+
     /** Sets the Address Street.
      * @param street A String containing the Address Street
      */
     public void setStreet(String street){
         this.street = street;
     }
+
     /** Sets the Address StreetNumber.
      * @param streetNumber A String containing the Address StreetNumber
      */
     public void setStreetNumber(String streetNumber){
         this.streetNumber = streetNumber;
     }
-
 }

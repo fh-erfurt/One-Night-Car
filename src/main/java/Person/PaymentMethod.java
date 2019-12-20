@@ -35,6 +35,7 @@ public class PaymentMethod {
         this.validThrough = validThrough;
         this.CCV = CCV;
     }
+
     /** Creates a PaymentMethod with default Values.
      * It is used to increment speed of UnitTests.
      */
@@ -44,48 +45,56 @@ public class PaymentMethod {
         this.validThrough = new GregorianCalendar(2025,GregorianCalendar.DECEMBER,31);
         this.CCV = "999";
     }
+
     /** Gets the PaymentMethod Card Number.
      * @return A string representing the PaymentMethod Card Number
      */
     public String getCardNumber(){
         return this.cardNumber;
     }
+
     /** Gets the PaymentMethod Card Type.
      * @return A CardType representing the PaymentMethod Card Type
      */
     public CardType getCardType(){
         return this.cardType;
     }
+
     /** Gets the PaymentMethod Valid Through.
      * @return A Gregorian Calendar representing the PaymentMethod Valid Through
      */
     public GregorianCalendar getValidThrough(){
         return this.validThrough;
     }
+
     /** Gets the PaymentMethod CCV.
      * @return A string representing the PaymentMethod CCV
      */
     public String getCCV(){
         return this.CCV;
     }
+
     /** Sets the PaymentMethod Card Number.
      * @param cardNumber A String containing the PaymentMethod Card Number
      */
     public void setCardNumber(String cardNumber){
         this.cardNumber = cardNumber;
     }
+
     /** Sets the PaymentMethod Card Type.
      * @param cardType A CardType containing the PaymentMethod Card Type
      */
     public void setCardType(CardType cardType){
         this.cardType = cardType;
     }
+
     /** Sets the PaymentMethod Valid Through.
      * @param validThrough A Gregorian Calendar containing the PaymentMethod Valid Through
      */
     public void setValidThrough(GregorianCalendar validThrough){
         this.validThrough = validThrough;
     }
+
     /** Sets the PaymentMethod CCV.
      * @param CCV A String containing the PaymentMethod CCV
      */
