@@ -48,4 +48,9 @@ public abstract class CombustionCar extends Car {
    public double getConsumption(){
        return this.consumption;
    }
+
+    public void setFuelLevel(double fuelLevel){
+        this.fuelLevel=fuelLevel;
+    }
 }
+
