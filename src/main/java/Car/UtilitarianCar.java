@@ -6,7 +6,7 @@ package Car;
  *  it's the subclass of CombustionCar class
  *
  *  @author OneNightCar Team
- *  @version 1.0
+ *  @version 1.1.0
  *  @since 2019-12-27
  */
 public class UtilitarianCar extends CombustionCar {
