@@ -4,9 +4,10 @@ import ZuLöschen.List;
 import Rental.Rental;
 
 /**
- *  <h2> Car class </h2>
+ *  Car class
+ *
  *  it has the common Information about the cars
- *  it's the superclass of CombustionCar class and ElectricCar class
+ *  and it's the superclass of CombustionCar class and ElectricCar class
  *
  *  @author OneNightCar Team
  *  @version 1.0
@@ -37,8 +38,10 @@ public abstract class Car {
     protected long odometer;
     protected String permission; // which Customer can book this car (which customer Level)
     protected float price;       //Price pro hour
+    Location location;
 
     /* /////////////////////Methods/////////////////////////// */
+
     public Car(Type type, String brand, String model, State state,
                double GPSLatitude, double GPSLongitude, long odometer,
                String permission, float price){
@@ -46,17 +49,12 @@ public abstract class Car {
         this.brand=brand;
         this.model=model;
         this.state=state;
-        Location location = new Location(GPSLatitude,GPSLongitude);
+        this.location = new Location(GPSLatitude,GPSLongitude);
         this.odometer=odometer;
         this.permission= permission;
         this.price=price;
 
     }
-
-    public Car(){
-
-    }
-
 
     public void changeCarState (State newCarState) {
         this.state = newCarState;
@@ -67,11 +65,11 @@ public abstract class Car {
     }
 
    public void setNewLocation(double GPSLatitude, double GPSLongitude){
-        Location location= new Location(GPSLatitude,GPSLongitude);
+        this.location= new Location(GPSLatitude,GPSLongitude);
    }
-
-
-
+   public Location getLocation(){
+        return this.location;
+   }
 
     public float getPrice(){
         return this.price;
@@ -86,17 +84,9 @@ public abstract class Car {
     }
 
     public void setOdometer (Rental rental) {
-        //**************************************** bleibt das so ??
+      /* **************************************** bleibt das so ??*/
         this.odometer = rental.getOdometerAfter();
     }
-
-    /**
-     * this method is to change the car State
-     * @param state State */
-    public void setCarState(State state){
-        this.state = state;
-    }
-
 
 }
 
