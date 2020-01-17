@@ -22,7 +22,7 @@ public class Customer extends Person {
     protected enum CustomerLevel {
         NEWUSER,
         REGULARUSER,
-        SUPERUSER;
+        SUPERUSER
     }
     private PaymentMethod paymentMethod;
     // public ArrayList<FuelRental> fuelRentals;         TODO implement FuelRental
@@ -116,15 +116,18 @@ public class Customer extends Person {
         return true;
     }
 
-    /*TODO javadocs*/
+    /** Function to retrieve the current index from a car from the Electric car list
+     * @param carID an int representing the CarID
+     * @return An int representing the index on the List
+     */
     /*public int getElectricCarIndexInList(int carID){
         int indexInList = 0;
         for (indexInList; indexInList < electricRentals.size(); indexInList ++)
             if(electricRentals.get(indexInList).carID == carID){
                 return indexInList;
             }
-    }
-    */
+    }*/
+
 
     /*TODO javadocs*/
     /*public int getRegularCarIndexInList(int carID){
@@ -201,7 +204,7 @@ public class Customer extends Person {
      * @param arrivalTime a Time representing the new end of the Rental
      * @param fuelRental an FuelRental representing which Rental is being modified
      */
-    /*public void modifyAnElectricRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, FuelRental fuelRental){
+    /*public void modifyAFuelRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, FuelRental fuelRental){
         if (fuelRental.getCustomerID == this.customerID){
             if (admin.approveRentalModification == true){
                 // Create New Fuel Rental with the New data
@@ -217,7 +220,7 @@ public class Customer extends Person {
      */
     /*public void cancelFuelRental(FuelRental fuelRental){
         if (fuelRental.getCustomerID == this.customerID){
-            if (admin.approveRentalCancelation == true){
+            if (admin.approveRentalCancellation == true){
                 //TODO: implement delete Rental in Admin
                 //TODO: implement Method in FuelRental
                 //TODO: implement method getCustomerID
@@ -235,12 +238,12 @@ public class Customer extends Person {
         electricCar.changeCarState(Car.State.DAMAGED);
     }
 
-    private void requestCarRepair(ElectricCar electricCar, Employee employee) {
-        employee.employeeRepairsElectricCar(electricCar);
+    private void requestCarRepair(ElectricCar car, Employee employee) {
+        employee.employeeRepairsElectricCar(car);
     }
 
-    private void requestCarRepair(Car electricCar, Employee employee) {
-        employee.employeeRepairsElectricCar(electricCar);
+    private void requestCarRepair(CombustionCar car, Employee employee) {
+        employee.employeeRepairsElectricCar(car);
     }
     */
 }
