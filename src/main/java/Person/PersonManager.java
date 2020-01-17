@@ -2,6 +2,12 @@ package Person;
 
 import java.util.ArrayList;
 
+/** Represents the PersonManager
+ * @author OneNightCar
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class PersonManager {
     public ArrayList<Customer> customers;
     public ArrayList<Employee> employees;

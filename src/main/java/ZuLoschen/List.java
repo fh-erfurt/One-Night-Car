@@ -1,4 +1,4 @@
-package ZuLöschen;
+package ZuLoschen;
 
 import Car.Car;
 import ParkingArea.ParkingArea;

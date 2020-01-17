@@ -1,4 +1,4 @@
-package ZuLöschen;
+package ZuLoschen;
 
 public class ListTest {
 }

@@ -1,6 +1,5 @@
 package Car;
 
-import ZuLöschen.List;
 import Rental.Rental;
 
 /**

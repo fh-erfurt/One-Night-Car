@@ -5,6 +5,12 @@ import java.util.GregorianCalendar;
 import java.util.Random;
 import Rental.*;
 
+/** Represents an Admin
+ * @author OneNightCar
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class Admin extends Employee {
     /* /////////////////////Attributes///////////////////////// */
 
@@ -17,6 +23,7 @@ public class Admin extends Employee {
      * @param personAddress A PersonAddress representing Admin Address
      * @param personManager A PersonManager with the management from the Packet Person
      * @param salary A Float representing the Admin salary
+     * @param typeOfActivity a TypeOfActivity representing the activity of the Person
      */
     public Admin(String firstName, String surname, GregorianCalendar dateOfBirth, PersonAddress personAddress,
                  PersonManager personManager, float salary, TypeOfActivity typeOfActivity) {
@@ -84,6 +91,7 @@ public class Admin extends Employee {
 //    }
 
     /** Resolves a Problem where nobody else can make the Customer happy
+     * @return a boolean
     */
     public static boolean resolveProblem(){
         return true;

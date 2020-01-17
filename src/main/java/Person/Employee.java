@@ -5,6 +5,12 @@ import Rental.*;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
+/** Represents an Employee
+ * @author OneNightCar
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class Employee extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
@@ -52,8 +58,8 @@ public class Employee extends Person {
 
     /** Represents the situation in which the Employee tries to helps a Customer
      * @return A Boolean representing if the Issue was solved
-     * false -> the Issue was solved
-     * true -> the Issue was not solved
+     * false: the Issue was solved
+     * true: the Issue was not solved
      */
     static boolean employeeHelpsCustomer(){
         /* *********** Tries to make the Customer happy with the magical powers of Employee ********** */

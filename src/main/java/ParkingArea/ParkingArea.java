@@ -1,6 +1,6 @@
 package ParkingArea;
 
-import ZuLöschen.List;
+import ZuLoschen.List;
 
 import java.util.*;
 
