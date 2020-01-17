@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
-      <module name="java1-examples" target="1.5" />
+      <module name="java1-examples" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
