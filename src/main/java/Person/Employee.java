@@ -1,7 +1,6 @@
 package Person;
 
 import Car.*;
-import Rental.*;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
@@ -18,6 +17,21 @@ public class Employee extends Person {
     private int employeeID;
     private float salary;
     private TypeOfActivity typeOfActivity;
+    /** Represents the situation in which the Employee tries to helps a Customer
+     * @return A Boolean representing if the Issue was solved
+     * false: the Issue was solved
+     * true: the Issue was not solved
+     */
+    public boolean employeeHelpsCustomer(){
+        if(this.typeOfActivity == TypeOfActivity.CUSTOMERSUPPORT)
+        {
+            /* *********** Tries to make the Customer happy with the magical powers of Employee ********** */
+            return getRandomBoolean();
+        }
+        else {
+            return false;
+        }
+    }
     /** Creates an Employee with specified Employee Parameters.
      * @param firstName A String representing Employee first Name
      * @param surname A String representing Employee Surname
@@ -56,14 +70,10 @@ public class Employee extends Person {
         personManager.employees.add(this);                               //Adds this Employee to the Employee List
     }
 
-    /** Represents the situation in which the Employee tries to helps a Customer
-     * @return A Boolean representing if the Issue was solved
-     * false: the Issue was solved
-     * true: the Issue was not solved
-     */
-    static boolean employeeHelpsCustomer(){
-        /* *********** Tries to make the Customer happy with the magical powers of Employee ********** */
-        return getRandomBoolean();
+    public enum TypeOfActivity{
+        CUSTOMERSUPPORT,
+        MAINTAINER,
+        BOSS
     }
 
     /** Random boolean generator.
@@ -165,11 +175,6 @@ public class Employee extends Person {
         }
     }
 
-    public enum TypeOfActivity{
-        CUSTOMERSUPPORT,
-        MAINTAINER,
-        BOSS
-    }
 }
 
 

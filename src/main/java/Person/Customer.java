@@ -108,8 +108,8 @@ public class Customer extends Person {
 
     /** Represents the situation in which the customer needs Support from an Employee
      */
-    public void customerNeedHelp(){
-        if(Employee.employeeHelpsCustomer()){
+    public void customerNeedHelp(Employee employee){
+        if(employee.employeeHelpsCustomer()){
             // Issue was easily solved
         }
         else{
