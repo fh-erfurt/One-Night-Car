@@ -30,7 +30,7 @@ public class ElectricCar extends Car {
 /**
  * default Constructor for test */
     public ElectricCar(){
-        super(Type.MINI,"BMW","i3", state.PERFECT, 50.9787, 11.03283,
+        super(Type.MINI,"BMW","i3", State.PERFECT, 50.9787, 11.03283,
                 10999, "REGULARUSER", 69.00f);
         this.range= 200.00f;
         this.chargePercent= 100.00f;

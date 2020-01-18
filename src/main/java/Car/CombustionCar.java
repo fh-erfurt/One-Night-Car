@@ -15,12 +15,12 @@ public class CombustionCar extends Car {
     private double fuelLevel;   // in percent
     private double consumption; // the Consumption in 100 Km
     private Transmission transmission;
-    private enum  Transmission{
+    public enum  Transmission{
         MANUAL,
         AUTOMATIC;
     }
     private FuelType fuelType;
-    private enum FuelType{
+    public enum FuelType{
         PETROL,
         DIESEL;
     }
@@ -77,7 +77,11 @@ public class CombustionCar extends Car {
     }
 
     public void getTanked(){
-        //TODO
+        // TODO etwas machen
+        if (calculateConsumedFuel() > 50)
+        {
+
+        }
     }
 }
 

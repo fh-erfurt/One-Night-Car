@@ -20,7 +20,10 @@ public class PersonManager {
         this.customerCounter = 1;
         this.employeeCounter = 1;
     }
-
+    // ich denke du brauchst die Methode nicht
+    // es gib für ArrayList eine definierte Methode
+    // die die Anzahl der Elemente zurückgibt
+    // in diesem Fall:  customers.size();
     public int getAndIncrementCustomerCounter(){
         int oldCustomerCounter = this.customerCounter;
         this.customerCounter++;
