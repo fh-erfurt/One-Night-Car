@@ -41,8 +41,8 @@ public class Admin extends Employee {
     /** Function to check if an admin permits a modification
      * @param electricRental representing the Rental to modify
      * @return a Boolean representing the Permission
-     * true -> it can be changed
-     * false -> it has to stay that way
+     * true: it can be changed
+     * false: it has to stay that way
      */
 //    public boolean approveRentalModification(ElectricRental electricRental){
 //        GregorianCalendar currentDate = new GregorianCalendar();
@@ -58,8 +58,8 @@ public class Admin extends Employee {
     /** Function to check if an admin permits a modification
      * @param fuelRental representing the desired Rental to modify
      * @return a Boolean representing the Permission
-     * true -> it can be changed
-     * false -> it has to stay that way
+     * true: it can be changed
+     * false: it has to stay that way
      */
 //    public boolean approveRentalModification(FuelRental fuelRental){
 //        GregorianCalendar currentDate = new GregorianCalendar();
@@ -95,5 +95,27 @@ public class Admin extends Employee {
     */
     public static boolean resolveProblem(){
         return true;
+    }
+
+    /** Function to erase an Employee
+     * @param employee a Employee which is going to be erased
+     * @param personManager a PersonManager (List from which it should be removed)
+     */
+    public void deleteFuelRental(Employee employee, PersonManager personManager){
+        employee = null;
+        personManager.removeEmployeeFromEmployees(employee);
+        //Call the Garbage Collector
+        System.gc();
+    }
+
+    /** Function to erase a Customer
+     * @param customer a Customer which is going to be erased
+     * @param personManager a PersonManager (List from which it should be removed)
+     */
+    public void deleteFuelRental(Customer customer, PersonManager personManager){
+        customer = null;
+        personManager.removeCustomerFromCustomers(customer);
+        //Call the Garbage Collector
+        System.gc();
     }
 }

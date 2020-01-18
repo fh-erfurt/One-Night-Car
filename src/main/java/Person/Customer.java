@@ -119,26 +119,26 @@ public class Customer extends Person {
     }
 
     /** Function: retrieve the current index from an electric car in the Electric Rental list (Needed to Delete or Modify Rentals)
-     * @param carID an int representing the CarID
+     * @param electricCar an ElectricCar representing the Car
      * @return An int representing the index on the List
      */
     // TODO: complete and test when the Rental list are implemented
-//    public int getElectricCarIndexInElectricRentalList(int carID){
+//    public int getElectricCarIndexInElectricRentalList(ElectricCar electricCar){
 //        for (int indexInList = 0; indexInList < electricRentals.size(); indexInList ++)
-//            if(electricRentals.get(indexInList).carID == carID){
+//            if(electricRentals.get(indexInList) == electricCar){
 //                return indexInList;
 //            }
 //    }
 
 
     /** Function: retrieve the current index from a combustion car in the Fuel Rental list (Needed to Delete or Modify Rentals)
-     * @param carID an int representing the CarID
+     * @param combustionCar a CombustionCar representing the Car
      * @return An int representing the index on the List
      */
     // TODO: complete and test when the Rental list are implemented
-//    public int getCombustionCarIndexInFuelRentalList(int carID){
+//    public int getCombustionCarIndexInFuelRentalList(CombustionCar combustionCar){
 //        for (int indexInList = 0; indexInList < fuelRentals.size(); indexInList ++)
-//            if(fuelRentals.get(indexInList).carID == carID){
+//            if(fuelRentals.get(indexInList) = combustionCar.getCarID){
 //                return indexInList;
 //            }
 //    }
