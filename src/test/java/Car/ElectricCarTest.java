@@ -8,8 +8,32 @@ class ElectricCarTest {
 
     @Test
     void testSetNewLocation(){
-        ElectricCar car2 = new ElectricCar();
-        car2.setNewLocation(52.5164, 13.3811);
-        assertEquals(new Location(52.5164,13.3811), car2.getLocation());
+        CarManagementSystem electricCarList = new CarManagementSystem();
+        ElectricCar car1 = new ElectricCar(electricCarList);
+        car1.setNewLocation(52.5164, 13.3811);
+        assertEquals(new Location(52.5164,13.3811), car1.getLocation());
+    }
+
+    @Test
+    void testGetChargedAndSetChargePercent()
+    {
+        CarManagementSystem electricCarList = new CarManagementSystem();
+        ElectricCar car1 = new ElectricCar(electricCarList);
+        car1.setChargePercent(20);
+        System.out.println("the Current charge of the car1 after using setChargePercent is: "+ car1.getChargePercent()+"%");
+        car1.getChargedUp();
+        System.out.println("the Current charge of the car1 after using getChargedUp is: "+ car1.getChargePercent()+"%");
+
+        assertEquals(100, car1.getChargePercent());
+    }
+
+    @Test
+    void testChangeCarState()
+    {
+        CarManagementSystem electricCarList = new CarManagementSystem();
+        ElectricCar car1 = new ElectricCar(electricCarList);
+        car1.changeCarState(Car.State.DAMAGED);
+        System.out.println(car1.getCarState());
+        assertEquals(Car.State.DAMAGED, car1.getCarState());
     }
 }

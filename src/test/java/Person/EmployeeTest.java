@@ -25,7 +25,8 @@ class EmployeeTest {
         PersonAddress thisAddress = new PersonAddress();
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
                 list, 2000, Employee.TypeOfActivity.MAINTAINER);
-        ElectricCar testElectricCar = new ElectricCar();
+        CarManagementSystem electricCarList = new CarManagementSystem();
+        ElectricCar testElectricCar = new ElectricCar(electricCarList);
 
         testElectricCar.changeCarState(Car.State.DAMAGED);
         john.employeeRepairsElectricCar(testElectricCar);
@@ -40,7 +41,8 @@ class EmployeeTest {
         PersonAddress thisAddress = new PersonAddress();
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
                 list, 2000, Employee.TypeOfActivity.MAINTAINER);
-        CombustionCar testCombustionCar = new CombustionCar();
+        CarManagementSystem combustionCarList = new CarManagementSystem();
+        CombustionCar testCombustionCar = new CombustionCar(combustionCarList);
 
         testCombustionCar.setFuelLevel(20);
         john.employeeRefuelsCar(testCombustionCar);

@@ -1,10 +1,9 @@
 package Car;
-/**
- *  <h2> Location class </h2>
- *  it has the GPS information
- *  @author OneNightCar Team
- *  @version 1.0
- *  @since 2019-12-11
+
+/** Represents a Location
+ * @author OneNightCar
+ * @version 1.0
+ * @since 1.0
  */
 
 public class Location {
@@ -12,24 +11,29 @@ public class Location {
     private double GPSLongitude;
 
 
+    /***
+     * @param GPSLatitude  A double representing the position
+     * @param GPSLongitude A double representing the position
+     */
     public Location(double GPSLatitude, double GPSLongitude){
         this.GPSLatitude = GPSLatitude;
         this.GPSLongitude = GPSLongitude;
     }
 
+    /** Change the Latitude Location
+     * @param latitude
+     */
     public  void setGPSLatitude(double latitude){
         GPSLatitude= latitude;
     }
 
+
+    /** Change the Longitude Location
+     * @param longitude
+     */
     public void setGPSLongitude(double longitude){
         GPSLongitude= longitude;
     }
 
-/**
- * this method is used to return the longitude and latitude GPS infos of the Object
- * @return  double[] This return is the Location */
-    public double[] getGPSLocation(){
-        return new double[]{this.GPSLatitude , this.GPSLongitude};
-    }
 
 }

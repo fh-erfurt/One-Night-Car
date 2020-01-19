@@ -19,7 +19,7 @@ public class Customer extends Person {
 
     private int customerID;
     private CustomerLevel customerLevel;
-    protected enum CustomerLevel {
+    public enum CustomerLevel {
         NEWUSER,
         REGULARUSER,
         SUPERUSER
