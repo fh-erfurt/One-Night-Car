@@ -116,9 +116,9 @@ public abstract class Car {
      * @param rental gets the Odometer information after the return of the Car from the Rental Class
      * @see {@link Rental}
      */
-    public void setOdometer (Rental rental) {
-        this.odometer = rental.getOdometerAfter();
-    }
+//    public void setOdometer (Rental rental) {
+//        this.odometer = rental.getOdometerAfter();
+//    }
 
 
 

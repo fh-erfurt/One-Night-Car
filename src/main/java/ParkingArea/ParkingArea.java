@@ -1,7 +1,5 @@
 package ParkingArea;
 
-import ZuLoschen.List;
-
 import java.util.*;
 
 public class ParkingArea {
@@ -20,17 +18,17 @@ public class ParkingArea {
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public ParkingArea(int parkZIP, String parkCity, String parkStreet, String parkHouseNumber, List list) {
-        parkID = list.getSizeOfParkingAreas();            //Creates a running counter of Parking Areas in list
-        list.parkingAreas.add(this);                        //Adds the new Parking Area to the global list
-        this.parkZIP = parkZIP;
-        this.parkCity = parkCity;
-        this.parkStreet = parkStreet;
-        this.parkHouseNumber = parkHouseNumber;
-        this.stationCarIDList = new ArrayList<Integer>();
-        this.availableCarIDList = new ArrayList<Integer>();
-        this.notAvailableCarIDList = new ArrayList<Integer>();
-    }
+//   public ParkingArea(int parkZIP, String parkCity, String parkStreet, String parkHouseNumber, List list) {
+//        parkID = list.getSizeOfParkingAreas();            //Creates a running counter of Parking Areas in list
+//        list.parkingAreas.add(this);                        //Adds the new Parking Area to the global list
+//        this.parkZIP = parkZIP;
+//        this.parkCity = parkCity;
+//        this.parkStreet = parkStreet;
+//        this.parkHouseNumber = parkHouseNumber;
+//        this.stationCarIDList = new ArrayList<Integer>();
+//        this.availableCarIDList = new ArrayList<Integer>();
+//        this.notAvailableCarIDList = new ArrayList<Integer>();
+//    }
 
     public void assignCarToStation (int carID){
         stationCarIDList.add(carID);
