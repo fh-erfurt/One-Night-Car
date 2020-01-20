@@ -5,7 +5,7 @@
   <groupId>de.oneNightCar</groupId>
   <artifactId>FHE-java1-project</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <name>FHE-java1-project</name>
   <description>First try on Maven implementing in Java 1 Project</description>
