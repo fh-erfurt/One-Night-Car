@@ -1,6 +1,6 @@
 # One Night Car
 
-[![Build Status](https://github.com/fh-erfurt/One-Night-Car/workflows/Java CI/badge.svg)](https://github.com/fh-erfurt/One-Night-Car/actions)
+[![Build Status](https://github.com/fh-erfurt/One-Night-Car/workflows/One-Night-Car/badge.svg)](https://github.com/fh-erfurt/One-Night-Car/actions)
 
 ## Über uns
 ### Teammitglieder
