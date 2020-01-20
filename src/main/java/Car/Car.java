@@ -97,6 +97,17 @@ public abstract class Car {
    }
 
 
+
+   public double getGPSLatitude(){
+       return this.location.getGPSLatitude();
+   }
+
+
+    public double getGPSLongitude(){
+        return this.location.getGPSLongitude();
+    }
+
+
     /** Gets the Car Price
      * @return the Price of the Car in one Hour
      */

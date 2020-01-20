@@ -35,5 +35,7 @@ public class Location {
         GPSLongitude= longitude;
     }
 
+    public double getGPSLatitude(){return this.GPSLatitude;}
+    public double getGPSLongitude(){return this.GPSLongitude;}
 
 }

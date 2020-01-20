@@ -6,14 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ElectricCarTest {
 
-//    @Test
-//    void testSetNewLocation(){
-//        CarManagementSystem electricCarList = new CarManagementSystem();
-//        ElectricCar car1 = new ElectricCar(electricCarList);
-//        car1.setNewLocation(52.5164, 13.3811);
-//        assertEquals(52.5164, car1.getLocation());
-//        13.3811
-//    }
+    @Test
+    void testSetNewLocation(){
+        CarManagementSystem electricCarList = new CarManagementSystem();
+        ElectricCar car1 = new ElectricCar(electricCarList);
+        car1.setNewLocation(52.5164, 13.3811);
+        assertEquals(52.5164, car1.getGPSLatitude());
+        assertEquals(13.3811, car1.getGPSLongitude());
+
+    }
 
     @Test
     void testGetChargedAndSetChargePercent()
