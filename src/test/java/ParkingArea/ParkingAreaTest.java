@@ -11,7 +11,8 @@ class ParkingAreaTest {
 
 
     List parkingAreas = new List();
-    ParkingArea parkingArea1 = new ParkingArea(99098,"Erfurt","Marktstraße","1", parkingAreas);
+    ParkingArea parkingArea1 = new ParkingArea(99098,"Erfurt",
+                                               "Marktstraße","1", parkingAreas);
 
     @BeforeEach
     public void init () {
