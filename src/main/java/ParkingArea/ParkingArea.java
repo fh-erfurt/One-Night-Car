@@ -1,5 +1,7 @@
 package ParkingArea;
 
+import Car.Car;
+
 import java.util.*;
 
 public class ParkingArea {
@@ -7,66 +9,71 @@ public class ParkingArea {
     /* /////////////////////Attributes///////////////////////// */
 
     private int parkID;
-    private int parkZIP;
-    private String parkCity;
-    private String parkStreet;
-    private String parkHouseNumber;
+    private String ParkingAreaAddress;
+    private int maxCapacity;
     // ArrayList in case the number of cars in station changes
-    protected ArrayList<Integer> stationCarIDList;         //Testing purposes
-    protected ArrayList<Integer> availableCarIDList;
-    protected ArrayList<Integer> notAvailableCarIDList;
+    protected ArrayList<Car> carsInStation;
+    protected ArrayList<Car> availableCars;
+    protected ArrayList<Car> notAvailableCars;
 
     /* /////////////////////Methods/////////////////////////// */
 
-//   public ParkingArea(int parkZIP, String parkCity, String parkStreet, String parkHouseNumber, List list) {
-//        parkID = list.getSizeOfParkingAreas();            //Creates a running counter of Parking Areas in list
-//        list.parkingAreas.add(this);                        //Adds the new Parking Area to the global list
-//        this.parkZIP = parkZIP;
-//        this.parkCity = parkCity;
-//        this.parkStreet = parkStreet;
-//        this.parkHouseNumber = parkHouseNumber;
-//        this.stationCarIDList = new ArrayList<Integer>();
-//        this.availableCarIDList = new ArrayList<Integer>();
-//        this.notAvailableCarIDList = new ArrayList<Integer>();
-//    }
+    public ParkingArea(int parkID, String ParkingAreaAddress, int maxCapacity,
+                       ArrayList carsInStation, ArrayList availableCars,
+                       ArrayList notAvailableCars, ParkingAreaManager parkingAreaManager) {
 
-    public void assignCarToStation (int carID){
-        stationCarIDList.add(carID);
-        availableCarIDList.add(carID);
+        this.maxCapacity = maxCapacity;
+        this.carsInStation = new ArrayList<Car>();
+        this.availableCars = new ArrayList<Car>();
+        this.notAvailableCars = new ArrayList<Car>();
+        this.parkID = parkingAreaManager.getAndIncrementCounter();
+        parkingAreaManager.ParkingAreas.add(this);                               //Adds this ParkingArea to the ParkingAreas List
     }
 
-    protected int getIndexInStationCarIDList (int carID){                      //protected for Testing purposes
+    public ParkingArea() {
+
+    }
+
+
+    public void assignCarToStation(Car carID) {
+        carsInStation.add(carID);
+        availableCars.add(carID);
+    }
+
+    protected int getIndexInStationCarIDList(Car carID) {                      //protected for Testing purposes
         int carIDIndex;
-        for (carIDIndex = 0; carIDIndex < stationCarIDList.size(); carIDIndex++){
-            if (carID == stationCarIDList.get(carIDIndex)){
+        for (carIDIndex = 0; carIDIndex < carsInStation.size(); carIDIndex++) {
+            if (carID == carsInStation.get(carIDIndex)) {
                 break;
             }
         }
         return carIDIndex;
     }
 
-    public void removeCarFromStation (int carID){
+    public void removeCarFromStation(Car carID) {
         int currentCarIndex = getIndexInStationCarIDList(carID);
-        stationCarIDList.remove(currentCarIndex);
-        availableCarIDList.remove(currentCarIndex);
+        carsInStation.remove(currentCarIndex);
+        availableCars.remove(currentCarIndex);
     }
 
 
-    public void carIsBeingUsed (int carID){
+    public void carIsBeingUsed(Car carID) {
         int currentCarIndex = getIndexInStationCarIDList(carID);
-        availableCarIDList.remove(currentCarIndex);
-        notAvailableCarIDList.add(carID);
+        availableCars.remove(currentCarIndex);
+        notAvailableCars.add(carID);
     }
 
-    public void carIsNoLongerBeingUsed (int carID){
+    public void carIsNoLongerBeingUsed(Car carID) {
         int currentCarIndex = getIndexInStationCarIDList(carID);
-        availableCarIDList.add(carID);
-        notAvailableCarIDList.remove(currentCarIndex);
+        availableCars.add(carID);
+        notAvailableCars.remove(currentCarIndex);
     }
 
-    public int numberOfCarsAssignedToStation (){
-        return stationCarIDList.size();
+    public int numberOfCarsAssignedToStation() {
+        return carsInStation.size();
     }
 
 
 }
+
+
