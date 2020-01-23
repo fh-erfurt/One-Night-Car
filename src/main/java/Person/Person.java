@@ -23,7 +23,7 @@ public abstract class Person {
      * @return A string representing the whole name (first name and surname) of a person
      */
     public String getName(){
-        return this.firstName + this.surname;
+        return (this.firstName + " " + this.surname);
     }
 
     /** Gets the Persons DOB.
@@ -56,7 +56,7 @@ public abstract class Person {
     public void setPersonAddress(PersonAddress personAddress){
         this.personAddress.setZIP(personAddress.getZIP());
         this.personAddress.setCity(personAddress.getCity());
-        this.personAddress.setStreet(personAddress.getCity());
+        this.personAddress.setStreet(personAddress.getStreet());
         this.personAddress.setStreetNumber(personAddress.getStreetNumber());
     }
 }

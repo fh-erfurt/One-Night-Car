@@ -1,7 +1,7 @@
 package Person;
 
 import Car.*;
-import Rental.Rental;
+import Rental.*;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -19,10 +19,10 @@ public class Customer extends Person {
 
     private int customerID;
     private CustomerLevel customerLevel;
-    protected enum CustomerLevel {
+    public enum CustomerLevel {
         NEWUSER,
         REGULARUSER,
-        SUPERUSER;
+        SUPERUSER
     }
     private PaymentMethod paymentMethod;
     // public ArrayList<FuelRental> fuelRentals;         TODO implement FuelRental
@@ -107,34 +107,42 @@ public class Customer extends Person {
     }
 
     /** Represents the situation in which the customer needs Support from an Employee
-     * @return A Boolean representing if the Issue was solved
-     * true -> the Customer still needs Support
-     * false -> the Issue was solved
      */
-    public boolean customerNeedHelp(){
-        Employee.employeeHelpsCustomer(this.customerID);
-        return true;
+    public void customerNeedHelp(Employee employee){
+        if(employee.employeeHelpsCustomer()){
+            // Issue was easily solved
+        }
+        else{
+            // The admin has to intervene and help
+            Admin.resolveProblem();
+        }
     }
 
-    /*TODO javadocs*/
-    /*public int getElectricCarIndexInList(int carID){
-        int indexInList = 0;
-        for (indexInList; indexInList < electricRentals.size(); indexInList ++)
-            if(electricRentals.get(indexInList).carID == carID){
-                return indexInList;
-            }
-    }
-    */
+    /** Function: retrieve the current index from an electric car in the Electric Rental list (Needed to Delete or Modify Rentals)
+     * @param electricCar an ElectricCar representing the Car
+     * @return An int representing the index on the List
+     */
+    // TODO: complete and test when the Rental list are implemented
+//    public int getElectricCarIndexInElectricRentalList(ElectricCar electricCar){
+//        for (int indexInList = 0; indexInList < electricRentals.size(); indexInList ++)
+//            if(electricRentals.get(indexInList) == electricCar){
+//                return indexInList;
+//            }
+//    }
 
-    /*TODO javadocs*/
-    /*public int getRegularCarIndexInList(int carID){
-        int indexInList = 0;
-        for (indexInList; indexInList < fuelRentals.size(); indexInList ++)
-            if(fuelRentals.get(indexInList).carID == carID){
-                return indexInList;
-            }
-    }
-    */
+
+    /** Function: retrieve the current index from a combustion car in the Fuel Rental list (Needed to Delete or Modify Rentals)
+     * @param combustionCar a CombustionCar representing the Car
+     * @return An int representing the index on the List
+     */
+    // TODO: complete and test when the Rental list are implemented
+//    public int getCombustionCarIndexInFuelRentalList(CombustionCar combustionCar){
+//        for (int indexInList = 0; indexInList < fuelRentals.size(); indexInList ++)
+//            if(fuelRentals.get(indexInList) = combustionCar.getCarID){
+//                return indexInList;
+//            }
+//    }
+
 
     /** Creates a new Electric Rental of a Vehicle and this Customer
      * @param carID an int representing the id from an electric car the Customer wants to book
@@ -144,8 +152,7 @@ public class Customer extends Person {
      */
     public void rentAnElectricCar(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime){
         //TODO: implement the Class ElectricRental
-        //TODO: implement method TrasmitCarDataToRental
-        //this.electricRentals.add(CarManagement.getCarIDFromElectrics(carID))
+        //this.electricRentals.add()
     }
 
     /** Ask permission to Admin to Modify an existing Electrical Rental made by this Customer
@@ -155,32 +162,26 @@ public class Customer extends Person {
      * @param arrivalTime a Time representing the new end of the Rental
      * @param electricRental an ElectricRental representing which Rental is being modified
      */
-    /*public void modifyAnElectricRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, ElectricRental electricRental){
-        if (electricRental.getCustomerID == this.customerID){
-            if (admin.approveRentalModification == true){
-                // Create New Electrical Rental with the New data
-                //TODO: implement method getCustomerID
-                //this.electricRentals.set(getElectricCarIndexInList(carID), newRental);
-            }
-        }
-    }
-    */
+//    public void modifyAnElectricRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, ElectricRental electricRental){
+//        if (electricRental.getCustomerID == this.customerID){
+//            if (Admin.approveRentalModification == true){
+//                //TODO Create NewElectricRental
+//                //Change the current Electric Rental with the NewElectricRental
+//            }
+//        }
+//    }
 
     /** Ask the Admin to Cancel an existing Electrical Rental made by this Customer
      * @param electricRental an ElectricRental representing which Rental is being cancelled
      */
-    /*public void cancelElectricRental(ElectricRental electricRental){
-        if (electricRental.getCustomerID == this.customerID){
-            if (admin.approveRentalCancelation == true){
-                //TODO: implement delete Rental in Admin
-                //TODO: implement Method in ElectricRental
-                //TODO: implement method getCustomerID
-                //this.electricRentals.remove(getElectricCarIndexInList(electricRental.getCarID)
-            }
-        }
-    }
-    */
-
+//    public void cancelElectricRental(ElectricRental electricRental){
+//        if (electricRental.getCustomerID == this.customerID){
+//            if (Admin.approveRentalModification == true){
+//                //TODO: implement delete Electric Rental in Admin
+//                //this.electricRentals.remove(getElectricCarIndexInElectricRentalList(electricRental.getCarID)
+//            }
+//        }
+//    }
 
      /** Creates a new Rental of a Vehicle and this Customer
      * @param carID an int representing the id from a car the Customer wants to book
@@ -189,9 +190,8 @@ public class Customer extends Person {
      * @param arrivalTime a Time representing the end of the Rental
      */
     public void rentAFuelCar(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime){
-        //TODO: implement the Class Rental
-        //TODO: implement method TrasmitCarDataToRental
-        //this.fuelRentals.add(CarManagement.getCarIDFromCombustion(carID))
+        //TODO: implement the Class FuelRental
+        //this.fuelRentals.add()
     }
 
     /** Ask permission to Admin to Modify an existing Fuel Rental made by this Customer
@@ -201,46 +201,39 @@ public class Customer extends Person {
      * @param arrivalTime a Time representing the new end of the Rental
      * @param fuelRental an FuelRental representing which Rental is being modified
      */
-    /*public void modifyAnElectricRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, FuelRental fuelRental){
-        if (fuelRental.getCustomerID == this.customerID){
-            if (admin.approveRentalModification == true){
-                // Create New Fuel Rental with the New data
-                //TODO: implement method getCustomerID
-                //this.fuelRentals.set(getRegularCarIndexInList(carID), newRental);
-            }
-        }
-    }
-    */
+//    public void modifyAFuelRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, FuelRental fuelRental){
+//        if (fuelRental.getCustomerID == this.customerID){
+//            if (Admin.approveRentalModification(fuelRental) == true){
+//                //TODO Create NewFuelRental
+//                //Change the current Fuel Rental with the NewFuelRental
+//            }
+//        }
+//    }
+
 
     /** Ask the Admin to Cancel an existing Fuel Rental made by this Customer
      * @param fuelRental an ElectricRental representing which Rental is being cancelled
      */
-    /*public void cancelFuelRental(FuelRental fuelRental){
-        if (fuelRental.getCustomerID == this.customerID){
-            if (admin.approveRentalCancelation == true){
-                //TODO: implement delete Rental in Admin
-                //TODO: implement Method in FuelRental
-                //TODO: implement method getCustomerID
-                //this.fuelRentals.remove(getRegularCarIndexInList(fuelRental.getCarID)
-            }
-        }
-    }
-    */
+//    public void cancelFuelRental(FuelRental fuelRental){
+//        if (fuelRental.getCustomerID == this.customerID){
+//            if (Admin.approveRentalModification == true){
+//                //TODO: implement delete Fuel Rental in Admin
+//                //this.fuelRentals.remove(getCombustionCarIndexInFuelRentalList(fuelRental.getCarID)
+//            }
+//        }
+//    }
 
     /** Simulates the Situation in which a customer damages an Electric Car
      * @param electricCar the Car that was Damaged
      */
-    /*
     public void customerDamagesAnElectricCar(ElectricCar electricCar){
         electricCar.changeCarState(Car.State.DAMAGED);
     }
 
-    private void requestCarRepair(ElectricCar electricCar, Employee employee) {
-        employee.employeeRepairsElectricCar(electricCar);
+    /** Simulates the Situation in which a customer damages an Electric Car
+     * @param combustionCar the Car that was Damaged
+     */
+    public void customerDamagesAFuelCar(CombustionCar combustionCar){
+        combustionCar.changeCarState(Car.State.DAMAGED);
     }
-
-    private void requestCarRepair(Car electricCar, Employee employee) {
-        employee.employeeRepairsElectricCar(electricCar);
-    }
-    */
 }

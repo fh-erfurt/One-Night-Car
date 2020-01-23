@@ -1,11 +1,5 @@
 package Person;
 
-import ZuLöschen.List;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-import java.util.GregorianCalendar;
-
 class CustomerTest {
 
     /* List customers = new List();
