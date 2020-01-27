@@ -33,7 +33,7 @@ public class CarManagementSystem {
     }
 
 
-    /** Method to Add a combustion Car to the Array List´´
+    /** Method to Add a combustion Car to the Array List
      * @param combustionCar
      * the Position of the added Car is at the End of the List
      * @see {@link CombustionCar}*/
