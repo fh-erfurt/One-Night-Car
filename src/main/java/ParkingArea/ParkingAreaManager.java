@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class ParkingAreaManager {
 
-    public ArrayList<ParkingArea>            ParkingAreas;
-    public ArrayList<ElectricParkingArea>    ElectricParkingAreas;
+    public static ArrayList<ParkingArea>            ParkingAreas;
+    public static ArrayList<ElectricParkingArea>    ElectricParkingAreas;
     public int parkingAreaCounter;
 
 

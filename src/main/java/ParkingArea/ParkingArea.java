@@ -1,6 +1,9 @@
 package ParkingArea;
 
 import Car.Car;
+import Car.CombustionCar;
+import Car.ElectricCar;
+import Car.CarManagementSystem;
 
 import java.util.*;
 
@@ -11,16 +14,16 @@ public class ParkingArea {
     private int parkID;
     private String ParkingAreaAddress;
     private int maxCapacity;
+    protected ParkingAreaAddress parkingAreaAddress;
     // ArrayList in case the number of cars in station changes
-    protected ArrayList<Car> carsInStation;
-    protected ArrayList<Car> availableCars;
-    protected ArrayList<Car> notAvailableCars;
+    public ArrayList<Car> carsInStation;
+    public ArrayList<Car> availableCars;
+    public ArrayList<Car> notAvailableCars;
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public ParkingArea(int parkID, String ParkingAreaAddress, int maxCapacity,
-                       ArrayList carsInStation, ArrayList availableCars,
-                       ArrayList notAvailableCars, ParkingAreaManager parkingAreaManager) {
+    public ParkingArea(int parkID, ParkingAreaAddress ParkingAreaAddress, int maxCapacity
+            , ParkingAreaManager parkingAreaManager) {
 
         this.maxCapacity = maxCapacity;
         this.carsInStation = new ArrayList<Car>();
@@ -30,48 +33,67 @@ public class ParkingArea {
         parkingAreaManager.ParkingAreas.add(this);                               //Adds this ParkingArea to the ParkingAreas List
     }
 
-    public ParkingArea() {
+    public ParkingArea(ParkingAreaManager parkingAreaManager) {
+        this.parkID = parkingAreaManager.getAndIncrementCounter();
+        this.parkingAreaAddress = new ParkingAreaAddress();
+        this.maxCapacity = 100;
+        parkingAreaManager.ParkingAreas.add(this);
 
     }
 
 
-    public void assignCarToStation(Car carID) {
-        carsInStation.add(carID);
-        availableCars.add(carID);
+
+
+    public void assignCarToStation(CombustionCar combustionCar) {
+        //carManagementSystem.getCarIDFromCombustion(combustionCar);
+        carsInStation.add(combustionCar);
+        availableCars.add(combustionCar);
     }
 
-    protected int getIndexInStationCarIDList(Car carID) {                      //protected for Testing purposes
+    protected int getIndexInStationCarIDList(CombustionCar combustionCar) {                      //protected for Testing purposes
         int carIDIndex;
         for (carIDIndex = 0; carIDIndex < carsInStation.size(); carIDIndex++) {
-            if (carID == carsInStation.get(carIDIndex)) {
+            if (combustionCar == carsInStation.get(carIDIndex)) {
                 break;
             }
         }
         return carIDIndex;
     }
 
-    public void removeCarFromStation(Car carID) {
-        int currentCarIndex = getIndexInStationCarIDList(carID);
+    public void removeCarFromStation(CombustionCar combustionCar) {
+        int currentCarIndex = getIndexInStationCarIDList(combustionCar);
         carsInStation.remove(currentCarIndex);
         availableCars.remove(currentCarIndex);
     }
 
 
-    public void carIsBeingUsed(Car carID) {
-        int currentCarIndex = getIndexInStationCarIDList(carID);
+    public void carIsBeingUsed(CombustionCar combustionCar) {
+        int currentCarIndex = getIndexInStationCarIDList(combustionCar);
         availableCars.remove(currentCarIndex);
-        notAvailableCars.add(carID);
+        notAvailableCars.add(combustionCar);
     }
 
-    public void carIsNoLongerBeingUsed(Car carID) {
-        int currentCarIndex = getIndexInStationCarIDList(carID);
-        availableCars.add(carID);
+    public void carIsNoLongerBeingUsed(CombustionCar combustionCar) {
+        int currentCarIndex = getIndexInStationCarIDList(combustionCar);
+        availableCars.add(combustionCar);
         notAvailableCars.remove(currentCarIndex);
     }
 
     public int numberOfCarsAssignedToStation() {
         return carsInStation.size();
     }
+
+   // public int getCarID(Car carID) {return this.carID;}
+
+    public ParkingAreaAddress getParkingAreaAddress() {return this.parkingAreaAddress;}
+
+    public int getMaxCapacity() {return this.maxCapacity;}
+
+    public ArrayList<Car> getCarsInStation() {
+        return carsInStation;
+    }
+
+
 
 
 }
