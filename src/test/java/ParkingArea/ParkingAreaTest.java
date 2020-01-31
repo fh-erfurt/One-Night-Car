@@ -1,19 +1,62 @@
 package ParkingArea;
 
-import ParkingArea.ParkingArea;
-import ZuLöschen.List;
+
+import Car.CarManagementSystem;
+import Car.CombustionCar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ParkingArea.ParkingAreaManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingAreaTest {
 
 
-   List parkingAreas = new List();
-   ParkingArea parkingArea1 = new ParkingArea(150, parkingAreas);
 
-    @BeforeEach
+
+    @Test
+    void test_assign_car_to_station() {
+
+        ParkingAreaManager ParkingAreaList = new ParkingAreaManager();
+        CarManagementSystem combustionCarsList = new CarManagementSystem();
+
+        CombustionCar Auto1 = new CombustionCar(combustionCarsList);
+        ParkingArea Area1 = new ParkingArea(ParkingAreaList);
+
+
+        Area1.assignCarToStation(Auto1);
+
+        assertEquals(1,Area1.availableCars.size());
+    }
+
+    @Test
+    void test_get_index_in_carID_list(){
+
+    }
+
+    @Test
+    void test_remove_car_from_station() {
+
+    }
+
+    @Test
+    void test_car_is_being_used(){
+
+    }
+
+    @Test
+    void test_car_is_no_longer_being_used(){
+
+    }
+
+
+    @Test
+    void test_print_all_cars_in_station(){
+
+    }
+
+
+ /*   @BeforeEach
     public void init () {
         parkingArea1.assignCarToStation(0);
     }
@@ -50,5 +93,5 @@ class ParkingAreaTest {
     assertEquals(parkingArea1.availableCarIDList.size(), 1);
 }
 
-
+*/
 }
