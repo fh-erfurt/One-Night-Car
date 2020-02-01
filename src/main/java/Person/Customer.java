@@ -4,6 +4,7 @@ import Car.*;
 import Rental.*;
 
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -25,8 +26,8 @@ public class Customer extends Person {
         SUPERUSER
     }
     private PaymentMethod paymentMethod;
-    // public ArrayList<FuelRental> fuelRentals;         TODO implement FuelRental
-    // public ArrayList<ElectricRental> electricRentals; TODO implement ElectricRental
+    public ArrayList<FuelRental> fuelRentals;
+    public ArrayList<ElectricRental> electricRentals;
 
 
     /* /////////////////////Methods/////////////////////////// */
@@ -50,8 +51,8 @@ public class Customer extends Person {
         personManager.customers.add(this);                               //Adds this Customer to the Customer List
         this.customerLevel = customerLevel;
         this.paymentMethod = paymentMethod;
-        // this.fuelRentals = new ArrayList<FuelRental>();                  TODO
-        // this.electricRentals = new ArrayList<ElectricRental>();          TODO
+        this.fuelRentals = new ArrayList<FuelRental>();
+        this.electricRentals = new ArrayList<ElectricRental>();
     }
 
     /** Creates a Customer with default Values.
@@ -67,8 +68,8 @@ public class Customer extends Person {
         personManager.customers.add(this);                               //Adds this Customer to the Customer List
         this.customerLevel = CustomerLevel.REGULARUSER;
         this.paymentMethod = new PaymentMethod();
-        // this.fuelRentals = new ArrayList<FuelRental>();                  TODO
-        // this.electricRentals = new ArrayList<ElectricRental>();          TODO
+        this.fuelRentals = new ArrayList<FuelRental>();
+        this.electricRentals = new ArrayList<ElectricRental>();
     }
 
     /** Gets the Customers ID.
@@ -83,6 +84,36 @@ public class Customer extends Person {
      */
     public CustomerLevel getCustomerLevel(){
         return this.customerLevel;
+    }
+
+    /** Gets the Electric Rentals.
+     * @return An ArrayList representing Electric Rentals
+     */
+    public ArrayList getElectricRentals(){
+        return this.electricRentals;
+    }
+
+    /** Gets the Electric Rental with index.
+     * @param index an int index
+     * @return An ElectricRental with given index
+     */
+    public ElectricRental getElectricRentalWithIndex(int index){
+        return this.electricRentals.get(index);
+    }
+
+    /** Gets the Fuel Rentals.
+     * @return An ArrayList representing Fuel Rentals
+     */
+    public ArrayList getFuelRentals(){
+        return this.fuelRentals;
+    }
+
+    /** Gets the Fuel Rental with index.
+     * @param index an int index
+     * @return A FuelRental with given index
+     */
+    public FuelRental getFuelRentalWithIndex(int index){
+        return this.fuelRentals.get(index);
     }
 
     /** Gets the Customer Payment Method.
@@ -108,120 +139,166 @@ public class Customer extends Person {
 
     /** Represents the situation in which the customer needs Support from an Employee
      */
-    public void customerNeedHelp(Employee employee){
+    public boolean customerNeedHelp(Employee employee){
         if(employee.employeeHelpsCustomer()){
             // Issue was easily solved
+            return true;
         }
         else{
             // The admin has to intervene and help
             Admin.resolveProblem();
+            return true;
         }
     }
 
     /** Function: retrieve the current index from an electric car in the Electric Rental list (Needed to Delete or Modify Rentals)
      * @param electricCar an ElectricCar representing the Car
-     * @return An int representing the index on the List
+     * @return An int representing the index on the List, if not found, returns -1
      */
-    // TODO: complete and test when the Rental list are implemented
-//    public int getElectricCarIndexInElectricRentalList(ElectricCar electricCar){
-//        for (int indexInList = 0; indexInList < electricRentals.size(); indexInList ++)
-//            if(electricRentals.get(indexInList) == electricCar){
-//                return indexInList;
-//            }
-//    }
+    public int getElectricCarIndexInElectricRentalList(ElectricCar electricCar){
+        for (int indexInList = 0; indexInList < electricRentals.size(); indexInList ++)
+            if(electricRentals.get(indexInList).getElectricCar() == electricCar){
+                return indexInList;
+            }
+        return -1;
+    }
 
 
     /** Function: retrieve the current index from a combustion car in the Fuel Rental list (Needed to Delete or Modify Rentals)
      * @param combustionCar a CombustionCar representing the Car
      * @return An int representing the index on the List
      */
-    // TODO: complete and test when the Rental list are implemented
-//    public int getCombustionCarIndexInFuelRentalList(CombustionCar combustionCar){
-//        for (int indexInList = 0; indexInList < fuelRentals.size(); indexInList ++)
-//            if(fuelRentals.get(indexInList) = combustionCar.getCarID){
-//                return indexInList;
-//            }
-//    }
+    public int getCombustionCarIndexInFuelRentalList(CombustionCar combustionCar){
+        for (int indexInList = 0; indexInList < fuelRentals.size(); indexInList ++)
+            if(fuelRentals.get(indexInList).getCombustionCar() == combustionCar){
+                return indexInList;
+            }
+        return -1;
+    }
 
 
-    /** Creates a new Electric Rental of a Vehicle and this Customer
-     * @param carID an int representing the id from an electric car the Customer wants to book
-     * @param date a GregorianCalender representing the date of the Booking
-     * @param departureTime a Time representing the beginning of the Rental
-     * @param arrivalTime a Time representing the end of the Rental
+    /**
+     * Creates a new Electric Rental of a Vehicle and this Customer
+     * @param electricCar   an ElectricCar representing an electric car the Customer wants to book
+     * @param date          a LocalDate representing the date of the Booking
+     * @param carManagementSystem in order to know the carID of the car
+     * @param yearDeparture Int representing the departure year
+     * @param monthDeparture int representing the departure month
+     * @param dayDeparture int representing the departure day
+     * @param yearArrival Int representing the arrival year
+     * @param monthArrival int representing the arrival month
+     * @param dayArrival int representing the arrival day
+     * @param rentalManager to add this rental to all the rentals
      */
-    public void rentAnElectricCar(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime){
-        //TODO: implement the Class ElectricRental
-        //this.electricRentals.add()
+    public void rentAnElectricCar(ElectricCar electricCar, CarManagementSystem carManagementSystem, LocalDate date,
+                                  int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,
+                                  int monthArrival, int dayArrival, RentalManager rentalManager) {
+        ElectricRental electricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
+                                                            yearDeparture, monthDeparture, dayDeparture, yearArrival ,
+                                                            monthArrival, dayArrival, rentalManager);
+        this.electricRentals.add(electricRental);
     }
 
     /** Ask permission to Admin to Modify an existing Electrical Rental made by this Customer
-     * @param carID An int representing the new electric carID
-     * @param date a GregorianCalender representing the new date of the Booking
-     * @param departureTime a Time representing the new beginning of the Rental
-     * @param arrivalTime a Time representing the new end of the Rental
-     * @param electricRental an ElectricRental representing which Rental is being modified
+     * @param electricRental the Rental that wants to be modified
+     * @param date          a LocalDate representing the date of the Booking
+     * @param yearDeparture Int representing the new departure year
+     * @param monthDeparture int representing the new departure month
+     * @param dayDeparture int representing the new departure day
+     * @param yearArrival Int representing the new arrival year
+     * @param monthArrival int representing the new arrival month
+     * @param dayArrival int representing the new arrival day
+     * @param rentalManager to add this rental to all the rentals
      */
-//    public void modifyAnElectricRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, ElectricRental electricRental){
-//        if (electricRental.getCustomerID == this.customerID){
-//            if (Admin.approveRentalModification == true){
-//                //TODO Create NewElectricRental
-//                //Change the current Electric Rental with the NewElectricRental
-//            }
-//        }
-//    }
+    public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar, CarManagementSystem carManagementSystem,
+                                    LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,
+                                    int monthArrival, int dayArrival, RentalManager rentalManager) {
+        if (electricRental.getCustomerID() == this.customerID){
+            if (Admin.approveRentalModification(electricRental) == true){
+                ElectricRental newElectricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
+                                                                    yearDeparture, monthDeparture, dayDeparture, yearArrival,
+                                                                    monthArrival, dayArrival, rentalManager);
+                // Remove the old Rental
+                this.electricRentals.remove(electricRental);
+                // Add the new Rental
+                this.electricRentals.add(newElectricRental);
+            }
+        }
+    }
 
     /** Ask the Admin to Cancel an existing Electrical Rental made by this Customer
      * @param electricRental an ElectricRental representing which Rental is being cancelled
      */
-//    public void cancelElectricRental(ElectricRental electricRental){
-//        if (electricRental.getCustomerID == this.customerID){
-//            if (Admin.approveRentalModification == true){
-//                //TODO: implement delete Electric Rental in Admin
-//                //this.electricRentals.remove(getElectricCarIndexInElectricRentalList(electricRental.getCarID)
-//            }
-//        }
-//    }
-
-     /** Creates a new Rental of a Vehicle and this Customer
-     * @param carID an int representing the id from a car the Customer wants to book
-     * @param date a GregorianCalender representing the date of the Booking
-     * @param departureTime a Time representing the beginning of the Rental
-     * @param arrivalTime a Time representing the end of the Rental
-     */
-    public void rentAFuelCar(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime){
-        //TODO: implement the Class FuelRental
-        //this.fuelRentals.add()
+    public void cancelElectricRental(ElectricRental electricRental){
+        if (electricRental.getCustomerID() == this.customerID){
+            if (Admin.approveRentalModification(electricRental) == true){
+                this.electricRentals.remove(electricRental);
+                Admin.deleteElectricRental(electricRental);
+            }
+        }
     }
 
-    /** Ask permission to Admin to Modify an existing Fuel Rental made by this Customer
-     * @param carID An int representing the new carID
-     * @param date a GregorianCalender representing the new date of the Booking
-     * @param departureTime a Time representing the new beginning of the Rental
-     * @param arrivalTime a Time representing the new end of the Rental
-     * @param fuelRental an FuelRental representing which Rental is being modified
+    /**
+     * Creates a new Rental of a Vehicle and this Customer
+     * @param combustionCar   an CombustionCar representing the car the Customer wants to book
+     * @param date          a LocalDate representing the date of the Booking
+     * @param carManagementSystem in order to know the carID of the car
+     * @param yearDeparture Int representing the departure year
+     * @param monthDeparture int representing the departure month
+     * @param dayDeparture int representing the departure day
+     * @param yearArrival Int representing the arrival year
+     * @param monthArrival int representing the arrival month
+     * @param dayArrival int representing the arrival day
+     * @param rentalManager to add this rental to all the rentals
      */
-//    public void modifyAFuelRental(int carID, GregorianCalendar date, Time departureTime, Time arrivalTime, FuelRental fuelRental){
-//        if (fuelRental.getCustomerID == this.customerID){
-//            if (Admin.approveRentalModification(fuelRental) == true){
-//                //TODO Create NewFuelRental
-//                //Change the current Fuel Rental with the NewFuelRental
-//            }
-//        }
-//    }
+     public void rentAFuelCar(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
+                              LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival,
+                              int monthArrival, int dayArrival) {
+         FuelRental fuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
+                                                this.getCustomerID(), date, yearDeparture, monthDeparture, dayDeparture,
+                                                yearArrival, monthArrival, dayArrival);
+         this.fuelRentals.add(fuelRental);
+     }
 
+    /** Ask permission to Admin to Modify an existing Electrical Rental made by this Customer
+     * @param fuelRental the Rental that wants to be modified
+     * @param date          a LocalDate representing the date of the Booking
+     * @param yearDeparture Int representing the new departure year
+     * @param monthDeparture int representing the new departure month
+     * @param dayDeparture int representing the new departure day
+     * @param yearArrival Int representing the new arrival year
+     * @param monthArrival int representing the new arrival month
+     * @param dayArrival int representing the new arrival day
+     * @param rentalManager to add this rental to all the rentals
+     */
+    public void modifyARegularRental(FuelRental fuelRental, RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
+                                     LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival,
+                                     int monthArrival, int dayArrival) {
+        if (fuelRental.getCustomerID() == this.customerID){
+            if (Admin.approveRentalModification(fuelRental) == true){
+                FuelRental newFuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
+                                                this.customerID, date, yearDeparture, monthDeparture, dayDeparture,
+                                                            yearArrival, monthArrival, dayArrival);
+                // Remove the old Rental
+                this.fuelRentals.remove(fuelRental);
+                // Add the new Rental
+                this.fuelRentals.add(newFuelRental);
+            }
+        }
+    }
 
     /** Ask the Admin to Cancel an existing Fuel Rental made by this Customer
      * @param fuelRental an ElectricRental representing which Rental is being cancelled
      */
-//    public void cancelFuelRental(FuelRental fuelRental){
-//        if (fuelRental.getCustomerID == this.customerID){
-//            if (Admin.approveRentalModification == true){
-//                //TODO: implement delete Fuel Rental in Admin
-//                //this.fuelRentals.remove(getCombustionCarIndexInFuelRentalList(fuelRental.getCarID)
-//            }
-//        }
-//    }
+    public void cancelFuelRental(FuelRental fuelRental){
+        if (fuelRental.getCustomerID() == this.customerID){
+            if (Admin.approveRentalModification(fuelRental) == true){
+                this.fuelRentals.remove(fuelRental);
+                Admin.deleteFuelRental(fuelRental);
+            }
+//            this.fuelRentals.remove(fuelRental);
+        }
+    }
 
     /** Simulates the Situation in which a customer damages an Electric Car
      * @param electricCar the Car that was Damaged

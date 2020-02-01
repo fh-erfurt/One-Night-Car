@@ -16,7 +16,7 @@ class RentalTest {
         PersonManager personManager = new PersonManager();
         Customer customer = new Customer(personManager);
         ElectricCar electricCar = new ElectricCar(carManagementSystem);
-        ElectricRental rental1 = new ElectricRental(rentalManager, carManagementSystem, customer, electricCar, personManager );
+        ElectricRental rental1 = new ElectricRental(rentalManager, carManagementSystem, customer.getCustomerID(), electricCar);
 
         long days = rental1.calculateElapsedDays();
 

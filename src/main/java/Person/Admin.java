@@ -44,16 +44,9 @@ public class Admin extends Employee {
      * true: it can be changed
      * false: it has to stay that way
      */
-//    public boolean approveRentalModification(ElectricRental electricRental){
-//        GregorianCalendar currentDate = new GregorianCalendar();
-//        // It is only True if there are at least 1 day between current time and Rental date
-//        if((currentDate.get(Calendar.DAY_OF_MONTH) - electricRental.getDate.get(Calendar.DAY_OF_MONTH)) > 0){
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
-//    }
+    public static boolean approveRentalModification(ElectricRental electricRental){
+        return true;
+    }
 
     /** Function to check if an admin permits a modification
      * @param fuelRental representing the desired Rental to modify
@@ -61,34 +54,27 @@ public class Admin extends Employee {
      * true: it can be changed
      * false: it has to stay that way
      */
-//    public boolean approveRentalModification(FuelRental fuelRental){
-//        GregorianCalendar currentDate = new GregorianCalendar();
-//        // It is only True if there are at least 1 day between current time and Rental date
-//        if((currentDate.get(Calendar.DAY_OF_MONTH) - fuelRental.getDate.get(Calendar.DAY_OF_MONTH)) > 0){
-//            return true;
-//        }
-//        else{
-//            return false;
-//        }
-//    }
+    public static boolean approveRentalModification(FuelRental fuelRental){
+        return true;
+    }
 
     /** Function to erase a FuelRental
      * @param fuelRental
      */
-//    public void deleteFuelRental(FuelRental fuelRental){
-//        fuelRental = null
-//        //Call the Garbage Collector
-//        System.gc();
-//    }
+    public static void deleteFuelRental(FuelRental fuelRental){
+        fuelRental = null;
+        //Call the Garbage Collector
+        System.gc();
+    }
 
     /** Function to erase a FuelRental
      * @param electricRental
      */
-//    public void deleteFuelRental(ElectricRental electricRental){
-//        electricRental = null;
-//        //Call the Garbage Collector
-//        System.gc();
-//    }
+    public static void deleteElectricRental(ElectricRental electricRental){
+        electricRental = null;
+        //Call the Garbage Collector
+        System.gc();
+    }
 
     /** Resolves a Problem where nobody else can make the Customer happy
      * @return a boolean
@@ -101,7 +87,7 @@ public class Admin extends Employee {
      * @param employee a Employee which is going to be erased
      * @param personManager a PersonManager (List from which it should be removed)
      */
-    public void deleteFuelRental(Employee employee, PersonManager personManager){
+    public void deleteEmployee (Employee employee, PersonManager personManager){
         employee = null;
         personManager.removeEmployeeFromEmployees(employee);
         //Call the Garbage Collector
@@ -112,7 +98,7 @@ public class Admin extends Employee {
      * @param customer a Customer which is going to be erased
      * @param personManager a PersonManager (List from which it should be removed)
      */
-    public void deleteFuelRental(Customer customer, PersonManager personManager){
+    public void deleteCustomer (Customer customer, PersonManager personManager){
         customer = null;
         personManager.removeCustomerFromCustomers(customer);
         //Call the Garbage Collector

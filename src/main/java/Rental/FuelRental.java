@@ -20,6 +20,8 @@ public class FuelRental extends Rental {
 
     private double fuelLevelBefore;
     private double fuelLevelAfter;
+    private CombustionCar combustionCar;
+
     /* /////////////////////Methods/////////////////////////// */
     /** Creates a rental entry with parameters for a combustion car
      * * @param rentalID An integer value used to identify certain rental entries
@@ -36,33 +38,38 @@ public class FuelRental extends Rental {
      * @param monthArrival the time at which he has returned
      * @param dayArrival the time at which he has returned
      */
-    public FuelRental(RentalManager RentalManager, CombustionCar CombustionCar, CarManagementSystem CarManagementSystem, Customer customer, LocalDate date,
+    public FuelRental(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem, int customerID, LocalDate date,
                       int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,int monthArrival, int dayArrival){
-        rentalID = RentalManager.getSizeOfFuelRentals();            //Creates a running counter of Rentals in list
-        RentalManager.addRentalIntoFuelRentals(this);                          //Adds the new rental to the global list
-        this.carID = CarManagementSystem.getCarIDFromCombustion(CombustionCar);
-        this.customerID = customer.getCustomerID();
-        this.rentalPrice = calculateRentalPriceForCombustion(CombustionCar);
-        this.date = date;
-        this.departureTime = new GregorianCalendar(yearDeparture, monthDeparture, dayDeparture);
-        this.arrivalTime = new GregorianCalendar(yearArrival, monthArrival, dayArrival);
-        this.odometerBefore = CombustionCar.getOdometer();
-        this.fuelLevelBefore = CombustionCar.getFuelLevel();
-        this.fuelLevelAfter = CombustionCar.getFuelLevel();
+        super(customerID, date, yearDeparture, monthDeparture, dayDeparture, yearArrival , monthArrival, dayArrival);
+        rentalID = rentalManager.getSizeOfFuelRentals();                          //Creates a running counter of Rentals in list
+        rentalManager.addRentalIntoFuelRentals(this);                          //Adds the new rental to the global list
+        this.carID = carManagementSystem.getCarIDFromCombustion(combustionCar);
+        this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
+        this.odometerBefore = combustionCar.getOdometer();
+        this.fuelLevelBefore = combustionCar.getFuelLevel();
+        this.fuelLevelAfter = combustionCar.getFuelLevel();
+        this.combustionCar = combustionCar;
     }
 
-    public FuelRental(RentalManager RentalManager, CarManagementSystem CarManagementSystem, Customer customer, LocalDate date, CombustionCar CombustionCar, PersonManager PersonManager){
-        this.rentalID = RentalManager.getSizeOfFuelRentals();
-        RentalManager.addRentalIntoFuelRentals(this);
-        this.carID = CarManagementSystem.getCarIDFromCombustion(CombustionCar);
-        this.customerID = PersonManager.getCustomerIndexInCustomerList(customer);
-        this.rentalPrice = calculateRentalPriceForCombustion(CombustionCar);
-        this.date = date;
-        this.departureTime = new GregorianCalendar(2020, Calendar.JANUARY, 1);
-        this.arrivalTime = new GregorianCalendar(2020, Calendar.JANUARY, 4);
-        this.odometerBefore = CombustionCar.getOdometer();
-        this.fuelLevelBefore = CombustionCar.getFuelLevel();
+    /**
+     * A constructor that uses default values
+     * @param rentalManager the management system needed to add the entry to the global list
+     * @param carManagementSystem the management system, so we can get information about the car
+     * @param customerID an Int representing the customers ID
+     * @param combustionCar the car itself, object of the class ElectricCar
+     */
+    public FuelRental(RentalManager rentalManager, CarManagementSystem carManagementSystem, int customerID, LocalDate date,
+                      CombustionCar combustionCar, PersonManager personManager){
+        super();
+        this.rentalID = rentalManager.getSizeOfFuelRentals();
+        rentalManager.addRentalIntoFuelRentals(this);
+        this.carID = carManagementSystem.getCarIDFromCombustion(combustionCar);
+        this.customerID = customerID;
+        this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
+        this.odometerBefore = combustionCar.getOdometer();
+        this.fuelLevelBefore = combustionCar.getFuelLevel();
         this.fuelLevelAfter = getFuelLevelAfter();
+        this.combustionCar = combustionCar;
     }
     /** Sets the fuelLevel after the rental of the car
      *
@@ -88,4 +95,5 @@ public class FuelRental extends Rental {
         return rentalPrice;
     }
 
+    public CombustionCar getCombustionCar() { return this.combustionCar; }
 }

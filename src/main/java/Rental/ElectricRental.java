@@ -20,13 +20,14 @@ public class ElectricRental extends Rental {
 
     private double chargePercentBefore;
     private double chargePercentAfter;
+    private ElectricCar electricCar;
+
     /* /////////////////////Methods/////////////////////////// */
 
     /**
      * Creates a Rental entry for a rental of an electric Car
-     * @param ElectricCar the car itself, object of the class ElectricCar
-     * @param CarManagementSystem the management system, so we can get information about the car
-     * @param customer the customer
+     * @param electricCar the car itself, object of the class ElectricCar
+     * @param carManagementSystem the management system, so we can get information about the car
      * @param date the date of the rental
      * @param yearDeparture  the time at which the customer started the rental
      * @param monthDeparture  the time at which the customer started the rental
@@ -34,46 +35,41 @@ public class ElectricRental extends Rental {
      * @param yearArrival the time at which he has returned
      * @param monthArrival the time at which he has returned
      * @param dayArrival the time at which he has returned
-     * @param RentalManager the management system needed to add the entry to the global list
-     * @param Personmanager a system to manage the customer's information
+     * @param rentalManager the management system needed to add the entry to the global list
+     * @param customerID the Customer ID
      */
-    public ElectricRental(ElectricCar ElectricCar, CarManagementSystem CarManagementSystem, PersonManager Personmanager, Customer customer, LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture,
-                          int yearArrival ,int monthArrival, int dayArrival, RentalManager RentalManager){
-        this.rentalID = RentalManager.getSizeOfElectricRentals();
-        RentalManager.addRentalIntoElectricRentals(this);
-        this.carID = CarManagementSystem.getCarIDFromElectric(ElectricCar);
-        this.customerID = Personmanager.getCustomerIndexInCustomerList(customer);
-        this.rentalPrice = calculateRentalPriceForElectric(ElectricCar);
-        this.date = date;
-        this.departureTime = new GregorianCalendar(yearDeparture, monthDeparture, dayDeparture);
-        this.arrivalTime = new GregorianCalendar(yearArrival, monthArrival, dayArrival);
-        this.odometerBefore = ElectricCar.getOdometer();
-        this.chargePercentBefore = ElectricCar.getChargePercent();
+    public ElectricRental(ElectricCar electricCar, CarManagementSystem carManagementSystem, int customerID, LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture,
+                          int yearArrival ,int monthArrival, int dayArrival, RentalManager rentalManager){
+        super(customerID, date, yearDeparture, monthDeparture, dayDeparture, yearArrival, monthArrival, dayArrival);
+        this.rentalID = rentalManager.getAndIncrementCounter();
+        rentalManager.addRentalIntoElectricRentals(this);
+        this.carID = carManagementSystem.getCarIDFromElectric(electricCar);
+        this.rentalPrice = calculateRentalPriceForElectric(electricCar);
+        this.odometerBefore = electricCar.getOdometer();
+        this.chargePercentBefore = electricCar.getChargePercent();
+        this.electricCar = electricCar;
     }
 
     /**
      * A constructor that uses default values
-     * @param RentalManager the management system needed to add the entry to the global list
+     * @param rentalManager the management system needed to add the entry to the global list
      * @param carManagementSystem the management system, so we can get information about the car
-     * @param customer the customer
+     * @param customerID an Int representing the customers ID
      * @param electricCar the car itself, object of the class ElectricCar
-     * @param personManager a system to manage the customer's information
      */
-    ElectricRental(RentalManager RentalManager, CarManagementSystem carManagementSystem, Customer customer, ElectricCar electricCar, PersonManager personManager){
-        this.rentalID = RentalManager.getSizeOfElectricRentals();
-        RentalManager.addRentalIntoElectricRentals(this);
+    public ElectricRental(RentalManager rentalManager, CarManagementSystem carManagementSystem, int customerID, ElectricCar electricCar){
+        super();
+        this.rentalID = rentalManager.getAndIncrementCounter();
+        rentalManager.addRentalIntoElectricRentals(this);
         this.carID = carManagementSystem.getCarIDFromElectric(electricCar);
-        this.customerID = personManager.getCustomerIndexInCustomerList(customer);
-        this.rentalPrice = electricCar.getPrice();
-        this.date = LocalDate.now();
-        this.departureTime = new GregorianCalendar(2020, Calendar.JANUARY, 1);
-        this.arrivalTime = new GregorianCalendar(2020, Calendar.DECEMBER, 31);
+        this.customerID = customerID;
+        this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
+        this.electricCar = electricCar;
     }
 
     /** Sets the charge of the electric car after the rental
-     *
      * @param ElectricCar the rented electric car
      * @return the current charge before recharge
      */
@@ -83,8 +79,10 @@ public class ElectricRental extends Rental {
 
     private double getChargePercentAfter() { return this.chargePercentAfter; }
 
-    private float calculateRentalPriceForElectric(ElectricCar ElectricCar) {
+        private float calculateRentalPriceForElectric(ElectricCar ElectricCar) {
         return calculateElapsedDays() * ElectricCar.getPrice();
     }
+
+    public ElectricCar getElectricCar() { return this.electricCar; }
 
 }
