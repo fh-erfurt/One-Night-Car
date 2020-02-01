@@ -10,15 +10,18 @@ import java.util.ArrayList;
 public class ElectricParkingArea extends ParkingArea {
 
     private int maxElectricCarCapacity;
-    public ArrayList<Car> electricCarsInStation;
+    public ArrayList<ElectricCar> electricCarsInStation;
+    public ArrayList<ElectricCar> availableElectricCars;
+    public ArrayList<ElectricCar> notAvailableElectricCars;
 
     public ElectricParkingArea(int parkID, ParkingAreaAddress ParkingAreaAddress, int maxCapacity,
                                int maxElectricCarCapacity, ParkingAreaManager parkingAreaManager) {
         super(parkID, ParkingAreaAddress, maxCapacity, parkingAreaManager);
 
-
         this.maxElectricCarCapacity = maxElectricCarCapacity;
-        this.electricCarsInStation = new ArrayList<Car>();
+        this.electricCarsInStation = new ArrayList<ElectricCar>();
+        this.availableElectricCars = new ArrayList<ElectricCar>();
+        this.notAvailableElectricCars = new ArrayList<ElectricCar>();
         parkingAreaManager.ElectricParkingAreas.add(this);
 
     }
@@ -26,8 +29,10 @@ public class ElectricParkingArea extends ParkingArea {
     public ElectricParkingArea(ParkingAreaManager parkingAreaManager){
         super(2,new ParkingAreaAddress(), 100, parkingAreaManager);
 
+        this.electricCarsInStation = new ArrayList<ElectricCar>();
+        this.availableElectricCars = new ArrayList<ElectricCar>();
+        this.notAvailableElectricCars = new ArrayList<ElectricCar>();
         this.maxElectricCarCapacity = 100;
-
     }
 
     public int getMaxElectricCarCapacity() {

@@ -12,13 +12,12 @@ public class ParkingArea {
     /* /////////////////////Attributes///////////////////////// */
 
     private int parkID;
-    private String ParkingAreaAddress;
     private int maxCapacity;
     ParkingAreaAddress parkingAreaAddress;
     // ArrayList in case the number of cars in station changes
-    public ArrayList<Car> carsInStation;
-    public ArrayList<Car> availableCars;
-    public ArrayList<Car> notAvailableCars;
+    public ArrayList<CombustionCar> carsInStation;
+    public ArrayList<CombustionCar> availableCars;
+    public ArrayList<CombustionCar> notAvailableCars;
 
     /* /////////////////////Methods/////////////////////////// */
 
@@ -27,23 +26,22 @@ public class ParkingArea {
 
         this.maxCapacity = maxCapacity;
         this.parkingAreaAddress = new ParkingAreaAddress();  // könnte mit Parameter sein oder default
-        this.carsInStation = new ArrayList<Car>();
-        this.availableCars = new ArrayList<Car>();
-        this.notAvailableCars = new ArrayList<Car>();
+        this.carsInStation = new ArrayList<CombustionCar>();
+        this.availableCars = new ArrayList<CombustionCar>();
+        this.notAvailableCars = new ArrayList<CombustionCar>();
         this.parkID = parkingAreaManager.getAndIncrementCounter();
         parkingAreaManager.ParkingAreas.add(this);                               //Adds this ParkingArea to the ParkingAreas List
     }
 
     public ParkingArea(ParkingAreaManager parkingAreaManager) {
         this.parkID = parkingAreaManager.getAndIncrementCounter();
-        this.parkingAreaAddress = new ParkingAreaAddress();
         this.maxCapacity = 100;
+        this.parkingAreaAddress = new ParkingAreaAddress();
+        this.carsInStation = new ArrayList<CombustionCar>();
+        this.availableCars = new ArrayList<CombustionCar>();
+        this.notAvailableCars = new ArrayList<CombustionCar>();
         parkingAreaManager.ParkingAreas.add(this);
-
     }
-
-
-
 
     public void assignCarToStation(CombustionCar combustionCar) {
         //carManagementSystem.getCarIDFromCombustion(combustionCar);
@@ -90,7 +88,7 @@ public class ParkingArea {
 
     public int getMaxCapacity() {return this.maxCapacity;}
 
-    public ArrayList<Car> getCarsInStation() {
+    public ArrayList<CombustionCar> getCarsInStation() {
         return carsInStation;
     }
 

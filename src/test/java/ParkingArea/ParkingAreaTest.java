@@ -11,21 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingAreaTest {
 
-
-
-
     @Test
     void test_assign_car_to_station() {
+        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+        CarManagementSystem carManagementSystem = new CarManagementSystem();
 
-        ParkingAreaManager ParkingAreaList = new ParkingAreaManager();
-        CarManagementSystem combustionCarsList = new CarManagementSystem();
+        CombustionCar combustionCar = new CombustionCar(carManagementSystem);
+        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar Auto1 = new CombustionCar(combustionCarsList);
-        ParkingArea Area1 = new ParkingArea(ParkingAreaList);
+        parkingArea.assignCarToStation(combustionCar);
 
-        Area1.assignCarToStation(Auto1);
-
-        assertEquals(1,Area1.availableCars.size());
+        assertEquals(1, parkingArea.availableCars.size());
+        assertEquals(1, parkingArea.carsInStation.size());
     }
 
     /*
