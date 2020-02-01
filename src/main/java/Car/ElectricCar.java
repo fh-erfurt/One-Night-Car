@@ -26,7 +26,7 @@ public class ElectricCar extends Car {
      * @param GPSLongitude A double representing the Car position
      * @param customerLevel A user Level from Customer representing the User Permission
      * @param price A float representing the costs of the Car per Day
-     * @param range
+     * @param range A float representing the range the car can drive before it needs to be recharged
      * @param chargePercent A float representing the electric Car charge
      */
     public ElectricCar(Type type, String brand, String model, State state,
