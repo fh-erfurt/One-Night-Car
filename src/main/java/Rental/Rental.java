@@ -2,7 +2,9 @@ package Rental;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /** Represents a rental entry
  * @author OneNightCar
@@ -11,15 +13,15 @@ import java.time.LocalDateTime;
   */
 public abstract class Rental {
     /* /////////////////////Attributes///////////////////////// */
-    int rentalID;
-    int carID;
-    int customerID;
-    float rentalPrice;
-    long odometerBefore;
-    long odometerAfter = 0;
+    protected int rentalID;
+    protected int carID;
+    protected int customerID;
+    protected float rentalPrice;
+    protected long odometerBefore;
+    protected long odometerAfter = 0;
     LocalDate date;
-    LocalDateTime departureTime;
-    LocalDateTime arrivalTime;
+    Calendar departureTime;
+    Calendar arrivalTime;
 
 
 
@@ -29,7 +31,7 @@ public abstract class Rental {
      * @return the total amount of hours the rental has lasted
      */
     int calculateElapsedDays(){
-        return this.arrivalTime.getDayOfYear() - this.departureTime.getDayOfYear();
+          return Math.abs(arrivalTime.get(Calendar.DAY_OF_YEAR) - departureTime.get(Calendar.DAY_OF_YEAR));
     }
 
     /** Sets the odometer to the value after the rental

@@ -32,7 +32,7 @@ public abstract class Car {
 
     protected long odometer;
     protected Enum permission; // which Customer can book this car (which customer Level)
-    protected float price;       //Price pro hour
+    protected float price;       //Price pro day
     Location location;
 
     /* /////////////////////Methods/////////////////////////// */
@@ -45,7 +45,7 @@ public abstract class Car {
      * @param GPSLatitude  A double representing the Car position
      * @param GPSLongitude A double representing the Car position
      * @param customerLevel An enum from Customer representing the User Permission
-     * @param price A float representing the costs of the Car per Hour
+     * @param price A float representing the costs of the Car per Day
      */
     public Car(Type type, String brand, String model, State state,
                double GPSLatitude, double GPSLongitude, long odometer,

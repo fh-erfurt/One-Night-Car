@@ -11,18 +11,18 @@ class RentalTest {
 
     @Test
     void testElapsedDays(){
-        RentalManager Rentals = new RentalManager();
-        CarManagementSystem CarManagementSystem = new CarManagementSystem();
-        ElectricCar ElectricCar = new ElectricCar(CarManagementSystem);
-        PersonManager PersonManager = new PersonManager();
-        Customer customer = new Customer(PersonManager);
-        ElectricRental TeslaS = new ElectricRental(Rentals, CarManagementSystem, customer, ElectricCar, PersonManager);
+        RentalManager rentalManager = new RentalManager();
+        CarManagementSystem carManagementSystem = new CarManagementSystem();
+        PersonManager personManager = new PersonManager();
+        Customer customer = new Customer(personManager);
+        ElectricCar electricCar = new ElectricCar(carManagementSystem);
+        ElectricRental rental1 = new ElectricRental(rentalManager, carManagementSystem, customer, electricCar, personManager );
 
-        int elapsedDays = TeslaS.calculateElapsedDays();
-        assertEquals(7, elapsedDays);
+        long days = rental1.calculateElapsedDays();
+
+        assertEquals(365, days);
     }
 
-    @Test
 
 
 }

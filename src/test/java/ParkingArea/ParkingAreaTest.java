@@ -23,12 +23,12 @@ class ParkingAreaTest {
         CombustionCar Auto1 = new CombustionCar(combustionCarsList);
         ParkingArea Area1 = new ParkingArea(ParkingAreaList);
 
-
         Area1.assignCarToStation(Auto1);
 
         assertEquals(1,Area1.availableCars.size());
     }
 
+    /*
     @Test
     void test_get_index_in_carID_list(){
 
@@ -54,7 +54,7 @@ class ParkingAreaTest {
     void test_print_all_cars_in_station(){
 
     }
-
+*/
 
  /*   @BeforeEach
     public void init () {

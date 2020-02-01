@@ -22,25 +22,30 @@ public class FuelRental extends Rental {
     private double fuelLevelAfter;
     /* /////////////////////Methods/////////////////////////// */
     /** Creates a rental entry with parameters for a combustion car
-     * @param rentalID An integer value used to identify certain rental entries
-     * @param carID An integer value used to identify certain cars inside a rental entry
-     * @param customerID An integer value used to identify certain customers inside a rental entry
-     * @param rentalPrice The total price of a rental
-     * @param odometerBefore The value on the odometer of a car before the rental
-     * @param odometerAfter  The value on the odometer of a car after the rental
+     * * @param rentalID An integer value used to identify certain rental entries
+     * * @param carID An integer value used to identify certain cars inside a rental entry
+     * * @param customerID An integer value used to identify certain customers inside a rental entry
+     * * @param rentalPrice The total price of a rental
+     * * @param odometerBefore The value on the odometer of a car before the rental
+     * * @param odometerAfter  The value on the odometer of a car after the rental
      * @param date The date a rental has been created
-     * @param departureTime A timestamp of when the customer has started the rental
-     * @param arrivalTime   A timestamp of when the customer has to return the car
+     * @param yearDeparture  the time at which the customer started the rental
+     * @param monthDeparture  the time at which the customer started the rental
+     * @param dayDeparture  the time at which the customer started the rental
+     * @param yearArrival the time at which he has returned
+     * @param monthArrival the time at which he has returned
+     * @param dayArrival the time at which he has returned
      */
-    public FuelRental(RentalManager RentalManager, CombustionCar CombustionCar, CarManagementSystem CarManagementSystem, Customer customer, LocalDate date, LocalDateTime departureTime, LocalDateTime arrivalTime){
+    public FuelRental(RentalManager RentalManager, CombustionCar CombustionCar, CarManagementSystem CarManagementSystem, Customer customer, LocalDate date,
+                      int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,int monthArrival, int dayArrival){
         rentalID = RentalManager.getSizeOfFuelRentals();            //Creates a running counter of Rentals in list
         RentalManager.addRentalIntoFuelRentals(this);                          //Adds the new rental to the global list
         this.carID = CarManagementSystem.getCarIDFromCombustion(CombustionCar);
         this.customerID = customer.getCustomerID();
         this.rentalPrice = calculateRentalPriceForCombustion(CombustionCar);
         this.date = date;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
+        this.departureTime = new GregorianCalendar(yearDeparture, monthDeparture, dayDeparture);
+        this.arrivalTime = new GregorianCalendar(yearArrival, monthArrival, dayArrival);
         this.odometerBefore = CombustionCar.getOdometer();
         this.fuelLevelBefore = CombustionCar.getFuelLevel();
         this.fuelLevelAfter = CombustionCar.getFuelLevel();
@@ -53,8 +58,8 @@ public class FuelRental extends Rental {
         this.customerID = PersonManager.getCustomerIndexInCustomerList(customer);
         this.rentalPrice = calculateRentalPriceForCombustion(CombustionCar);
         this.date = date;
-        this.departureTime = LocalDateTime.now();
-        this.arrivalTime = LocalDateTime.now().plusWeeks(1);
+        this.departureTime = new GregorianCalendar(2020, Calendar.JANUARY, 1);
+        this.arrivalTime = new GregorianCalendar(2020, Calendar.JANUARY, 4);
         this.odometerBefore = CombustionCar.getOdometer();
         this.fuelLevelBefore = CombustionCar.getFuelLevel();
         this.fuelLevelAfter = getFuelLevelAfter();

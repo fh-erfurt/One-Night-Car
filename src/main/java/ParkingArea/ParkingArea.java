@@ -14,7 +14,7 @@ public class ParkingArea {
     private int parkID;
     private String ParkingAreaAddress;
     private int maxCapacity;
-    protected ParkingAreaAddress parkingAreaAddress;
+    ParkingAreaAddress parkingAreaAddress;
     // ArrayList in case the number of cars in station changes
     public ArrayList<Car> carsInStation;
     public ArrayList<Car> availableCars;
@@ -26,6 +26,7 @@ public class ParkingArea {
             , ParkingAreaManager parkingAreaManager) {
 
         this.maxCapacity = maxCapacity;
+        this.parkingAreaAddress = new ParkingAreaAddress();  // könnte mit Parameter sein oder default
         this.carsInStation = new ArrayList<Car>();
         this.availableCars = new ArrayList<Car>();
         this.notAvailableCars = new ArrayList<Car>();
@@ -46,8 +47,8 @@ public class ParkingArea {
 
     public void assignCarToStation(CombustionCar combustionCar) {
         //carManagementSystem.getCarIDFromCombustion(combustionCar);
-        carsInStation.add(combustionCar);
-        availableCars.add(combustionCar);
+        this.carsInStation.add(combustionCar);
+        this.availableCars.add(combustionCar);
     }
 
     protected int getIndexInStationCarIDList(CombustionCar combustionCar) {                      //protected for Testing purposes
