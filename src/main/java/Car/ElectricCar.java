@@ -6,7 +6,6 @@ import javax.swing.text.Position;
 
 /** Represents a Electric Car
  * extent Car
- * @see {@link Car}
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
@@ -28,6 +27,7 @@ public class ElectricCar extends Car {
      * @param price A float representing the costs of the Car per Day
      * @param range A float representing the range the car can drive before it needs to be recharged
      * @param chargePercent A float representing the electric Car charge
+     * @param carManagementSystem the system where all car are saved
      */
     public ElectricCar(Type type, String brand, String model, State state,
                        long odometer, double GPSLatitude, double GPSLongitude, Customer.CustomerLevel customerLevel,
@@ -68,7 +68,7 @@ public class ElectricCar extends Car {
 
 
     /** Change the Electric Car ChargePercent .
-     * @param chargePercent
+     * @param chargePercent a float representing the new charge level
      */
     public void setChargePercent(float chargePercent){
         this.chargePercent = chargePercent;

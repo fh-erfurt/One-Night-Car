@@ -21,7 +21,7 @@ public class Location {
     }
 
     /** Change the Latitude Location
-     * @param latitude
+     * @param latitude a double with the new Latitude
      */
     public  void setGPSLatitude(double latitude){
         GPSLatitude= latitude;
@@ -29,7 +29,7 @@ public class Location {
 
 
     /** Change the Longitude Location
-     * @param longitude
+     * @param longitude a double with the new Longitude
      */
     public void setGPSLongitude(double longitude){
         GPSLongitude= longitude;

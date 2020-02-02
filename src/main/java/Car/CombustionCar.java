@@ -4,7 +4,6 @@ import Person.Customer;
 import Rental.Rental;
 /** Represents a Combustion Car
  * extent Car
- * @see {@link Car}
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
@@ -41,6 +40,7 @@ public class CombustionCar extends Car {
      * @param consumption A double representing the consumption of the Car in 100 km
      * @param transmission An enum representing the Transmission of the Car (Manuel, Automatic)
      * @param fuelType an enum representing the Fuel Type of the Car (Petrol, Diesel)
+     * @param carManagementSystem The system where all the car are saved
      */
     public CombustionCar(Type type, String brand, String model, State state,
                          double GPSLatitude, double GPSLongitude, long odometer,
@@ -102,7 +102,7 @@ public class CombustionCar extends Car {
 
 
     /** Change the Combustion Car fuel level .
-     * @param fuelLevel
+     * @param fuelLevel a double with the new fuellevel
      */
     public void setFuelLevel(double fuelLevel){
         this.fuelLevel=fuelLevel;

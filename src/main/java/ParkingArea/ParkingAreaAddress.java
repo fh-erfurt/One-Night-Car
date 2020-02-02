@@ -15,9 +15,6 @@ public class ParkingAreaAddress {
     private String street;
     private String streetNumber;
 
-
-
-
     /* /////////////////////Methods/////////////////////////// */
 
     /** Creates a ParkingAreaAddress with specified Address.
@@ -35,7 +32,9 @@ public class ParkingAreaAddress {
         this.streetNumber   = streetNumber;
     }
 
-
+    /**
+     * Creater a Parking Aria with standard values
+     */
     public ParkingAreaAddress(){
         this.ZIP = "99085";
         this.city = "Erfurt";

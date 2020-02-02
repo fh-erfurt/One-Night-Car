@@ -31,7 +31,7 @@ public abstract class Car {
     }
 
     protected long odometer;
-    protected Enum permission; // which Customer can book this car (which customer Level)
+    protected Enum permission;    // which Customer can book this car (which customer Level)
     protected float price;       //Price pro day
     Location location;
 
@@ -79,9 +79,8 @@ public abstract class Car {
 
 
     /** Set a new Location of the Car .
-     * @param GPSLatitude
-     * @param GPSLongitude
-     * @see {@link Location}
+     * @param GPSLatitude the latitude of the GPS
+     * @param GPSLongitude the longitude of the GPS
      */
    public void setNewLocation(double GPSLatitude, double GPSLongitude){
         this.location= new Location(GPSLatitude,GPSLongitude);
@@ -90,7 +89,6 @@ public abstract class Car {
 
     /** Gets the Car Location
      * @return the Location of the Car
-     * @see {@link Location}
      */
    public Location getLocation(){
         return this.location;
@@ -125,7 +123,6 @@ public abstract class Car {
 
     /** Change the Car odometer .
      * @param rental gets the Odometer information after the return of the Car from the Rental Class
-     * @see {@link Rental}
      */
     public void setOdometer (Rental rental) {
         this.odometer = rental.getOdometerAfter();
