@@ -60,29 +60,35 @@ public class ParkingArea {
     }
 
     public void removeCarFromStation(CombustionCar combustionCar) {
-        int currentCarIndex = getIndexInStationCarIDList(combustionCar);
-        carsInStation.remove(currentCarIndex);
-        availableCars.remove(currentCarIndex);
+        //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
+        carsInStation.remove(combustionCar);
+        availableCars.remove(combustionCar);
     }
 
 
     public void carIsBeingUsed(CombustionCar combustionCar) {
-        int currentCarIndex = getIndexInStationCarIDList(combustionCar);
-        availableCars.remove(currentCarIndex);
+        //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
+        availableCars.remove(combustionCar);
         notAvailableCars.add(combustionCar);
     }
 
     public void carIsNoLongerBeingUsed(CombustionCar combustionCar) {
-        int currentCarIndex = getIndexInStationCarIDList(combustionCar);
+        //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
         availableCars.add(combustionCar);
-        notAvailableCars.remove(currentCarIndex);
+        notAvailableCars.remove(combustionCar);
     }
 
     public int numberOfCarsAssignedToStation() {
         return carsInStation.size();
     }
 
-   // public int getCarID(Car carID) {return this.carID;}
+    /** gets the Index(id) of the combustionCar list
+     * @return  the Index of combustionCarList
+     * */
+
+    public int getCombustionCarID(CombustionCar combustionCar) {
+        return carsInStation.indexOf(combustionCar);
+    }
 
     public ParkingAreaAddress getParkingAreaAddress() {return this.parkingAreaAddress;}
 

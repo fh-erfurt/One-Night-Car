@@ -39,11 +39,19 @@ public class ElectricParkingArea extends ParkingArea {
         return this.maxElectricCarCapacity;
     }
 
+    public void setMaxElectricCarCapacity(int maxElectricCarCapacity) {
+        this.maxElectricCarCapacity = maxElectricCarCapacity;
+    }
+
     public void assignElectricCarToStation(ElectricCar electricCar) {
         electricCarsInStation.add(electricCar);
     }
 
     public void removeElectricCarFromStation(ElectricCar electricCar){
         electricCarsInStation.remove(electricCar);
+    }
+
+    public int getElectricCarID(ElectricCar electricCar) {
+        return electricCarsInStation.indexOf(electricCar);
     }
 }

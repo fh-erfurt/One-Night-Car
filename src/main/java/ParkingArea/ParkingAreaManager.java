@@ -1,5 +1,7 @@
 package ParkingArea;
 
+import Car.CombustionCar;
+
 import java.util.ArrayList;
 
 public class ParkingAreaManager {
@@ -49,6 +51,29 @@ public class ParkingAreaManager {
 
     public int getParkIDFromParkingAreas(ParkingArea parkingArea){
         return ParkingAreas.indexOf(parkingArea);
+    }
+
+    protected int returnParkingAreaWithIndex(ParkingArea parkingArea) {                      //protected for Testing purposes
+        int ParkingAreaIndex;
+        for (ParkingAreaIndex = 0; ParkingAreaIndex < ParkingAreas.size(); ParkingAreaIndex++) {
+            if (parkingArea == ParkingAreas.get(ParkingAreaIndex)) {
+                break;
+            }
+        }
+        return ParkingAreaIndex;
+
+    }
+
+    protected int returnElectricParkingAreaWithIndex(ElectricParkingArea electricParkingArea) {                      //protected for Testing purposes
+        int ElectricParkingAreaIndex;
+        for (ElectricParkingAreaIndex = 0; ElectricParkingAreaIndex < ElectricParkingAreas.size();
+             ElectricParkingAreaIndex++) {
+            if (electricParkingArea == ParkingAreas.get(ElectricParkingAreaIndex)) {
+                break;
+            }
+        }
+        return ElectricParkingAreaIndex;
+
     }
 
 
