@@ -11,12 +11,13 @@ Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 ![Package Person](/diagrammen/packagePerson.png)
 
 * Rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen. Zuständig: Pascal Giese (@pascalgiese)
-  * Electric Rental: Mieten eines electrischen Autos
-  * Fuel Rental: Mieten eines nicht electrischen Autos 
-  
+  * Electric Rental: Mieten eines elektrischen Autos
+  * Fuel Rental: Mieten eines benzinbetriebenen Autos 
+![Package Rental](/diagrammen/packageRental.png)
+
 * ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: Benito Grauel (@TheBenitoo)
-  * Electric ParkingArea: beschreibt ein ParkinArea mit (bengrenzte anzahl) anschluße für elektrische Autos
-  * Fuel Rental: beschreibt ein gewönliches ParkinArea 
+  * Electric ParkingArea: beschreibt eine ParkinArea mit (bengrenzter Anzahl) Anschlüssen für elektrische Autos
+  * Fuel Rental: beschreibt eine gewönliche ParkingArea 
 ![Package Parking Area](/diagrammen/packageParkingArea.png)
 
 * Car: Beinhaltet alle Informationen von Autos. Zuständig: Ahmad Abo Louha (@AhmadAboLouha)
@@ -35,20 +36,27 @@ One-Night-Car CarSharing Verwaltungsystem
 * Admin: verantwortlich für bestimmten fälle. Beispielweise: Erlaubnis von Stornierungen, Kunde oder Employee von System löschen
 
 ## Events
-* Auto mieten: Ein Rental-Objekt wird instanziiert (Zwischen einen Kunde und ein Auto)
-* Auto reparieren: Ein Maintainer repariert ein Auto (Nach der Repatur wird nie wieder in CarState == Perfect)
+* Auto mieten: Ein Rental-Objekt wird instanziiert (Zwischen einem Kunde und einem Auto)
+* Auto reparieren: Ein Maintainer repariert ein Auto (Nach der Reparatur wird nie wieder in CarState == Perfect)
 * Auto tanken: Ein Maintainer kümmert sich darum, dass die Autos die im Moment nicht gemietet sind, genug Benzin / Diesel haben
-TODO: hier noch andere Aktivitäten ergänzen
+* Mitarbeiter einstellen : Ein neues Objekt der Klasse Mitarbeiter wird instanziiert
+* Kundensupport: Ein Mitarbeiter wird einem Kunden zugeordnet mittels Funktion und löst dessen Problem
+* Neues Auto bereitstellen: Ein Objekt der Klasse ElectricCar oder CombustionCar wird instanziiert
 
 ## Anforderungsbeschreibung(Grob)
-TODO: hier ein Paar sätze schreiben
+Ziel des Projektes war es ein System zu entwerfen, welches als Grundlage für eine Serveranwendung im Folgesemester dient. Unser Projektteam hat es sich zur Aufgabe gemacht, ein Carsharing Verwaltungssystem zu programmieren, welches aus insgesamt vier Subsystemem besteht und jedes Subsystem war einem Mietglied des Teams zugeordnet.
 
 ## Abgrenzung(Das System soll nicht:)
 Rechnungswesen: Das System soll keine Lohnzahlungen an Person, sowie Rechnungen und deren Abwicklung von Kunden- oder Herstellerkäufen verwalten. Dies übernimmt ein externer Dienstleister.
 
-Zahlung: Über externen Dienstleiste PayPal oder SofortÜberweisung: Am Ende des Miet- vorgangs, wird der Käufer dorthin weitergeleitet, Shop gibt Käufer- und Bestelldaten an Paypal o.Ä. weiter und erhält eine Status-Rückmeldung.
+Zahlung: Über externen Dienstleister PayPal oder SofortÜberweisung: Am Ende des Miet- vorgangs, wird der Käufer dorthin weitergeleitet, Shop gibt Käufer- und Bestelldaten an Paypal o.Ä. weiter und erhält eine Status-Rückmeldung.
 
 ## Protokoll
-Um zu wissen was zu machen war und wer was machen soll, haben wir zusammen ein Excel-Datei erstellt, indem alle Instanzvariablen und Methoden für jede Klasse.
+Um zu wissen was zu machen war und wer was machen soll, haben wir zusammen eine Excel-Datei erstellt, indem alle Instanzvariablen und Methoden für jede Klasse stehen. Idee ist folgende: Alles erstmal auflisten, dann bei implementieren die Zellen ständig mit den richtigen Farben bemalen.
 
-TODO: hier PDF link hinzüfugen
+![Plan](/diagrammen/planGuide.jpg)
+![Plan](/diagrammen/planCars.jpg)
+![Plan](/diagrammen/planPA.jpg)
+![Plan](/diagrammen/planPerson.jpg)
+![Plan](/diagrammen/planRental.jpg)
+
