@@ -36,10 +36,12 @@ One-Night-Car CarSharing Verwaltungsystem
 * Admin: verantwortlich für bestimmten fälle. Beispielweise: Erlaubnis von Stornierungen, Kunde oder Employee von System löschen
 
 ## Events
-* Auto mieten: Ein Rental-Objekt wird instanziiert (Zwischen einen Kunde und ein Auto)
+* Auto mieten: Ein Rental-Objekt wird instanziiert (Zwischen einem Kunde und einem Auto)
 * Auto reparieren: Ein Maintainer repariert ein Auto (Nach der Reparatur wird nie wieder in CarState == Perfect)
 * Auto tanken: Ein Maintainer kümmert sich darum, dass die Autos die im Moment nicht gemietet sind, genug Benzin / Diesel haben
-TODO: hier noch andere Aktivitäten ergänzen
+* Mitarbeiter einstellen : Ein neues Objekt der Klasse Mitarbeiter wird instanziiert
+* Kundensupport: Ein Mitarbeiter wird einem Kunden zugeordnet mittels Funktion und löst dessen Problem
+* Neues Auto bereitstellen: Ein Objekt der Klasse ElectricCar oder CombustionCar wird instanziiert
 
 ## Anforderungsbeschreibung(Grob)
 Ziel des Projektes war es ein System zu entwerfen, welches als Grundlage für eine Serveranwendung im Folgesemester dient. Unser Projektteam hat es sich zur Aufgabe gemacht, ein Carsharing Verwaltungssystem zu programmieren, welches aus insgesamt vier Subsystemem besteht und jedes Subsystem war einem Mietglied des Teams zugeordnet.
