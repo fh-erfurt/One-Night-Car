@@ -82,13 +82,7 @@ public class CombustionCar extends Car {
    }
 
 
-   public double calculateConsumedFuel(){
-       double consumedFuel;
-       // TODO auf die 2 Methoden warten
-       // consumedFuel = Rental.getFuelLevelBefore - Rental.getFuelLevelAfter;
-       // return consumedFuel;
-       return  0;   // um error zu vermeiden
-   }
+
 
 
     /** Gets the max. Tank Size
