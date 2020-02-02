@@ -8,6 +8,7 @@ package ParkingArea;
 
 public class ParkingAreaAddress {
 
+    /* /////////////////////Attributes///////////////////////// */
 
     private String ZIP;
     private String city;
@@ -42,17 +43,27 @@ public class ParkingAreaAddress {
         this.streetNumber = "25";
     }
 
+    /**gets the ZIP
+     * @return ZIP
+     */
+
     public String getZIP() {return this.ZIP;}
 
-
+    /**gets the City
+     * @return City
+     */
 
     public String getCity() {return this.city;}
 
-
+    /**gets the Street
+     * @return Street
+     */
 
     public String getStreet() {return this.street;}
 
-
+    /**gets the street number
+     * @return street number
+     */
 
     public String getStreetNumber() {return this.streetNumber;}
 
