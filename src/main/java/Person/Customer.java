@@ -138,6 +138,8 @@ public class Customer extends Person {
     }
 
     /** Represents the situation in which the customer needs Support from an Employee
+     * @param employee which employee is going to help this customer
+     * @return a boolean
      */
     public boolean customerNeedHelp(Employee employee){
         if(employee.employeeHelpsCustomer()){
@@ -209,6 +211,8 @@ public class Customer extends Person {
      * @param monthArrival int representing the new arrival month
      * @param dayArrival int representing the new arrival day
      * @param rentalManager to add this rental to all the rentals
+     * @param carManagementSystem the system where all cars are saved
+     * @param electricCar which electric car rental is being modified
      */
     public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar, CarManagementSystem carManagementSystem,
                                     LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,
@@ -270,6 +274,8 @@ public class Customer extends Person {
      * @param monthArrival int representing the new arrival month
      * @param dayArrival int representing the new arrival day
      * @param rentalManager to add this rental to all the rentals
+     * @param carManagementSystem the system where all cars are saved
+     * @param combustionCar which cars Rental need to be modified
      */
     public void modifyARegularRental(FuelRental fuelRental, RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
                                      LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival,

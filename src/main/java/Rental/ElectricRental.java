@@ -73,7 +73,6 @@ public class ElectricRental extends Rental {
 
     /** Sets the charge of the electric car after the rental
      * @param ElectricCar the rented electric car
-     * @return the current charge before recharge
      */
     public void setChargePercentAfter (ElectricCar ElectricCar) {
         this.chargePercentAfter = (ElectricCar.getRange() - (this.odometerAfter - this.odometerBefore)) / ElectricCar.getRange();

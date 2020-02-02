@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 /** Represents a Electric Parking Area
         * extend ParkingArea
-        * @see {@link ParkingArea}
         * @author OneNightCar
         * @version 1.0
         * @since 1.0
@@ -79,7 +78,7 @@ public class ElectricParkingArea extends ParkingArea {
     }
 
     /**adds an electric car to the station
-     * @param electricCar
+     * @param electricCar an Electric Car
      */
 
     public void assignElectricCarToStation(ElectricCar electricCar) {
@@ -87,7 +86,7 @@ public class ElectricParkingArea extends ParkingArea {
     }
 
     /**removes an electric car from the station
-     * @param electricCar
+     * @param electricCar an Electric Car
      */
 
     public void removeElectricCarFromStation(ElectricCar electricCar){
@@ -95,7 +94,7 @@ public class ElectricParkingArea extends ParkingArea {
     }
 
     /** gets the Index(id) of an electric car in the station
-     * @param electricCar
+     * @param electricCar an Electric Car
      * @return Index(id)
      */
 

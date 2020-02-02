@@ -40,6 +40,10 @@ public class FuelRental extends Rental {
      * @param yearArrival the time at which he has returned
      * @param monthArrival the time at which he has returned
      * @param dayArrival the time at which he has returned
+     * @param combustionCar a Combustion Car
+     * @param carManagementSystem where all cars are saved
+     * @param customerID which customer is making the Rental
+     * @param rentalManager where all rental are saved
      */
     public FuelRental(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem, int customerID, LocalDate date,
                       int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,int monthArrival, int dayArrival){
@@ -60,6 +64,8 @@ public class FuelRental extends Rental {
      * @param carManagementSystem the management system, so we can get information about the car
      * @param customerID an Int representing the customers ID
      * @param combustionCar the car itself, object of the class ElectricCar
+     * @param date at what time was the rental made
+     * @param personManager where all persons are saved
      */
     public FuelRental(RentalManager rentalManager, CarManagementSystem carManagementSystem, int customerID, LocalDate date,
                       CombustionCar combustionCar, PersonManager personManager){

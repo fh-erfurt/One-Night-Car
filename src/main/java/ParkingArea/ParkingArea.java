@@ -61,7 +61,7 @@ public class ParkingArea {
 
     /**
      * adds a Combustion Car to the carsInStation and availableCars list
-     * @param combustionCar
+     * @param combustionCar a Combustion Car
      */
 
     public void assignCarToStation(CombustionCar combustionCar) {
@@ -72,7 +72,7 @@ public class ParkingArea {
 
     /**
      * gets the Index from a Combustion Car from the carsInStation list
-     * @param combustionCar
+     * @param combustionCar a Combustion Car
      * @return returns the Combustion Car Index(id)
      */
 
@@ -88,7 +88,7 @@ public class ParkingArea {
 
     /**
      * removes a Combustion Car from the carsInStation and available Cars list
-     * @param combustionCar
+     * @param combustionCar a Combustion Car
      */
 
     public void removeCarFromStation(CombustionCar combustionCar) {
@@ -99,7 +99,7 @@ public class ParkingArea {
 
     /**
      * sets a Combustion Car in the state notAvailableCars and removes it from availableCars
-     * @param combustionCar
+     * @param combustionCar a Combustion Car
      */
 
     public void carIsBeingUsed(CombustionCar combustionCar) {
@@ -110,7 +110,7 @@ public class ParkingArea {
 
     /**
      * sets a Combustion Car in the state availableCars and removes t from notAvailableCars
-     * @param combustionCar
+     * @param combustionCar a Combustion Car
      */
 
     public void carIsNoLongerBeingUsed(CombustionCar combustionCar) {
@@ -130,6 +130,7 @@ public class ParkingArea {
 
     /** gets the Index(id) of the combustionCar list
      * @return  the Index of combustionCarList
+     * @param combustionCar a Combustion Car
      * */
 
     public int getCombustionCarID(CombustionCar combustionCar) {

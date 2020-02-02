@@ -59,7 +59,7 @@ public class Admin extends Employee {
     }
 
     /** Function to erase a FuelRental
-     * @param fuelRental
+     * @param fuelRental which rental needs to be deleted
      */
     public static void deleteFuelRental(FuelRental fuelRental){
         fuelRental = null;
@@ -68,7 +68,7 @@ public class Admin extends Employee {
     }
 
     /** Function to erase a FuelRental
-     * @param electricRental
+     * @param electricRental which rental needs to be deleted
      */
     public static void deleteElectricRental(ElectricRental electricRental){
         electricRental = null;

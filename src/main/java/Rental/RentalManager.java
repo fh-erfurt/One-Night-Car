@@ -14,7 +14,7 @@ public class RentalManager {
     private ArrayList<ElectricRental> ElectricRentals;
     private ArrayList<FuelRental> FuelRentals;
     private int  RentalCounter;
-    
+
     /* /////////////////////Methods/////////////////////////// */
 
     /**
@@ -35,8 +35,7 @@ public class RentalManager {
 
     /**
      * Adds a Rental object to the global list
-     * @param ElectricRental
-     * @see {@link ElectricRental}
+     * @param ElectricRental an Electrical Rental
      */
     public void addRentalIntoElectricRentals (ElectricRental ElectricRental) {
         ElectricRentals.add(ElectricRental);
@@ -44,8 +43,7 @@ public class RentalManager {
 
     /**
      * Adds a Rental object to the global list
-     * @param FuelRental
-     * @see {@link FuelRental}
+     * @param FuelRental a Fuel Rental
      */
     public void addRentalIntoFuelRentals (FuelRental FuelRental) {
         FuelRentals.add(FuelRental);
@@ -53,8 +51,7 @@ public class RentalManager {
 
     /**
      * Removes a Rental object from the global List
-     * @param ElectricRental
-     * @see {@link ElectricRental}
+     * @param ElectricRental an Electric Rental
      */
     public void removeRentalFromElectricsRentals (ElectricRental ElectricRental){
         ElectricRentals.remove(ElectricRental);
@@ -62,8 +59,7 @@ public class RentalManager {
 
     /**
      * Removes a Rental object from the global list
-     * @param FuelRental
-     * @see {@link FuelRental}
+     * @param FuelRental a Fuel rental
      */
     public void removeRentalFromFuelRentals (FuelRental FuelRental) {
         FuelRentals.remove(FuelRental);
@@ -87,7 +83,7 @@ public class RentalManager {
 
     /**
      * Returns the RentalID of the Electric Rental
-     * @param ElectricRental
+     * @param ElectricRental an Electric Rental
      * @return the RentalID of the Rental
      */
     public int getRentalIDFromElectricRentals (ElectricRental ElectricRental){
@@ -96,7 +92,7 @@ public class RentalManager {
 
     /**
      * Returns the RentalID of the Fuel Rental
-     * @param FuelRental
+     * @param FuelRental a Fuel Rental
      * @return the RentalID of the Rental
      */
     public int getRentalIDFromFuelRentals (FuelRental FuelRental){
@@ -105,7 +101,7 @@ public class RentalManager {
 
     /**
      * Returns the Index of a Rental in the global list
-     * @param ElectricRental
+     * @param ElectricRental an Electric Rental
      * @return the index of an electric Rental in the global list
      */
     public int returnElectricRentalWithIndex (ElectricRental ElectricRental){
@@ -114,7 +110,7 @@ public class RentalManager {
 
     /**
      * Returns the Index of a Rental in the global list
-     * @param FuelRental
+     * @param FuelRental a Fuel Rental
      * @return the index of a fuel rental in the global list
      */
     public int returnFuelRentalWithIndex (FuelRental FuelRental){
