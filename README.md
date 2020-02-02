@@ -7,19 +7,19 @@
 Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 
 ## Packages
-* Person: Beinhaltet alle Informationen von Kunden, Mitarbeiter und Admins. Zuständig: @mrrestre
+* Person: Beinhaltet alle Informationen von Kunden, Mitarbeiter und Admins. Zuständig: Alejandro Restrepo Klinge (@mrrestre)
 ![Package Person](/diagrammen/packagePerson.png)
 
-* Rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen. Zuständig: @pascalgiese
+* Rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen. Zuständig: Pascal Giese (@pascalgiese)
   * Electric Rental: Mieten eines electrischen Autos
   * Fuel Rental: Mieten eines nicht electrischen Autos 
   
-* ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: @TheBenitoo
+* ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: Benito Grauel (@TheBenitoo)
   * Electric ParkingArea: beschreibt ein ParkinArea mit (bengrenzte anzahl) anschluße für elektrische Autos
   * Fuel Rental: beschreibt ein gewönliches ParkinArea 
 ![Package Parking Area](/diagrammen/packageParkingArea.png)
 
-* Car: Beinhaltet alle Informationen von Autos. Zuständig: @AhmadAboLouha
+* Car: Beinhaltet alle Informationen von Autos. Zuständig: Ahmad Abo Louha (@AhmadAboLouha)
   * Electric Car: haben verschiedene Eigenschaften als andere Autos
 ![Package Car](/diagrammen/packageCar.png)
 
@@ -35,9 +35,9 @@ One-Night-Car CarSharing Verwaltungsystem
 * Admin: verantwortlich für bestimmten fälle. Beispielweise: Erlaubnis von Stornierungen, Kunde oder Employee von System löschen
 
 ## Events
-Auto mieten: Ein Rental-Objekt wird instanziiert (Zwischen einen Kunde und ein Auto)
-Auto reparieren: Ein Maintainer repariert ein Auto (Nach der Repatur wird nie wieder in CarState == Perfect)
-Auto tanken: Ein Maintainer kümmert sich darum, dass die Autos die im Moment nicht gemietet sind, genug Benzin / Diesel haben
+* Auto mieten: Ein Rental-Objekt wird instanziiert (Zwischen einen Kunde und ein Auto)
+* Auto reparieren: Ein Maintainer repariert ein Auto (Nach der Repatur wird nie wieder in CarState == Perfect)
+* Auto tanken: Ein Maintainer kümmert sich darum, dass die Autos die im Moment nicht gemietet sind, genug Benzin / Diesel haben
 TODO: hier noch andere Aktivitäten ergänzen
 
 ## Anforderungsbeschreibung(Grob)
