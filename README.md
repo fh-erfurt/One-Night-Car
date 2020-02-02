@@ -12,7 +12,7 @@ Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 
 * Rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen. Zuständig: Pascal Giese (@pascalgiese)
   * Electric Rental: Mieten eines elektrischen Autos
-  * Fuel Rental: Mieten eines nicht elektrischen Autos 
+  * Fuel Rental: Mieten eines benzinbetriebenen Autos 
 ![Package Rental](/diagrammen/packageRental.png)
 
 * ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: Benito Grauel (@TheBenitoo)
@@ -42,7 +42,7 @@ One-Night-Car CarSharing Verwaltungsystem
 TODO: hier noch andere Aktivitäten ergänzen
 
 ## Anforderungsbeschreibung(Grob)
-TODO: hier ein Paar sätze schreiben
+Ziel des Projektes war es ein System zu entwerfen, welches als Grundlage für eine Serveranwendung im Folgesemester dient. Unser Projektteam hat es sich zur Aufgabe gemacht, ein Carsharing Verwaltungssystem zu programmieren, welches aus insgesamt vier Subsystemem besteht und jedes Subsystem war einem Mietglied des Teams zugeordnet.
 
 ## Abgrenzung(Das System soll nicht:)
 Rechnungswesen: Das System soll keine Lohnzahlungen an Person, sowie Rechnungen und deren Abwicklung von Kunden- oder Herstellerkäufen verwalten. Dies übernimmt ein externer Dienstleister.
