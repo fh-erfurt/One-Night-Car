@@ -17,7 +17,7 @@ Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 
 * ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: Benito Grauel (@TheBenitoo)
   * Electric ParkingArea: beschreibt eine ParkinArea mit (bengrenzter Anzahl) Anschlüssen für elektrische Autos
-  * Fuel Rental: beschreibt eine gewönliche ParkinArea 
+  * Fuel Rental: beschreibt eine gewönliche ParkingArea 
 ![Package Parking Area](/diagrammen/packageParkingArea.png)
 
 * Car: Beinhaltet alle Informationen von Autos. Zuständig: Ahmad Abo Louha (@AhmadAboLouha)
