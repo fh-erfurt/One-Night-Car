@@ -72,13 +72,15 @@ public class FuelRental extends Rental {
         this.combustionCar = combustionCar;
     }
     /** Sets the fuelLevel after the rental of the car
-     *
      * @param CombustionCar The car that has been rented
-     * @return The fuel level of the car after the rental
      */
-    public double setFuelLevelAfter (CombustionCar CombustionCar) {
-        double fuelLevel = CombustionCar.getFuelLevel() - (CombustionCar.getConsumption() * (this.odometerAfter - this.odometerBefore));
-        return fuelLevel;
+    public void setFuelLevelAfter (CombustionCar CombustionCar) {
+        if (CombustionCar.getConsumption() * (this.odometerAfter - this.odometerBefore) > CombustionCar.getTankSize()){
+            this.fuelLevelAfter = -1;
+        }
+        else {
+            this.fuelLevelAfter = CombustionCar.getFuelLevel() - (CombustionCar.getConsumption() * (this.odometerAfter - this.odometerBefore)) / CombustionCar.getFuelLevel();
+        }
     }
 
     public double getFuelLevelAfter(){

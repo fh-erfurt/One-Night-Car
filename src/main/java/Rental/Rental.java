@@ -68,7 +68,7 @@ public abstract class Rental {
      *
      */
     public void setOdometerAfter(){
-        this.odometerAfter = odometerBefore + ((calculateElapsedDays() / 24) * 32); //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
+        this.odometerAfter = odometerBefore + ((calculateElapsedDays() * 24) * 32); //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
     }
 
     /** Gets the odometer after the rental

@@ -23,6 +23,19 @@ class RentalTest {
         assertEquals(365, days);
     }
 
+    @Test
+    void testSetOdometerAfter(){
+        RentalManager rentalManager = new RentalManager();
+        CarManagementSystem carManagementSystem = new CarManagementSystem();
+        PersonManager personManager = new PersonManager();
+        Customer customer = new Customer(personManager);
+        ElectricCar electricCar = new ElectricCar(carManagementSystem);
+        ElectricRental rental1 = new ElectricRental(rentalManager, carManagementSystem, customer.getCustomerID(), electricCar);
+
+        rental1.setOdometerAfter();
+        long odometer = rental1.getOdometerAfter();
+        assertEquals(291319, odometer);
+    }
 
 
 }

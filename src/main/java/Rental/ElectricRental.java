@@ -18,8 +18,8 @@ import java.util.GregorianCalendar;
 public class ElectricRental extends Rental {
     /* /////////////////////Attributes///////////////////////// */
 
-    private double chargePercentBefore;
-    private double chargePercentAfter;
+    private float chargePercentBefore;
+    private float chargePercentAfter;
     private ElectricCar electricCar;
 
     /* /////////////////////Methods/////////////////////////// */
@@ -71,15 +71,19 @@ public class ElectricRental extends Rental {
 
     /** Sets the charge of the electric car after the rental
      * @param ElectricCar the rented electric car
-     * @return the current charge before recharge
      */
     public void setChargePercentAfter (ElectricCar ElectricCar) {
-        this.chargePercentAfter = (ElectricCar.getRange() - (this.odometerAfter - this.odometerBefore)) / ElectricCar.getRange();
+        if ((this.odometerAfter - this.odometerBefore) > ElectricCar.getRange()) {
+            this.chargePercentAfter = -1;
+        }
+        else {
+            this.chargePercentAfter = (ElectricCar.getRange() - (this.odometerAfter - this.odometerBefore)) / ElectricCar.getRange();
+        }
     }
 
-    private double getChargePercentAfter() { return this.chargePercentAfter; }
+    public float getChargePercentAfter() { return this.chargePercentAfter; }
 
-        private float calculateRentalPriceForElectric(ElectricCar ElectricCar) {
+    private float calculateRentalPriceForElectric(ElectricCar ElectricCar) {
         return calculateElapsedDays() * ElectricCar.getPrice();
     }
 
