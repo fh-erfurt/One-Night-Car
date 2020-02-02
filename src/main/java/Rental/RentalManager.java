@@ -2,11 +2,19 @@ package Rental;
 
 import java.util.ArrayList;
 
+/** Represents the Rental Manager
+ * @author OneNightCar
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class RentalManager {
     /* /////////////////////Attributes///////////////////////// */
+
     private ArrayList<ElectricRental> ElectricRentals;
     private ArrayList<FuelRental> FuelRentals;
     private int  RentalCounter;
+    
     /* /////////////////////Methods/////////////////////////// */
 
     /**

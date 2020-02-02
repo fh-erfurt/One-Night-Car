@@ -31,7 +31,7 @@ public abstract class Car {
     }
 
     protected long odometer;
-    protected Enum permission; // which Customer can book this car (which customer Level)
+    protected Enum permission;    // which Customer can book this car (which customer Level)
     protected float price;       //Price pro day
     Location location;
 

@@ -11,10 +11,12 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-
-/** A class for cars that run on electricity
- *
+/** Represents an ElectricRental
+ * @author OneNightCar
+ * @version 1.0
+ * @since 1.0
  */
+
 public class ElectricRental extends Rental {
     /* /////////////////////Attributes///////////////////////// */
 

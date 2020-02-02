@@ -14,6 +14,7 @@ import java.util.GregorianCalendar;
  * @version 1.0
  * @since 1.0
   */
+
 public abstract class Rental {
     /* /////////////////////Attributes///////////////////////// */
 
@@ -29,8 +30,7 @@ public abstract class Rental {
 
     /* /////////////////////Methods/////////////////////////// */
 
-    /**
-     * Creates a Rental entry for a rental
+    /** Creates a Rental entry for a rental
      * @param date the date of the rental
      * @param yearDeparture  the time at which the customer started the rental
      * @param monthDeparture  the time at which the customer started the rental
@@ -48,8 +48,7 @@ public abstract class Rental {
         this.arrivalTime = new GregorianCalendar(yearArrival, monthArrival, dayArrival);
     }
 
-    /**
-     * Default Constructor for Rental
+    /** Default Constructor for Rental
      */
     public Rental(){
         this.date = LocalDate.now();
@@ -65,14 +64,12 @@ public abstract class Rental {
     }
 
     /** Sets the odometer to the value after the rental
-     *
      */
     public void setOdometerAfter(){
         this.odometerAfter = odometerBefore + ((calculateElapsedDays() / 24) * 32); //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
     }
 
     /** Gets the odometer after the rental
-     *
      * @return the odometer after the rental
      */
     public long getOdometerAfter(){
@@ -80,7 +77,6 @@ public abstract class Rental {
     }
 
     /** Gets the carID
-     *
      * @return the carID
      */
     public int getCarID() {

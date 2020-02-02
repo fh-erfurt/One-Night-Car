@@ -12,9 +12,12 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.lang.Math;
 
-/**
- * A class for cars that run on gasoline
+/** Represents a FuelRental
+ * @author OneNightCar
+ * @version 1.0
+ * @since 1.0
  */
+
 public class FuelRental extends Rental {
     /* /////////////////////Attributes///////////////////////// */
 

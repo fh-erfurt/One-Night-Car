@@ -16,7 +16,6 @@ public class Employee extends Person {
 
     private int employeeID;
     private float salary;
-    private TypeOfActivity typeOfActivity;
     /** Represents the situation in which the Employee tries to helps a Customer
      * @return A Boolean representing if the Issue was solved
      * false: the Issue was solved
@@ -32,6 +31,8 @@ public class Employee extends Person {
             return false;
         }
     }
+    private TypeOfActivity typeOfActivity;
+
     /** Creates an Employee with specified Employee Parameters.
      * @param firstName A String representing Employee first Name
      * @param surname A String representing Employee Surname
@@ -68,12 +69,6 @@ public class Employee extends Person {
         this.typeOfActivity = TypeOfActivity.BOSS;
         this.employeeID = personManager.getAndIncrementEmployeeCounter();
         personManager.employees.add(this);                               //Adds this Employee to the Employee List
-    }
-
-    public enum TypeOfActivity{
-        CUSTOMERSUPPORT,
-        MAINTAINER,
-        BOSS
     }
 
     /** Random boolean generator.
@@ -117,6 +112,12 @@ public class Employee extends Person {
      */
     public void setSalary(float salary){
         this.salary = salary;
+    }
+
+    public enum TypeOfActivity{
+        CUSTOMERSUPPORT,
+        MAINTAINER,
+        BOSS
     }
 
     /** Employee tries to repair a car.
