@@ -13,7 +13,8 @@ Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 * Rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen. Zuständig: Pascal Giese (@pascalgiese)
   * Electric Rental: Mieten eines electrischen Autos
   * Fuel Rental: Mieten eines nicht electrischen Autos 
-  
+![Package Rental](/diagrammen/packageRental.png)
+
 * ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: Benito Grauel (@TheBenitoo)
   * Electric ParkingArea: beschreibt ein ParkinArea mit (bengrenzte anzahl) anschluße für elektrische Autos
   * Fuel Rental: beschreibt ein gewönliches ParkinArea 
@@ -49,6 +50,11 @@ Rechnungswesen: Das System soll keine Lohnzahlungen an Person, sowie Rechnungen 
 Zahlung: Über externen Dienstleiste PayPal oder SofortÜberweisung: Am Ende des Miet- vorgangs, wird der Käufer dorthin weitergeleitet, Shop gibt Käufer- und Bestelldaten an Paypal o.Ä. weiter und erhält eine Status-Rückmeldung.
 
 ## Protokoll
-Um zu wissen was zu machen war und wer was machen soll, haben wir zusammen ein Excel-Datei erstellt, indem alle Instanzvariablen und Methoden für jede Klasse.
+Um zu wissen was zu machen war und wer was machen soll, haben wir zusammen ein Excel-Datei erstellt, indem alle Instanzvariablen und Methoden für jede Klasse. Idee ist folgende: Alles erstmal auflisten, dann bei implementieren die Zellen ständig mit den richtigen Farben bemahlen.
 
-TODO: hier PDF link hinzüfugen
+![Plan](/diagrammen/planGuide.jpg)
+![Plan](/diagrammen/planCars.jpg)
+![Plan](/diagrammen/planPA.jpg)
+![Plan](/diagrammen/planPerson.jpg)
+![Plan](/diagrammen/planRental.jpg)
+
