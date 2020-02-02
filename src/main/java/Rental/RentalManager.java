@@ -28,18 +28,12 @@ public class RentalManager {
     /**
      * Adds a Rental object to the global list
      */
-    public void addRentalIntoElectricRentals (ElectricRental ElectricRental) {
-        ElectricRentals.add(ElectricRental);
-        this.RentalCounter++;
-    }
+    public void addRentalIntoElectricRentals (ElectricRental ElectricRental) { ElectricRentals.add(ElectricRental); }
 
     /**
      * Adds a Rental object to the global list
      */
-    public void addRentalIntoFuelRentals (FuelRental FuelRental) {
-        FuelRentals.add(FuelRental);
-        this.RentalCounter++;
-    }
+    public void addRentalIntoFuelRentals (FuelRental FuelRental) { FuelRentals.add(FuelRental); }
 
     /**
      * Removes a Rental object from the global List
