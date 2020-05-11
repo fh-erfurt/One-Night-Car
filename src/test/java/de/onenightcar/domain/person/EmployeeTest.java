@@ -1,10 +1,6 @@
 package de.onenightcar.domain.person;
 
-import OneNightCar.Car.*;
-import de.onenightcar.domain.car.Car;
-import de.onenightcar.domain.car.CarManagementSystem;
-import de.onenightcar.domain.car.CombustionCar;
-import de.onenightcar.domain.car.ElectricCar;
+import de.onenightcar.domain.car.*;
 import org.junit.jupiter.api.Test;
 import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
