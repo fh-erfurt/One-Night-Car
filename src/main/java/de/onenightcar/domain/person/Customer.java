@@ -1,14 +1,8 @@
 package de.onenightcar.domain.person;
 
-import OneNightCar.Car.*;
-import OneNightCar.Rental.*;
-import de.onenightcar.domain.car.Car;
-import de.onenightcar.domain.car.CarManagementSystem;
-import de.onenightcar.domain.car.CombustionCar;
-import de.onenightcar.domain.car.ElectricCar;
-import de.onenightcar.domain.rental.ElectricRental;
-import de.onenightcar.domain.rental.FuelRental;
-import de.onenightcar.domain.rental.RentalManager;
+
+import de.onenightcar.domain.rental.*;
+import de.onenightcar.domain.car.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

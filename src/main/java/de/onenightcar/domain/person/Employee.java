@@ -1,9 +1,6 @@
 package de.onenightcar.domain.person;
 
-import OneNightCar.Car.*;
-import de.onenightcar.domain.car.Car;
-import de.onenightcar.domain.car.CombustionCar;
-import de.onenightcar.domain.car.ElectricCar;
+import de.onenightcar.domain.car.*;
 
 import java.util.GregorianCalendar;
 import java.util.Random;

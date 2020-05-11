@@ -1,10 +1,9 @@
 package de.onenightcar.domain.person;
 
+import de.onenightcar.domain.rental.*;
+
 import java.util.GregorianCalendar;
 import java.util.Random;
-import OneNightCar.Rental.*;
-import de.onenightcar.domain.rental.ElectricRental;
-import de.onenightcar.domain.rental.FuelRental;
 
 /** Represents an Admin
  * @author OneNightCar
