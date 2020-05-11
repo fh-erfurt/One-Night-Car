@@ -1,6 +1,6 @@
 # One Night OneNightCar.Car
 
-[![Build Status](https://github.com/fh-erfurt/One-Night-OneNightCar.Car/workflows/One-Night-OneNightCar.Car/badge.svg)](https://github.com/fh-erfurt/One-Night-OneNightCar.Car/actions)
+[![Build Status](https://github.com/fh-erfurt/One-Night-OneNightCar.Car/workflows/One-Night-Car/badge.svg)](https://github.com/fh-erfurt/One-Night-Car/actions)
 
 ## Über uns
 ### Teammitglieder
