@@ -11,11 +11,23 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
-            <property	name="javax.persistence.jdbc.driver"	        value="com.mysql.cj.jdbc.Driver" />
-            <property	name="javax.persistence.jdbc.url"	            value="jdbc:mysql://localhost:3306/oneNightCar" />
-            <property	name="javax.persistence.jdbc.user"	            value="root" />
-            <property	name="javax.persistence.jdbc.password"	        value="" />
+<!--            mySql (funktioniert nicht)-->
+
+<!--            <property	name="javax.persistence.jdbc.driver"	        value="com.mysql.cj.jdbc.Driver" />-->
+<!--            <property	name="javax.persistence.jdbc.url"	            value="jdbc:mysql://localhost:3306/OneNightCar" />-->
+<!--            <property	name="javax.persistence.jdbc.user"	            value="root" />-->
+<!--            <property	name="javax.persistence.jdbc.password"	        value="" />-->
+
+<!--            H2-->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:OneNightCar" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
+
+            <!-- EclipseLink Properties -->
             <property	name="eclipselink.ddl-generation"	            value="drop-and-create-tables" />
+            <property   name="eclipselink.create-ddl-jdbc-file-name"    value="createDDL_ddlGeneration.jdbc"/>
+            <property   name="eclipselink.drop-ddl-jdbc-file-name"      value="dropDDL_ddlGeneration.jdbc"/>
+            <property   name="eclipselink.logging.level"                value="INFO"/>
             <property	name="eclipselink.ddl-generation.output-mode"	value="both" />
         </properties>
 

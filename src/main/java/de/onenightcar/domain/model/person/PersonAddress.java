@@ -1,14 +1,33 @@
 package de.onenightcar.domain.model.person;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
 /** Represents a PersonAddress
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
-public class PersonAddress {
+
+@Entity
+public class PersonAddress implements Serializable {
 
     /* /////////////////////Attributes///////////////////////// */
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Version
+    private Long version;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modified;
 
     private String ZIP;
     private String city;
@@ -95,4 +114,34 @@ public class PersonAddress {
     public void setStreetNumber(String streetNumber){
         this.streetNumber = streetNumber;
     }
+
+    @Override
+    public String toString() {
+        return "PersonAddress [ZIP= " + this.ZIP +
+                ", City= "            + this.city +
+                ", Street "           + this.street +
+                ", Street Number "    + this.streetNumber;
+    }
+
+
+    /* /////////////////////Lifecycle Hooks/////////////////////////// */
+
+    public void setCreated (Date date) {
+        this.created = date;
+    }
+
+    @PrePersist
+    void onCreate(){
+        this.setCreated( new Date() );
+    }
+
+    public void setModified (Date date) {
+        this.created = date;
+    }
+
+    @PreUpdate
+    void onUpdate(){
+        this.setModified( new Date());
+    }
+
 }
