@@ -136,7 +136,7 @@ public class PersonAddress implements Serializable {
     }
 
     public void setModified (Date date) {
-        this.created = date;
+        this.modified = date;
     }
 
     @PreUpdate
