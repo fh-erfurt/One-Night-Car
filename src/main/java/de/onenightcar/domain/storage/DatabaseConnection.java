@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DatabaseConnection {
+public abstract class DatabaseConnection {
 
     private static final Logger LOG = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 

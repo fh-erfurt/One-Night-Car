@@ -4,6 +4,8 @@ package de.onenightcar.domain.model.person;
 import de.onenightcar.domain.model.rental.*;
 import de.onenightcar.domain.model.car.*;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -210,7 +212,7 @@ public class Customer extends Person {
                                     LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,
                                     int monthArrival, int dayArrival, RentalManager rentalManager) {
         if (electricRental.getCustomerID() == this.customerID){
-            if (Admin.approveRentalModification(electricRental) == true){
+            if (Admin.approveRentalModification(electricRental)){
                 ElectricRental newElectricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
                                                                     yearDeparture, monthDeparture, dayDeparture, yearArrival,
                                                                     monthArrival, dayArrival, rentalManager);
@@ -227,7 +229,7 @@ public class Customer extends Person {
      */
     public void cancelElectricRental(ElectricRental electricRental){
         if (electricRental.getCustomerID() == this.customerID){
-            if (Admin.approveRentalModification(electricRental) == true){
+            if (Admin.approveRentalModification(electricRental)){
                 this.electricRentals.remove(electricRental);
                 Admin.deleteElectricRental(electricRental);
             }
@@ -273,7 +275,7 @@ public class Customer extends Person {
                                      LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival,
                                      int monthArrival, int dayArrival) {
         if (fuelRental.getCustomerID() == this.customerID){
-            if (Admin.approveRentalModification(fuelRental) == true){
+            if (Admin.approveRentalModification(fuelRental)){
                 FuelRental newFuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
                                                 this.customerID, date, yearDeparture, monthDeparture, dayDeparture,
                                                             yearArrival, monthArrival, dayArrival);
@@ -290,7 +292,7 @@ public class Customer extends Person {
      */
     public void cancelFuelRental(FuelRental fuelRental){
         if (fuelRental.getCustomerID() == this.customerID){
-            if (Admin.approveRentalModification(fuelRental) == true){
+            if (Admin.approveRentalModification(fuelRental)){
                 this.fuelRentals.remove(fuelRental);
                 Admin.deleteFuelRental(fuelRental);
             }

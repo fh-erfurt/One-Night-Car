@@ -1,8 +1,9 @@
 package de.onenightcar.domain.model.person;
 
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
+
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Date;
+
 
 /** Represents a PersonAddress
  * @author OneNightCar
@@ -12,22 +13,9 @@ import java.util.Date;
 
 
 @Entity
-public class PersonAddress implements Serializable {
+public class PersonAddress extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes///////////////////////// */
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Version
-    private Long version;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modified;
 
     private String ZIP;
     private String city;
@@ -122,26 +110,4 @@ public class PersonAddress implements Serializable {
                 ", Street "           + this.street +
                 ", Street Number "    + this.streetNumber;
     }
-
-
-    /* /////////////////////Lifecycle Hooks/////////////////////////// */
-
-    public void setCreated (Date date) {
-        this.created = date;
-    }
-
-    @PrePersist
-    void onCreate(){
-        this.setCreated( new Date() );
-    }
-
-    public void setModified (Date date) {
-        this.modified = date;
-    }
-
-    @PreUpdate
-    void onUpdate(){
-        this.setModified( new Date());
-    }
-
 }

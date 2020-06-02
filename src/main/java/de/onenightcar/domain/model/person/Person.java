@@ -1,20 +1,27 @@
 package de.onenightcar.domain.model.person;
 
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
+
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import java.util.GregorianCalendar;
 
-/** Represents a PaymentMethod
+/** Represents a Person
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
-public abstract class Person {
+@MappedSuperclass
+public abstract class Person extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes///////////////////////// */
 
     protected String firstName;
     protected String surname;
     protected GregorianCalendar dateOfBirth;
+
+    @OneToOne
     protected PersonAddress personAddress;
 
     /* /////////////////////Methods/////////////////////////// */

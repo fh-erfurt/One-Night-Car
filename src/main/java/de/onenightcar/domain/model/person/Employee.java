@@ -2,19 +2,22 @@ package de.onenightcar.domain.model.person;
 
 import de.onenightcar.domain.model.car.*;
 
+import javax.persistence.Entity;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
 /** Represents an Employee
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
+@Entity
 public class Employee extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
 
+    //TODO: remove the employeeID (already has a an ID from the AbstractDatabaseEntity) and see where it may be a problem
     private int employeeID;
     private float salary;
     private TypeOfActivity typeOfActivity;
@@ -52,6 +55,10 @@ public class Employee extends Person {
         this.typeOfActivity = TypeOfActivity.BOSS;
         this.employeeID = personManager.getAndIncrementEmployeeCounter();
         personManager.employees.add(this);                               //Adds this Employee to the Employee List
+    }
+
+    // Needed to be able to create the entity
+    public Employee(){
     }
 
     /* /////////////////////Methods/////////////////////////// */

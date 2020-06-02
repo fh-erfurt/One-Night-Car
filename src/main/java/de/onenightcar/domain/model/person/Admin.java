@@ -2,15 +2,17 @@ package de.onenightcar.domain.model.person;
 
 import de.onenightcar.domain.model.rental.*;
 
+import javax.persistence.Entity;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
 /** Represents an Admin
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
+@Entity
 public class Admin extends Employee {
     /* /////////////////////Attributes///////////////////////// */
 
@@ -28,6 +30,10 @@ public class Admin extends Employee {
     public Admin(String firstName, String surname, GregorianCalendar dateOfBirth, PersonAddress personAddress,
                  PersonManager personManager, float salary, TypeOfActivity typeOfActivity) {
         super(firstName, surname, dateOfBirth, personAddress, personManager, salary, typeOfActivity);
+    }
+
+    // Needed to be able to create the entity
+    public Admin() {
     }
 
     /** Random boolean generator.

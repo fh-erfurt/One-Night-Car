@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java1-examples" />
+        <module name="FHE-java1-project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="java1-examples" target="11" />
+      <module name="FHE-java1-project" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
