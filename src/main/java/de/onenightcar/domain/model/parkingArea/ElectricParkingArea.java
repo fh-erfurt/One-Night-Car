@@ -56,6 +56,7 @@ public class ElectricParkingArea extends ParkingArea {
         this.availableElectricCars = new ArrayList<ElectricCar>();
         this.notAvailableElectricCars = new ArrayList<ElectricCar>();
         this.maxElectricCarCapacity = 100;
+        parkingAreaManager.ElectricParkingAreas.add(this);
     }
 
     /**gets the max. capacity of electric cars.
@@ -80,6 +81,16 @@ public class ElectricParkingArea extends ParkingArea {
 
     public void assignElectricCarToStation(ElectricCar electricCar) {
         electricCarsInStation.add(electricCar);
+        availableElectricCars.add(electricCar);
+    }
+
+    /**
+     * Shows the number of cars in the Station
+     * @return the size of carsInStation
+     */
+
+    public int numberOfElectricCarsAssignedToStation() {
+        return electricCarsInStation.size();
     }
 
     /**removes an electric car from the station
@@ -88,6 +99,7 @@ public class ElectricParkingArea extends ParkingArea {
 
     public void removeElectricCarFromStation(ElectricCar electricCar){
         electricCarsInStation.remove(electricCar);
+        availableElectricCars.remove(electricCar);
     }
 
     /** gets the Index(id) of an electric car in the station

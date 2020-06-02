@@ -1,5 +1,6 @@
 package de.onenightcar.domain.model.car;
 
+import de.onenightcar.domain.model.parkingArea.ParkingArea;
 import de.onenightcar.domain.model.person.Customer;
 
 /** Represents a Combustion OneNightCar.Car
@@ -36,7 +37,7 @@ public class CombustionCar extends Car {
                          double GPSLatitude, double GPSLongitude, long odometer,
                          Customer.CustomerLevel customerLevel, float price, double tankSize,
                          double fuelLevel, double consumption, Transmission transmission,
-                         FuelType fuelType, CarManagementSystem carManagementSystem){
+                         FuelType fuelType, CarManagementSystem carManagementSystem, ParkingArea parkingArea){
         super(type, brand, model, state, GPSLatitude, GPSLongitude, odometer,
                 customerLevel, price);
         this.tankSize= tankSize;
@@ -45,12 +46,18 @@ public class CombustionCar extends Car {
         this.transmission = transmission;
         this.fuelType= fuelType;
         carManagementSystem.combustionCarsList.add(this);
+        if(parkingArea.numberOfCarsAssignedToStation() < parkingArea.getMaxCapacity()) {
+            parkingArea.assignCarToStation(this);
+        }
+        else{
+            System.out.println("there is no more place in this park!");
+        }
     }
     /** Creates a Combustion OneNightCar.Car  with default Values.
      * It is used to increment speed of UnitTests.
      * @param carManagementSystem A CarManagementSystem with the management from the Packet OneNightCar.Car
      */
-    public CombustionCar(CarManagementSystem carManagementSystem){
+    public CombustionCar(CarManagementSystem carManagementSystem, ParkingArea parkingArea){
         super(Type.MIDDLE, "Mercedes", "glc_250", State.OK, 50.984790, 11.041410, 197212,
                 Customer.CustomerLevel.REGULARUSER, 39.99f);
         this.tankSize = 66;
@@ -59,6 +66,12 @@ public class CombustionCar extends Car {
         this.transmission = Transmission.AUTOMATIC;
         this.fuelType = FuelType.PETROL;
         carManagementSystem.combustionCarsList.add(this);
+        if(parkingArea.numberOfCarsAssignedToStation() < parkingArea.getMaxCapacity()) {
+            parkingArea.assignCarToStation(this);
+        }
+        else{
+            System.out.println("there is no more place in this park!");
+        }
     }
 
     /** Gets the Fuel Level
