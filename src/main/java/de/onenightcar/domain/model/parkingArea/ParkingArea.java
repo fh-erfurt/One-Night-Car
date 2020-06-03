@@ -20,10 +20,14 @@ public class ParkingArea {
     public ArrayList<CombustionCar> availableCars;
     public ArrayList<CombustionCar> notAvailableCars;
     ParkingAreaAddress parkingAreaAddress;
-    private int parkID;
-    private int maxCapacity;
+    protected int parkID;
+    protected int maxCapacity;
 
     /* /////////////////////Methods/////////////////////////// */
+
+    public ParkingArea() {
+
+    }
 
     /**
      * creates an OneNightCar.ParkingArea Constructor with Parameters to use it in the Child class.
@@ -41,7 +45,7 @@ public class ParkingArea {
         this.availableCars = new ArrayList<CombustionCar>();
         this.notAvailableCars = new ArrayList<CombustionCar>();
         this.parkID = parkingAreaManager.getAndIncrementCounter();
-        parkingAreaManager.ParkingAreas.add(this);                               //Adds this OneNightCar.ParkingArea to the ParkingAreas List
+        parkingAreaManager.ParkingAreas.add(this);           //Adds this OneNightCar.ParkingArea to the ParkingAreas List
     }
 
     /** Creates a OneNightCar.ParkingArea with default Values.

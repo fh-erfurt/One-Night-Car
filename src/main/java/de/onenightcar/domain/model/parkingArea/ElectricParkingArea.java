@@ -25,17 +25,18 @@ public class ElectricParkingArea extends ParkingArea {
     /**
      * Creates an ElectricParkingArea Constructor with specified ElectricParkingArea Parameters.
      * @param parkID An integer to represent the parID
-     * @param ParkingAreaAddress A ParkingAreaAddress representing the address of the parking Area
+     * @param parkingAreaAddress A ParkingAreaAddress representing the address of the parking Area
      * @param maxCapacity An integer representing the max. Capacity of Cars in OneNightCar.ParkingArea
      * @param maxElectricCarCapacity An integer representing the max. Capacity of Cars in ElectricParkingArea
      * @param parkingAreaManager A parking Area Manager with the Management of the Parking Areas
      */
 
 
-    public ElectricParkingArea(int parkID, ParkingAreaAddress ParkingAreaAddress, int maxCapacity,
+    public ElectricParkingArea(int parkID, ParkingAreaAddress parkingAreaAddress, int maxCapacity,
                                int maxElectricCarCapacity, ParkingAreaManager parkingAreaManager) {
-        super(parkID, ParkingAreaAddress, maxCapacity, parkingAreaManager);
-
+        this.parkID = parkID;
+        this.parkingAreaAddress = new ParkingAreaAddress();
+        this.maxCapacity = maxCapacity;
         this.maxElectricCarCapacity = maxElectricCarCapacity;
         this.electricCarsInStation = new ArrayList<ElectricCar>();
         this.availableElectricCars = new ArrayList<ElectricCar>();

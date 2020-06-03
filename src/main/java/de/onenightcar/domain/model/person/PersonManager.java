@@ -52,21 +52,7 @@ public class PersonManager {
         return oldEmployeeCounter;
     }
 
-    /**
-     * Adds a Customer to the customer list
-     * @param customer which Customer need to be added to the list
-     */
-    public void addCustomerIntoCustomers(Customer customer){
-        this.customers.add(customer);
-    }
 
-    /**
-     * Adds an Employee to the employee list
-     * @param employee which Customer need to be added to the list
-     */
-    public void addEmployeeIntoEmployees(Employee employee){
-        this.employees.add(employee);
-    }
 
     /**
      * Get the current Index of a Customer in the customer List

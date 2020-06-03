@@ -18,7 +18,10 @@ class ElectricParkingAreaTest {
         CarManagementSystem carManagementSystem = new CarManagementSystem();
         electricParkingArea.addElectricParkingAreaIntoElectricParkingAreas(Area1);
 
-        ElectricCar electricCar1 = new ElectricCar(carManagementSystem);
+        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+        ElectricParkingArea electricParkingArea2 = new ElectricParkingArea(parkingAreaManager);
+
+        ElectricCar electricCar1 = new ElectricCar(carManagementSystem, electricParkingArea2);
 
 
         Area1.assignElectricCarToStation(electricCar1);
@@ -35,8 +38,11 @@ class ElectricParkingAreaTest {
         CarManagementSystem carManagementSystem = new CarManagementSystem();
         electricParkingArea.addElectricParkingAreaIntoElectricParkingAreas(Area1);
 
-        ElectricCar electricCar1 = new ElectricCar(carManagementSystem);
-        ElectricCar electricCar2 = new ElectricCar(carManagementSystem);
+        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+        ElectricParkingArea electricParkingArea2 = new ElectricParkingArea(parkingAreaManager);
+
+        ElectricCar electricCar1 = new ElectricCar(carManagementSystem, electricParkingArea2);
+        ElectricCar electricCar2 = new ElectricCar(carManagementSystem, electricParkingArea2);
 
 
         Area1.assignElectricCarToStation(electricCar1);
@@ -53,11 +59,8 @@ class ElectricParkingAreaTest {
 
         ParkingAreaManager electricParkingArea = new ParkingAreaManager();
         ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
-
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
         electricParkingArea.addElectricParkingAreaIntoElectricParkingAreas(Area1);
 
-        ElectricCar electricCar1 = new ElectricCar(carManagementSystem);
 
         Area1.setMaxElectricCarCapacity(100);
 

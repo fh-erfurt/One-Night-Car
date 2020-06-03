@@ -21,40 +21,6 @@ public class CarManagementSystem {
         this.electricCarsList = new ArrayList<ElectricCar>();
     }
 
-    /** Method to Add an electric OneNightCar.Car to the ArrayList
-     * @param electricCar
-     * the Position of the added OneNightCar.Car is at the End of the List
-     */
-    public void addCarIntoElectrics(ElectricCar electricCar)
-    {
-        this.electricCarsList.add(electricCar);
-    }
-
-
-    /** Method to Add a combustion OneNightCar.Car to the Array List
-     * @param combustionCar a Combustion car
-     * the Position of the added OneNightCar.Car is at the End of the List
-     */
-    public void addCarIntoCombustion(CombustionCar combustionCar)
-    {
-        this.combustionCarsList.add(combustionCar);
-    }
-
-    /** Method to Delete a electric OneNightCar.Car from the Array List
-     * @param electricCar An Electric OneNightCar.Car
-     */
-
-    public void deleteCarFromElectric(ElectricCar electricCar){
-        this.electricCarsList.remove(electricCar);
-    }
-
-    /** Method to Delete a combustion OneNightCar.Car from the Array List
-     * @param combustionCar a Combustion car
-     */
-    public void deleteCarFromCombustion(CombustionCar combustionCar){
-        this.combustionCarsList.remove(combustionCar);
-    }
-
 
     /** gets the size of the electricCar list
      * @return  the size of electricCarList
@@ -64,12 +30,6 @@ public class CarManagementSystem {
     }
 
 
-    /** gets the size of the combustionCar list
-     * @return  the size of combustionCarList
-     * */
-    public int getSizeOfCombustionCarsList(){
-        return combustionCarsList.size();
-    }
 
     /** gets the Index(id) of the combustionCar list
      * @return  the Index of combustionCarList

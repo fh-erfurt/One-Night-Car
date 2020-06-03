@@ -35,7 +35,6 @@ class ParkingAreaManagerTest {
         ParkingAreaManager electricParkingAreas = new ParkingAreaManager();
 
         ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingAreas);
-        ElectricParkingArea Area2 = new ElectricParkingArea(electricParkingAreas);
 
         electricParkingAreas.removeParkingAreaIntoParkingAreas(Area1);
 

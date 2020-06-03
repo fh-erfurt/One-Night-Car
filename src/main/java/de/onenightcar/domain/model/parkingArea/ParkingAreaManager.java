@@ -53,12 +53,7 @@ public class ParkingAreaManager {
         this.ParkingAreas.add(parkingArea);
     }
 
-    /** Method to remove an electric Parking Area from the Array List
-     * @param electricParkingArea the new Parking Area
-     */
-    public void removeElectricParkingAreaIntoElectricParkingAreas(ElectricParkingArea electricParkingArea){
-        this.ElectricParkingAreas.remove(electricParkingArea);
-    }
+
 
     /** Method to remove an parking Area from the Array List
      * @param parkingArea the Parking area who need to be removed
@@ -85,14 +80,6 @@ public class ParkingAreaManager {
         return ElectricParkingAreas.indexOf(electricParkingArea);
     }
 
-    /** gets the Index(id) of the ParkingAreas list
-     * @param parkingArea from which Parking the Id is needed
-     * @return  the Index of ParkingAreas
-     * */
-    public int getParkIDFromParkingAreas(ParkingArea parkingArea){
-        return ParkingAreas.indexOf(parkingArea);
-    }
-
     /** returns the OneNightCar.ParkingArea with Index(id)
      * @param parkingArea from which Parking the Id is needed
      * @return ParkingAreaIndex
@@ -111,7 +98,7 @@ public class ParkingAreaManager {
      * @param electricParkingArea the parking area whose id is needed
      * @return an int value
      */
-    protected int returnElectricParkingAreaWithIndex(ElectricParkingArea electricParkingArea) {                      //protected for Testing purposes
+    protected int returnElectricParkingAreaWithIndex(ElectricParkingArea electricParkingArea) {       //protected for Testing purposes
         int ElectricParkingAreaIndex;
         for (ElectricParkingAreaIndex = 0; ElectricParkingAreaIndex < ElectricParkingAreas.size();
              ElectricParkingAreaIndex++) {
