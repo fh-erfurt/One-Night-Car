@@ -5,6 +5,7 @@ import de.onenightcar.domain.model.rental.*;
 import javax.persistence.Entity;
 import java.util.GregorianCalendar;
 import java.util.Random;
+import java.util.logging.*;
 
 /** Represents an Admin
  * @author OneNightCar
@@ -15,6 +16,38 @@ import java.util.Random;
 @Entity
 public class Admin extends Employee {
     /* /////////////////////Attributes///////////////////////// */
+
+    private final static Logger logr = Logger.getLogger( Logger.GLOBAL_LOGGER_NAME );
+
+    private static void setupLogger() {
+        LogManager.getLogManager().reset();
+        logr.setLevel(Level.ALL);
+
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.SEVERE);
+        logr.addHandler(ch);
+
+        try {
+            FileHandler fh = new FileHandler("myLogger.log", true);
+            fh.setLevel(Level.FINE);
+            logr.addHandler(fh);
+        } catch (java.io.IOException e) {
+            // don't stop my program but log out to console.
+            logr.log(Level.SEVERE, "File logger not working.", e);
+        }
+         /*
+         Different Levels in order
+          OFF
+          SEVERE
+          WARNING
+          INFO
+          CONFIG
+          FINE
+          FINER
+          FINEST
+          ALL
+        */
+    }
 
     /* /////////////////////Methods/////////////////////////// */
 
@@ -34,6 +67,13 @@ public class Admin extends Employee {
 
     // Needed to be able to create the entity
     public Admin() {
+    }
+
+    //Logging try
+    public static void main(String[] args) throws java.io.IOException {
+
+        setupLogger();
+
     }
 
     /** Random boolean generator.
@@ -94,10 +134,17 @@ public class Admin extends Employee {
      * @param personManager a PersonManager (List from which it should be removed)
      */
     public void deleteEmployee (Employee employee, PersonManager personManager){
-        employee = null;
-        personManager.removeEmployeeFromEmployees(employee);
-        //Call the Garbage Collector
-        System.gc();
+        try {
+            employee = null;
+            personManager.removeEmployeeFromEmployees(employee);
+            //Call the Garbage Collector
+            System.gc();
+        }
+        catch(Exception e){
+            System.out.print("Employee could not be removed or does not exist!");
+            logr.log(Level.SEVERE, "An error accured!", e);
+            //
+        }
     }
 
     /** Function to erase a Customer

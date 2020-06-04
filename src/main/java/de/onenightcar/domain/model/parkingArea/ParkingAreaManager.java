@@ -65,12 +65,22 @@ public class ParkingAreaManager {
     /** gets the size of the ElectricParkingAreas list
      * @return  the size of ElectricParkingAreas
      */
-    public int getSizeOfElectricParkingAreas() {return ElectricParkingAreas.size() ;}
+    public int getSizeOfElectricParkingAreas() {
+        try {
+            return ElectricParkingAreas.size();
+        }
+        catch(Exception e) {
+           System.out.print("This Parking Area doesn't exist!");
+           return 1;                                                //return must be changed
+        }
+    }
 
     /** gets the size of the ParkingAreas list
      * @return  the size of ParkingAreas
      * */
-    public int getSizeOfParkingAreas() {return ParkingAreas.size() ;}
+
+    public int getSizeOfParkingAreas () {return ParkingAreas.size();
+    }
 
     /** gets the Index(id) of the ElectricParkingAreas list
      * @param electricParkingArea from which Parking the Id is needed

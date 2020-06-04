@@ -26,7 +26,13 @@ public class CarManagementSystem {
      * @return  the size of electricCarList
      * */
     public int getSizeOfElectricCarsList(){
-        return electricCarsList.size();
+        try {
+            return electricCarsList.size();
+        }
+        catch(Exception e){
+            System.out.print("ElectricCarsList not found!");
+            return 0;
+        }
     }
 
 

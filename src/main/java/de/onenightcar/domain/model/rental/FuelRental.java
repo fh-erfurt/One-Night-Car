@@ -102,5 +102,13 @@ public class FuelRental extends Rental {
         return rentalPrice;
     }
 
-    public CombustionCar getCombustionCar() { return this.combustionCar; }
+    public CombustionCar getCombustionCar() {
+        try {
+            return this.combustionCar;
+        }
+        catch(Exception e){
+            System.out.print("CombustionCar doesn't exist!");
+            return combustionCar;
+        }
+    }
 }

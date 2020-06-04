@@ -51,10 +51,15 @@ public abstract class Person extends AbstractDatabaseEntity {
      * @param personAddress a PersonAddress containing the Persons new Address
      */
     public void setPersonAddress(PersonAddress personAddress){
-        this.personAddress.setZIP(personAddress.getZIP());
-        this.personAddress.setCity(personAddress.getCity());
-        this.personAddress.setStreet(personAddress.getStreet());
-        this.personAddress.setStreetNumber(personAddress.getStreetNumber());
+        try {
+            this.personAddress.setZIP(personAddress.getZIP());
+            this.personAddress.setCity(personAddress.getCity());
+            this.personAddress.setStreet(personAddress.getStreet());
+            this.personAddress.setStreetNumber(personAddress.getStreetNumber());
+        }
+        catch(Exception e){
+            System.out.print("PersonAddress could not bei set!");
+        }
     }
 
     /** Sets the Persons first Name and Surname.

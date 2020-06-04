@@ -46,8 +46,15 @@ public class ParkingAreaAddress {
      * @return ZIP
      */
 
-    public String getZIP() {return this.ZIP;}
-
+    public String getZIP() {
+        try {
+            return this.ZIP;
+        }
+        catch(Exception e){
+            System.out.print("This ParkingAreaAddress doesn't exist!");
+            return "00000";
+        }
+    }
     /**gets the City
      * @return City
      */

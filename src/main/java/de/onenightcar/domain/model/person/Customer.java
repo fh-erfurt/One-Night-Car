@@ -189,10 +189,15 @@ public class Customer extends Person {
     public void rentAnElectricCar(ElectricCar electricCar, CarManagementSystem carManagementSystem, LocalDate date,
                                   int yearDeparture, int monthDeparture, int dayDeparture, int yearArrival ,
                                   int monthArrival, int dayArrival, RentalManager rentalManager) {
-        ElectricRental electricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
-                                                            yearDeparture, monthDeparture, dayDeparture, yearArrival ,
-                                                            monthArrival, dayArrival, rentalManager);
-        this.electricRentals.add(electricRental);
+        try {
+            ElectricRental electricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
+                    yearDeparture, monthDeparture, dayDeparture, yearArrival,
+                    monthArrival, dayArrival, rentalManager);
+            this.electricRentals.add(electricRental);
+        }
+        catch(Exception e){
+            System.out.print("Rental couldn't be executed!");
+        }
     }
 
     /** Ask permission to Admin to Modify an existing Electrical OneNightCar.Rental made by this Customer
@@ -211,16 +216,21 @@ public class Customer extends Person {
     public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar, CarManagementSystem carManagementSystem,
                                     LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,
                                     int monthArrival, int dayArrival, RentalManager rentalManager) {
-        if (electricRental.getCustomerID() == this.customerID){
-            if (Admin.approveRentalModification(electricRental)){
-                ElectricRental newElectricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
-                                                                    yearDeparture, monthDeparture, dayDeparture, yearArrival,
-                                                                    monthArrival, dayArrival, rentalManager);
-                // Remove the old OneNightCar.Rental
-                this.electricRentals.remove(electricRental);
-                // Add the new OneNightCar.Rental
-                this.electricRentals.add(newElectricRental);
+        try {
+            if (electricRental.getCustomerID() == this.customerID) {
+                if (Admin.approveRentalModification(electricRental)) {
+                    ElectricRental newElectricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
+                            yearDeparture, monthDeparture, dayDeparture, yearArrival,
+                            monthArrival, dayArrival, rentalManager);
+                    // Remove the old OneNightCar.Rental
+                    this.electricRentals.remove(electricRental);
+                    // Add the new OneNightCar.Rental
+                    this.electricRentals.add(newElectricRental);
+                }
             }
+        }
+        catch(Exception e){
+            System.out.print("Electric Car couldn't be modified!");
         }
     }
 
@@ -252,10 +262,15 @@ public class Customer extends Person {
      public void rentAFuelCar(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
                               LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival,
                               int monthArrival, int dayArrival) {
-         FuelRental fuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
-                                                this.getCustomerID(), date, yearDeparture, monthDeparture, dayDeparture,
-                                                yearArrival, monthArrival, dayArrival);
-         this.fuelRentals.add(fuelRental);
+         try {
+             FuelRental fuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
+                     this.getCustomerID(), date, yearDeparture, monthDeparture, dayDeparture,
+                     yearArrival, monthArrival, dayArrival);
+             this.fuelRentals.add(fuelRental);
+         }
+         catch(Exception e){
+             System.out.print("Rental could not be executed!");
+         }
      }
 
     /** Ask permission to Admin to Modify an existing Electrical OneNightCar.Rental made by this Customer

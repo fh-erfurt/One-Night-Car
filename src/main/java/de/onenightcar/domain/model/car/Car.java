@@ -64,7 +64,12 @@ public abstract class Car {
      * @param GPSLongitude the longitude of the GPS
      */
    public void setNewLocation(double GPSLatitude, double GPSLongitude){
-        this.location= new Location(GPSLatitude,GPSLongitude);
+       try {
+           this.location = new Location(GPSLatitude, GPSLongitude);
+       }
+       catch(Exception e){
+           System.out.print("Latitude inadmissible!");
+       }
    }
 
     /** Gets the OneNightCar.Car Location

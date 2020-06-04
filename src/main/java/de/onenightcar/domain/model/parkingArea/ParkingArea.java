@@ -96,9 +96,15 @@ public class ParkingArea {
      */
 
     public void removeCarFromStation(CombustionCar combustionCar) {
-        //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
-        carsInStation.remove(combustionCar);
-        availableCars.remove(combustionCar);
+
+        try {
+            //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
+            carsInStation.remove(combustionCar);
+            availableCars.remove(combustionCar);
+        }
+        catch(Exception e){
+            System.out.print("Removing Car from Station has not worked!");
+        }
     }
 
     /**

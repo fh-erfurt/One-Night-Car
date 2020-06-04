@@ -81,8 +81,14 @@ public class ElectricParkingArea extends ParkingArea {
      */
 
     public void assignElectricCarToStation(ElectricCar electricCar) {
-        electricCarsInStation.add(electricCar);
-        availableElectricCars.add(electricCar);
+
+        try {
+            electricCarsInStation.add(electricCar);
+            availableElectricCars.add(electricCar);
+        }
+        catch(Exception e){
+            System.out.print("Assigning Electric Car to station has failed!");
+        }
     }
 
     /**

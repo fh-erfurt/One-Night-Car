@@ -84,6 +84,14 @@ public class ElectricRental extends Rental {
         return calculateElapsedDays() * ElectricCar.getPrice();
     }
 
-    public ElectricCar getElectricCar() { return this.electricCar; }
+    public ElectricCar getElectricCar() {
+        try {
+            return this.electricCar;
+        }
+        catch(Exception e){
+            System.out.print("Electric Car doesn't exist!");
+            return electricCar;                               //edit return
+        }
+    }
 
 }

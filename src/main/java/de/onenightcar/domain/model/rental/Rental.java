@@ -61,7 +61,12 @@ public abstract class Rental {
     /** Sets the odometer to the value after the rental
      */
     public void setOdometerAfter(){
-        this.odometerAfter = odometerBefore + ((calculateElapsedDays() * 24) * 32); //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
+        try {
+            this.odometerAfter = odometerBefore + ((calculateElapsedDays() * 24) * 32); //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
+        }
+        catch(Exception e){
+            System.out.print("Set Odometer has failed!");
+        }
     }
 
     /** Gets the odometer after the rental

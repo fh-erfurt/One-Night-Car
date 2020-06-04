@@ -89,7 +89,12 @@ public class PersonManager {
      * @param customer a Customer which is going to be deleted from the list
      */
     public void removeCustomerFromCustomers(Customer customer){
-        this.customers.remove(getCustomerIndexInCustomerList(customer));
+        try {
+            this.customers.remove(getCustomerIndexInCustomerList(customer));
+        }
+        catch(Exception e){
+            System.out.print("Could not remove Customer!");
+        }
     }
 
     /**

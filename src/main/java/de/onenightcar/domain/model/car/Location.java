@@ -26,7 +26,12 @@ public class Location {
      * @param latitude a double with the new Latitude
      */
     public  void setGPSLatitude(double latitude){
-        GPSLatitude= latitude;
+        try {
+            GPSLatitude = latitude;
+        }
+        catch(Exception e){
+            System.out.print("Latitude inadmissible!");
+        }
     }
 
     public double getGPSLongitude(){return this.GPSLongitude;}

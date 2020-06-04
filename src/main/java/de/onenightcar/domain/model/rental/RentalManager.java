@@ -31,7 +31,12 @@ public class RentalManager {
      * Adds a OneNightCar.Rental object to the global list
      */
     public void addRentalIntoElectricRentals(ElectricRental ElectricRental) {
-        ElectricRentals.add(ElectricRental);
+        try {
+            ElectricRentals.add(ElectricRental);
+        }
+        catch(Exception e){
+            System.out.print("Adding Rental into Electric Rental has failed!");
+        }
     }
 
     /**

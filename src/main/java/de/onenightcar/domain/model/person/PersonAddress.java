@@ -58,7 +58,12 @@ public class PersonAddress extends AbstractDatabaseEntity {
      * @param ZIP A String containing the Address ZIP
      */
     public void setZIP(String ZIP){
-        this.ZIP = ZIP;
+        try {
+            this.ZIP = ZIP;
+        }
+        catch(Exception e){
+            System.out.print("Could not set ZIP!");
+        }
     }
 
     /** Gets the Address city.

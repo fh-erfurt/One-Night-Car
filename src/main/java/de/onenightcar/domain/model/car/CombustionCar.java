@@ -85,7 +85,12 @@ public class CombustionCar extends Car {
      * @param fuelLevel a double with the new fuellevel
      */
     public void setFuelLevel(double fuelLevel){
-        this.fuelLevel=fuelLevel;
+        try {
+            this.fuelLevel = fuelLevel;
+        }
+        catch(Exception e){
+            System.out.print("FuelLevel inadmissible!");
+        }
     }
 
     /** Gets the max. Tank Size

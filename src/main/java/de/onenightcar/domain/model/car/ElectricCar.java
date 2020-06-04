@@ -73,7 +73,12 @@ public class ElectricCar extends Car {
      * @param chargePercent a float representing the new charge level
      */
     public void setChargePercent(float chargePercent){
-        this.chargePercent = chargePercent;
+        try {
+            this.chargePercent = chargePercent;
+        }
+        catch(Exception e){
+            System.out.print("Setting charge percent has failed!");
+        }
     }
 
     /** Gets the range of an ElectricCar

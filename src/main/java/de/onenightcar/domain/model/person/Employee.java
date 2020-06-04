@@ -119,7 +119,12 @@ public class Employee extends Person {
      * @param salary A float representing the new salary of an Employee
      */
     public void setSalary(float salary){
-        this.salary = salary;
+        try {
+            this.salary = salary;
+        }
+        catch(Exception e){
+            System.out.print("Salary couldn't be set, check Salary!");
+        }
     }
 
     /** Employee tries to repair a car.

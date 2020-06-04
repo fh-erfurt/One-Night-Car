@@ -52,7 +52,12 @@ public class PaymentMethod {
      * @param cardNumber A String containing the PaymentMethod Card Number
      */
     public void setCardNumber(String cardNumber){
-        this.cardNumber = cardNumber;
+        try {
+            this.cardNumber = cardNumber;
+        }
+        catch(Exception e){
+            System.out.print("Card number couldn't be set!");
+        }
     }
 
     /** Gets the PaymentMethod Card Type.
