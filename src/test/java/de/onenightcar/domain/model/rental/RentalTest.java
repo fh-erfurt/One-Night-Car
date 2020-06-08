@@ -2,6 +2,8 @@ package de.onenightcar.domain.model.rental;
 
 import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.ElectricCar;
+import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
+import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
 import de.onenightcar.domain.model.person.Customer;
 import de.onenightcar.domain.model.person.PersonManager;
 import org.junit.jupiter.api.Test;
@@ -15,7 +17,10 @@ class RentalTest {
         CarManagementSystem carManagementSystem = new CarManagementSystem();
         PersonManager personManager = new PersonManager();
         Customer customer = new Customer(personManager);
-        ElectricCar electricCar = new ElectricCar(carManagementSystem);
+
+        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
+        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+        ElectricCar electricCar = new ElectricCar(carManagementSystem, Area1);
         ElectricRental rental1 = new ElectricRental(rentalManager, carManagementSystem, customer.getCustomerID(), electricCar);
 
         long days = rental1.calculateElapsedDays();
@@ -29,7 +34,11 @@ class RentalTest {
         CarManagementSystem carManagementSystem = new CarManagementSystem();
         PersonManager personManager = new PersonManager();
         Customer customer = new Customer(personManager);
-        ElectricCar electricCar = new ElectricCar(carManagementSystem);
+
+        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
+        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+
+        ElectricCar electricCar = new ElectricCar(carManagementSystem, Area1);
         ElectricRental rental1 = new ElectricRental(rentalManager, carManagementSystem, customer.getCustomerID(), electricCar);
 
         rental1.setOdometerAfter();

@@ -4,6 +4,9 @@ import de.onenightcar.domain.model.car.Car;
 import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.CombustionCar;
 import de.onenightcar.domain.model.car.ElectricCar;
+import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
+import de.onenightcar.domain.model.parkingArea.ParkingArea;
+import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
 import de.onenightcar.domain.model.rental.ElectricRental;
 import de.onenightcar.domain.model.rental.RentalManager;
 import org.junit.jupiter.api.Assertions;
@@ -57,9 +60,13 @@ class CustomerTest {
         RentalManager rentalManager = new RentalManager();
         CarManagementSystem carManagementSystem = new CarManagementSystem();
 
-        ElectricCar car1 = new ElectricCar(carManagementSystem);
-        ElectricCar car2 = new ElectricCar(carManagementSystem);
-        ElectricCar car3 = new ElectricCar(carManagementSystem);
+
+        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
+        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+
+        ElectricCar car1 = new ElectricCar(carManagementSystem, Area1);
+        ElectricCar car2 = new ElectricCar(carManagementSystem, Area1);
+        ElectricCar car3 = new ElectricCar(carManagementSystem, Area1);
 
         ElectricRental testRental1 = new ElectricRental(rentalManager, carManagementSystem, max.getCustomerID(), car1);
         ElectricRental testRental2 = new ElectricRental(rentalManager, carManagementSystem, max.getCustomerID(), car2);
@@ -79,7 +86,11 @@ class CustomerTest {
         PersonManager list = new PersonManager();
         Customer max = new Customer(list);
         CarManagementSystem carManagementSystem = new CarManagementSystem();
-        CombustionCar combustionCar = new CombustionCar(carManagementSystem);
+
+        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
+
+        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
 
         max.customerDamagesAFuelCar(combustionCar);
 
@@ -92,7 +103,11 @@ class CustomerTest {
         Customer max = new Customer(list);
         RentalManager rentalManager = new RentalManager();
         CarManagementSystem carManagementSystem = new CarManagementSystem();
-        CombustionCar combustionCar = new CombustionCar(carManagementSystem);
+
+        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
+
+        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
         LocalDate date = LocalDate.now();
 
         max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date,
@@ -111,7 +126,10 @@ class CustomerTest {
         GregorianCalendar departure = new GregorianCalendar(2020,03,15);
         GregorianCalendar arrival = new GregorianCalendar(2020,03,18);
 
-        ElectricCar car1 = new ElectricCar(carManagementSystem);
+        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
+        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+
+        ElectricCar car1 = new ElectricCar(carManagementSystem, Area1);
 
         max.rentAnElectricCar(car1, carManagementSystem, date, 2020, 01,
                             1,  2020 ,01, 2, rentalManager);
@@ -130,7 +148,11 @@ class CustomerTest {
         Customer max = new Customer(list);
         RentalManager rentalManager = new RentalManager();
         CarManagementSystem carManagementSystem = new CarManagementSystem();
-        CombustionCar combustionCar = new CombustionCar(carManagementSystem);
+
+        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
+
+        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
         LocalDate date = LocalDate.now();
         max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date,
                 2020, 03, 15, 2020, 03, 18);

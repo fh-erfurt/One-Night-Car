@@ -1,6 +1,9 @@
 package de.onenightcar.domain.model.person;
 
 import de.onenightcar.domain.model.car.*;
+import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
+import de.onenightcar.domain.model.parkingArea.ParkingArea;
+import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
 import org.junit.jupiter.api.Test;
 import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +29,10 @@ class EmployeeTest {
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
                 list, 2000, Employee.TypeOfActivity.MAINTAINER);
         CarManagementSystem electricCarList = new CarManagementSystem();
-        ElectricCar testElectricCar = new ElectricCar(electricCarList);
+        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
+        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+
+        ElectricCar testElectricCar = new ElectricCar(electricCarList, Area1);
 
         testElectricCar.changeCarState(Car.State.DAMAGED);
         john.employeeRepairsElectricCar(testElectricCar);
@@ -42,7 +48,11 @@ class EmployeeTest {
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
                 list, 2000, Employee.TypeOfActivity.MAINTAINER);
         CarManagementSystem combustionCarList = new CarManagementSystem();
-        CombustionCar testCombustionCar = new CombustionCar(combustionCarList);
+
+        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
+
+        CombustionCar testCombustionCar = new CombustionCar(combustionCarList, parkingArea);
 
         testCombustionCar.setFuelLevel(20);
         john.employeeRefuelsCar(testCombustionCar);
