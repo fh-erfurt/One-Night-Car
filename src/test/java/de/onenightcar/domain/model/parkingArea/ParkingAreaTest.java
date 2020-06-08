@@ -20,7 +20,7 @@ class ParkingAreaTest {
         CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
 
 
-        parkingArea.assignCarToStation(combustionCar);
+
 
         assertEquals(1, parkingArea.availableCars.size());
         assertEquals(1, parkingArea.carsInStation.size());
@@ -37,8 +37,8 @@ class ParkingAreaTest {
         CombustionCar combustionCar2 = new CombustionCar(carManagementSystem, parkingArea);
 
 
-        parkingArea.assignCarToStation(combustionCar1);
-        parkingArea.assignCarToStation(combustionCar2);
+        /*parkingArea.assignCarToStation(combustionCar1);
+        parkingArea.assignCarToStation(combustionCar2);*/
 
         parkingArea.removeCarFromStation(combustionCar2);
 
@@ -95,8 +95,7 @@ class ParkingAreaTest {
         CombustionCar combustionCar1 = new CombustionCar(carManagementSystem, parkingArea);
         CombustionCar combustionCar2 = new CombustionCar(carManagementSystem, parkingArea);
 
-        parkingArea.assignCarToStation(combustionCar1);
-        parkingArea.assignCarToStation(combustionCar2);
+
 
         parkingArea.carIsBeingUsed(combustionCar1);
         parkingArea.carIsNoLongerBeingUsed(combustionCar1);

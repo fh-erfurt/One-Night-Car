@@ -24,7 +24,7 @@ class ParkingAreaManagerTest {
 
         ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingAreas);
 
-        electricParkingAreas.addElectricParkingAreaIntoElectricParkingAreas(Area1);
+
 
         assertEquals(1,electricParkingAreas.getSizeOfElectricParkingAreas());
 
@@ -38,7 +38,7 @@ class ParkingAreaManagerTest {
 
         electricParkingAreas.removeParkingAreaIntoParkingAreas(Area1);
 
-        assertEquals(1,electricParkingAreas.getSizeOfParkingAreas());
+        assertEquals(0,electricParkingAreas.getSizeOfParkingAreas());
     }
 
     @Test
