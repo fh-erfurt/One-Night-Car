@@ -25,7 +25,7 @@ public abstract class PersonAddressRepository {
             }
 
         } catch (Exception e) {
-            LOG.log(Level.WARNING, "The Query did not worked out" + e);
+            LOG.log(Level.WARNING, "The Query did not work out" + e);
         }
         return null;
     }

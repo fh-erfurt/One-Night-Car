@@ -7,6 +7,7 @@ import de.onenightcar.domain.model.car.*;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -178,21 +179,15 @@ public class Customer extends Person {
      * @param electricCar   an ElectricCar representing an electric car the Customer wants to book
      * @param date          a LocalDate representing the date of the Booking
      * @param carManagementSystem in order to know the carID of the car
-     * @param yearDeparture Int representing the departure year
-     * @param monthDeparture int representing the departure month
-     * @param dayDeparture int representing the departure day
-     * @param yearArrival Int representing the arrival year
-     * @param monthArrival int representing the arrival month
-     * @param dayArrival int representing the arrival day
+     * @param departure the date and time at which the customer started the rental
+     * @param arrival the date and time at which the customer ended the rental
      * @param rentalManager to add this rental to all the rentals
      */
-    public void rentAnElectricCar(ElectricCar electricCar, CarManagementSystem carManagementSystem, LocalDate date,
-                                  int yearDeparture, int monthDeparture, int dayDeparture, int yearArrival ,
-                                  int monthArrival, int dayArrival, RentalManager rentalManager) {
+    public void rentAnElectricCar(ElectricCar electricCar, CarManagementSystem carManagementSystem, LocalDateTime date,
+                                  LocalDateTime departure, LocalDateTime arrival, RentalManager rentalManager) {
         try {
             ElectricRental electricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
-                    yearDeparture, monthDeparture, dayDeparture, yearArrival,
-                    monthArrival, dayArrival, rentalManager);
+                    departure, arrival, rentalManager);
             this.electricRentals.add(electricRental);
         }
         catch(Exception e){
@@ -203,25 +198,19 @@ public class Customer extends Person {
     /** Ask permission to Admin to Modify an existing Electrical OneNightCar.Rental made by this Customer
      * @param electricRental the OneNightCar.Rental that wants to be modified
      * @param date          a LocalDate representing the date of the Booking
-     * @param yearDeparture Int representing the new departure year
-     * @param monthDeparture int representing the new departure month
-     * @param dayDeparture int representing the new departure day
-     * @param yearArrival Int representing the new arrival year
-     * @param monthArrival int representing the new arrival month
-     * @param dayArrival int representing the new arrival day
+     * @param departure the date and time at which the customer started the rental
+     * @param arrival the date and time at which the customer ended the rental
      * @param rentalManager to add this rental to all the rentals
      * @param carManagementSystem the system where all cars are saved
      * @param electricCar which electric car rental is being modified
      */
     public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar, CarManagementSystem carManagementSystem,
-                                    LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival ,
-                                    int monthArrival, int dayArrival, RentalManager rentalManager) {
+                                    LocalDateTime date, LocalDateTime departure, LocalDateTime arrival, RentalManager rentalManager) {
         try {
             if (electricRental.getCustomerID() == this.customerID) {
                 if (Admin.approveRentalModification(electricRental)) {
                     ElectricRental newElectricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
-                            yearDeparture, monthDeparture, dayDeparture, yearArrival,
-                            monthArrival, dayArrival, rentalManager);
+                            departure, arrival, rentalManager);
                     // Remove the old OneNightCar.Rental
                     this.electricRentals.remove(electricRental);
                     // Add the new OneNightCar.Rental
@@ -251,21 +240,15 @@ public class Customer extends Person {
      * @param combustionCar   an CombustionCar representing the car the Customer wants to book
      * @param date          a LocalDate representing the date of the Booking
      * @param carManagementSystem in order to know the carID of the car
-     * @param yearDeparture Int representing the departure year
-     * @param monthDeparture int representing the departure month
-     * @param dayDeparture int representing the departure day
-     * @param yearArrival Int representing the arrival year
-     * @param monthArrival int representing the arrival month
-     * @param dayArrival int representing the arrival day
+     * @param departure the date and time at which the customer started the rental
+     * @param arrival the date and time at which the customer ended the rental
      * @param rentalManager to add this rental to all the rentals
      */
      public void rentAFuelCar(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
-                              LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival,
-                              int monthArrival, int dayArrival) {
+                              LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
          try {
              FuelRental fuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
-                     this.getCustomerID(), date, yearDeparture, monthDeparture, dayDeparture,
-                     yearArrival, monthArrival, dayArrival);
+                     this.getCustomerID(), date, departure, arrival);
              this.fuelRentals.add(fuelRental);
          }
          catch(Exception e){
@@ -276,24 +259,18 @@ public class Customer extends Person {
     /** Ask permission to Admin to Modify an existing Electrical OneNightCar.Rental made by this Customer
      * @param fuelRental the OneNightCar.Rental that wants to be modified
      * @param date          a LocalDate representing the date of the Booking
-     * @param yearDeparture Int representing the new departure year
-     * @param monthDeparture int representing the new departure month
-     * @param dayDeparture int representing the new departure day
-     * @param yearArrival Int representing the new arrival year
-     * @param monthArrival int representing the new arrival month
-     * @param dayArrival int representing the new arrival day
+     * @param departure the date and time at which the customer started the rental
+     * @param arrival the date and time at which the customer ended the rental
      * @param rentalManager to add this rental to all the rentals
      * @param carManagementSystem the system where all cars are saved
      * @param combustionCar which cars OneNightCar.Rental need to be modified
      */
     public void modifyARegularRental(FuelRental fuelRental, RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
-                                     LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture, int yearArrival,
-                                     int monthArrival, int dayArrival) {
+                                     LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
         if (fuelRental.getCustomerID() == this.customerID){
             if (Admin.approveRentalModification(fuelRental)){
                 FuelRental newFuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
-                                                this.customerID, date, yearDeparture, monthDeparture, dayDeparture,
-                                                            yearArrival, monthArrival, dayArrival);
+                                                this.customerID, date, departure, arrival);
                 // Remove the old OneNightCar.Rental
                 this.fuelRentals.remove(fuelRental);
                 // Add the new OneNightCar.Rental

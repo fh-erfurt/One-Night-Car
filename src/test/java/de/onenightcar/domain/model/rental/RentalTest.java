@@ -25,7 +25,7 @@ class RentalTest {
 
         long days = rental1.calculateElapsedDays();
 
-        assertEquals(365, days);
+        assertEquals(7, days);
     }
 
     @Test

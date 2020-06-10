@@ -1,8 +1,8 @@
 package de.onenightcar.domain.model.rental;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
+import static java.time.temporal.ChronoUnit.DAYS;
+
 
 /** Represents a rental entry
  * @author OneNightCar
@@ -19,43 +19,39 @@ public abstract class Rental {
     protected float rentalPrice;
     protected long odometerBefore;
     protected long odometerAfter = 0;
-    LocalDate date;
-    GregorianCalendar departureTime;
-    GregorianCalendar arrivalTime;
+    protected LocalDateTime date;
+    protected LocalDateTime departure;
+    protected LocalDateTime arrival;
 
     /* /////////////////////Methods/////////////////////////// */
 
     /** Creates a OneNightCar.Rental entry for a rental
-     * @param date the date of the rental
-     * @param yearDeparture  the time at which the customer started the rental
-     * @param monthDeparture  the time at which the customer started the rental
-     * @param dayDeparture  the time at which the customer started the rental
-     * @param yearArrival the time at which he has returned
-     * @param monthArrival the time at which he has returned
-     * @param dayArrival the time at which he has returned
+     * @param date the date and time of the booking
+     * @param departure the date and time at which the customer started the rental
+     * @param arrival  the date and time at which the customer ended the rental
      * @param customerID the Customer ID
      */
-    public Rental(int customerID, LocalDate date, int yearDeparture, int monthDeparture, int dayDeparture,
-                          int yearArrival , int monthArrival, int dayArrival){
+    public Rental(int customerID, LocalDateTime date, LocalDateTime departure,
+                          LocalDateTime arrival){
         this.customerID = customerID;
         this.date = date;
-        this.departureTime = new GregorianCalendar(yearDeparture, monthDeparture, dayDeparture);
-        this.arrivalTime = new GregorianCalendar(yearArrival, monthArrival, dayArrival);
+        this.departure = departure;
+        this.arrival = arrival;
     }
 
     /** Default Constructor for OneNightCar.Rental
      */
     public Rental(){
-        this.date = LocalDate.now();
-        this.departureTime = new GregorianCalendar(2020, Calendar.JANUARY, 1);
-        this.arrivalTime = new GregorianCalendar(2020, Calendar.DECEMBER, 31);
+        this.date = LocalDateTime.now();
+        this.departure = LocalDateTime.now();
+        this.arrival = departure.plusWeeks(1);
     }
 
     /** Calculates the duration of a rental
      * @return the total amount of hours the rental has lasted
      */
-    int calculateElapsedDays(){
-          return Math.abs(arrivalTime.get(Calendar.DAY_OF_YEAR) - departureTime.get(Calendar.DAY_OF_YEAR));
+    public long calculateElapsedDays(){
+        return arrival.until(departure, DAYS);
     }
 
     /** Sets the odometer to the value after the rental
@@ -91,12 +87,12 @@ public abstract class Rental {
         return this.customerID;
     }
 
-    public LocalDate getDate () {
+    public LocalDateTime getDate () {
         return this.date;
     }
 
-    public GregorianCalendar getDepartureTime () {return this.departureTime;}
+    public LocalDateTime getDepartureTime () {return this.departure;}
 
-    public GregorianCalendar getArrivalTime () {return this.arrivalTime;}
+    public LocalDateTime getArrivalTime () {return this.arrival;}
 
 }

@@ -6,6 +6,7 @@ import de.onenightcar.domain.model.person.PersonManager;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /** Represents a FuelRental
  * @author OneNightCar
@@ -29,20 +30,16 @@ public class FuelRental extends Rental {
      * * @param odometerBefore The value on the odometer of a car before the rental
      * * @param odometerAfter  The value on the odometer of a car after the rental
      * @param date The date a rental has been created
-     * @param yearDeparture  the time at which the customer started the rental
-     * @param monthDeparture  the time at which the customer started the rental
-     * @param dayDeparture  the time at which the customer started the rental
-     * @param yearArrival the time at which he has returned
-     * @param monthArrival the time at which he has returned
-     * @param dayArrival the time at which he has returned
+     * @param departure  the date and time at which the customer started the rental
+     * @param arrival the date and time at which the customer ended the rental
      * @param combustionCar a Combustion OneNightCar.Car
      * @param carManagementSystem where all cars are saved
      * @param customerID which customer is making the OneNightCar.Rental
      * @param rentalManager where all rental are saved
      */
-    public FuelRental(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem, int customerID, LocalDate date,
-                      int yearDeparture, int monthDeparture, int dayDeparture, int yearArrival , int monthArrival, int dayArrival){
-        super(customerID, date, yearDeparture, monthDeparture, dayDeparture, yearArrival , monthArrival, dayArrival);
+    public FuelRental(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem, int customerID, LocalDateTime date,
+                      LocalDateTime departure, LocalDateTime arrival){
+        super(customerID, date, departure, arrival);
         rentalID = rentalManager.getSizeOfFuelRentals();                          //Creates a running counter of Rentals in list
         rentalManager.addRentalIntoFuelRentals(this);                          //Adds the new rental to the global list
         this.carID = carManagementSystem.getCarIDFromCombustion(combustionCar);
@@ -62,7 +59,7 @@ public class FuelRental extends Rental {
      * @param date at what time was the rental made
      * @param personManager where all persons are saved
      */
-    public FuelRental(RentalManager rentalManager, CarManagementSystem carManagementSystem, int customerID, LocalDate date,
+    public FuelRental(RentalManager rentalManager, CarManagementSystem carManagementSystem, int customerID, LocalDateTime date,
                       CombustionCar combustionCar, PersonManager personManager){
         super();
         this.rentalID = rentalManager.getSizeOfFuelRentals();

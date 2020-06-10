@@ -5,6 +5,7 @@ import de.onenightcar.domain.model.car.ElectricCar;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /** Represents an ElectricRental
  * @author OneNightCar
@@ -26,18 +27,14 @@ public class ElectricRental extends Rental {
      * @param electricCar the car itself, object of the class ElectricCar
      * @param carManagementSystem the management system, so we can get information about the car
      * @param date the date of the rental
-     * @param yearDeparture  the time at which the customer started the rental
-     * @param monthDeparture  the time at which the customer started the rental
-     * @param dayDeparture  the time at which the customer started the rental
-     * @param yearArrival the time at which he has returned
-     * @param monthArrival the time at which he has returned
-     * @param dayArrival the time at which he has returned
+     * @param departure the date and time at which the customer started the rental
+     * @param arrival the date and time at which the customer ended the rental
      * @param rentalManager the management system needed to add the entry to the global list
      * @param customerID the Customer ID
      */
-    public ElectricRental(ElectricCar electricCar, CarManagementSystem carManagementSystem, int customerID, LocalDate date, int yearDeparture,int monthDeparture,int dayDeparture,
-                          int yearArrival ,int monthArrival, int dayArrival, RentalManager rentalManager){
-        super(customerID, date, yearDeparture, monthDeparture, dayDeparture, yearArrival, monthArrival, dayArrival);
+    public ElectricRental(ElectricCar electricCar, CarManagementSystem carManagementSystem, int customerID, LocalDateTime date, LocalDateTime departure,
+                          LocalDateTime arrival, RentalManager rentalManager){
+        super(customerID, date, departure, arrival);
         this.rentalID = rentalManager.getAndIncrementCounter();
         rentalManager.addRentalIntoElectricRentals(this);
         this.carID = carManagementSystem.getCarIDFromElectric(electricCar);
