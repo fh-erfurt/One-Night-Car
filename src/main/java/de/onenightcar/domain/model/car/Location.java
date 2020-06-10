@@ -1,14 +1,23 @@
 package de.onenightcar.domain.model.car;
 
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
+
+import javax.persistence.Entity;
+
 /** Represents a Location
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
  */
-
-public class Location {
+@Entity
+public class Location extends AbstractDatabaseEntity {
     private double GPSLatitude;
     private double GPSLongitude;
+
+
+
+    public Location(){}
+
 
 
     /***

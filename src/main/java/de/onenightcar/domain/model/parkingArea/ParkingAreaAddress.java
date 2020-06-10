@@ -1,12 +1,17 @@
 package de.onenightcar.domain.model.parkingArea;
 
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
+
+import javax.persistence.Entity;
+
 /** Represents a ParkingAreaAddress
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
  */
 
-public class ParkingAreaAddress {
+@Entity
+public class ParkingAreaAddress extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes///////////////////////// */
 
@@ -74,4 +79,12 @@ public class ParkingAreaAddress {
     public String getStreetNumber() {return this.streetNumber;}
 
 
+    @Override
+    public String toString() {
+        return "ParkingAreaAddress [ZIP= " + this.ZIP +
+                ", City= "            + this.city +
+                ", Street "           + this.street +
+                ", Street Number "    + this.streetNumber;
+    }
 }
+

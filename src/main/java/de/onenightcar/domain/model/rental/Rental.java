@@ -1,5 +1,8 @@
 package de.onenightcar.domain.model.rental;
 
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
+
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -9,8 +12,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
  * @version 1.0
  * @since 1.0
   */
-
-public abstract class Rental {
+@MappedSuperclass
+public abstract class Rental extends AbstractDatabaseEntity {
     /* /////////////////////Attributes///////////////////////// */
 
     protected int rentalID;

@@ -2,6 +2,7 @@ package de.onenightcar.domain.model.parkingArea;
 
 import de.onenightcar.domain.model.car.ElectricCar;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
 /** Represents a Electric Parking Area
@@ -10,7 +11,7 @@ import java.util.ArrayList;
         * @version 1.0
         * @since 1.0
         */
-
+@Entity
 public class ElectricParkingArea extends ParkingArea {
 
     /* /////////////////////Attributes///////////////////////// */
@@ -58,6 +59,10 @@ public class ElectricParkingArea extends ParkingArea {
         this.notAvailableElectricCars = new ArrayList<ElectricCar>();
         this.maxElectricCarCapacity = 100;
         parkingAreaManager.ElectricParkingAreas.add(this);
+    }
+
+    public ElectricParkingArea() {
+
     }
 
     /**gets the max. capacity of electric cars.

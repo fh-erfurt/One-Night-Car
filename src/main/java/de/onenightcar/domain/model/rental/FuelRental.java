@@ -5,6 +5,8 @@ import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.person.PersonManager;
 
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -13,12 +15,14 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @since 1.0
  */
-
+@Entity
 public class FuelRental extends Rental {
     /* /////////////////////Attributes///////////////////////// */
 
     private double fuelLevelBefore;
     private double fuelLevelAfter;
+
+    @OneToOne
     private CombustionCar combustionCar;
 
     /* /////////////////////Methods/////////////////////////// */
@@ -71,6 +75,10 @@ public class FuelRental extends Rental {
         this.fuelLevelBefore = combustionCar.getFuelLevel();
         this.fuelLevelAfter = getFuelLevelAfter();
         this.combustionCar = combustionCar;
+    }
+
+    public FuelRental() {
+
     }
 
     public double getFuelLevelAfter(){

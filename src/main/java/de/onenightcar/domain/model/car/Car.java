@@ -2,13 +2,20 @@ package de.onenightcar.domain.model.car;
 
 import de.onenightcar.domain.model.person.Customer;
 import de.onenightcar.domain.model.rental.Rental;
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
+
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /** Represents a OneNightCar.Car
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
  */
-public abstract class Car {
+
+@MappedSuperclass
+public abstract class Car extends AbstractDatabaseEntity {
 
     protected Type type;
     protected String brand;
@@ -17,7 +24,10 @@ public abstract class Car {
     protected long odometer;
     protected Enum permission;    // which Customer can book this car (which customer Level)
     protected float price;       //Price pro day
-    Location location;
+
+    @OneToOne
+    protected Location location;
+
     /** Creates an OneNightCar.Car Constructor with Parameters to use it in the Child Class.
      * @param type A enum representing the Type of the OneNightCar.Car
      * @param brand A String representing a OneNightCar.Car Brand
@@ -41,6 +51,9 @@ public abstract class Car {
         this.permission= customerLevel;
         this.price=price;
 
+    }
+
+    protected Car() {
     }
 
     /** Change the OneNightCar.Car state .

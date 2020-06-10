@@ -1,8 +1,11 @@
 package de.onenightcar.domain.model.parkingArea;
 
 import de.onenightcar.domain.model.car.CombustionCar;
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
 
 
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import java.util.*;
 
 /** Represents a OneNightCar.ParkingArea
@@ -11,7 +14,8 @@ import java.util.*;
  * @since 1.0
  */
 
-public class ParkingArea {
+@MappedSuperclass
+public class ParkingArea extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes///////////////////////// */
 
@@ -19,7 +23,9 @@ public class ParkingArea {
     public ArrayList<CombustionCar> carsInStation;
     public ArrayList<CombustionCar> availableCars;
     public ArrayList<CombustionCar> notAvailableCars;
-    ParkingAreaAddress parkingAreaAddress;
+
+    @OneToOne
+    protected ParkingAreaAddress parkingAreaAddress;
     protected int parkID;
     protected int maxCapacity;
 

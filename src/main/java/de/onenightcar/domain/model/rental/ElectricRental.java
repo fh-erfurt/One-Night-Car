@@ -4,6 +4,8 @@ import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.ElectricCar;
 
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -12,12 +14,14 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @since 1.0
  */
-
+@Entity
 public class ElectricRental extends Rental {
     /* /////////////////////Attributes///////////////////////// */
 
     private float chargePercentBefore;
     private float chargePercentAfter;
+
+    @OneToOne
     private ElectricCar electricCar;
 
     /* /////////////////////Methods/////////////////////////// */
@@ -61,6 +65,10 @@ public class ElectricRental extends Rental {
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
         this.electricCar = electricCar;
+    }
+
+    public ElectricRental() {
+
     }
 
     public float getChargePercentAfter() { return this.chargePercentAfter; }

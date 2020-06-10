@@ -3,12 +3,16 @@ package de.onenightcar.domain.model.car;
 import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.domain.model.person.Customer;
 
+import javax.persistence.Entity;
+
 /** Represents a Electric OneNightCar.Car
  * extent OneNightCar.Car
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
  */
+
+@Entity
 public class ElectricCar extends Car {
     private float range;   // in Km
     private float chargePercent; //current
@@ -59,6 +63,11 @@ public class ElectricCar extends Car {
         else{
             System.out.println("there is no more place in this parking Area!");
         }
+    }
+
+    // Needed to be able to create the entity
+    public ElectricCar() {
+
     }
 
 

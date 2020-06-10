@@ -3,13 +3,15 @@ package de.onenightcar.domain.model.car;
 import de.onenightcar.domain.model.parkingArea.ParkingArea;
 import de.onenightcar.domain.model.person.Customer;
 
+import javax.persistence.Entity;
+
 /** Represents a Combustion OneNightCar.Car
  * extent OneNightCar.Car
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
  */
-
+@Entity
 public class CombustionCar extends Car {
     private double tankSize;    // in liter
     private double fuelLevel;   // in percent
@@ -72,6 +74,11 @@ public class CombustionCar extends Car {
         else{
             System.out.println("there is no more place in this park!");
         }
+    }
+
+
+    // Needed to be able to create the entity
+    public CombustionCar(){
     }
 
     /** Gets the Fuel Level
