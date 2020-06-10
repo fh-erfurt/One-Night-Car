@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -108,10 +109,14 @@ class CustomerTest {
         ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
         CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
-        LocalDate date = LocalDate.now();
+        LocalDateTime date = LocalDateTime.now();
 
-        max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date,
-                2020, 03, 15, 2020, 03, 18);
+        LocalDateTime departure;
+        departure = LocalDateTime.of(2020,03,15,00,00);
+        LocalDateTime arrival;
+        arrival= LocalDateTime.of(2020,03,18,00,00);
+
+        max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date, departure, arrival);
 
         assertEquals(1, max.getFuelRentals().size());
     }
@@ -122,24 +127,25 @@ class CustomerTest {
         Customer max = new Customer(list);
         RentalManager rentalManager = new RentalManager();
         CarManagementSystem carManagementSystem = new CarManagementSystem();
-        LocalDate date = LocalDate.now();
-        GregorianCalendar departure = new GregorianCalendar(2020,03,15);
-        GregorianCalendar arrival = new GregorianCalendar(2020,03,18);
+        LocalDateTime date = LocalDateTime.now();
+        LocalDateTime departure;
+        departure = LocalDateTime.of(2020,03,15,00,00);
+        LocalDateTime arrival;
+        arrival= LocalDateTime.of(2020,03,18,00,00);
 
         ParkingAreaManager electricParkingArea = new ParkingAreaManager();
         ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
 
         ElectricCar car1 = new ElectricCar(carManagementSystem, Area1);
 
-        max.rentAnElectricCar(car1, carManagementSystem, date, 2020, 01,
-                            1,  2020 ,01, 2, rentalManager);
+        max.rentAnElectricCar(car1, carManagementSystem, date, departure, arrival, rentalManager);
 
 
-        max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, carManagementSystem, date, 2020,
-                03, 15, 2020, 03, 18, rentalManager);
+        max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, carManagementSystem, date, LocalDateTime.of(2020, 3, 16, 00,00),
+                LocalDateTime.of(2020, 3, 19, 00,00), rentalManager);
 
-        assertEquals(departure.get(Calendar.DAY_OF_YEAR), max.electricRentals.get(0).getDepartureTime().get(Calendar.DAY_OF_YEAR));
-        assertEquals(arrival.get(Calendar.DAY_OF_YEAR), max.electricRentals.get(0).getArrivalTime().get(Calendar.DAY_OF_YEAR));
+        assertEquals(16, max.electricRentals.get(0).getDepartureTime().getDayOfMonth());
+        assertEquals(19, max.electricRentals.get(0).getArrivalTime().getDayOfMonth());
     }
 
     @Test
@@ -152,10 +158,14 @@ class CustomerTest {
         ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
         ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
+        LocalDateTime departure;
+        departure = LocalDateTime.of(2020,03,15,00,00);
+        LocalDateTime arrival;
+        arrival= LocalDateTime.of(2020,03,18,00,00);
+
         CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
-        LocalDate date = LocalDate.now();
-        max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date,
-                2020, 03, 15, 2020, 03, 18);
+        LocalDateTime date = LocalDateTime.now();
+        max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date, departure, arrival);
 
 
         max.cancelFuelRental(max.getFuelRentalWithIndex(0));

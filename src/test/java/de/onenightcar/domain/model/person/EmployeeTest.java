@@ -5,6 +5,8 @@ import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.domain.model.parkingArea.ParkingArea;
 import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -24,7 +26,8 @@ class EmployeeTest {
     @Test
     void an_employee_repairs_an_electric_car(){
         PersonManager list = new PersonManager();
-        GregorianCalendar dateOfBirth = new GregorianCalendar(1985,GregorianCalendar.FEBRUARY,20);
+        LocalDateTime dateOfBirth;
+        dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
         PersonAddress thisAddress = new PersonAddress();
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
                 list, 2000, Employee.TypeOfActivity.MAINTAINER);
@@ -43,7 +46,8 @@ class EmployeeTest {
     @Test
     void an_employee_refuels_a_combustion_car(){
         PersonManager list = new PersonManager();
-        GregorianCalendar dateOfBirth = new GregorianCalendar(1985,GregorianCalendar.FEBRUARY,20);
+        LocalDateTime dateOfBirth;
+        dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
         PersonAddress thisAddress = new PersonAddress();
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
                 list, 2000, Employee.TypeOfActivity.MAINTAINER);

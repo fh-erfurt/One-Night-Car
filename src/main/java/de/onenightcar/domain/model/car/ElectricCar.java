@@ -57,7 +57,7 @@ public class ElectricCar extends Car {
             electricParkingArea.assignElectricCarToStation(this);
         }
         else{
-            System.out.println("there is no more place in this park!");
+            System.out.println("there is no more place in this parking Area!");
         }
     }
 

@@ -51,7 +51,7 @@ public abstract class Rental {
      * @return the total amount of hours the rental has lasted
      */
     public long calculateElapsedDays(){
-        return arrival.until(departure, DAYS);
+        return departure.until(arrival, DAYS);
     }
 
     /** Sets the odometer to the value after the rental

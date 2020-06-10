@@ -9,6 +9,7 @@ import de.onenightcar.domain.model.person.PersonManager;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,10 +25,15 @@ public class FuelRentalTest {
         ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
         ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
+        LocalDateTime date = LocalDateTime.now();
+        LocalDateTime departure;
+        departure = LocalDateTime.of(2020,01,31,00,00);
+        LocalDateTime arrival;
+        arrival= LocalDateTime.of(2020,02,04,00,00);
+
 
         CombustionCar CombustionCar = new CombustionCar(carManagementSystem, parkingArea);
-        FuelRental rental2 = new FuelRental(rentalManager, CombustionCar, carManagementSystem, customer.getCustomerID(), LocalDate.of(2020, 1, 31),
-        2020, 1, 31, 2020, 2, 4);
+        FuelRental rental2 = new FuelRental(rentalManager, CombustionCar, carManagementSystem, customer.getCustomerID(), date, departure, arrival);
         rental2.setOdometerAfter();
         rental2.setFuelLevelAfter(CombustionCar);
         assertEquals(-1, rental2.getFuelLevelAfter(), "The car had to be refueled already in order to drive this far.");

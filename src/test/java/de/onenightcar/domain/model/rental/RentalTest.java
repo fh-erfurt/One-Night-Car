@@ -43,7 +43,7 @@ class RentalTest {
 
         rental1.setOdometerAfter();
         long odometer = rental1.getOdometerAfter();
-        assertEquals(291319, odometer);
+        assertEquals(16375, odometer);
     }
 
 

@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+
 
 /** Represents a PaymentMethod
  * @author OneNightCar
@@ -29,13 +29,13 @@ public class Customer extends Person {
     /** Creates a Customer with specified Customer Parameters.
      * @param firstName A String representing Customers first Name
      * @param surname A String representing Customers Surname
-     * @param dateOfBirth A GregorianCalendar representing Customers DOB
+     * @param dateOfBirth A LocalDateTime representing Customers DOB
      * @param personAddress A PersonAddress representing Customers Address
      * @param personManager A PersonManager with the management from the Packet OneNightCar.Person
      * @param customerLevel A CustomerLevel representing Customers Level
      * @param paymentMethod A PaymentMethod representing Customers Payment Method
      */
-    public Customer(String firstName, String surname, GregorianCalendar dateOfBirth, PersonAddress personAddress,
+    public Customer(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
                     PersonManager personManager, CustomerLevel customerLevel, PaymentMethod paymentMethod){
         this.firstName = firstName;
         this.surname = surname;
@@ -59,7 +59,7 @@ public class Customer extends Person {
     public Customer(PersonManager personManager){
         this.firstName = "Max";
         this.surname = "Mustermann";
-        this.dateOfBirth = new GregorianCalendar(1990,GregorianCalendar.DECEMBER,31);
+        this.dateOfBirth = LocalDateTime.of(1990,12,31,00,00);
         this.personAddress = new PersonAddress();
         this.customerID = personManager.getAndIncrementCustomerCounter();
         personManager.customers.add(this);                               //Adds this Customer to the Customer List

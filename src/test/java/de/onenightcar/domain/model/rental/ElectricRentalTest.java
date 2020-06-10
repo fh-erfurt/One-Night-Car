@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ElectricRentalTest {
 
@@ -23,8 +24,14 @@ public class ElectricRentalTest {
         ParkingAreaManager electricParkingArea = new ParkingAreaManager();
         ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
 
+        LocalDateTime date = LocalDateTime.now();
+        LocalDateTime departure;
+        departure = LocalDateTime.of(2020,01,31,00,00);
+        LocalDateTime arrival;
+        arrival= LocalDateTime.of(2020,02,04,00,00);
+
         ElectricCar electricCar = new ElectricCar(carManagementSystem, Area1);
-        ElectricRental rental1 = new ElectricRental(electricCar, carManagementSystem, customer.getCustomerID(), LocalDate.of(2020, 1, 31), 2020, 1, 31, 2020 , 2, 4, rentalManager);
+        ElectricRental rental1 = new ElectricRental(electricCar, carManagementSystem, customer.getCustomerID(),date, departure, arrival, rentalManager);
 
         rental1.setOdometerAfter();
         rental1.setChargePercentAfter(electricCar);

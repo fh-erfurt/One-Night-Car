@@ -4,7 +4,8 @@ import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
+
 
 /** Represents a Person
  * @author OneNightCar
@@ -19,7 +20,7 @@ public abstract class Person extends AbstractDatabaseEntity {
 
     protected String firstName;
     protected String surname;
-    protected GregorianCalendar dateOfBirth;
+    protected LocalDateTime dateOfBirth;
 
     @OneToOne
     protected PersonAddress personAddress;
@@ -34,9 +35,9 @@ public abstract class Person extends AbstractDatabaseEntity {
     }
 
     /** Gets the Persons DOB.
-     * @return A GregorianCalendar representing the Date of Birth of a person
+     * @return A LocalDateTime representing the Date of Birth of a person
      */
-    public GregorianCalendar getDateOfBirth(){
+    public LocalDateTime getDateOfBirth(){
         return this.dateOfBirth;
     }
 

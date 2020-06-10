@@ -3,7 +3,7 @@ package de.onenightcar.domain.model.person;
 import de.onenightcar.domain.model.car.*;
 
 import javax.persistence.Entity;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 /** Represents an Employee
@@ -24,13 +24,13 @@ public class Employee extends Person {
     /** Creates an Employee with specified Employee Parameters.
      * @param firstName A String representing Employee first Name
      * @param surname A String representing Employee Surname
-     * @param dateOfBirth A GregorianCalendar representing Employee DOB
+     * @param dateOfBirth A LocalDateTime representing Employee DOB
      * @param personAddress A PersonAddress representing Employee Address
      * @param personManager A PersonManager with the management from the Packet OneNightCar.Person
      * @param salary A Float representing the Employee salary
      * @param typeOfActivity a TypeOfActivity representing what the Employee does
      */
-    public Employee(String firstName, String surname, GregorianCalendar dateOfBirth, PersonAddress personAddress,
+    public Employee(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
                     PersonManager personManager, float salary, TypeOfActivity typeOfActivity){
         this.firstName = firstName;
         this.surname = surname;
@@ -49,7 +49,7 @@ public class Employee extends Person {
     public Employee(PersonManager personManager){
         this.firstName = "Peter";
         this.surname = "Bossmann";
-        this.dateOfBirth = new GregorianCalendar(1964,GregorianCalendar.APRIL,4);
+        this.dateOfBirth = LocalDateTime.of(1964,4,4,00,00);
         this.personAddress = new PersonAddress();
         this.salary = 10000;
         this.typeOfActivity = TypeOfActivity.BOSS;
