@@ -15,7 +15,7 @@ class ParkingAreaManagerTest {
         ParkingArea Anger1 = new ParkingArea(list);
 
         assertEquals(100, Anger1.getMaxCapacity());
-        assertEquals(2, list.getAndIncrementCounter());
+        assertEquals(1, list.getAndIncrementCounter());
     }
 
     @Test
