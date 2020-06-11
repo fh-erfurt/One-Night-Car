@@ -1,6 +1,14 @@
 package de.onenightcar.domain.storage.core;
 
+import de.onenightcar.domain.model.car.CarManagementSystem;
+import de.onenightcar.domain.model.car.CombustionCar;
+import de.onenightcar.domain.model.parkingArea.ParkingArea;
+import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
+import de.onenightcar.domain.model.person.Customer;
 import de.onenightcar.domain.model.person.PersonAddress;
+import de.onenightcar.domain.model.person.PersonManager;
+import de.onenightcar.domain.model.rental.FuelRental;
+import de.onenightcar.domain.model.rental.RentalManager;
 import de.onenightcar.domain.storage.DatabaseConnection;
 import de.onenightcar.domain.storage.packageRepositories.carRespository.PersonAddressRepository;
 
@@ -12,6 +20,7 @@ import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,31 +38,60 @@ public class JPADemo {
 
         EntityManager em = emf.createEntityManager();
 
-        PersonAddress personAddress = new PersonAddress();
+//        PersonAddress personAddress = new PersonAddress();
 
-        // Save the Person Address
-        em.getTransaction().begin();
-        em.persist(personAddress);
-        em.getTransaction().commit();
+//        // Save the Person Address
+//        em.getTransaction().begin();
+//        em.persist(personAddress);
+//        em.getTransaction().commit();
 
         //Used to modify and check the changes in DB
 //        em.getTransaction().begin();
 //        personAddress.setZIP("00000");
 //        em.getTransaction().commit();
 
-        // Read existing entries
-        Query q = em.createQuery("select t from PersonAddress t");
-        List<PersonAddress> personAddressList = q.getResultList();
-        for (PersonAddress personAddresses : personAddressList) {
-            System.out.println(personAddresses);
-        }
-        System.out.println("Size: " + personAddressList.size());
+//        // Read existing entries
+//        Query q = em.createQuery("select t from PersonAddress t");
+//        List<PersonAddress> personAddressList = q.getResultList();
+//        for (PersonAddress personAddresses : personAddressList) {
+//            System.out.println(personAddresses);
+//        }
+//        System.out.println("Size: " + personAddressList.size());
+//
+//        // Try with the DatabaseConnection directly
+//        Connection conn = DatabaseConnection.getConnection();
+//        PersonAddressRepository.printAllPersonsAddressesFromDatabase(conn);
+//
+//        DatabaseConnection.disconnectDatabase(conn);
 
-        // Try with the DatabaseConnection directly
-        Connection conn = DatabaseConnection.getConnection();
-        PersonAddressRepository.printAllPersonsAddressesFromDatabase(conn);
 
-        DatabaseConnection.disconnectDatabase(conn);
+        //////////////////////////////////////////////////////////////////////////
+
+
+//        RentalManager rentalManager = new RentalManager();
+//        CarManagementSystem carManagementSystem = new CarManagementSystem();
+//        PersonManager personManager = new PersonManager();
+//        Customer customer = new Customer(personManager);
+//
+//        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
+//        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
+//
+//        LocalDateTime date = LocalDateTime.now();
+//        LocalDateTime departure;
+//        departure = LocalDateTime.of(2020,01,31,00,00);
+//        LocalDateTime arrival;
+//        arrival= LocalDateTime.of(2020,02,04,00,00);
+//
+//
+//        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
+//        FuelRental rental2 = new FuelRental(rentalManager, combustionCar, carManagementSystem, customer.getCustomerID(), date, departure, arrival);
+//
+//        em.getTransaction().begin();
+//        em.persist(customer);
+//        em.persist(combustionCar);
+//        em.persist(rental2);
+//        em.getTransaction().commit();
+
 
     }
 }

@@ -4,53 +4,53 @@ import de.onenightcar.domain.model.car.CombustionCar;
 import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
 
 
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.*;
 
 /** Represents a OneNightCar.ParkingArea
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
-@MappedSuperclass
+@Entity
 public class ParkingArea extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes///////////////////////// */
 
     // ArrayList in case the number of cars in station changes
-    public ArrayList<CombustionCar> carsInStation;
-    public ArrayList<CombustionCar> availableCars;
-    public ArrayList<CombustionCar> notAvailableCars;
+    @OneToMany
+    public List<CombustionCar> carsInStation;
+
+    @OneToMany
+    public List<CombustionCar> availableCars;
+
+    @OneToMany
+    public List<CombustionCar> notAvailableCars;
 
     @OneToOne
     protected ParkingAreaAddress parkingAreaAddress;
-    protected int parkID;
+
     protected int maxCapacity;
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public ParkingArea() {
-
-    }
+    public ParkingArea() {}
 
     /**
      * creates an OneNightCar.ParkingArea Constructor with Parameters to use it in the Child class.
-     * @param parkID An integer to represent the parkID
-     * @param ParkingAreaAddress A ParkingAreaAddress representing the address of the Parking Area
+     * @param parkingAreaAddress A ParkingAreaAddress representing the address of the Parking Area
      * @param maxCapacity An integer to represent the maximum capacity of the Parking Area
      * @param parkingAreaManager A Parking Area Manager with the Management of the Parking Areas
      */
-    public ParkingArea(int parkID, ParkingAreaAddress ParkingAreaAddress, int maxCapacity
+    public ParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity
             , ParkingAreaManager parkingAreaManager) {
 
         this.maxCapacity = maxCapacity;
-        this.parkingAreaAddress = new ParkingAreaAddress();  // könnte mit Parameter sein oder default
+        this.parkingAreaAddress = parkingAreaAddress;
         this.carsInStation = new ArrayList<CombustionCar>();
         this.availableCars = new ArrayList<CombustionCar>();
         this.notAvailableCars = new ArrayList<CombustionCar>();
-        this.parkID = parkingAreaManager.getAndIncrementCounter();
         parkingAreaManager.ParkingAreas.add(this);           //Adds this OneNightCar.ParkingArea to the ParkingAreas List
     }
 
@@ -60,7 +60,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
      */
 
     public ParkingArea(ParkingAreaManager parkingAreaManager) {
-        this.parkID = parkingAreaManager.getAndIncrementCounter();
         this.maxCapacity = 100;
         this.parkingAreaAddress = new ParkingAreaAddress();
         this.carsInStation = new ArrayList<CombustionCar>();
@@ -172,12 +171,9 @@ public class ParkingArea extends AbstractDatabaseEntity {
      * @return carsInStation
      */
 
-    public ArrayList<CombustionCar> getCarsInStation() {
+    public List<CombustionCar> getCarsInStation() {
         return carsInStation;
     }
-
-
-
 
 }
 

@@ -3,31 +3,37 @@ package de.onenightcar.domain.model.car;
 import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /** Represents a Location
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
  */
+
+
 @Entity
-public class Location extends AbstractDatabaseEntity {
+public class CarLocation extends AbstractDatabaseEntity {
+
+    /* /////////////////////Attributes/////////////////////////// */
+
     private double GPSLatitude;
     private double GPSLongitude;
 
+    /* /////////////////////Constructors/////////////////////////// */
 
-
-    public Location(){}
-
-
+    public CarLocation(){}
 
     /***
      * @param GPSLatitude  A double representing the position
      * @param GPSLongitude A double representing the position
      */
-    public Location(double GPSLatitude, double GPSLongitude){
+    public CarLocation(double GPSLatitude, double GPSLongitude){
         this.GPSLatitude = GPSLatitude;
         this.GPSLongitude = GPSLongitude;
     }
+
+    /* /////////////////////Methods/////////////////////////// */
 
     public double getGPSLatitude(){return this.GPSLatitude;}
 

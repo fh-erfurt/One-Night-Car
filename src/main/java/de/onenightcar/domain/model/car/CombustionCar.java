@@ -4,20 +4,40 @@ import de.onenightcar.domain.model.parkingArea.ParkingArea;
 import de.onenightcar.domain.model.person.Customer;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
 /** Represents a Combustion OneNightCar.Car
  * extent OneNightCar.Car
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
+
 @Entity
 public class CombustionCar extends Car {
+
+    /* /////////////////////Attributes/////////////////////////// */
+
+    // A car does not change it Transmission, its enough when we save just a String whit the Car Transmission
+    @Enumerated(EnumType.STRING)
+    private Transmission transmission;
+
+    // A car does not change it FuelType, its enough when we save just a String whit the Car FuelType
+    @Enumerated(EnumType.STRING)
+    private FuelType fuelType;
+
     private double tankSize;    // in liter
     private double fuelLevel;   // in percent
     private double consumption; // the Consumption in 100 Km
-    private Transmission transmission;
-    private FuelType fuelType;
+
+    /* /////////////////////Constructors/////////////////////////// */
+
+    // Needed to be able to create the entity
+    public CombustionCar(){}
+
+
     /** Creates an ElectricCar with specified ElectricCar Parameters.
      * @param type A enum representing the Type of the OneNightCar.Car
      * @param brand A String representing a OneNightCar.Car Brand
@@ -42,6 +62,7 @@ public class CombustionCar extends Car {
                          FuelType fuelType, CarManagementSystem carManagementSystem, ParkingArea parkingArea){
         super(type, brand, model, state, GPSLatitude, GPSLongitude, odometer,
                 customerLevel, price);
+
         this.tankSize= tankSize;
         this.fuelLevel= fuelLevel;
         this.consumption=consumption;
@@ -55,6 +76,7 @@ public class CombustionCar extends Car {
             System.out.println("there is no more place in this park!");
         }
     }
+
     /** Creates a Combustion OneNightCar.Car  with default Values.
      * It is used to increment speed of UnitTests.
      * @param carManagementSystem A CarManagementSystem with the management from the Packet OneNightCar.Car
@@ -76,10 +98,7 @@ public class CombustionCar extends Car {
         }
     }
 
-
-    // Needed to be able to create the entity
-    public CombustionCar(){
-    }
+    /* /////////////////////Methods/////////////////////////// */
 
     /** Gets the Fuel Level
      * @return The Combustion OneNightCar.Car current Fuel level
@@ -123,13 +142,13 @@ public class CombustionCar extends Car {
 
     public enum  Transmission{
         MANUAL,
-        AUTOMATIC;
+        AUTOMATIC
     }
 
 
     public enum FuelType{
         PETROL,
-        DIESEL;
+        DIESEL
     }
 }
 

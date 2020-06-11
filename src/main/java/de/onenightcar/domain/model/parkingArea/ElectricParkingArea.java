@@ -3,29 +3,40 @@ package de.onenightcar.domain.model.parkingArea;
 import de.onenightcar.domain.model.car.ElectricCar;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
+import java.util.List;
 
 /** Represents a Electric Parking Area
-        * extend OneNightCar.ParkingArea
-        * @author OneNightCar
-        * @version 1.0
-        * @since 1.0
-        */
+* extend OneNightCar.ParkingArea
+* @author OneNightCar
+* @version 2.0
+* @since 1.0
+*/
+
 @Entity
 public class ElectricParkingArea extends ParkingArea {
 
     /* /////////////////////Attributes///////////////////////// */
 
-    protected ArrayList<ElectricCar> electricCarsInStation;
-    protected ArrayList<ElectricCar> availableElectricCars;
-    protected ArrayList<ElectricCar> notAvailableElectricCars;
+    @OneToMany
+    protected List<ElectricCar> electricCarsInStation;
+
+    @OneToMany
+    protected List<ElectricCar> availableElectricCars;
+
+    @OneToMany
+    protected List<ElectricCar> notAvailableElectricCars;
+
     private int maxElectricCarCapacity;
 
     /* /////////////////////Methods/////////////////////////// */
 
+    public ElectricParkingArea() {}
+
     /**
      * Creates an ElectricParkingArea Constructor with specified ElectricParkingArea Parameters.
-     * @param parkID An integer to represent the parID
      * @param parkingAreaAddress A ParkingAreaAddress representing the address of the parking Area
      * @param maxCapacity An integer representing the max. Capacity of Cars in OneNightCar.ParkingArea
      * @param maxElectricCarCapacity An integer representing the max. Capacity of Cars in ElectricParkingArea
@@ -33,17 +44,15 @@ public class ElectricParkingArea extends ParkingArea {
      */
 
 
-    public ElectricParkingArea(int parkID, ParkingAreaAddress parkingAreaAddress, int maxCapacity,
+    public ElectricParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity,
                                int maxElectricCarCapacity, ParkingAreaManager parkingAreaManager) {
-        this.parkID = parkID;
-        this.parkingAreaAddress = new ParkingAreaAddress();
+        this.parkingAreaAddress = parkingAreaAddress;
         this.maxCapacity = maxCapacity;
         this.maxElectricCarCapacity = maxElectricCarCapacity;
         this.electricCarsInStation = new ArrayList<ElectricCar>();
         this.availableElectricCars = new ArrayList<ElectricCar>();
         this.notAvailableElectricCars = new ArrayList<ElectricCar>();
         parkingAreaManager.ElectricParkingAreas.add(this);
-
     }
 
     /** Creates an ElectricParkingArea with default values.
@@ -52,7 +61,7 @@ public class ElectricParkingArea extends ParkingArea {
      */
 
     public ElectricParkingArea(ParkingAreaManager parkingAreaManager){
-        super(2,new ParkingAreaAddress(), 100, parkingAreaManager);
+        super(new ParkingAreaAddress(), 100, parkingAreaManager);
 
         this.electricCarsInStation = new ArrayList<ElectricCar>();
         this.availableElectricCars = new ArrayList<ElectricCar>();
@@ -61,9 +70,6 @@ public class ElectricParkingArea extends ParkingArea {
         parkingAreaManager.ElectricParkingAreas.add(this);
     }
 
-    public ElectricParkingArea() {
-
-    }
 
     /**gets the max. capacity of electric cars.
      * @return max Capacity

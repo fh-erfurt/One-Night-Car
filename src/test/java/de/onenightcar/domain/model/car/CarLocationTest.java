@@ -2,7 +2,7 @@ package de.onenightcar.domain.model.car;
 
 import org.junit.jupiter.api.Test;
 
-class LocationTest {
+class CarLocationTest {
 
     @Test
     void setGPS() {

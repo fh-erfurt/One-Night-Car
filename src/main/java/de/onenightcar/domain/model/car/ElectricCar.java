@@ -4,6 +4,7 @@ import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.domain.model.person.Customer;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /** Represents a Electric OneNightCar.Car
  * extent OneNightCar.Car
@@ -14,9 +15,16 @@ import javax.persistence.Entity;
 
 @Entity
 public class ElectricCar extends Car {
-    private float range;   // in Km
+
+    /* /////////////////////Attributes/////////////////////////// */
+
+    private float range;         //in Km
     private float chargePercent; //current
 
+    /* /////////////////////Constructors/////////////////////////// */
+
+    // Needed to be able to create the entity
+    public ElectricCar() {}
 
     /** Creates an ElectricCar with specified ElectricCar Parameters.
      * @param type A enum representing the Type of the OneNightCar.Car
@@ -35,10 +43,12 @@ public class ElectricCar extends Car {
     public ElectricCar(Type type, String brand, String model, State state,
                        long odometer, double GPSLatitude, double GPSLongitude, Customer.CustomerLevel customerLevel,
                        float price, float range, float chargePercent, CarManagementSystem carManagementSystem, ElectricParkingArea electricParkingArea){
-        super(type, brand, model, state,  GPSLatitude, GPSLongitude,odometer, customerLevel , price);
+                    super(type, brand, model, state,  GPSLatitude, GPSLongitude, odometer, customerLevel , price);
+
         this.range=range;
         this.chargePercent=chargePercent;
         carManagementSystem.electricCarsList.add(this);
+
         if(electricParkingArea.numberOfElectricCarsAssignedToStation() < electricParkingArea.getMaxElectricCarCapacity()) {
             electricParkingArea.assignElectricCarToStation(this);
         }
@@ -65,11 +75,7 @@ public class ElectricCar extends Car {
         }
     }
 
-    // Needed to be able to create the entity
-    public ElectricCar() {
-
-    }
-
+    /* /////////////////////Methods/////////////////////////// */
 
     /** Gets the Charge Percent
      * @return The Electric OneNightCar.Car current ChargePercent
@@ -96,6 +102,8 @@ public class ElectricCar extends Car {
     public float getRange(){
         return this.range;
     }
+
+    public void setRange(float range) { this.range = range;}
 
     /** set the Charge on 100 %
      */

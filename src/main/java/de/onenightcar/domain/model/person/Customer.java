@@ -4,11 +4,11 @@ package de.onenightcar.domain.model.person;
 import de.onenightcar.domain.model.rental.*;
 import de.onenightcar.domain.model.car.*;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /** Represents a PaymentMethod
@@ -17,15 +17,30 @@ import java.util.ArrayList;
  * @since 1.0
  */
 
+@Entity
 public class Customer extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
 
-    public ArrayList<FuelRental> fuelRentals;
-    public ArrayList<ElectricRental> electricRentals;
-    private int customerID;
+    @OneToMany
+    public List<FuelRental> fuelRentals;
+
+    @OneToMany
+    public List<ElectricRental> electricRentals;
+
+    @Enumerated(EnumType.STRING)
     private CustomerLevel customerLevel;
+
+    @OneToOne
     private PaymentMethod paymentMethod;
+
+    //TODO das muss WEG! Rental anpassen
+    private int customerID;
+
+
+
+    protected Customer() {}
+
     /** Creates a Customer with specified Customer Parameters.
      * @param firstName A String representing Customers first Name
      * @param surname A String representing Customers Surname
@@ -41,7 +56,6 @@ public class Customer extends Person {
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.personAddress = personAddress;
-        this.customerID = personManager.getAndIncrementCustomerCounter();
         personManager.customers.add(this);                               //Adds this Customer to the Customer List
         this.customerLevel = customerLevel;
         this.paymentMethod = paymentMethod;
@@ -61,7 +75,6 @@ public class Customer extends Person {
         this.surname = "Mustermann";
         this.dateOfBirth = LocalDateTime.of(1990,12,31,00,00);
         this.personAddress = new PersonAddress();
-        this.customerID = personManager.getAndIncrementCustomerCounter();
         personManager.customers.add(this);                               //Adds this Customer to the Customer List
         this.customerLevel = CustomerLevel.REGULARUSER;
         this.paymentMethod = new PaymentMethod();
@@ -69,12 +82,6 @@ public class Customer extends Person {
         this.electricRentals = new ArrayList<ElectricRental>();
     }
 
-    /** Gets the Customers ID.
-     * @return A int representing ID of a Customer
-     */
-    public int getCustomerID(){
-        return this.customerID;
-    }
 
     /** Gets the Customer Level.
      * @return A CustomerLevel representing Level of a Customer
@@ -90,10 +97,12 @@ public class Customer extends Person {
         this.customerLevel = customerLevel;
     }
 
+    public int getCustomerID() {return this.customerID;}
+
     /** Gets the Electric Rentals.
      * @return An ArrayList representing Electric Rentals
      */
-    public ArrayList getElectricRentals(){
+    public List getElectricRentals(){
         return this.electricRentals;
     }
 
@@ -108,7 +117,7 @@ public class Customer extends Person {
     /** Gets the Fuel Rentals.
      * @return An ArrayList representing Fuel Rentals
      */
-    public ArrayList getFuelRentals(){
+    public List getFuelRentals(){
         return this.fuelRentals;
     }
 
@@ -248,7 +257,7 @@ public class Customer extends Person {
                               LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
          try {
              FuelRental fuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
-                     this.getCustomerID(), date, departure, arrival);
+                     this.customerID, date, departure, arrival);
              this.fuelRentals.add(fuelRental);
          }
          catch(Exception e){

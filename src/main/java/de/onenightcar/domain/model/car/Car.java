@@ -4,8 +4,9 @@ import de.onenightcar.domain.model.person.Customer;
 import de.onenightcar.domain.model.rental.Rental;
 import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /** Represents a OneNightCar.Car
@@ -17,16 +18,31 @@ import javax.persistence.OneToOne;
 @MappedSuperclass
 public abstract class Car extends AbstractDatabaseEntity {
 
+
+    /* /////////////////////Attributes/////////////////////////// */
+
+    // A car does not change it Type, its enough when we save just a String whit the Car Type
+    @Enumerated(EnumType.STRING)
     protected Type type;
+
+    // A car State may change, that is why it is preferred to used String
+    @Enumerated(EnumType.STRING)
+    protected State state;
+
     protected String brand;
     protected String model;
-    protected State state;
+
     protected long odometer;
-    protected Enum permission;    // which Customer can book this car (which customer Level)
-    protected float price;       //Price pro day
+    protected Customer.CustomerLevel customerLevel;    // which Customer can book this car (which customer Level)
+    protected float price;                             //Price pro day
 
     @OneToOne
-    protected Location location;
+    protected CarLocation carLocation;
+
+    /* /////////////////////Constructors/////////////////////////// */
+
+    // Needed to be able to create the entity
+    protected Car() {}
 
     /** Creates an OneNightCar.Car Constructor with Parameters to use it in the Child Class.
      * @param type A enum representing the Type of the OneNightCar.Car
@@ -39,22 +55,19 @@ public abstract class Car extends AbstractDatabaseEntity {
      * @param customerLevel An enum from Customer representing the User Permission
      * @param price A float representing the costs of the OneNightCar.Car per Day
      */
-    public Car(Type type, String brand, String model, State state,
+    protected Car(Type type, String brand, String model, State state,
                double GPSLatitude, double GPSLongitude, long odometer,
                Customer.CustomerLevel customerLevel, float price){
         this.type= type;
         this.brand=brand;
         this.model=model;
         this.state=state;
-        this.location = new Location(GPSLatitude,GPSLongitude);
+        this.carLocation = new CarLocation(GPSLatitude,GPSLongitude);
         this.odometer=odometer;
-        this.permission= customerLevel;
+        this.customerLevel= customerLevel;
         this.price=price;
-
     }
 
-    protected Car() {
-    }
 
     /** Change the OneNightCar.Car state .
      * @param newCarState an enum containing the OneNightCar.Car new State
@@ -78,7 +91,7 @@ public abstract class Car extends AbstractDatabaseEntity {
      */
    public void setNewLocation(double GPSLatitude, double GPSLongitude){
        try {
-           this.location = new Location(GPSLatitude, GPSLongitude);
+           this.carLocation = new CarLocation(GPSLatitude, GPSLongitude);
        }
        catch(Exception e){
            System.out.print("Latitude inadmissible!");
@@ -88,16 +101,16 @@ public abstract class Car extends AbstractDatabaseEntity {
     /** Gets the OneNightCar.Car Location
      * @return the Location of the OneNightCar.Car
      */
-   public Location getLocation(){
-        return this.location;
+   public CarLocation getCarLocation(){
+        return this.carLocation;
    }
 
    public double getGPSLatitude(){
-       return this.location.getGPSLatitude();
+       return this.carLocation.getGPSLatitude();
    }
 
     public double getGPSLongitude(){
-        return this.location.getGPSLongitude();
+        return this.carLocation.getGPSLongitude();
     }
 
     /** Gets the OneNightCar.Car Price

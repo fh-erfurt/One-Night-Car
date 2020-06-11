@@ -45,7 +45,7 @@ public class FuelRental extends Rental {
                       LocalDateTime departure, LocalDateTime arrival){
         super(customerID, date, departure, arrival);
         rentalID = rentalManager.getSizeOfFuelRentals();                          //Creates a running counter of Rentals in list
-        rentalManager.addRentalIntoFuelRentals(this);                          //Adds the new rental to the global list
+        rentalManager.addRentalIntoFuelRentals(this);                            //Adds the new rental to the global list
         this.carID = carManagementSystem.getCarIDFromCombustion(combustionCar);
         this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
         this.odometerBefore = combustionCar.getOdometer();

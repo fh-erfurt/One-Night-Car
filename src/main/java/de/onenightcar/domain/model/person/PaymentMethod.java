@@ -1,5 +1,8 @@
 package de.onenightcar.domain.model.person;
 
+import de.onenightcar.domain.storage.core.AbstractDatabaseEntity;
+
+import javax.persistence.Entity;
 import java.util.GregorianCalendar;
 
 /** Represents a PaymentMethod
@@ -8,7 +11,8 @@ import java.util.GregorianCalendar;
  * @since 1.0
  */
 
-public class PaymentMethod {
+@Entity
+public class PaymentMethod extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes///////////////////////// */
 
@@ -16,6 +20,7 @@ public class PaymentMethod {
     private CardType cardType;
     private GregorianCalendar validThrough;
     private String CCV;
+
     /** Creates a PaymentMethod with specified PaymentMethod.
      * @param cardNumber PaymentMethod’s Card Number
      * @param cardType PaymentMethod’s Card Type
@@ -29,8 +34,6 @@ public class PaymentMethod {
         this.CCV = CCV;
     }
 
-    /* /////////////////////Methods/////////////////////////// */
-
     /** Creates a PaymentMethod with default Values.
      * It is used to increment speed of UnitTests.
      */
@@ -40,6 +43,8 @@ public class PaymentMethod {
         this.validThrough = new GregorianCalendar(2025,GregorianCalendar.DECEMBER,31);
         this.CCV = "999";
     }
+
+    /* /////////////////////Methods/////////////////////////// */
 
     /** Gets the PaymentMethod Card Number.
      * @return A string representing the PaymentMethod Card Number
