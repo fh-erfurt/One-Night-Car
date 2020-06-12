@@ -76,11 +76,11 @@ public class ElectricRental extends Rental {
      * @param electricCar the rented electric car
      */
     public void setChargePercentAfter (ElectricCar electricCar) {
-        if ((this.odometerAfter - this.odometerBefore) > electricCar.getRangeTest()) {
+        if ((this.odometerAfter - this.odometerBefore) > electricCar.getElectricalRange()) {
             this.chargePercentAfter = -1;
         }
         else {
-            this.chargePercentAfter = (electricCar.getRangeTest() - (this.odometerAfter - this.odometerBefore)) / electricCar.getRangeTest();
+            this.chargePercentAfter = (electricCar.getElectricalRange() - (this.odometerAfter - this.odometerBefore)) / electricCar.getElectricalRange();
         }
     }
 

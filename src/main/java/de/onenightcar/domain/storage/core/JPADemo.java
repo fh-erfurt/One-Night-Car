@@ -19,9 +19,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static de.onenightcar.domain.storage.packageRepositories.personRepository.CustomerDAO.persistCustomer;
 
 
 // This class it´s just there for testing purposes //
@@ -66,23 +69,23 @@ public class JPADemo {
         //////////////////////////////////////////////////////////////////////////
 
 
-        RentalManager rentalManager = new RentalManager();
-
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
-
-        PersonManager personManager = new PersonManager();
-
-        PaymentMethod pm = new PaymentMethod();
-        PersonAddress pa = new PersonAddress();
-        LocalDateTime date = LocalDateTime.now();
-
-        Customer customer = new Customer("firstName", "surname", date, pa, personManager, Customer.CustomerLevel.NEWUSER , pm);
-
-        em.getTransaction().begin();
-        em.persist(pm);
-        em.persist(pa);
-        em.persist(customer);
-        em.getTransaction().commit();
+//        RentalManager rentalManager = new RentalManager();
+//
+//        CarManagementSystem carManagementSystem = new CarManagementSystem();
+//
+//        PersonManager personManager = new PersonManager();
+//
+//        PaymentMethod pm = new PaymentMethod();
+//        PersonAddress pa = new PersonAddress();
+//        LocalDateTime date = LocalDateTime.now();
+//
+//        Customer customer = new Customer("firstName", "surname", date, pa, personManager, Customer.CustomerLevel.NEWUSER , pm);
+//
+//        em.getTransaction().begin();
+//        em.persist(pm);
+//        em.persist(pa);
+//        em.persist(customer);
+//        em.getTransaction().commit();
 
 //        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
 //        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
@@ -103,6 +106,15 @@ public class JPADemo {
 //        em.persist(rental2);
 //        em.getTransaction().commit();
 
+        /////////////////////////////////////////////////////////////
 
+        PersonManager personManager = new PersonManager();
+        Customer customer = new Customer(personManager);
+
+        persistCustomer(customer);
+
+        em.getTransaction().begin();
+        customer.setPaymentMethod("12344332124345", PaymentMethod.CardType.DEBIT, new GregorianCalendar(2020,GregorianCalendar.JANUARY,10), "303");
+        em.getTransaction().commit();
     }
 }

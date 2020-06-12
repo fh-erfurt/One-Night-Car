@@ -107,7 +107,7 @@ public class PaymentMethod extends AbstractDatabaseEntity {
         this.CCV = CCV;
     }
 
-    protected enum CardType{
+    public enum CardType{
         DEBIT,
         CREDIT
     }

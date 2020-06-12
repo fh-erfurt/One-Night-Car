@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -141,6 +142,13 @@ public class Customer extends Person {
      */
     public void setPaymentMethod(PaymentMethod paymentMethod){
         this.paymentMethod = paymentMethod;
+    }
+
+    public void setPaymentMethod(String cardNumber, PaymentMethod.CardType cardType, GregorianCalendar validThrough, String CCV){
+        this.paymentMethod.setCardNumber(cardNumber);
+        this.paymentMethod.setCardType(cardType);
+        this.paymentMethod.setValidThrough(validThrough);
+        this.paymentMethod.setCCV(CCV);
     }
 
     /** Represents the situation in which the customer needs Support from an Employee
