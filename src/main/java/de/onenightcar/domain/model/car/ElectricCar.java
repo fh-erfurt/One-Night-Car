@@ -4,7 +4,6 @@ import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.domain.model.person.Customer;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /** Represents a Electric OneNightCar.Car
  * extent OneNightCar.Car
@@ -18,7 +17,7 @@ public class ElectricCar extends Car {
 
     /* /////////////////////Attributes/////////////////////////// */
 
-    private float range;         //in Km
+    private float rangeTest;         //in Km
     private float chargePercent; //current
 
     /* /////////////////////Constructors/////////////////////////// */
@@ -36,16 +35,16 @@ public class ElectricCar extends Car {
      * @param GPSLongitude A double representing the OneNightCar.Car position
      * @param customerLevel A user Level from Customer representing the User Permission
      * @param price A float representing the costs of the OneNightCar.Car per Day
-     * @param range A float representing the range the car can drive before it needs to be recharged
+     * @param rangeTest A float representing the range the car can drive before it needs to be recharged
      * @param chargePercent A float representing the electric OneNightCar.Car charge
      * @param carManagementSystem the system where all car are saved
      */
     public ElectricCar(Type type, String brand, String model, State state,
                        long odometer, double GPSLatitude, double GPSLongitude, Customer.CustomerLevel customerLevel,
-                       float price, float range, float chargePercent, CarManagementSystem carManagementSystem, ElectricParkingArea electricParkingArea){
+                       float price, float rangeTest, float chargePercent, CarManagementSystem carManagementSystem, ElectricParkingArea electricParkingArea){
                     super(type, brand, model, state,  GPSLatitude, GPSLongitude, odometer, customerLevel , price);
 
-        this.range=range;
+        this.rangeTest = rangeTest;
         this.chargePercent=chargePercent;
         carManagementSystem.electricCarsList.add(this);
 
@@ -64,7 +63,7 @@ public class ElectricCar extends Car {
     public ElectricCar(CarManagementSystem carManagementSystem, ElectricParkingArea electricParkingArea){
         super(Type.MINI,"BMW","i3", State.PERFECT, 50.9787, 11.03283,
                 10999, Customer.CustomerLevel.NEWUSER , 69.00f);
-        this.range= 200.00f;
+        this.rangeTest = 200.00f;
         this.chargePercent= 100.00f;
         carManagementSystem.electricCarsList.add(this);
         if(electricParkingArea.numberOfElectricCarsAssignedToStation() < electricParkingArea.getMaxElectricCarCapacity()) {
@@ -99,11 +98,11 @@ public class ElectricCar extends Car {
     /** Gets the range of an ElectricCar
      * @return The Electric OneNightCar.Car current Range
      */
-    public float getRange(){
-        return this.range;
+    public float getRangeTest(){
+        return this.rangeTest;
     }
 
-    public void setRange(float range) { this.range = range;}
+    public void setRangeTest(float range) { this.rangeTest = range;}
 
     /** set the Charge on 100 %
      */

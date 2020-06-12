@@ -6,7 +6,6 @@ import de.onenightcar.domain.model.car.ElectricCar;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /** Represents an ElectricRental
@@ -77,11 +76,11 @@ public class ElectricRental extends Rental {
      * @param electricCar the rented electric car
      */
     public void setChargePercentAfter (ElectricCar electricCar) {
-        if ((this.odometerAfter - this.odometerBefore) > electricCar.getRange()) {
+        if ((this.odometerAfter - this.odometerBefore) > electricCar.getRangeTest()) {
             this.chargePercentAfter = -1;
         }
         else {
-            this.chargePercentAfter = (electricCar.getRange() - (this.odometerAfter - this.odometerBefore)) / electricCar.getRange();
+            this.chargePercentAfter = (electricCar.getRangeTest() - (this.odometerAfter - this.odometerBefore)) / electricCar.getRangeTest();
         }
     }
 

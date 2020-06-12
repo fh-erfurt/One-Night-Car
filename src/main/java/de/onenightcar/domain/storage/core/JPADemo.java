@@ -4,9 +4,7 @@ import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.CombustionCar;
 import de.onenightcar.domain.model.parkingArea.ParkingArea;
 import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
-import de.onenightcar.domain.model.person.Customer;
-import de.onenightcar.domain.model.person.PersonAddress;
-import de.onenightcar.domain.model.person.PersonManager;
+import de.onenightcar.domain.model.person.*;
 import de.onenightcar.domain.model.rental.FuelRental;
 import de.onenightcar.domain.model.rental.RentalManager;
 import de.onenightcar.domain.storage.DatabaseConnection;
@@ -38,14 +36,14 @@ public class JPADemo {
 
         EntityManager em = emf.createEntityManager();
 
-//        PersonAddress personAddress = new PersonAddress();
+        PersonAddress personAddress = new PersonAddress();
 
 //        // Save the Person Address
 //        em.getTransaction().begin();
 //        em.persist(personAddress);
 //        em.getTransaction().commit();
-
-        //Used to modify and check the changes in DB
+//
+//        //Used to modify and check the changes in DB
 //        em.getTransaction().begin();
 //        personAddress.setZIP("00000");
 //        em.getTransaction().commit();
@@ -68,15 +66,28 @@ public class JPADemo {
         //////////////////////////////////////////////////////////////////////////
 
 
-//        RentalManager rentalManager = new RentalManager();
-//        CarManagementSystem carManagementSystem = new CarManagementSystem();
-//        PersonManager personManager = new PersonManager();
-//        Customer customer = new Customer(personManager);
-//
+        RentalManager rentalManager = new RentalManager();
+
+        CarManagementSystem carManagementSystem = new CarManagementSystem();
+
+        PersonManager personManager = new PersonManager();
+
+        PaymentMethod pm = new PaymentMethod();
+        PersonAddress pa = new PersonAddress();
+        LocalDateTime date = LocalDateTime.now();
+
+        Customer customer = new Customer("firstName", "surname", date, pa, personManager, Customer.CustomerLevel.NEWUSER , pm);
+
+        em.getTransaction().begin();
+        em.persist(pm);
+        em.persist(pa);
+        em.persist(customer);
+        em.getTransaction().commit();
+
 //        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
 //        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 //
-//        LocalDateTime date = LocalDateTime.now();
+//        LocalDateTime rDate = LocalDateTime.now();
 //        LocalDateTime departure;
 //        departure = LocalDateTime.of(2020,01,31,00,00);
 //        LocalDateTime arrival;
@@ -85,7 +96,7 @@ public class JPADemo {
 //
 //        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
 //        FuelRental rental2 = new FuelRental(rentalManager, combustionCar, carManagementSystem, customer.getCustomerID(), date, departure, arrival);
-//
+
 //        em.getTransaction().begin();
 //        em.persist(customer);
 //        em.persist(combustionCar);
