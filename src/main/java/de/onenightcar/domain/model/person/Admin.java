@@ -57,13 +57,12 @@ public class Admin extends Employee {
      * @param surname A String representing Admin Surname
      * @param dateOfBirth A GregorianCalendar representing Admin DOB
      * @param personAddress A PersonAddress representing Admin Address
-     * @param personManager A PersonManager with the management from the Packet OneNightCar.Person
      * @param salary A Float representing the Admin salary
      * @param typeOfActivity a TypeOfActivity representing the activity of the OneNightCar.Person
      */
     public Admin(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
-                 PersonManager personManager, float salary, TypeOfActivity typeOfActivity) {
-        super(firstName, surname, dateOfBirth, personAddress, personManager, salary, typeOfActivity);
+                  float salary, TypeOfActivity typeOfActivity) {
+        super(firstName, surname, dateOfBirth, personAddress, salary, typeOfActivity);
     }
 
     // Needed to be able to create the entity
@@ -132,12 +131,10 @@ public class Admin extends Employee {
 
     /** Function to erase an Employee
      * @param employee a Employee which is going to be erased
-     * @param personManager a PersonManager (List from which it should be removed)
      */
-    public void deleteEmployee (Employee employee, PersonManager personManager){
+    public void deleteEmployee (Employee employee){
         try {
             employee = null;
-            personManager.removeEmployeeFromEmployees(employee);
             //Call the Garbage Collector
             System.gc();
         }
@@ -150,11 +147,9 @@ public class Admin extends Employee {
 
     /** Function to erase a Customer
      * @param customer a Customer which is going to be erased
-     * @param personManager a PersonManager (List from which it should be removed)
      */
-    public void deleteCustomer (Customer customer, PersonManager personManager){
+    public void deleteCustomer (Customer customer){
         customer = null;
-        personManager.removeCustomerFromCustomers(customer);
         //Call the Garbage Collector
         System.gc();
     }

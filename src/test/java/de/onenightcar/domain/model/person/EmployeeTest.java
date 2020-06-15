@@ -3,7 +3,6 @@ package de.onenightcar.domain.model.person;
 import de.onenightcar.domain.model.car.*;
 import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.domain.model.parkingArea.ParkingArea;
-import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -15,8 +14,7 @@ class EmployeeTest {
 
     @Test
     void an_employee_type_of_activity_can_be_changed() {
-        PersonManager list = new PersonManager();
-        Employee peter = new Employee(list);
+        Employee peter = new Employee();
 
         peter.setTypeOfActivity(Employee.TypeOfActivity.MAINTAINER);
 
@@ -25,17 +23,15 @@ class EmployeeTest {
 
     @Test
     void an_employee_repairs_an_electric_car(){
-        PersonManager list = new PersonManager();
         LocalDateTime dateOfBirth;
         dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
         PersonAddress thisAddress = new PersonAddress();
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
-                list, 2000, Employee.TypeOfActivity.MAINTAINER);
-        CarManagementSystem electricCarList = new CarManagementSystem();
-        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
-        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+                 2000, Employee.TypeOfActivity.MAINTAINER);
 
-        ElectricCar testElectricCar = new ElectricCar(electricCarList, Area1);
+        ElectricParkingArea Area1 = new ElectricParkingArea();
+
+        ElectricCar testElectricCar = new ElectricCar(Area1);
 
         testElectricCar.changeCarState(Car.State.DAMAGED);
         john.employeeRepairsElectricCar(testElectricCar);
@@ -45,18 +41,16 @@ class EmployeeTest {
 
     @Test
     void an_employee_refuels_a_combustion_car(){
-        PersonManager list = new PersonManager();
         LocalDateTime dateOfBirth;
         dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
         PersonAddress thisAddress = new PersonAddress();
         Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
-                list, 2000, Employee.TypeOfActivity.MAINTAINER);
-        CarManagementSystem combustionCarList = new CarManagementSystem();
+                 2000, Employee.TypeOfActivity.MAINTAINER);
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar testCombustionCar = new CombustionCar(combustionCarList, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+
+        CombustionCar testCombustionCar = new CombustionCar(parkingArea);
 
         testCombustionCar.setFuelLevel(20);
         john.employeeRefuelsCar(testCombustionCar);
@@ -66,8 +60,7 @@ class EmployeeTest {
 
     @Test
     void the_address_of_a_person_can_be_changed(){
-        PersonManager list = new PersonManager();
-        Employee peter = new Employee(list);
+        Employee peter = new Employee();
         PersonAddress testAddress = new PersonAddress("07743", "Jena", "Am Planetarium", "38");
 
         peter.setPersonAddress(testAddress);
@@ -80,8 +73,7 @@ class EmployeeTest {
 
     @Test
     void the_name_of_a_person_can_be_changed(){
-        PersonManager list = new PersonManager();
-        Employee peter = new Employee(list);
+        Employee peter = new Employee();
 
         peter.setNewName("Peter","Muller");
 

@@ -1,7 +1,6 @@
 package de.onenightcar.domain.model.parkingArea;
 
 
-import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.CombustionCar;
 import org.junit.jupiter.api.Test;
 
@@ -12,12 +11,11 @@ class ParkingAreaTest {
 
     @Test
     void test_assign_car_to_station() {
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
 
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+
+        CombustionCar combustionCar = new CombustionCar(parkingArea);
 
 
 
@@ -29,12 +27,11 @@ class ParkingAreaTest {
     @Test
     void test_remove_car_from_station(){
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar combustionCar1 = new CombustionCar(carManagementSystem, parkingArea);
-        CombustionCar combustionCar2 = new CombustionCar(carManagementSystem, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+
+        CombustionCar combustionCar1 = new CombustionCar(parkingArea);
+        CombustionCar combustionCar2 = new CombustionCar(parkingArea);
 
 
         /*parkingArea.assignCarToStation(combustionCar1);
@@ -50,11 +47,9 @@ class ParkingAreaTest {
     @Test
     void test_get_index_in_station_carID_list(){
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
-        CombustionCar combustionCar1 = new CombustionCar(carManagementSystem, parkingArea);
-        CombustionCar combustionCar2 = new CombustionCar(carManagementSystem, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+        CombustionCar combustionCar1 = new CombustionCar(parkingArea);
+        CombustionCar combustionCar2 = new CombustionCar(parkingArea);
 
 
         parkingArea.assignCarToStation(combustionCar1);
@@ -68,11 +63,10 @@ class ParkingAreaTest {
     @Test
     void test_car_is_being_used(){
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
-        CombustionCar combustionCar1 = new CombustionCar(carManagementSystem, parkingArea);
-        CombustionCar combustionCar2 = new CombustionCar(carManagementSystem, parkingArea);
+
+        ParkingArea parkingArea = new ParkingArea();
+        CombustionCar combustionCar1 = new CombustionCar(parkingArea);
+        CombustionCar combustionCar2 = new CombustionCar(parkingArea);
 
 
         parkingArea.assignCarToStation(combustionCar1);
@@ -86,14 +80,13 @@ class ParkingAreaTest {
     @Test
     void test_car_is_no_longer_being_used(){
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
 
 
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar combustionCar1 = new CombustionCar(carManagementSystem, parkingArea);
-        CombustionCar combustionCar2 = new CombustionCar(carManagementSystem, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+
+        CombustionCar combustionCar1 = new CombustionCar(parkingArea);
+        CombustionCar combustionCar2 = new CombustionCar(parkingArea);
 
 
 
@@ -109,12 +102,11 @@ class ParkingAreaTest {
     @Test
     void test_print_all_cars_in_station(){
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar combustionCar1 = new CombustionCar(carManagementSystem, parkingArea);
-        CombustionCar combustionCar2 = new CombustionCar(carManagementSystem, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+
+        CombustionCar combustionCar1 = new CombustionCar(parkingArea);
+        CombustionCar combustionCar2 = new CombustionCar(parkingArea);
 
 
         parkingArea.assignCarToStation(combustionCar1);

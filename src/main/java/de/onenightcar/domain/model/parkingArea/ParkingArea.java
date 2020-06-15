@@ -35,37 +35,32 @@ public class ParkingArea extends AbstractDatabaseEntity {
 
     /* /////////////////////Methods/////////////////////////// */
 
-    public ParkingArea() {}
 
     /**
      * creates an OneNightCar.ParkingArea Constructor with Parameters to use it in the Child class.
      * @param parkingAreaAddress A ParkingAreaAddress representing the address of the Parking Area
      * @param maxCapacity An integer to represent the maximum capacity of the Parking Area
-     * @param parkingAreaManager A Parking Area Manager with the Management of the Parking Areas
      */
-    public ParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity
-            , ParkingAreaManager parkingAreaManager) {
+    public ParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity) {
 
         this.maxCapacity = maxCapacity;
         this.parkingAreaAddress = parkingAreaAddress;
         this.carsInStation = new ArrayList<CombustionCar>();
         this.availableCars = new ArrayList<CombustionCar>();
         this.notAvailableCars = new ArrayList<CombustionCar>();
-        parkingAreaManager.ParkingAreas.add(this);           //Adds this OneNightCar.ParkingArea to the ParkingAreas List
     }
 
     /** Creates a OneNightCar.ParkingArea with default Values.
      * It is used to increment speed of UnitTests.
-     * @param parkingAreaManager A ParkingAreaManager with the management from the Packet OneNightCar.ParkingArea
      */
 
-    public ParkingArea(ParkingAreaManager parkingAreaManager) {
+
+    public ParkingArea( ) {
         this.maxCapacity = 100;
         this.parkingAreaAddress = new ParkingAreaAddress();
         this.carsInStation = new ArrayList<CombustionCar>();
         this.availableCars = new ArrayList<CombustionCar>();
         this.notAvailableCars = new ArrayList<CombustionCar>();
-        parkingAreaManager.ParkingAreas.add(this);
     }
 
     /**

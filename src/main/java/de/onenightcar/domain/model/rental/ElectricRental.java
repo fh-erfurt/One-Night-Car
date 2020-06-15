@@ -1,6 +1,5 @@
 package de.onenightcar.domain.model.rental;
 
-import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.ElectricCar;
 
 
@@ -28,19 +27,14 @@ public class ElectricRental extends Rental {
     /**
      * Creates a OneNightCar.Rental entry for a rental of an electric OneNightCar.Car
      * @param electricCar the car itself, object of the class ElectricCar
-     * @param carManagementSystem the management system, so we can get information about the car
      * @param date the date of the rental
      * @param departure the date and time at which the customer started the rental
      * @param arrival the date and time at which the customer ended the rental
-     * @param rentalManager the management system needed to add the entry to the global list
      * @param customerID the Customer ID
      */
-    public ElectricRental(ElectricCar electricCar, CarManagementSystem carManagementSystem, int customerID, LocalDateTime date, LocalDateTime departure,
-                          LocalDateTime arrival, RentalManager rentalManager){
+    public ElectricRental(ElectricCar electricCar,  int customerID, LocalDateTime date, LocalDateTime departure,
+                          LocalDateTime arrival){
         super(customerID, date, departure, arrival);
-        this.rentalID = rentalManager.getAndIncrementCounter();
-        rentalManager.addRentalIntoElectricRentals(this);
-        this.carID = carManagementSystem.getCarIDFromElectric(electricCar);
         this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
@@ -49,16 +43,11 @@ public class ElectricRental extends Rental {
 
     /**
      * A constructor that uses default values
-     * @param rentalManager the management system needed to add the entry to the global list
-     * @param carManagementSystem the management system, so we can get information about the car
      * @param customerID an Int representing the customers ID
      * @param electricCar the car itself, object of the class ElectricCar
      */
-    public ElectricRental(RentalManager rentalManager, CarManagementSystem carManagementSystem, int customerID, ElectricCar electricCar){
+    public ElectricRental(  int customerID, ElectricCar electricCar){
         super();
-        this.rentalID = rentalManager.getAndIncrementCounter();
-        rentalManager.addRentalIntoElectricRentals(this);
-        this.carID = carManagementSystem.getCarIDFromElectric(electricCar);
         this.customerID = customerID;
         this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();

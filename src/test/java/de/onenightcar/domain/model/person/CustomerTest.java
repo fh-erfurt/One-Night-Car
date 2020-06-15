@@ -1,14 +1,11 @@
 package de.onenightcar.domain.model.person;
 
 import de.onenightcar.domain.model.car.Car;
-import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.CombustionCar;
 import de.onenightcar.domain.model.car.ElectricCar;
 import de.onenightcar.domain.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.domain.model.parkingArea.ParkingArea;
-import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
 import de.onenightcar.domain.model.rental.ElectricRental;
-import de.onenightcar.domain.model.rental.RentalManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +20,7 @@ class CustomerTest {
 
     @Test
     void the_customer_level_may_be_changed() {
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
+        Customer max = new Customer();
 
         max.setCustomerLevel(Customer.CustomerLevel.SUPERUSER);
 
@@ -33,8 +29,7 @@ class CustomerTest {
 
     @Test
     void the_payment_method_may_be_changed() {
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
+        Customer max = new Customer();
         GregorianCalendar testCalendar = new GregorianCalendar(2025,GregorianCalendar.FEBRUARY,20);
         PaymentMethod paymentMethod = new PaymentMethod("0000 1111 2222 3333", PaymentMethod.CardType.DEBIT, testCalendar, "123");
 
@@ -47,31 +42,27 @@ class CustomerTest {
 
     @Test
     void the_customer_should_be_helped(){
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
-        Employee peter = new Employee(list);
+        Customer max = new Customer();
+        Employee peter = new Employee();
 
         assertEquals(true, max.customerNeedHelp(peter));
     }
 
     @Test
     void the_right_index_should_be_returned_with_the_given_car () {
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
-        RentalManager rentalManager = new RentalManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
+        Customer max = new Customer();
 
 
-        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
-        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
 
-        ElectricCar car1 = new ElectricCar(carManagementSystem, Area1);
-        ElectricCar car2 = new ElectricCar(carManagementSystem, Area1);
-        ElectricCar car3 = new ElectricCar(carManagementSystem, Area1);
+        ElectricParkingArea Area1 = new ElectricParkingArea();
 
-        ElectricRental testRental1 = new ElectricRental(rentalManager, carManagementSystem, max.getCustomerID(), car1);
-        ElectricRental testRental2 = new ElectricRental(rentalManager, carManagementSystem, max.getCustomerID(), car2);
-        ElectricRental testRental3 = new ElectricRental(rentalManager, carManagementSystem, max.getCustomerID(), car3);
+        ElectricCar car1 = new ElectricCar(Area1);
+        ElectricCar car2 = new ElectricCar(Area1);
+        ElectricCar car3 = new ElectricCar(Area1);
+
+        ElectricRental testRental1 = new ElectricRental( max.getCustomerID(), car1);
+        ElectricRental testRental2 = new ElectricRental( max.getCustomerID(), car2);
+        ElectricRental testRental3 = new ElectricRental(max.getCustomerID(), car3);
 
         max.getElectricRentals().add(testRental1);
         max.getElectricRentals().add(testRental2);
@@ -84,14 +75,12 @@ class CustomerTest {
 
     @Test
     void a_customer_damages_a_car () {
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
+        Customer max = new Customer();
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+
+        CombustionCar combustionCar = new CombustionCar(parkingArea);
 
         max.customerDamagesAFuelCar(combustionCar);
 
@@ -100,15 +89,12 @@ class CustomerTest {
 
     @Test
     void a_customer_is_able_to_rent_a_combustion_car () {
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
-        RentalManager rentalManager = new RentalManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
+        Customer max = new Customer();
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
 
-        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
+        ParkingArea parkingArea = new ParkingArea();
+
+        CombustionCar combustionCar = new CombustionCar(parkingArea);
         LocalDateTime date = LocalDateTime.now();
 
         LocalDateTime departure;
@@ -116,33 +102,30 @@ class CustomerTest {
         LocalDateTime arrival;
         arrival= LocalDateTime.of(2020,03,18,00,00);
 
-        max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date, departure, arrival);
+        max.rentAFuelCar(combustionCar,  date, departure, arrival);
 
         assertEquals(1, max.getFuelRentals().size());
     }
 
     @Test
     void a_customer_is_able_to_modify_an_electric_rental () {
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
-        RentalManager rentalManager = new RentalManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
+        Customer max = new Customer();
+
         LocalDateTime date = LocalDateTime.now();
         LocalDateTime departure;
         departure = LocalDateTime.of(2020,03,15,00,00);
         LocalDateTime arrival;
         arrival= LocalDateTime.of(2020,03,18,00,00);
 
-        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
-        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+        ElectricParkingArea Area1 = new ElectricParkingArea();
 
-        ElectricCar car1 = new ElectricCar(carManagementSystem, Area1);
+        ElectricCar car1 = new ElectricCar(Area1);
 
-        max.rentAnElectricCar(car1, carManagementSystem, date, departure, arrival, rentalManager);
+        max.rentAnElectricCar(car1, date, departure, arrival);
 
 
-        max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, carManagementSystem, date, LocalDateTime.of(2020, 3, 16, 00,00),
-                LocalDateTime.of(2020, 3, 19, 00,00), rentalManager);
+        max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, date, LocalDateTime.of(2020, 3, 16, 00,00),
+                LocalDateTime.of(2020, 3, 19, 00,00));
 
         assertEquals(16, max.electricRentals.get(0).getDepartureTime().getDayOfMonth());
         assertEquals(19, max.electricRentals.get(0).getArrivalTime().getDayOfMonth());
@@ -150,22 +133,18 @@ class CustomerTest {
 
     @Test
     void a_customer_is_able_to_cancel_a_fuel_rental () {
-        PersonManager list = new PersonManager();
-        Customer max = new Customer(list);
-        RentalManager rentalManager = new RentalManager();
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
+        Customer max = new Customer();
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        ParkingArea parkingArea = new ParkingArea(parkingAreaManager);
+        ParkingArea parkingArea = new ParkingArea();
 
         LocalDateTime departure;
         departure = LocalDateTime.of(2020,03,15,00,00);
         LocalDateTime arrival;
         arrival= LocalDateTime.of(2020,03,18,00,00);
 
-        CombustionCar combustionCar = new CombustionCar(carManagementSystem, parkingArea);
+        CombustionCar combustionCar = new CombustionCar(parkingArea);
         LocalDateTime date = LocalDateTime.now();
-        max.rentAFuelCar(rentalManager, combustionCar, carManagementSystem, date, departure, arrival);
+        max.rentAFuelCar(combustionCar, date, departure, arrival);
 
 
         max.cancelFuelRental(max.getFuelRentalWithIndex(0));

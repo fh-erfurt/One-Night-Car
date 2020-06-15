@@ -1,8 +1,6 @@
 package de.onenightcar.domain.model.rental;
 
 import de.onenightcar.domain.model.car.CombustionCar;
-import de.onenightcar.domain.model.car.CarManagementSystem;
-import de.onenightcar.domain.model.person.PersonManager;
 
 
 import javax.persistence.Entity;
@@ -37,16 +35,11 @@ public class FuelRental extends Rental {
      * @param departure  the date and time at which the customer started the rental
      * @param arrival the date and time at which the customer ended the rental
      * @param combustionCar a Combustion OneNightCar.Car
-     * @param carManagementSystem where all cars are saved
      * @param customerID which customer is making the OneNightCar.Rental
-     * @param rentalManager where all rental are saved
      */
-    public FuelRental(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem, int customerID, LocalDateTime date,
+    public FuelRental( CombustionCar combustionCar,  int customerID, LocalDateTime date,
                       LocalDateTime departure, LocalDateTime arrival){
         super(customerID, date, departure, arrival);
-        rentalID = rentalManager.getSizeOfFuelRentals();                          //Creates a running counter of Rentals in list
-        rentalManager.addRentalIntoFuelRentals(this);                            //Adds the new rental to the global list
-        this.carID = carManagementSystem.getCarIDFromCombustion(combustionCar);
         this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
         this.odometerBefore = combustionCar.getOdometer();
         this.fuelLevelBefore = combustionCar.getFuelLevel();
@@ -56,19 +49,13 @@ public class FuelRental extends Rental {
 
     /**
      * A constructor that uses default values
-     * @param rentalManager the management system needed to add the entry to the global list
-     * @param carManagementSystem the management system, so we can get information about the car
      * @param customerID an Int representing the customers ID
      * @param combustionCar the car itself, object of the class ElectricCar
      * @param date at what time was the rental made
-     * @param personManager where all persons are saved
      */
-    public FuelRental(RentalManager rentalManager, CarManagementSystem carManagementSystem, int customerID, LocalDateTime date,
-                      CombustionCar combustionCar, PersonManager personManager){
+    public FuelRental( int customerID, LocalDateTime date,
+                      CombustionCar combustionCar){
         super();
-        this.rentalID = rentalManager.getSizeOfFuelRentals();
-        rentalManager.addRentalIntoFuelRentals(this);
-        this.carID = carManagementSystem.getCarIDFromCombustion(combustionCar);
         this.customerID = customerID;
         this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
         this.odometerBefore = combustionCar.getOdometer();

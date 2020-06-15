@@ -1,12 +1,9 @@
 package de.onenightcar.domain.storage.core;
 
-import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.CombustionCar;
 import de.onenightcar.domain.model.parkingArea.ParkingArea;
-import de.onenightcar.domain.model.parkingArea.ParkingAreaManager;
 import de.onenightcar.domain.model.person.*;
 import de.onenightcar.domain.model.rental.FuelRental;
-import de.onenightcar.domain.model.rental.RentalManager;
 import de.onenightcar.domain.storage.DatabaseConnection;
 import de.onenightcar.domain.storage.packageRepositories.carRespository.PersonAddressRepository;
 
@@ -108,8 +105,7 @@ public class JPADemo {
 
         /////////////////////////////////////////////////////////////
 
-        PersonManager personManager = new PersonManager();
-        Customer customer = new Customer(personManager);
+        Customer customer = new Customer();
 
         persistCustomer(customer);
 

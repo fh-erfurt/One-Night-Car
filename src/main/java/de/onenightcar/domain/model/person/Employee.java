@@ -26,40 +26,31 @@ public class Employee extends Person {
      * @param surname A String representing Employee Surname
      * @param dateOfBirth A LocalDateTime representing Employee DOB
      * @param personAddress A PersonAddress representing Employee Address
-     * @param personManager A PersonManager with the management from the Packet OneNightCar.Person
      * @param salary A Float representing the Employee salary
      * @param typeOfActivity a TypeOfActivity representing what the Employee does
      */
-    public Employee(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
-                    PersonManager personManager, float salary, TypeOfActivity typeOfActivity){
+    public Employee(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress, float salary, TypeOfActivity typeOfActivity){
         this.firstName = firstName;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.personAddress = personAddress;
         this.salary = salary;
         this.typeOfActivity = typeOfActivity;
-        this.employeeID = personManager.getAndIncrementEmployeeCounter();
-        personManager.employees.add(this);                               //Adds this Employee to the Employee List
     }
 
     /** Creates a Customer with default Values.
      * It is used to increment speed of UnitTests.
-     * @param personManager A PersonManager with the management from the Packet OneNightCar.Person
      */
-    public Employee(PersonManager personManager){
+    public Employee( ){
         this.firstName = "Peter";
         this.surname = "Bossmann";
         this.dateOfBirth = LocalDateTime.of(1964,4,4,00,00);
         this.personAddress = new PersonAddress();
         this.salary = 10000;
         this.typeOfActivity = TypeOfActivity.BOSS;
-        this.employeeID = personManager.getAndIncrementEmployeeCounter();
-        personManager.employees.add(this);                               //Adds this Employee to the Employee List
     }
 
-    // Needed to be able to create the entity
-    public Employee(){
-    }
+
 
     /* /////////////////////Methods/////////////////////////// */
 

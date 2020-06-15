@@ -1,6 +1,5 @@
 package de.onenightcar.domain.model.parkingArea;
 
-import de.onenightcar.domain.model.car.CarManagementSystem;
 import de.onenightcar.domain.model.car.ElectricCar;
 import org.junit.jupiter.api.Test;
 
@@ -12,16 +11,13 @@ class ElectricParkingAreaTest {
     void testing_assign_electric_car_to_station() {
 
 
-        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
-        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+        ElectricParkingArea Area1 = new ElectricParkingArea();
 
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
-        electricParkingArea.addElectricParkingAreaIntoElectricParkingAreas(Area1);
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        ElectricParkingArea electricParkingArea2 = new ElectricParkingArea(parkingAreaManager);
 
-        ElectricCar electricCar1 = new ElectricCar(carManagementSystem, electricParkingArea2);
+        ElectricParkingArea electricParkingArea2 = new ElectricParkingArea();
+
+        ElectricCar electricCar1 = new ElectricCar(electricParkingArea2);
 
 
         Area1.assignElectricCarToStation(electricCar1);
@@ -32,17 +28,14 @@ class ElectricParkingAreaTest {
     @Test
     void testing_remove_electric_car_from_station() {
 
-        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
-        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
+        ElectricParkingArea Area1 = new ElectricParkingArea();
 
-        CarManagementSystem carManagementSystem = new CarManagementSystem();
-        electricParkingArea.addElectricParkingAreaIntoElectricParkingAreas(Area1);
 
-        ParkingAreaManager parkingAreaManager = new ParkingAreaManager();
-        ElectricParkingArea electricParkingArea2 = new ElectricParkingArea(parkingAreaManager);
 
-        ElectricCar electricCar1 = new ElectricCar(carManagementSystem, electricParkingArea2);
-        ElectricCar electricCar2 = new ElectricCar(carManagementSystem, electricParkingArea2);
+        ElectricParkingArea electricParkingArea2 = new ElectricParkingArea();
+
+        ElectricCar electricCar1 = new ElectricCar(electricParkingArea2);
+        ElectricCar electricCar2 = new ElectricCar(electricParkingArea2);
 
 
         Area1.assignElectricCarToStation(electricCar1);
@@ -57,9 +50,7 @@ class ElectricParkingAreaTest {
     @Test
     void testing_get_max_electric_cars_capacity() {
 
-        ParkingAreaManager electricParkingArea = new ParkingAreaManager();
-        ElectricParkingArea Area1 = new ElectricParkingArea(electricParkingArea);
-        electricParkingArea.addElectricParkingAreaIntoElectricParkingAreas(Area1);
+        ElectricParkingArea Area1 = new ElectricParkingArea();
 
 
         Area1.setMaxElectricCarCapacity(100);

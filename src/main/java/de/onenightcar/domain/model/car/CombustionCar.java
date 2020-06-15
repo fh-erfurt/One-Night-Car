@@ -53,13 +53,12 @@ public class CombustionCar extends Car {
      * @param consumption A double representing the consumption of the OneNightCar.Car in 100 km
      * @param transmission An enum representing the Transmission of the OneNightCar.Car (Manuel, Automatic)
      * @param fuelType an enum representing the Fuel Type of the OneNightCar.Car (Petrol, Diesel)
-     * @param carManagementSystem The system where all the car are saved
      */
     public CombustionCar(Type type, String brand, String model, State state,
                          double GPSLatitude, double GPSLongitude, long odometer,
                          Customer.CustomerLevel customerLevel, float price, double tankSize,
                          double fuelLevel, double consumption, Transmission transmission,
-                         FuelType fuelType, CarManagementSystem carManagementSystem, ParkingArea parkingArea){
+                         FuelType fuelType,  ParkingArea parkingArea){
         super(type, brand, model, state, GPSLatitude, GPSLongitude, odometer,
                 customerLevel, price);
 
@@ -68,7 +67,6 @@ public class CombustionCar extends Car {
         this.consumption=consumption;
         this.transmission = transmission;
         this.fuelType= fuelType;
-        carManagementSystem.combustionCarsList.add(this);
         if(parkingArea.numberOfCarsAssignedToStation() < parkingArea.getMaxCapacity()) {
             parkingArea.assignCarToStation(this);
         }
@@ -79,9 +77,9 @@ public class CombustionCar extends Car {
 
     /** Creates a Combustion OneNightCar.Car  with default Values.
      * It is used to increment speed of UnitTests.
-     * @param carManagementSystem A CarManagementSystem with the management from the Packet OneNightCar.Car
+     * @param parkingArea A CarManagementSystem with the management from the Packet OneNightCar.Car
      */
-    public CombustionCar(CarManagementSystem carManagementSystem, ParkingArea parkingArea){
+    public CombustionCar(ParkingArea parkingArea){
         super(Type.MIDDLE, "Mercedes", "glc_250", State.OK, 50.984790, 11.041410, 197212,
                 Customer.CustomerLevel.REGULARUSER, 39.99f);
         this.tankSize = 66;
@@ -89,7 +87,6 @@ public class CombustionCar extends Car {
         this.consumption = 8.1;
         this.transmission = Transmission.AUTOMATIC;
         this.fuelType = FuelType.PETROL;
-        carManagementSystem.combustionCarsList.add(this);
         if(parkingArea.numberOfCarsAssignedToStation() < parkingArea.getMaxCapacity()) {
             parkingArea.assignCarToStation(this);
         }

@@ -40,24 +40,19 @@ public class Customer extends Person {
 
 
 
-    protected Customer() {}
-
     /** Creates a Customer with specified Customer Parameters.
      * @param firstName A String representing Customers first Name
      * @param surname A String representing Customers Surname
      * @param dateOfBirth A LocalDateTime representing Customers DOB
      * @param personAddress A PersonAddress representing Customers Address
-     * @param personManager A PersonManager with the management from the Packet OneNightCar.Person
      * @param customerLevel A CustomerLevel representing Customers Level
      * @param paymentMethod A PaymentMethod representing Customers Payment Method
      */
-    public Customer(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
-                    PersonManager personManager, CustomerLevel customerLevel, PaymentMethod paymentMethod){
+    public Customer(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress, CustomerLevel customerLevel, PaymentMethod paymentMethod){
         this.firstName = firstName;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.personAddress = personAddress;
-        personManager.customers.add(this);                               //Adds this Customer to the Customer List
         this.customerLevel = customerLevel;
         this.paymentMethod = paymentMethod;
         this.fuelRentals = new ArrayList<FuelRental>();
@@ -69,14 +64,12 @@ public class Customer extends Person {
 
     /** Creates a Customer with default Values.
      * It is used to increment speed of UnitTests.
-     * @param personManager A PersonManager with the management from the Packet OneNightCar.Person
      */
-    public Customer(PersonManager personManager){
+    public Customer( ){
         this.firstName = "Max";
         this.surname = "Mustermann";
         this.dateOfBirth = LocalDateTime.of(1990,12,31,00,00);
         this.personAddress = new PersonAddress();
-        personManager.customers.add(this);                               //Adds this Customer to the Customer List
         this.customerLevel = CustomerLevel.REGULARUSER;
         this.paymentMethod = new PaymentMethod();
         this.fuelRentals = new ArrayList<FuelRental>();
@@ -195,16 +188,14 @@ public class Customer extends Person {
      * Creates a new Electric OneNightCar.Rental of a Vehicle and this Customer
      * @param electricCar   an ElectricCar representing an electric car the Customer wants to book
      * @param date          a LocalDate representing the date of the Booking
-     * @param carManagementSystem in order to know the carID of the car
      * @param departure the date and time at which the customer started the rental
      * @param arrival the date and time at which the customer ended the rental
-     * @param rentalManager to add this rental to all the rentals
      */
-    public void rentAnElectricCar(ElectricCar electricCar, CarManagementSystem carManagementSystem, LocalDateTime date,
-                                  LocalDateTime departure, LocalDateTime arrival, RentalManager rentalManager) {
+    public void rentAnElectricCar(ElectricCar electricCar,  LocalDateTime date,
+                                  LocalDateTime departure, LocalDateTime arrival) {
         try {
-            ElectricRental electricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
-                    departure, arrival, rentalManager);
+            ElectricRental electricRental = new ElectricRental(electricCar, this.customerID, date,
+                    departure, arrival);
             this.electricRentals.add(electricRental);
         }
         catch(Exception e){
@@ -217,17 +208,15 @@ public class Customer extends Person {
      * @param date          a LocalDate representing the date of the Booking
      * @param departure the date and time at which the customer started the rental
      * @param arrival the date and time at which the customer ended the rental
-     * @param rentalManager to add this rental to all the rentals
-     * @param carManagementSystem the system where all cars are saved
      * @param electricCar which electric car rental is being modified
      */
-    public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar, CarManagementSystem carManagementSystem,
-                                    LocalDateTime date, LocalDateTime departure, LocalDateTime arrival, RentalManager rentalManager) {
+    public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar,
+                                    LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
         try {
             if (electricRental.getCustomerID() == this.customerID) {
                 if (Admin.approveRentalModification(electricRental)) {
-                    ElectricRental newElectricRental = new ElectricRental(electricCar, carManagementSystem, this.customerID, date,
-                            departure, arrival, rentalManager);
+                    ElectricRental newElectricRental = new ElectricRental(electricCar,  this.customerID, date,
+                            departure, arrival);
                     // Remove the old OneNightCar.Rental
                     this.electricRentals.remove(electricRental);
                     // Add the new OneNightCar.Rental
@@ -256,15 +245,13 @@ public class Customer extends Person {
      * Creates a new OneNightCar.Rental of a Vehicle and this Customer
      * @param combustionCar   an CombustionCar representing the car the Customer wants to book
      * @param date          a LocalDate representing the date of the Booking
-     * @param carManagementSystem in order to know the carID of the car
      * @param departure the date and time at which the customer started the rental
      * @param arrival the date and time at which the customer ended the rental
-     * @param rentalManager to add this rental to all the rentals
      */
-     public void rentAFuelCar(RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
+     public void rentAFuelCar(  CombustionCar combustionCar,
                               LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
          try {
-             FuelRental fuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
+             FuelRental fuelRental = new FuelRental(combustionCar,
                      this.customerID, date, departure, arrival);
              this.fuelRentals.add(fuelRental);
          }
@@ -278,15 +265,13 @@ public class Customer extends Person {
      * @param date          a LocalDate representing the date of the Booking
      * @param departure the date and time at which the customer started the rental
      * @param arrival the date and time at which the customer ended the rental
-     * @param rentalManager to add this rental to all the rentals
-     * @param carManagementSystem the system where all cars are saved
      * @param combustionCar which cars OneNightCar.Rental need to be modified
      */
-    public void modifyARegularRental(FuelRental fuelRental, RentalManager rentalManager, CombustionCar combustionCar, CarManagementSystem carManagementSystem,
+    public void modifyARegularRental(FuelRental fuelRental, CombustionCar combustionCar,
                                      LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
         if (fuelRental.getCustomerID() == this.customerID){
             if (Admin.approveRentalModification(fuelRental)){
-                FuelRental newFuelRental = new FuelRental(rentalManager, combustionCar, carManagementSystem,
+                FuelRental newFuelRental = new FuelRental( combustionCar,
                                                 this.customerID, date, departure, arrival);
                 // Remove the old OneNightCar.Rental
                 this.fuelRentals.remove(fuelRental);

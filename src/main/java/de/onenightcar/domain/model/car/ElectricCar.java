@@ -37,16 +37,14 @@ public class ElectricCar extends Car {
      * @param price A float representing the costs of the OneNightCar.Car per Day
      * @param electricalRange A float representing the range the car can drive before it needs to be recharged
      * @param chargePercent A float representing the electric OneNightCar.Car charge
-     * @param carManagementSystem the system where all car are saved
      */
     public ElectricCar(Type type, String brand, String model, State state,
                        long odometer, double GPSLatitude, double GPSLongitude, Customer.CustomerLevel customerLevel,
-                       float price, float electricalRange, float chargePercent, CarManagementSystem carManagementSystem, ElectricParkingArea electricParkingArea){
+                       float price, float electricalRange, float chargePercent,  ElectricParkingArea electricParkingArea){
                     super(type, brand, model, state,  GPSLatitude, GPSLongitude, odometer, customerLevel , price);
 
         this.electricalRange = electricalRange;
         this.chargePercent=chargePercent;
-        carManagementSystem.electricCarsList.add(this);
 
         if(electricParkingArea.numberOfElectricCarsAssignedToStation() < electricParkingArea.getMaxElectricCarCapacity()) {
             electricParkingArea.assignElectricCarToStation(this);
@@ -58,14 +56,13 @@ public class ElectricCar extends Car {
 /**
  /** Creates an Electric OneNightCar.Car OneNightCar.Car  with default Values.
  * It is used to increment speed of UnitTests.
- * @param carManagementSystem A CarManagementSystem with the management from the Packet OneNightCar.Car
+ * @param electricParkingArea A CarManagementSystem with the management from the Packet OneNightCar.Car
  */
-    public ElectricCar(CarManagementSystem carManagementSystem, ElectricParkingArea electricParkingArea){
+    public ElectricCar( ElectricParkingArea electricParkingArea){
         super(Type.MINI,"BMW","i3", State.PERFECT, 50.9787, 11.03283,
                 10999, Customer.CustomerLevel.NEWUSER , 69.00f);
         this.electricalRange = 200.00f;
         this.chargePercent= 100.00f;
-        carManagementSystem.electricCarsList.add(this);
         if(electricParkingArea.numberOfElectricCarsAssignedToStation() < electricParkingArea.getMaxElectricCarCapacity()) {
             electricParkingArea.assignElectricCarToStation(this);
         }
