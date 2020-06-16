@@ -23,7 +23,7 @@ public class ElectricCar extends Car {
     /* /////////////////////Constructors/////////////////////////// */
 
     // Needed to be able to create the entity
-    public ElectricCar() {}
+    protected ElectricCar() {}
 
     /** Creates an ElectricCar with specified ElectricCar Parameters.
      * @param type A enum representing the Type of the OneNightCar.Car

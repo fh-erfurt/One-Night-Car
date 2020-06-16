@@ -35,7 +35,7 @@ public class CombustionCar extends Car {
     /* /////////////////////Constructors/////////////////////////// */
 
     // Needed to be able to create the entity
-    public CombustionCar(){}
+    protected CombustionCar(){}
 
 
     /** Creates an ElectricCar with specified ElectricCar Parameters.

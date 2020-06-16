@@ -22,7 +22,7 @@ public class CarLocation extends AbstractDatabaseEntity {
 
     /* /////////////////////Constructors/////////////////////////// */
 
-    public CarLocation(){}
+    protected CarLocation(){}
 
     /***
      * @param GPSLatitude  A double representing the position

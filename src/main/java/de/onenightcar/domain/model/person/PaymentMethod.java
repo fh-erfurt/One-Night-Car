@@ -107,6 +107,15 @@ public class PaymentMethod extends AbstractDatabaseEntity {
         this.CCV = CCV;
     }
 
+    @Override
+    public String toString() {
+        return "Card Number: '" + this.cardNumber + "', " +
+               "Card Type: '" + this.cardType + "', " +
+               "Valid Through: '" + this.validThrough + "', " +
+               "CCC" + this.CCV + "'";
+    }
+
+
     public enum CardType{
         DEBIT,
         CREDIT

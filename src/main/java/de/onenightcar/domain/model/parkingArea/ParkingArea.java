@@ -55,7 +55,7 @@ public class ParkingArea extends AbstractDatabaseEntity {
      */
 
 
-    public ParkingArea( ) {
+    public ParkingArea() {
         this.maxCapacity = 100;
         this.parkingAreaAddress = new ParkingAreaAddress();
         this.carsInStation = new ArrayList<CombustionCar>();

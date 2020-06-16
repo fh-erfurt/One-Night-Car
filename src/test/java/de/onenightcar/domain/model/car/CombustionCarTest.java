@@ -3,6 +3,7 @@ package de.onenightcar.domain.model.car;
 import de.onenightcar.domain.model.parkingArea.ParkingArea;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CombustionCarTest {

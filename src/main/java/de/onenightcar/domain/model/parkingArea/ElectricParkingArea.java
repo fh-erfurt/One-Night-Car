@@ -33,8 +33,6 @@ public class ElectricParkingArea extends ParkingArea {
 
     /* /////////////////////Methods/////////////////////////// */
 
-
-
     /**
      * Creates an ElectricParkingArea Constructor with specified ElectricParkingArea Parameters.
      * @param parkingAreaAddress A ParkingAreaAddress representing the address of the parking Area

@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
+
 /** Represents a OneNightCar.Car
  * @author OneNightCar
  * @version 1.0

@@ -24,6 +24,8 @@ public class ElectricRental extends Rental {
 
     /* /////////////////////Methods/////////////////////////// */
 
+    protected ElectricRental() {}
+
     /**
      * Creates a OneNightCar.Rental entry for a rental of an electric OneNightCar.Car
      * @param electricCar the car itself, object of the class ElectricCar
@@ -53,10 +55,6 @@ public class ElectricRental extends Rental {
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
         this.electricCar = electricCar;
-    }
-
-    public ElectricRental() {
-
     }
 
     public float getChargePercentAfter() { return this.chargePercentAfter; }

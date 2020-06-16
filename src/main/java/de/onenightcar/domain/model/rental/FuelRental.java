@@ -24,6 +24,9 @@ public class FuelRental extends Rental {
     private CombustionCar combustionCar;
 
     /* /////////////////////Methods/////////////////////////// */
+
+    protected FuelRental() {}
+
     /** Creates a rental entry with parameters for a combustion car
      * * @param rentalID An integer value used to identify certain rental entries
      * * @param carID An integer value used to identify certain cars inside a rental entry
@@ -64,9 +67,6 @@ public class FuelRental extends Rental {
         this.combustionCar = combustionCar;
     }
 
-    public FuelRental() {
-
-    }
 
     public double getFuelLevelAfter(){
         return this.fuelLevelAfter;

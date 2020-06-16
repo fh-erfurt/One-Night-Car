@@ -66,7 +66,7 @@ public class Admin extends Employee {
     }
 
     // Needed to be able to create the entity
-    public Admin() {
+    protected Admin() {
     }
 
     //Logging try
