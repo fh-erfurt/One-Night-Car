@@ -58,9 +58,9 @@ class CustomerTest {
         ElectricCar car2 = new ElectricCar(Area1);
         ElectricCar car3 = new ElectricCar(Area1);
 
-        ElectricRental testRental1 = new ElectricRental( max.getCustomerID(), car1);
-        ElectricRental testRental2 = new ElectricRental( max.getCustomerID(), car2);
-        ElectricRental testRental3 = new ElectricRental(max.getCustomerID(), car3);
+        ElectricRental testRental1 = new ElectricRental(car1);
+        ElectricRental testRental2 = new ElectricRental(car2);
+        ElectricRental testRental3 = new ElectricRental(car3);
 
         max.getElectricRentals().add(testRental1);
         max.getElectricRentals().add(testRental2);

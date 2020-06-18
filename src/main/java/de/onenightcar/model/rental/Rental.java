@@ -16,9 +16,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public abstract class Rental extends AbstractDatabaseEntity {
     /* /////////////////////Attributes///////////////////////// */
 
-    protected int rentalID;
-    protected int carID;
-    protected int customerID;
     protected float rentalPrice;
     protected long odometerBefore;
     protected long odometerAfter = 0;
@@ -32,11 +29,9 @@ public abstract class Rental extends AbstractDatabaseEntity {
      * @param date the date and time of the booking
      * @param departure the date and time at which the customer started the rental
      * @param arrival  the date and time at which the customer ended the rental
-     * @param customerID the Customer ID
      */
-    public Rental(int customerID, LocalDateTime date, LocalDateTime departure,
+    public Rental(LocalDateTime date, LocalDateTime departure,
                           LocalDateTime arrival){
-        this.customerID = customerID;
         this.date = date;
         this.departure = departure;
         this.arrival = arrival;
@@ -73,21 +68,6 @@ public abstract class Rental extends AbstractDatabaseEntity {
      */
     public long getOdometerAfter(){
         return this.odometerAfter;
-    }
-
-    /** Gets the carID
-     * @return the carID
-     */
-    public int getCarID() {
-        return this.carID;
-    }
-
-    public int getRentalID () {
-        return this.rentalID;
-    }
-
-    public int getCustomerID() {
-        return this.customerID;
     }
 
     public LocalDateTime getDate () {

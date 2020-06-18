@@ -16,9 +16,6 @@ import java.util.Random;
 public class Employee extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
-
-    //TODO: remove the employeeID (already has a an ID from the AbstractDatabaseEntity) and see where it may be a problem
-    private int employeeID;
     private float salary;
     private TypeOfActivity typeOfActivity;
     /** Creates an Employee with specified Employee Parameters.
@@ -76,13 +73,6 @@ public class Employee extends Person {
         else {
             return false;
         }
-    }
-
-    /** Gets the Employee ID.
-     * @return A int representing ID of an Employee
-     */
-    public int getEmployeeID(){
-        return this.employeeID;
     }
 
     /** Gets the Employee TypeOfActivity.

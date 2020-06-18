@@ -32,11 +32,10 @@ public class ElectricRental extends Rental {
      * @param date the date of the rental
      * @param departure the date and time at which the customer started the rental
      * @param arrival the date and time at which the customer ended the rental
-     * @param customerID the Customer ID
      */
-    public ElectricRental(ElectricCar electricCar,  int customerID, LocalDateTime date, LocalDateTime departure,
+    public ElectricRental(ElectricCar electricCar, LocalDateTime date, LocalDateTime departure,
                           LocalDateTime arrival){
-        super(customerID, date, departure, arrival);
+        super(date, departure, arrival);
         this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
@@ -45,12 +44,10 @@ public class ElectricRental extends Rental {
 
     /**
      * A constructor that uses default values
-     * @param customerID an Int representing the customers ID
      * @param electricCar the car itself, object of the class ElectricCar
      */
-    public ElectricRental(  int customerID, ElectricCar electricCar){
+    public ElectricRental(ElectricCar electricCar){
         super();
-        this.customerID = customerID;
         this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();

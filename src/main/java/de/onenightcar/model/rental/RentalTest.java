@@ -14,7 +14,7 @@ class RentalTest {
 
         ElectricParkingArea Area1 = new ElectricParkingArea();
         ElectricCar electricCar = new ElectricCar(Area1);
-        ElectricRental rental1 = new ElectricRental(customer.getCustomerID(), electricCar);
+        ElectricRental rental1 = new ElectricRental(electricCar);
 
         long days = rental1.calculateElapsedDays();
 
@@ -28,7 +28,7 @@ class RentalTest {
         ElectricParkingArea Area1 = new ElectricParkingArea();
 
         ElectricCar electricCar = new ElectricCar(Area1);
-        ElectricRental rental1 = new ElectricRental(customer.getCustomerID(), electricCar);
+        ElectricRental rental1 = new ElectricRental(electricCar);
 
         rental1.setOdometerAfter();
         long odometer = rental1.getOdometerAfter();
