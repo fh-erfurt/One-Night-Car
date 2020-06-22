@@ -15,9 +15,30 @@ import java.util.logging.*;
 
 @Entity
 public class Admin extends Employee {
+
     /* /////////////////////Attributes///////////////////////// */
 
     private final static Logger logr = Logger.getLogger( Logger.GLOBAL_LOGGER_NAME );
+
+    /* /////////////////////Constructors/////////////////////////// */
+
+    // Needed to be able to create the entity
+    protected Admin() {}
+
+    /** Creates an Admin with specified Admin Parameters.
+     * @param firstName A String representing Admin first Name
+     * @param surname A String representing Admin Surname
+     * @param dateOfBirth A GregorianCalendar representing Admin DOB
+     * @param personAddress A PersonAddress representing Admin Address
+     * @param salary A Float representing the Admin salary
+     * @param typeOfActivity a TypeOfActivity representing the activity of the OneNightCar.Person
+     */
+    public Admin(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
+                 float salary, TypeOfActivity typeOfActivity) {
+        super(firstName, surname, dateOfBirth, personAddress, salary, typeOfActivity);
+    }
+
+    /* /////////////////////Methods/////////////////////////// */
 
     private static void setupLogger() {
         LogManager.getLogManager().reset();
@@ -49,30 +70,9 @@ public class Admin extends Employee {
         */
     }
 
-    /* /////////////////////Methods/////////////////////////// */
-
-    /** Creates an Admin with specified Admin Parameters.
-     * @param firstName A String representing Admin first Name
-     * @param surname A String representing Admin Surname
-     * @param dateOfBirth A GregorianCalendar representing Admin DOB
-     * @param personAddress A PersonAddress representing Admin Address
-     * @param salary A Float representing the Admin salary
-     * @param typeOfActivity a TypeOfActivity representing the activity of the OneNightCar.Person
-     */
-    public Admin(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
-                  float salary, TypeOfActivity typeOfActivity) {
-        super(firstName, surname, dateOfBirth, personAddress, salary, typeOfActivity);
-    }
-
-    // Needed to be able to create the entity
-    protected Admin() {
-    }
-
     //Logging try
     public static void main(String[] args) throws java.io.IOException {
-
         setupLogger();
-
     }
 
     /** Random boolean generator.
@@ -152,4 +152,7 @@ public class Admin extends Employee {
         //Call the Garbage Collector
         System.gc();
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }

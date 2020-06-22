@@ -1,6 +1,7 @@
 package de.onenightcar.model.rental;
 
 import de.onenightcar.model.car.CombustionCar;
+import de.onenightcar.model.person.Customer;
 
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 public class FuelRental extends Rental {
+
     /* /////////////////////Attributes///////////////////////// */
 
     private double fuelLevelBefore;
@@ -22,7 +24,7 @@ public class FuelRental extends Rental {
     @OneToOne
     private CombustionCar combustionCar;
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Constructors/////////////////////////// */
 
     protected FuelRental() {}
 
@@ -33,8 +35,8 @@ public class FuelRental extends Rental {
      * @param combustionCar a Combustion OneNightCar.Car
      */
     public FuelRental(CombustionCar combustionCar, LocalDateTime date,
-                      LocalDateTime departure, LocalDateTime arrival){
-        super(date, departure, arrival);
+                      LocalDateTime departure, LocalDateTime arrival, Customer customer){
+        super(date, departure, arrival, customer);
         this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
         this.odometerBefore = combustionCar.getOdometer();
         this.fuelLevelBefore = combustionCar.getFuelLevel();
@@ -47,8 +49,8 @@ public class FuelRental extends Rental {
      * @param combustionCar the car itself, object of the class ElectricCar
      * @param date at what time was the rental made
      */
-    public FuelRental(LocalDateTime date, CombustionCar combustionCar){
-        super();
+    public FuelRental(LocalDateTime date, CombustionCar combustionCar, Customer customer){
+        super(customer);
         this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
         this.odometerBefore = combustionCar.getOdometer();
         this.fuelLevelBefore = combustionCar.getFuelLevel();
@@ -56,6 +58,7 @@ public class FuelRental extends Rental {
         this.combustionCar = combustionCar;
     }
 
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     public double getFuelLevelAfter(){
         return this.fuelLevelAfter;
@@ -73,16 +76,6 @@ public class FuelRental extends Rental {
         }
     }
 
-    /**
-     * Takes the price of a car and multiplies it with the elapsed hours
-     * @param CombustionCar is the car rented by the customer
-     * @return the total price of the rental
-     */
-    public float calculateRentalPriceForCombustion (CombustionCar CombustionCar) {
-        float rentalPrice = calculateElapsedDays() * CombustionCar.getPrice();
-        return rentalPrice;
-    }
-
     public CombustionCar getCombustionCar() {
         try {
             return this.combustionCar;
@@ -92,4 +85,34 @@ public class FuelRental extends Rental {
             return combustionCar;
         }
     }
+
+    public void setCombustionCar(CombustionCar combustionCar) {
+        this.combustionCar = combustionCar;
+    }
+
+    public double getFuelLevelBefore() {
+        return fuelLevelBefore;
+    }
+
+    public void setFuelLevelBefore(double fuelLevelBefore) {
+        this.fuelLevelBefore = fuelLevelBefore;
+    }
+
+    public void setFuelLevelAfter(double fuelLevelAfter) {
+        this.fuelLevelAfter = fuelLevelAfter;
+    }
+
+    /* /////////////////////Methods/////////////////////////// */
+
+    /**
+     * Takes the price of a car and multiplies it with the elapsed hours
+     * @param CombustionCar is the car rented by the customer
+     * @return the total price of the rental
+     */
+    public float calculateRentalPriceForCombustion (CombustionCar CombustionCar) {
+        return calculateElapsedDays() * CombustionCar.getPrice();
+    }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }

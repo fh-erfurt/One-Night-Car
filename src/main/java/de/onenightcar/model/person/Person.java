@@ -25,13 +25,22 @@ public abstract class Person extends AbstractDatabaseEntity {
     @OneToOne
     protected PersonAddress personAddress;
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
-    /** Gets the Persons name.
-     * @return A string representing the whole name (first name and surname) of a person
-     */
-    public String getName(){
-        return (this.firstName + " " + this.surname);
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     /** Gets the Persons DOB.
@@ -39,6 +48,10 @@ public abstract class Person extends AbstractDatabaseEntity {
      */
     public LocalDateTime getDateOfBirth(){
         return this.dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     /** Gets the Persons Address.
@@ -59,8 +72,17 @@ public abstract class Person extends AbstractDatabaseEntity {
             this.personAddress.setStreetNumber(personAddress.getStreetNumber());
         }
         catch(Exception e){
-            System.out.print("PersonAddress could not bei set!");
+            System.out.print("PersonAddress could not be set!");
         }
+    }
+
+    /* /////////////////////Methods/////////////////////////// */
+
+    /** Gets the Persons name.
+     * @return A string representing the whole name (first name and surname) of a person
+     */
+    public String getName(){
+        return (this.firstName + " " + this.surname);
     }
 
     /** Sets the Persons first Name and Surname.
@@ -71,5 +93,8 @@ public abstract class Person extends AbstractDatabaseEntity {
         this.firstName = firstName;
         this.surname = surname;
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }
 

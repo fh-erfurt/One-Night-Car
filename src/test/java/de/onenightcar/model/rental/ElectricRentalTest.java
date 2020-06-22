@@ -24,7 +24,7 @@ public class ElectricRentalTest {
         arrival= LocalDateTime.of(2020,02,04,00,00);
 
         ElectricCar electricCar = new ElectricCar(Area1);
-        ElectricRental rental1 = new ElectricRental(electricCar, date, departure, arrival);
+        ElectricRental rental1 = new ElectricRental(electricCar, date, departure, arrival, customer);
 
         rental1.setOdometerAfter();
         rental1.setChargePercentAfter(electricCar);

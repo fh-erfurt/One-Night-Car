@@ -12,7 +12,7 @@ class ElectricCarTest {
 
         ElectricParkingArea electricParkingArea = new ElectricParkingArea();
         ElectricCar car1 = new ElectricCar(electricParkingArea);
-        car1.setNewLocation(52.5164, 13.3811);
+        car1.setCarLocation(52.5164, 13.3811);
         assertEquals(52.5164, car1.getGPSLatitude());
         assertEquals(13.3811, car1.getGPSLongitude());
 
@@ -38,7 +38,7 @@ class ElectricCarTest {
 
         ElectricParkingArea electricParkingArea = new ElectricParkingArea();
         ElectricCar car1 = new ElectricCar(electricParkingArea);
-        car1.changeCarState(Car.State.DAMAGED);
+        car1.setCarState(Car.State.DAMAGED);
         System.out.println(car1.getCarState());
         assertEquals(Car.State.DAMAGED, car1.getCarState());
     }

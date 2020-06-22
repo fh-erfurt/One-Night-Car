@@ -1,6 +1,7 @@
 package de.onenightcar.model.rental;
 
 import de.onenightcar.model.car.ElectricCar;
+import de.onenightcar.model.person.Customer;
 
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 public class ElectricRental extends Rental {
+
     /* /////////////////////Attributes///////////////////////// */
 
     private float chargePercentBefore;
@@ -22,8 +24,9 @@ public class ElectricRental extends Rental {
     @OneToOne
     private ElectricCar electricCar;
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Constructors/////////////////////////// */
 
+    // Needed to be able to create the entity
     protected ElectricRental() {}
 
     /**
@@ -34,8 +37,8 @@ public class ElectricRental extends Rental {
      * @param arrival the date and time at which the customer ended the rental
      */
     public ElectricRental(ElectricCar electricCar, LocalDateTime date, LocalDateTime departure,
-                          LocalDateTime arrival){
-        super(date, departure, arrival);
+                          LocalDateTime arrival, Customer customer){
+        super(date, departure, arrival, customer);
         this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
@@ -46,13 +49,15 @@ public class ElectricRental extends Rental {
      * A constructor that uses default values
      * @param electricCar the car itself, object of the class ElectricCar
      */
-    public ElectricRental(ElectricCar electricCar){
-        super();
+    public ElectricRental(ElectricCar electricCar, Customer customer){
+        super(customer);
         this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
         this.electricCar = electricCar;
     }
+
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     public float getChargePercentAfter() { return this.chargePercentAfter; }
 
@@ -68,6 +73,24 @@ public class ElectricRental extends Rental {
         }
     }
 
+    public float getChargePercentBefore() {
+        return chargePercentBefore;
+    }
+
+    public void setChargePercentBefore(float chargePercentBefore) {
+        this.chargePercentBefore = chargePercentBefore;
+    }
+
+    public void setChargePercentAfter(float chargePercentAfter) {
+        this.chargePercentAfter = chargePercentAfter;
+    }
+
+    public void setElectricCar(ElectricCar electricCar) {
+        this.electricCar = electricCar;
+    }
+
+    /* /////////////////////Methods/////////////////////////// */
+
     private float calculateRentalPriceForElectric(ElectricCar ElectricCar) {
         return calculateElapsedDays() * ElectricCar.getPrice();
     }
@@ -81,5 +104,7 @@ public class ElectricRental extends Rental {
             return electricCar;                               //edit return
         }
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
 
 }

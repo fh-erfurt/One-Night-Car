@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 /** Represents a Electric OneNightCar.Car
  * extent OneNightCar.Car
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
@@ -18,7 +18,7 @@ public class ElectricCar extends Car {
     /* /////////////////////Attributes/////////////////////////// */
 
     private float electricalRange;         //in Km
-    private float chargePercent; //current
+    private float chargePercent;           //current
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -53,11 +53,12 @@ public class ElectricCar extends Car {
             System.out.println("there is no more place in this park!");
         }
     }
-/**
- /** Creates an Electric OneNightCar.Car OneNightCar.Car  with default Values.
- * It is used to increment speed of UnitTests.
- * @param electricParkingArea A CarManagementSystem with the management from the Packet OneNightCar.Car
- */
+
+    /**
+     /** Creates an Electric OneNightCar.Car OneNightCar.Car  with default Values.
+     * It is used to increment speed of UnitTests.
+     * @param electricParkingArea A CarManagementSystem with the management from the Packet OneNightCar.Car
+     */
     public ElectricCar( ElectricParkingArea electricParkingArea){
         super(Type.MINI,"BMW","i3", State.PERFECT, 50.9787, 11.03283,
                 10999, Customer.CustomerLevel.NEWUSER , 69.00f);
@@ -71,7 +72,7 @@ public class ElectricCar extends Car {
         }
     }
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Charge Percent
      * @return The Electric OneNightCar.Car current ChargePercent
@@ -101,9 +102,14 @@ public class ElectricCar extends Car {
 
     public void setElectricalRange(float range) { this.electricalRange = range;}
 
+    /* /////////////////////Methods/////////////////////////// */
+
     /** set the Charge on 100 %
      */
     public void getChargedUp(){
         setChargePercent(100);
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }

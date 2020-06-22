@@ -30,7 +30,7 @@ public class ElectricParkingArea extends ParkingArea {
 
     private int maxElectricCarCapacity;
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Constructors/////////////////////////// */
 
     /**
      * Creates an ElectricParkingArea Constructor with specified ElectricParkingArea Parameters.
@@ -38,8 +38,6 @@ public class ElectricParkingArea extends ParkingArea {
      * @param maxCapacity An integer representing the max. Capacity of Cars in OneNightCar.ParkingArea
      * @param maxElectricCarCapacity An integer representing the max. Capacity of Cars in ElectricParkingArea
      */
-
-
     public ElectricParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity,
                                int maxElectricCarCapacity) {
         super(parkingAreaAddress,maxCapacity);
@@ -53,8 +51,8 @@ public class ElectricParkingArea extends ParkingArea {
     }
 
     /** Creates an ElectricParkingArea with default values.
-     * It is used to increment speed of UnitTests.*/
-
+     * It is used to increment speed of UnitTests.
+     */
     public ElectricParkingArea(){
         super(new ParkingAreaAddress(), 100);
 
@@ -64,11 +62,11 @@ public class ElectricParkingArea extends ParkingArea {
         this.maxElectricCarCapacity = 100;
     }
 
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     /**gets the max. capacity of electric cars.
      * @return max Capacity
      */
-
     public int getMaxElectricCarCapacity() {
         return this.maxElectricCarCapacity;
     }
@@ -76,15 +74,39 @@ public class ElectricParkingArea extends ParkingArea {
     /** sets the max. capacity of electric cars in the station
      * @param maxElectricCarCapacity max Capacity
      */
-
     public void setMaxElectricCarCapacity(int maxElectricCarCapacity) {
         this.maxElectricCarCapacity = maxElectricCarCapacity;
     }
 
+    public List<ElectricCar> getElectricCarsInStation() {
+        return electricCarsInStation;
+    }
+
+    public void setElectricCarsInStation(List<ElectricCar> electricCarsInStation) {
+        this.electricCarsInStation = electricCarsInStation;
+    }
+
+    public List<ElectricCar> getAvailableElectricCars() {
+        return availableElectricCars;
+    }
+
+    public void setAvailableElectricCars(List<ElectricCar> availableElectricCars) {
+        this.availableElectricCars = availableElectricCars;
+    }
+
+    public List<ElectricCar> getNotAvailableElectricCars() {
+        return notAvailableElectricCars;
+    }
+
+    public void setNotAvailableElectricCars(List<ElectricCar> notAvailableElectricCars) {
+        this.notAvailableElectricCars = notAvailableElectricCars;
+    }
+
+    /* /////////////////////Methods/////////////////////////// */
+
     /**adds an electric car to the station
      * @param electricCar an Electric OneNightCar.Car
      */
-
     public void assignElectricCarToStation(ElectricCar electricCar) {
 
         try {
@@ -100,7 +122,6 @@ public class ElectricParkingArea extends ParkingArea {
      * Shows the number of cars in the Station
      * @return the size of carsInStation
      */
-
     public int numberOfElectricCarsAssignedToStation() {
         return electricCarsInStation.size();
     }
@@ -108,7 +129,6 @@ public class ElectricParkingArea extends ParkingArea {
     /**removes an electric car from the station
      * @param electricCar an Electric OneNightCar.Car
      */
-
     public void removeElectricCarFromStation(ElectricCar electricCar){
         electricCarsInStation.remove(electricCar);
         availableElectricCars.remove(electricCar);
@@ -118,8 +138,10 @@ public class ElectricParkingArea extends ParkingArea {
      * @param electricCar an Electric OneNightCar.Car
      * @return Index(id)
      */
-
     public int getElectricCarID(ElectricCar electricCar) {
         return electricCarsInStation.indexOf(electricCar);
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }
