@@ -2,6 +2,7 @@ package de.onenightcar.bootstrap;
 
 import de.onenightcar.model.person.PaymentMethod;
 import de.onenightcar.repositories.carRespository.CombustionCarRepository;
+import de.onenightcar.repositories.carRespository.ElectricCarRepository;
 import de.onenightcar.repositories.personRepository.PaymentMethodRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +22,9 @@ public class BootStrapData implements CommandLineRunner {
     //ParkingArea Package
 
 
-    //Car Package
+    //Car Packages
     private final CombustionCarRepository combustionCarRepository;
+
 
     //RentalPackage
 
