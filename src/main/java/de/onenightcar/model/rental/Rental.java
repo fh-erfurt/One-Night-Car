@@ -59,7 +59,7 @@ public abstract class Rental extends AbstractDatabaseEntity {
             this.odometerAfter = odometerBefore + ((calculateElapsedDays() * 24) * 32); //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
         }
         catch(Exception e){
-            System.out.print("Set Odometer has failed!");
+            System.out.print(e + "Set Odometer has failed!");
         }
     }
 

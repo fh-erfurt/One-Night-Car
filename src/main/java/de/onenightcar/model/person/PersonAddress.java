@@ -1,6 +1,8 @@
 package de.onenightcar.model.person;
 
 import de.onenightcar.util.AbstractDatabaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 
@@ -16,6 +18,8 @@ import javax.persistence.*;
 public class PersonAddress extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes///////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(PersonAddress.class);
 
     private String ZIP;
     private String city;
@@ -60,9 +64,12 @@ public class PersonAddress extends AbstractDatabaseEntity {
     public void setZIP(String ZIP){
         try {
             this.ZIP = ZIP;
+            log.info("ZIP set to ", ZIP);
+
         }
         catch(Exception e){
             System.out.print("Could not set ZIP!");
+            log.error("Could not set ZIP to ", ZIP);
         }
     }
 
@@ -78,6 +85,8 @@ public class PersonAddress extends AbstractDatabaseEntity {
      */
     public void setCity(String city){
         this.city = city;
+        log.info("Set City to");
+        log.info(String.valueOf(city));
     }
 
     /** Gets the Address Street.
@@ -91,7 +100,17 @@ public class PersonAddress extends AbstractDatabaseEntity {
      * @param street A String containing the Address Street
      */
     public void setStreet(String street){
-        this.street = street;
+//        try {
+//                street.matches("[a-zA-z]");
+//                Integer.parseInt(street);
+                this.street = street;
+                log.info("Set street to ", street);
+                log.info(String.valueOf(street));
+
+//        }
+//        catch(Exception e) {
+//            System.out.println("Ja");
+//        }
     }
 
     /** Gets the Address Street.
@@ -106,6 +125,7 @@ public class PersonAddress extends AbstractDatabaseEntity {
      */
     public void setStreetNumber(String streetNumber){
         this.streetNumber = streetNumber;
+        log.info("Set streetNumber to ", streetNumber);
     }
 
     @Override

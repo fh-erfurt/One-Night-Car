@@ -1,6 +1,9 @@
 package de.onenightcar.model.parkingArea;
 
 import de.onenightcar.model.car.ElectricCar;
+import de.onenightcar.model.person.Admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -18,6 +21,8 @@ import java.util.List;
 public class ElectricParkingArea extends ParkingArea {
 
     /* /////////////////////Attributes///////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(ElectricParkingArea.class);
 
     @OneToMany
     protected List<ElectricCar> electricCarsInStation;
@@ -78,7 +83,22 @@ public class ElectricParkingArea extends ParkingArea {
      */
 
     public void setMaxElectricCarCapacity(int maxElectricCarCapacity) {
-        this.maxElectricCarCapacity = maxElectricCarCapacity;
+//        this.maxElectricCarCapacity = maxElectricCarCapacity;
+
+        if (maxElectricCarCapacity > 100) {
+            log.error("Value set to high!");
+            log.info(String.valueOf(maxElectricCarCapacity));
+            }
+            else if (maxElectricCarCapacity < 0){
+            log.error("Value set to low!");
+            log.info(String.valueOf(maxElectricCarCapacity));
+            }
+
+            else {
+            this.maxElectricCarCapacity = maxElectricCarCapacity;
+            log.info("Set Electric Car Capacity to ");
+            log.info(String.valueOf(maxElectricCarCapacity));
+            }
     }
 
     /**adds an electric car to the station
@@ -92,7 +112,7 @@ public class ElectricParkingArea extends ParkingArea {
             availableElectricCars.add(electricCar);
         }
         catch(Exception e){
-            System.out.print("Assigning Electric Car to station has failed!");
+            System.out.print(e + "Assigning Electric Car to station has failed!");
         }
     }
 

@@ -1,7 +1,10 @@
 package de.onenightcar.model.car;
 
 import de.onenightcar.model.parkingArea.ElectricParkingArea;
+import de.onenightcar.model.person.Admin;
 import de.onenightcar.model.person.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 
@@ -16,6 +19,8 @@ import javax.persistence.Entity;
 public class ElectricCar extends Car {
 
     /* /////////////////////Attributes/////////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(ElectricCar.class);
 
     private float electricalRange;         //in Km
     private float chargePercent; //current
@@ -86,9 +91,11 @@ public class ElectricCar extends Car {
     public void setChargePercent(float chargePercent){
         try {
             this.chargePercent = chargePercent;
+            log.info("Set charge percentage to ", chargePercent);
         }
         catch(Exception e){
             System.out.print("Setting charge percent has failed!");
+            log.error("Error setting charge percent to ", chargePercent);
         }
     }
 

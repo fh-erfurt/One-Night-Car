@@ -6,11 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="One-Night-Car" />
         <module name="FHE-java1-project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="FHE-java1-project" target="11" />
+      <module name="One-Night-Car" target="11" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="One-Night-Car" options="-parameters" />
+    </option>
   </component>
 </project>

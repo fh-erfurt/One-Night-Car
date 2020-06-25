@@ -1,6 +1,8 @@
 package de.onenightcar.model.person;
 
 import de.onenightcar.model.car.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ import java.util.Random;
 public class Employee extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
+    static Logger log = LoggerFactory.getLogger(Employee.class);
     private float salary;
     private TypeOfActivity typeOfActivity;
     /** Creates an Employee with specified Employee Parameters.
@@ -102,9 +105,12 @@ public class Employee extends Person {
     public void setSalary(float salary){
         try {
             this.salary = salary;
+            log.info("Set salary to ", salary);
         }
         catch(Exception e){
             System.out.print("Salary couldn't be set, check Salary!");
+            log.error("Salary couldn't be set to", salary);
+
         }
     }
 
@@ -160,6 +166,7 @@ public class Employee extends Person {
             if(this.typeOfActivity == TypeOfActivity.MAINTAINER) {
                 /* *********** Goes to the Tanking Station and refuels the car ********** */
                 combustionCar.setFuelLevel(100);
+                log.info("Set FuelLevel to 100.");
             }
         }
     }

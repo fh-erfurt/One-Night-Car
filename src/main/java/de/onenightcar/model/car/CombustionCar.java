@@ -1,7 +1,10 @@
 package de.onenightcar.model.car;
 
 import de.onenightcar.model.parkingArea.ParkingArea;
+import de.onenightcar.model.person.Admin;
 import de.onenightcar.model.person.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +21,8 @@ import javax.persistence.Enumerated;
 public class CombustionCar extends Car {
 
     /* /////////////////////Attributes/////////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(Admin.class);
 
     // A car does not change it Transmission, its enough when we save just a String whit the Car Transmission
     @Enumerated(EnumType.STRING)
@@ -88,9 +93,11 @@ public class CombustionCar extends Car {
         this.fuelType = FuelType.PETROL;
         if(parkingArea.numberOfCarsAssignedToStation() < parkingArea.getMaxCapacity()) {
             parkingArea.assignCarToStation(this);
+            log.info("Combustion car:", CombustionCar.this, "assigned to parking area", parkingArea);
         }
         else{
             System.out.println("there is no more place in this park!");
+            log.warn("Parking Area", parkingArea, "is full");
         }
     }
 
@@ -109,9 +116,11 @@ public class CombustionCar extends Car {
     public void setFuelLevel(double fuelLevel){
         try {
             this.fuelLevel = fuelLevel;
+            log.info("Set Fuel level to ", fuelLevel);
         }
         catch(Exception e){
             System.out.print("FuelLevel inadmissible!");
+            log.error("Fuel level inadmissible");
         }
     }
 

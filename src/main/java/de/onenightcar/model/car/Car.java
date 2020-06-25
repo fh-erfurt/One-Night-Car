@@ -1,8 +1,11 @@
 package de.onenightcar.model.car;
 
+import de.onenightcar.model.person.Admin;
 import de.onenightcar.model.person.Customer;
 import de.onenightcar.model.rental.Rental;
 import de.onenightcar.util.AbstractDatabaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +23,8 @@ import javax.persistence.OneToOne;
 public abstract class Car extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes/////////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(Car.class);
 
     // A car does not change it Type, its enough when we save just a String whit the Car Type
     @Enumerated(EnumType.STRING)
@@ -73,6 +78,7 @@ public abstract class Car extends AbstractDatabaseEntity {
      */
     public void changeCarState (State newCarState) {
         this.state = newCarState;
+        log.info("Car state change to ", newCarState);
     }
 
     /* /////////////////////Methods/////////////////////////// */
@@ -91,9 +97,11 @@ public abstract class Car extends AbstractDatabaseEntity {
    public void setNewLocation(double GPSLatitude, double GPSLongitude){
        try {
            this.carLocation = new CarLocation(GPSLatitude, GPSLongitude);
+           log.info("New car location set to ", carLocation);
        }
        catch(Exception e){
            System.out.print("Latitude inadmissible!");
+           log.error("Latitude inadmissible ", carLocation,e);
        }
    }
 
@@ -131,6 +139,7 @@ public abstract class Car extends AbstractDatabaseEntity {
      */
     public void setOdometer (Rental rental) {
         this.odometer = rental.getOdometerAfter();
+        log.info("New Odometer: ", odometer);
     }
 
     public enum Type{

@@ -3,6 +3,8 @@ package de.onenightcar.model.person;
 
 import de.onenightcar.model.rental.*;
 import de.onenightcar.model.car.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,7 +23,7 @@ import java.util.List;
 public class Customer extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
-
+    static Logger log = LoggerFactory.getLogger(Customer.class);
     @OneToMany
     public List<FuelRental> fuelRentals;
 
@@ -78,6 +80,7 @@ public class Customer extends Person {
      */
     public CustomerLevel getCustomerLevel(){
         return this.customerLevel;
+
     }
 
     /** Sets the Customer Level.
@@ -85,6 +88,7 @@ public class Customer extends Person {
      */
     public void setCustomerLevel(CustomerLevel customerLevel){
         this.customerLevel = customerLevel;
+        log.info("Changed CustomerLevel to", customerLevel);
     }
 
     /** Gets the Electric Rentals.
@@ -136,6 +140,7 @@ public class Customer extends Person {
         this.paymentMethod.setCardType(cardType);
         this.paymentMethod.setValidThrough(validThrough);
         this.paymentMethod.setCCV(CCV);
+        log.info("Payment Method changed");
     }
 
     /** Represents the situation in which the customer needs Support from an Employee
@@ -191,6 +196,7 @@ public class Customer extends Person {
             ElectricRental electricRental = new ElectricRental(electricCar, date,
                     departure, arrival);
             this.electricRentals.add(electricRental);
+            log.info("Rental executed!");
         }
         catch(Exception e){
             System.out.print("Rental couldn't be executed!");
@@ -216,11 +222,13 @@ public class Customer extends Person {
                     this.electricRentals.remove(electricRental);
                     // Add the new OneNightCar.Rental
                     this.electricRentals.add(newElectricRental);
+                    log.info("Electric Rental modified");
                 }
             //}
         }
         catch(Exception e){
             System.out.print("Electric Car couldn't be modified!");
+            log.error("Electric Car couldn't be modified!");
         }
     }
 
@@ -234,6 +242,7 @@ public class Customer extends Person {
                 this.electricRentals.remove(electricRental);
                 Admin.deleteElectricRental(electricRental);
             }
+            log.info("ElectricRental canceled!");
         //}
     }
 
@@ -249,9 +258,11 @@ public class Customer extends Person {
          try {
              FuelRental fuelRental = new FuelRental(combustionCar, date, departure, arrival);
              this.fuelRentals.add(fuelRental);
+             log.info("FuelCar rented.");
          }
          catch(Exception e){
              System.out.print("Rental could not be executed!");
+             log.error("Rental could not be executed!");
          }
      }
 
@@ -272,6 +283,8 @@ public class Customer extends Person {
                 this.fuelRentals.remove(fuelRental);
                 // Add the new OneNightCar.Rental
                 this.fuelRentals.add(newFuelRental);
+                log.info("Rental modified.");
+                log.info(String.valueOf(newFuelRental));
             }
        // }
     }
@@ -295,6 +308,7 @@ public class Customer extends Person {
      */
     public void customerDamagesAnElectricCar(ElectricCar electricCar){
         electricCar.changeCarState(Car.State.DAMAGED);
+        log.info("Customer damaged ElectricCar", electricCar);
     }
 
     /** Simulates the Situation in which a customer damages an Electric OneNightCar.Car
@@ -302,6 +316,7 @@ public class Customer extends Person {
      */
     public void customerDamagesAFuelCar(CombustionCar combustionCar){
         combustionCar.changeCarState(Car.State.DAMAGED);
+        log.info("Customer damaged FuelCar", combustionCar);
     }
 
     public enum CustomerLevel {
