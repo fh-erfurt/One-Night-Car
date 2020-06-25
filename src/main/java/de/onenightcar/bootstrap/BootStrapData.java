@@ -1,9 +1,15 @@
 package de.onenightcar.bootstrap;
 
-import de.onenightcar.model.person.PaymentMethod;
-import de.onenightcar.repositories.carRespository.CombustionCarRepository;
-import de.onenightcar.repositories.carRespository.ElectricCarRepository;
-import de.onenightcar.repositories.personRepository.PaymentMethodRepository;
+import de.onenightcar.model.person.*;
+import de.onenightcar.model.rental.*;
+import de.onenightcar.model.parkingArea.*;
+import de.onenightcar.model.car.*;
+
+import de.onenightcar.repositories.carRespository.*;
+import de.onenightcar.repositories.parkingAreaRepository.*;
+import de.onenightcar.repositories.rentalRepository.*;
+import de.onenightcar.repositories.personRepository.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -18,21 +24,51 @@ public class BootStrapData implements CommandLineRunner {
 
     //Person Package
     private final PaymentMethodRepository paymentMethodRepository;
+    private final CustomerRepository customerRepository;
+    private final EmployeeRepository employeeRepository;
+    private final PersonAddressRepository personAddressRepository;
+    private final AdminRepository adminRepository;
 
     //ParkingArea Package
-
+    private final ElectricParkingAreaRepository electricParkingAreaRepository;
+    private final ParkingAreaRepository parkingAreaRepository;
+    private final ParkingAreaAddressRepository parkingAreaAddressRepository;
 
     //Car Packages
+    private final CarLocationRepository carLocationRepository;
     private final CombustionCarRepository combustionCarRepository;
-
+    private final ElectricCarRepository electricCarRepository;
 
     //RentalPackage
+    private final ElectricRentalRepository electricRentalRepository;
+    private final FuelRentalRepository fuelRentalRepository;
 
-
-    //TODO: If you add something above this, change the constructor underneath this!!
-    public BootStrapData(CombustionCarRepository combustionCarRepository, PaymentMethodRepository paymentMethodRepository) {
-        this.combustionCarRepository = combustionCarRepository;
+    public BootStrapData(PaymentMethodRepository paymentMethodRepository,
+                         CustomerRepository customerRepository,
+                         EmployeeRepository employeeRepository,
+                         PersonAddressRepository personAddressRepository,
+                         AdminRepository adminRepository,
+                         ElectricParkingAreaRepository electricParkingAreaRepository,
+                         ParkingAreaRepository parkingAreaRepository,
+                         ParkingAreaAddressRepository parkingAreaAddressRepository,
+                         CarLocationRepository carLocationRepository,
+                         CombustionCarRepository combustionCarRepository,
+                         ElectricCarRepository electricCarRepository,
+                         ElectricRentalRepository electricRentalRepository,
+                         FuelRentalRepository fuelRentalRepository) {
         this.paymentMethodRepository = paymentMethodRepository;
+        this.customerRepository = customerRepository;
+        this.employeeRepository = employeeRepository;
+        this.personAddressRepository = personAddressRepository;
+        this.adminRepository = adminRepository;
+        this.electricParkingAreaRepository = electricParkingAreaRepository;
+        this.parkingAreaRepository = parkingAreaRepository;
+        this.parkingAreaAddressRepository = parkingAreaAddressRepository;
+        this.carLocationRepository = carLocationRepository;
+        this.combustionCarRepository = combustionCarRepository;
+        this.electricCarRepository = electricCarRepository;
+        this.electricRentalRepository = electricRentalRepository;
+        this.fuelRentalRepository = fuelRentalRepository;
     }
 
     @Override
