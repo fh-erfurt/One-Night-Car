@@ -58,7 +58,7 @@ public class Customer extends Person {
     /** Creates a Customer with default Values.
      * It is used to increment speed of UnitTests.
      */
-    public Customer( ){
+    public Customer(){
         this.firstName = "Max";
         this.surname = "Mustermann";
         this.dateOfBirth = LocalDateTime.of(1990,12,31,00,00);

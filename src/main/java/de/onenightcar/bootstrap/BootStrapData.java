@@ -81,7 +81,7 @@ public class BootStrapData implements CommandLineRunner {
         //Payment Method
 
         PaymentMethod pm1 = new PaymentMethod();
-        LocalDateTime validTrough = LocalDateTime.of(2021,02,20,10,10);
+        LocalDateTime validTrough = LocalDateTime.of(2021, 2,20,10,10);
         PaymentMethod pm2 = new PaymentMethod("1111 1111 1111 1111", PaymentMethod.CardType.DEBIT, validTrough, "225");
         PaymentMethod pm3 = new PaymentMethod("2222 2222 2222 2222", PaymentMethod.CardType.CREDIT, validTrough, "225");
 
@@ -96,16 +96,22 @@ public class BootStrapData implements CommandLineRunner {
 
         log.info("Number of Payment Methods added: " + paymentMethodRepository.count());
 
-        //Person Address
+        //Person Address (Customer)
 
         PersonAddress pa1 = new PersonAddress("99084", "Erfurt", "Hirschlachufer", "3");
         PersonAddress pa2 = new PersonAddress("07743", "Jena", "Bibliotheksweg", "11");
         PersonAddress pa3 = new PersonAddress("99423", "Weimar", "Eckenerstraße", "19");
+        PersonAddress ea1 = new PersonAddress("07743", "Jena", "Am Planetarium", "38");
+        PersonAddress ea2 = new PersonAddress("99423", "Weimar", "Goethestraße", "22");
+        PersonAddress ea3 = new PersonAddress("69126", "Heidelberg", "Holbeinring", "17");
 
         try{
             personAddressRepository.save(pa1);
             personAddressRepository.save(pa2);
             personAddressRepository.save(pa3);
+            personAddressRepository.save(ea1);
+            personAddressRepository.save(ea2);
+            personAddressRepository.save(ea3);
         } catch (Exception e) {
             log.debug("Exception" + e);
         }
@@ -114,9 +120,9 @@ public class BootStrapData implements CommandLineRunner {
 
         //Customer
 
-        LocalDateTime customer1DOB = LocalDateTime.of(1988, 02, 29,00,00);
-        LocalDateTime customer2DOB = LocalDateTime.of(1992, 02, 29,00,00);
-        LocalDateTime customer3DOB = LocalDateTime.of(1990, 12, 31,00,00);
+        LocalDateTime customer1DOB = LocalDateTime.of(1988, 2, 29,0,0);
+        LocalDateTime customer2DOB = LocalDateTime.of(1992, 2, 29,0,0);
+        LocalDateTime customer3DOB = LocalDateTime.of(1990, 12, 31, 0,0);
 
         Customer customer1 = new Customer("Max", "Musterman", customer1DOB, pa1, Customer.CustomerLevel.NEWUSER, pm1);
         Customer customer2 = new Customer("Maria", "Musterfrau", customer2DOB, pa2, Customer.CustomerLevel.REGULARUSER, pm2);
@@ -135,13 +141,13 @@ public class BootStrapData implements CommandLineRunner {
 
         //Employee
 
-        LocalDateTime employee1DOB = LocalDateTime.of(1970, 3, 31,00,00);
-        LocalDateTime employee2DOB = LocalDateTime.of(1965, 07, 17,00,00);
-        LocalDateTime employee3DOB = LocalDateTime.of(1992, 12, 31,00,00);
+        LocalDateTime employee1DOB = LocalDateTime.of(1970, 3, 31,0,0);
+        LocalDateTime employee2DOB = LocalDateTime.of(1965, 7, 17,0,0);
+        LocalDateTime employee3DOB = LocalDateTime.of(1992, 12, 31,0,0);
 
-        Employee employee1 = new Employee();
-        Employee employee2 = new Employee("John", "Doe", employee1DOB, pa1, 1600.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
-        Employee employee3 = new Employee("Pepito", "Perez", employee2DOB, pa2, 1800.00f, Employee.TypeOfActivity.MAINTAINER);
+        Employee employee1 = new Employee("John", "Doe", employee1DOB, ea1, 1600.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
+        Employee employee2 = new Employee("Pepito", "Perez", employee2DOB, ea2, 1800.00f, Employee.TypeOfActivity.MAINTAINER);
+        Employee employee3 = new Employee("Mike", "Bossman", employee3DOB, ea3, 1800.00f, Employee.TypeOfActivity.BOSS);
 
         try{
             employeeRepository.save(employee1);
@@ -154,20 +160,21 @@ public class BootStrapData implements CommandLineRunner {
         log.info("Number of Employees added: " + employeeRepository.count());
 
         //Admin
-        // TODO
-      /*  LocalDateTime adminDOB = LocalDateTime.of(1986, 9, 30,00,00);
+
+        LocalDateTime adminDOB = LocalDateTime.of(1986, 9, 30,0,0);
         PersonAddress adminAddress = new PersonAddress("99084", "Erfurt", "Stotternheimstrasse", "52");
 
 
-        Admin admin = new Employee("Administrator","Admin", adminDOB, adminAddress, 1999.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
+        Admin admin = new Admin("Administrator","Admin", adminDOB, adminAddress, 1999.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
 
         try{
+            personAddressRepository.save(admin.getPersonAddress());
             adminRepository.save(admin);
         } catch (Exception e) {
             log.debug("Exception" + e);
         }
 
-        log.info("Number of Admins added: " + adminRepository.count());*/
+        log.info("Number of Admins added: " + adminRepository.count());
 
 
 
@@ -178,13 +185,13 @@ public class BootStrapData implements CommandLineRunner {
         ParkingAreaAddress parkingAreaAddress1 = new ParkingAreaAddress();
         ParkingAreaAddress parkingAreaAddress2 = new ParkingAreaAddress("99084", "Erfurt", "Hirschlachufer", "3");
         ParkingAreaAddress parkingAreaAddress3 = new ParkingAreaAddress("99423", "Weimar", "Eckenerstraße", "19");
-
-
+        ParkingAreaAddress parkingAreaAddress4 = new ParkingAreaAddress("99423", "Weimar", "Eckenerstraße", "20");
 
         try{
             parkingAreaAddressRepository.save(parkingAreaAddress1);
             parkingAreaAddressRepository.save(parkingAreaAddress2);
             parkingAreaAddressRepository.save(parkingAreaAddress3);
+            parkingAreaAddressRepository.save(parkingAreaAddress4);
         } catch (Exception e) {
             log.debug("Exception" + e);
         }
@@ -209,8 +216,11 @@ public class BootStrapData implements CommandLineRunner {
         //Electric Parking Area
 
         ElectricParkingArea electricParkingArea1 = new ElectricParkingArea(parkingAreaAddress3, 300, 50);
+        ElectricParkingArea electricParkingArea2 = new ElectricParkingArea(parkingAreaAddress4, 10, 10);
+
         try{
             electricParkingAreaRepository.save(electricParkingArea1);
+            electricParkingAreaRepository.save(electricParkingArea2);
 
         }catch (Exception e){
             log.debug("Exception" + e);
@@ -245,20 +255,22 @@ public class BootStrapData implements CommandLineRunner {
                                                     50.978075, 11.037416, 67000, Customer.CustomerLevel.NEWUSER,
                                                     49.99f, 40, 100, 3.46, CombustionCar.Transmission.AUTOMATIC,
                                                     CombustionCar.FuelType.PETROL, parkingArea1);
-
         CombustionCar combustionCar2 = new CombustionCar(parkingArea2);
         CombustionCar combustionCar3 = new CombustionCar(parkingArea1);
 
         try{
+            carLocationRepository.save(combustionCar1.getCarLocation());
             combustionCarRepository.save(combustionCar1);
+            carLocationRepository.save(combustionCar2.getCarLocation());
             combustionCarRepository.save(combustionCar2);
+            carLocationRepository.save(combustionCar3.getCarLocation());
             combustionCarRepository.save(combustionCar3);
 
         }catch (Exception e){
             log.debug("Exception" + e);
         }
 
-        log.info("Number of Cars added: " + combustionCarRepository.count() );
+        log.info("Number of Fuel Cars added: " + combustionCarRepository.count() );
 
         //Electric Car
 
@@ -267,7 +279,9 @@ public class BootStrapData implements CommandLineRunner {
         ElectricCar electricCar2 = new ElectricCar(electricParkingArea1);
 
         try{
+            carLocationRepository.save(electricCar1.getCarLocation());
             electricCarRepository.save(electricCar1);
+            carLocationRepository.save(electricCar2.getCarLocation());
             electricCarRepository.save(electricCar2);
 
         }catch (Exception e){
@@ -275,7 +289,6 @@ public class BootStrapData implements CommandLineRunner {
         }
 
         log.info("Number of Electric Cars added: " + electricCarRepository.count() );
-
 
 
         ///////RentalPackage///////

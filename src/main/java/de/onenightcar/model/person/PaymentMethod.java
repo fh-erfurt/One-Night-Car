@@ -123,5 +123,4 @@ public class PaymentMethod extends AbstractDatabaseEntity {
                "Valid Through: '" + this.validThrough + "', " +
                "CCC" + this.CCV + "'";
     }
-
 }

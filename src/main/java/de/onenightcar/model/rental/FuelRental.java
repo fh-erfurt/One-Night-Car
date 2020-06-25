@@ -114,5 +114,4 @@ public class FuelRental extends Rental {
     }
 
     /* /////////////////////Overrides/////////////////////////// */
-
 }
