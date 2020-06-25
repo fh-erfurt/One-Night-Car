@@ -26,6 +26,7 @@ public class CarLocation extends AbstractDatabaseEntity {
 
     /* /////////////////////Constructors/////////////////////////// */
 
+    // Needed to be able to create the entity
     protected CarLocation(){}
 
     /***
@@ -37,7 +38,7 @@ public class CarLocation extends AbstractDatabaseEntity {
         this.GPSLongitude = GPSLongitude;
     }
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     public double getGPSLatitude(){return this.GPSLatitude;}
 
@@ -64,5 +65,7 @@ public class CarLocation extends AbstractDatabaseEntity {
         GPSLongitude= longitude;
         log.info("GPS longitude set to ", longitude);
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
 
 }

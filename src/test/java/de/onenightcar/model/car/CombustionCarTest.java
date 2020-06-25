@@ -13,7 +13,7 @@ class CombustionCarTest {
 
         ParkingArea parkingArea = new ParkingArea();
         CombustionCar car1 = new CombustionCar(parkingArea);
-        car1.changeCarState(Car.State.DAMAGED);
+        car1.setCarState(Car.State.DAMAGED);
 
         /* assertEquals(Expected         , Actual            ); */
         assertEquals(Car.State.DAMAGED, car1.getCarState());

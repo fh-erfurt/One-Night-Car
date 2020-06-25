@@ -28,7 +28,7 @@ class CustomerTest {
     @Test
     void the_payment_method_may_be_changed() {
         Customer max = new Customer();
-        GregorianCalendar testCalendar = new GregorianCalendar(2025,GregorianCalendar.FEBRUARY,20);
+        LocalDateTime testCalendar = LocalDateTime.of(2025,2,20,10,10);
         PaymentMethod paymentMethod = new PaymentMethod("0000 1111 2222 3333", PaymentMethod.CardType.DEBIT, testCalendar, "123");
 
         max.setPaymentMethod(paymentMethod);
@@ -58,9 +58,9 @@ class CustomerTest {
         ElectricCar car2 = new ElectricCar(Area1);
         ElectricCar car3 = new ElectricCar(Area1);
 
-        ElectricRental testRental1 = new ElectricRental(car1);
-        ElectricRental testRental2 = new ElectricRental(car2);
-        ElectricRental testRental3 = new ElectricRental(car3);
+        ElectricRental testRental1 = new ElectricRental(car1, max);
+        ElectricRental testRental2 = new ElectricRental(car2, max);
+        ElectricRental testRental3 = new ElectricRental(car3, max);
 
         max.getElectricRentals().add(testRental1);
         max.getElectricRentals().add(testRental2);
@@ -125,8 +125,8 @@ class CustomerTest {
         max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, date, LocalDateTime.of(2020, 3, 16, 00,00),
                 LocalDateTime.of(2020, 3, 19, 00,00));
 
-        assertEquals(16, max.electricRentals.get(0).getDepartureTime().getDayOfMonth());
-        assertEquals(19, max.electricRentals.get(0).getArrivalTime().getDayOfMonth());
+        assertEquals(16, max.electricRentals.get(0).getDeparture().getDayOfMonth());
+        assertEquals(19, max.electricRentals.get(0).getArrival().getDayOfMonth());
     }
 
     @Test

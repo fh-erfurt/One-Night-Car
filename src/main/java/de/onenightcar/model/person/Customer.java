@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -36,7 +35,7 @@ public class Customer extends Person {
     @OneToOne
     private PaymentMethod paymentMethod;
 
-
+    /* /////////////////////Constructors/////////////////////////// */
 
     /** Creates a Customer with specified Customer Parameters.
      * @param firstName A String representing Customers first Name
@@ -58,8 +57,6 @@ public class Customer extends Person {
     }
 
 
-    /* /////////////////////Methods/////////////////////////// */
-
     /** Creates a Customer with default Values.
      * It is used to increment speed of UnitTests.
      */
@@ -74,6 +71,7 @@ public class Customer extends Person {
         this.electricRentals = new ArrayList<ElectricRental>();
     }
 
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Customer Level.
      * @return A CustomerLevel representing Level of a Customer
@@ -98,12 +96,8 @@ public class Customer extends Person {
         return this.electricRentals;
     }
 
-    /** Gets the Electric OneNightCar.Rental with index.
-     * @param index an int index
-     * @return An ElectricRental with given index
-     */
-    public ElectricRental getElectricRentalWithIndex(int index){
-        return this.electricRentals.get(index);
+    public void setElectricRentals(List<ElectricRental> electricRentals) {
+        this.electricRentals = electricRentals;
     }
 
     /** Gets the Fuel Rentals.
@@ -113,12 +107,8 @@ public class Customer extends Person {
         return this.fuelRentals;
     }
 
-    /** Gets the Fuel OneNightCar.Rental with index.
-     * @param index an int index
-     * @return A FuelRental with given index
-     */
-    public FuelRental getFuelRentalWithIndex(int index){
-        return this.fuelRentals.get(index);
+    public void setFuelRentals(List<FuelRental> fuelRentals) {
+        this.fuelRentals = fuelRentals;
     }
 
     /** Gets the Customer Payment Method.
@@ -135,12 +125,31 @@ public class Customer extends Person {
         this.paymentMethod = paymentMethod;
     }
 
-    public void setPaymentMethod(String cardNumber, PaymentMethod.CardType cardType, GregorianCalendar validThrough, String CCV){
+    public void setPaymentMethod(String cardNumber, PaymentMethod.CardType cardType, LocalDateTime validThrough, String CCV){
         this.paymentMethod.setCardNumber(cardNumber);
         this.paymentMethod.setCardType(cardType);
         this.paymentMethod.setValidThrough(validThrough);
         this.paymentMethod.setCCV(CCV);
         log.info("Payment Method changed");
+    }
+
+    /* /////////////////////Methods/////////////////////////// */
+
+
+    /** Gets the Electric OneNightCar.Rental with index.
+     * @param index an int index
+     * @return An ElectricRental with given index
+     */
+    public ElectricRental getElectricRentalWithIndex(int index){
+        return this.electricRentals.get(index);
+    }
+
+    /** Gets the Fuel OneNightCar.Rental with index.
+     * @param index an int index
+     * @return A FuelRental with given index
+     */
+    public FuelRental getFuelRentalWithIndex(int index){
+        return this.fuelRentals.get(index);
     }
 
     /** Represents the situation in which the customer needs Support from an Employee
@@ -194,7 +203,7 @@ public class Customer extends Person {
                                   LocalDateTime departure, LocalDateTime arrival) {
         try {
             ElectricRental electricRental = new ElectricRental(electricCar, date,
-                    departure, arrival);
+                    departure, arrival, this);
             this.electricRentals.add(electricRental);
             log.info("Rental executed!");
         }
@@ -217,18 +226,16 @@ public class Customer extends Person {
             //if (electricRental.getCustomerID() == this.customerID) {
                 if (Admin.approveRentalModification(electricRental)) {
                     ElectricRental newElectricRental = new ElectricRental(electricCar, date,
-                            departure, arrival);
+                            departure, arrival, this);
                     // Remove the old OneNightCar.Rental
                     this.electricRentals.remove(electricRental);
                     // Add the new OneNightCar.Rental
                     this.electricRentals.add(newElectricRental);
-                    log.info("Electric Rental modified");
                 }
             //}
         }
         catch(Exception e){
             System.out.print("Electric Car couldn't be modified!");
-            log.error("Electric Car couldn't be modified!");
         }
     }
 
@@ -256,7 +263,7 @@ public class Customer extends Person {
      public void rentAFuelCar(CombustionCar combustionCar,
                               LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
          try {
-             FuelRental fuelRental = new FuelRental(combustionCar, date, departure, arrival);
+             FuelRental fuelRental = new FuelRental(combustionCar, date, departure, arrival, this);
              this.fuelRentals.add(fuelRental);
              log.info("FuelCar rented.");
          }
@@ -278,7 +285,7 @@ public class Customer extends Person {
         // TODO check if its the right customer without the class attribute
         // if (fuelRental.getCustomerID() == this.customerID){
             if (Admin.approveRentalModification(fuelRental)){
-                FuelRental newFuelRental = new FuelRental( combustionCar, date, departure, arrival);
+                FuelRental newFuelRental = new FuelRental( combustionCar, date, departure, arrival, this);
                 // Remove the old OneNightCar.Rental
                 this.fuelRentals.remove(fuelRental);
                 // Add the new OneNightCar.Rental
@@ -307,7 +314,7 @@ public class Customer extends Person {
      * @param electricCar the OneNightCar.Car that was Damaged
      */
     public void customerDamagesAnElectricCar(ElectricCar electricCar){
-        electricCar.changeCarState(Car.State.DAMAGED);
+        electricCar.setCarState(Car.State.DAMAGED);
         log.info("Customer damaged ElectricCar", electricCar);
     }
 
@@ -315,13 +322,18 @@ public class Customer extends Person {
      * @param combustionCar the OneNightCar.Car that was Damaged
      */
     public void customerDamagesAFuelCar(CombustionCar combustionCar){
-        combustionCar.changeCarState(Car.State.DAMAGED);
+        combustionCar.setCarState(Car.State.DAMAGED);
         log.info("Customer damaged FuelCar", combustionCar);
     }
+
+    /* /////////////////////Enums/////////////////////////// */
 
     public enum CustomerLevel {
         NEWUSER,
         REGULARUSER,
         SUPERUSER
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }

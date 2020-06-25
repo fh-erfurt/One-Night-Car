@@ -5,11 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
-import java.util.GregorianCalendar;
+import java.time.LocalDateTime;
 
 /** Represents a PaymentMethod
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
@@ -23,7 +23,7 @@ public class PaymentMethod extends AbstractDatabaseEntity {
 
     private String cardNumber;
     private CardType cardType;
-    private GregorianCalendar validThrough;
+    private LocalDateTime validThrough;
     private String CCV;
 
     /** Creates a PaymentMethod with specified PaymentMethod.
@@ -32,7 +32,7 @@ public class PaymentMethod extends AbstractDatabaseEntity {
      * @param validThrough PaymentMethod’s Date (Until when the Card is Valid)
      * @param CCV PaymentMethod’s CCV (Security Code on the back)
      */
-    public PaymentMethod(String cardNumber, CardType cardType, GregorianCalendar validThrough, String CCV){
+    public PaymentMethod(String cardNumber, CardType cardType, LocalDateTime validThrough, String CCV){
         this.cardNumber = cardNumber;
         this.cardType = cardType;
         this.validThrough = validThrough;
@@ -45,11 +45,11 @@ public class PaymentMethod extends AbstractDatabaseEntity {
     public PaymentMethod(){
         this.cardNumber = "0000 0000 0000 0000";
         this.cardType = CardType.CREDIT;
-        this.validThrough = new GregorianCalendar(2025,GregorianCalendar.DECEMBER,31);
+        this.validThrough = LocalDateTime.of(2020,01,31,00,00);
         this.CCV = "999";
     }
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the PaymentMethod Card Number.
      * @return A string representing the PaymentMethod Card Number
@@ -113,14 +113,14 @@ public class PaymentMethod extends AbstractDatabaseEntity {
     /** Gets the PaymentMethod Valid Through.
      * @return A Gregorian Calendar representing the PaymentMethod Valid Through
      */
-    public GregorianCalendar getValidThrough(){
+    public LocalDateTime getValidThrough(){
         return this.validThrough;
     }
 
     /** Sets the PaymentMethod Valid Through.
      * @param validThrough A Gregorian Calendar containing the PaymentMethod Valid Through
      */
-    public void setValidThrough(GregorianCalendar validThrough){
+    public void setValidThrough(LocalDateTime validThrough){
         this.validThrough = validThrough;
         log.info("Valid through set to ");
         log.info(String.valueOf(validThrough));
@@ -141,6 +141,15 @@ public class PaymentMethod extends AbstractDatabaseEntity {
         log.info("CCV set to ", CCV);
     }
 
+    /* /////////////////////Enums/////////////////////////// */
+
+    public enum CardType{
+        DEBIT,
+        CREDIT
+    }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
     @Override
     public String toString() {
         return "Card Number: '" + this.cardNumber + "', " +
@@ -149,9 +158,4 @@ public class PaymentMethod extends AbstractDatabaseEntity {
                "CCC" + this.CCV + "'";
     }
 
-
-    public enum CardType{
-        DEBIT,
-        CREDIT
-    }
 }

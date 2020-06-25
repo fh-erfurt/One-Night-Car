@@ -25,7 +25,7 @@ public class FuelRentalTest {
 
 
         CombustionCar CombustionCar = new CombustionCar(parkingArea);
-        FuelRental rental2 = new FuelRental( CombustionCar, date, departure, arrival);
+        FuelRental rental2 = new FuelRental( CombustionCar, date, departure, arrival, customer);
         rental2.setOdometerAfter();
         rental2.setFuelLevelAfter(CombustionCar);
         assertEquals(-1, rental2.getFuelLevelAfter(), "The car had to be refueled already in order to drive this far.");

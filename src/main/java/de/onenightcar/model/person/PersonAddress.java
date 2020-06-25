@@ -26,7 +26,7 @@ public class PersonAddress extends AbstractDatabaseEntity {
     private String street;
     private String streetNumber;
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Constructors/////////////////////////// */
 
     /** Creates a PersonAddress with specified Address.
      * @param ZIP Address’s ZIP
@@ -50,6 +50,8 @@ public class PersonAddress extends AbstractDatabaseEntity {
         this.street = "Altonaer Str.";
         this.streetNumber = "25";
     }
+
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Address ZIP.
      * @return A string representing the Address ZIP
@@ -127,6 +129,8 @@ public class PersonAddress extends AbstractDatabaseEntity {
         this.streetNumber = streetNumber;
         log.info("Set streetNumber to ", streetNumber);
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
 
     @Override
     public String toString() {

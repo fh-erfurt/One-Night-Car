@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 
 /** Represents a OneNightCar.Car
  * @author OneNightCar
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  */
 
@@ -73,15 +73,15 @@ public abstract class Car extends AbstractDatabaseEntity {
         this.price=price;
     }
 
+    /* /////////////////////Getter/Setters/////////////////////////// */
+
     /** Change the OneNightCar.Car state .
      * @param newCarState an enum containing the OneNightCar.Car new State
      */
-    public void changeCarState (State newCarState) {
+    public void setCarState(State newCarState) {
         this.state = newCarState;
         log.info("Car state change to ", newCarState);
     }
-
-    /* /////////////////////Methods/////////////////////////// */
 
     /** Gets the OneNightCar.Car State.
      * @return the OneNightCar.Car State
@@ -90,41 +90,36 @@ public abstract class Car extends AbstractDatabaseEntity {
         return this.state;
     }
 
-    /** Set a new Location of the OneNightCar.Car .
-     * @param GPSLatitude the latitude of the GPS
-     * @param GPSLongitude the longitude of the GPS
-     */
-   public void setNewLocation(double GPSLatitude, double GPSLongitude){
-       try {
-           this.carLocation = new CarLocation(GPSLatitude, GPSLongitude);
-           log.info("New car location set to ", carLocation);
-       }
-       catch(Exception e){
-           System.out.print("Latitude inadmissible!");
-           log.error("Latitude inadmissible ", carLocation,e);
-       }
-   }
-
-    /** Gets the OneNightCar.Car Location
-     * @return the Location of the OneNightCar.Car
-     */
-   public CarLocation getCarLocation(){
-        return this.carLocation;
-   }
-
-   public double getGPSLatitude(){
-       return this.carLocation.getGPSLatitude();
-   }
-
-    public double getGPSLongitude(){
-        return this.carLocation.getGPSLongitude();
+    public Type getType() {
+        return type;
     }
 
-    /** Gets the OneNightCar.Car Price
-     * @return the Price of the OneNightCar.Car in one Hour
-     */
-    public float getPrice(){
-        return this.price;
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     /** Gets the OneNightCar.Car odometer
@@ -134,13 +129,65 @@ public abstract class Car extends AbstractDatabaseEntity {
         return this.odometer;
     }
 
+    public void setOdometer(long odometer) {
+        this.odometer = odometer;
+    }
+
     /** Change the OneNightCar.Car odometer .
      * @param rental gets the Odometer information after the return of the OneNightCar.Car from the OneNightCar.Rental Class
      */
     public void setOdometer (Rental rental) {
         this.odometer = rental.getOdometerAfter();
-        log.info("New Odometer: ", odometer);
     }
+
+    public Customer.CustomerLevel getCustomerLevel() {
+        return customerLevel;
+    }
+
+    public void setCustomerLevel(Customer.CustomerLevel customerLevel) {
+        this.customerLevel = customerLevel;
+    }
+
+    /** Gets the OneNightCar.Car Price
+     * @return the Price of the OneNightCar.Car in one Hour
+     */
+    public float getPrice(){
+        return this.price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    /** Gets the OneNightCar.Car Location
+     * @return the Location of the OneNightCar.Car
+     */
+    public CarLocation getCarLocation(){
+        return this.carLocation;
+    }
+
+    public void setCarLocation(CarLocation carLocation) {
+        this.carLocation = carLocation;
+    }
+
+    public void setCarLocation(double GPSLatitude, double GPSLongitude){
+        try {
+            this.carLocation = new CarLocation(GPSLatitude, GPSLongitude);
+        }
+        catch(Exception e){
+            System.out.print("Latitude inadmissible!");
+        }
+    }
+
+    public double getGPSLatitude(){
+        return this.carLocation.getGPSLatitude();
+    }
+
+    public double getGPSLongitude(){
+        return this.carLocation.getGPSLongitude();
+    }
+
+    /* /////////////////////Enums/////////////////////////// */
 
     public enum Type{
         MINI,

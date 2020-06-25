@@ -22,42 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Entity
 @RestController
 public class Admin extends Employee {
+
     /* /////////////////////Attributes///////////////////////// */
  static Logger log = LoggerFactory.getLogger(Admin.class);
 
-//    Logger logr = Logger.getLogger( Logger.GLOBAL_LOGGER_NAME );
-//
-//    private static void setupLogger() {
-//        LogManager.getLogManager().reset();
-//        logr.setLevel(Level.ALL);
-//
-//        ConsoleHandler ch = new ConsoleHandler();
-//        ch.setLevel(Level.SEVERE);
-//        logr.addHandler(ch);
-//
-//        try {
-//            FileHandler fh = new FileHandler("myLogger.log", true);
-//            fh.setLevel(Level.FINE);
-//            logr.addHandler(fh);
-//        } catch (java.io.IOException e) {
-//            // don't stop my program but log out to console.
-//            logr.log(Level.SEVERE, "File logger not working.", e);
-//        }
-//         /*
-//         Different Levels in order
-//          OFF
-//          SEVERE
-//          WARNING
-//          INFO
-//          CONFIG
-//          FINE
-//          FINER
-//          FINEST
-//          ALL
-//        */
-//    }
+    /* /////////////////////Constructors/////////////////////////// */
 
-    /* /////////////////////Methods/////////////////////////// */
+    // Needed to be able to create the entity
+    protected Admin() {}
 
     /** Creates an Admin with specified Admin Parameters.
      * @param firstName A String representing Admin first Name
@@ -68,14 +40,11 @@ public class Admin extends Employee {
      * @param typeOfActivity a TypeOfActivity representing the activity of the OneNightCar.Person
      */
     public Admin(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
-                  float salary, TypeOfActivity typeOfActivity) {
+                 float salary, TypeOfActivity typeOfActivity) {
         super(firstName, surname, dateOfBirth, personAddress, salary, typeOfActivity);
     }
 
-
-    // Needed to be able to create the entity
-    protected Admin() {
-    }
+    /* /////////////////////Methods/////////////////////////// */
 
 
     /** Random boolean generator.
@@ -148,7 +117,7 @@ public class Admin extends Employee {
             log.info("Delete Employee successful");
         }
         catch(Exception e){
-            System.out.print("Employee could not be removed or does not exist!");
+            System.out.print(e +"Employee could not be removed or does not exist!");
             log.error("Employee Employee could not be removed or does not exist!");
             //
         }
@@ -163,4 +132,7 @@ public class Admin extends Employee {
         System.gc();
         log.info("Customer deleted!");
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }

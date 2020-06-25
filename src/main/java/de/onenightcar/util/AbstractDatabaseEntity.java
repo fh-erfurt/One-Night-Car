@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 
 
-@MappedSuperclass
+@Entity
 @Inheritance( strategy	= InheritanceType.TABLE_PER_CLASS )
 public abstract class AbstractDatabaseEntity implements Serializable {
 

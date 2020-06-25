@@ -33,7 +33,7 @@ class EmployeeTest {
 
         ElectricCar testElectricCar = new ElectricCar(Area1);
 
-        testElectricCar.changeCarState(Car.State.DAMAGED);
+        testElectricCar.setCarState(Car.State.DAMAGED);
         john.employeeRepairsElectricCar(testElectricCar);
 
         assertNotEquals(Car.State.PERFECT,  testElectricCar.getCarState());

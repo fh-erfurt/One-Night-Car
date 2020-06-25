@@ -21,6 +21,9 @@ public class Employee extends Person {
     static Logger log = LoggerFactory.getLogger(Employee.class);
     private float salary;
     private TypeOfActivity typeOfActivity;
+
+    /* /////////////////////Constructors/////////////////////////// */
+
     /** Creates an Employee with specified Employee Parameters.
      * @param firstName A String representing Employee first Name
      * @param surname A String representing Employee Surname
@@ -50,33 +53,7 @@ public class Employee extends Person {
         this.typeOfActivity = TypeOfActivity.BOSS;
     }
 
-
-
-    /* /////////////////////Methods/////////////////////////// */
-
-    /** Random boolean generator.
-     * @return a random Boolean
-     */
-    private static boolean getRandomBoolean(){
-        Random random = new Random();
-        return random.nextBoolean();
-    }
-
-    /** Represents the situation in which the Employee tries to helps a Customer
-     * @return A Boolean representing if the Issue was solved
-     * false: the Issue was solved
-     * true: the Issue was not solved
-     */
-    public boolean employeeHelpsCustomer(){
-        if(this.typeOfActivity == TypeOfActivity.CUSTOMERSUPPORT)
-        {
-            /* *********** Tries to make the Customer happy with the magical powers of Employee ********** */
-            return getRandomBoolean();
-        }
-        else {
-            return false;
-        }
-    }
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Employee TypeOfActivity.
      * @return A TypeOfActivity representing the activity of an Employee
@@ -114,6 +91,32 @@ public class Employee extends Person {
         }
     }
 
+    /* /////////////////////Methods/////////////////////////// */
+
+    /** Random boolean generator.
+     * @return a random Boolean
+     */
+    private static boolean getRandomBoolean(){
+        Random random = new Random();
+        return random.nextBoolean();
+    }
+
+    /** Represents the situation in which the Employee tries to helps a Customer
+     * @return A Boolean representing if the Issue was solved
+     * false: the Issue was solved
+     * true: the Issue was not solved
+     */
+    public boolean employeeHelpsCustomer(){
+        if(this.typeOfActivity == TypeOfActivity.CUSTOMERSUPPORT)
+        {
+            /* *********** Tries to make the Customer happy with the magical powers of Employee ********** */
+            return getRandomBoolean();
+        }
+        else {
+            return false;
+        }
+    }
+
     /** Employee tries to repair a car.
      * @param electricCar A ElectricCar needing to be repaired
      */
@@ -126,11 +129,11 @@ public class Employee extends Person {
                 carSuccessfullyRepaired = getRandomBoolean();
                 if (carSuccessfullyRepaired){
                     // The car could be Repaired
-                    electricCar.changeCarState(Car.State.OK);
+                    electricCar.setCarState(Car.State.OK);
                 }
                 else{
                     // Nothing to do here :(
-                    electricCar.changeCarState(Car.State.DAMAGED);
+                    electricCar.setCarState(Car.State.DAMAGED);
                 }
             }
         }
@@ -148,11 +151,11 @@ public class Employee extends Person {
                 carSuccessfullyRepaired = getRandomBoolean();
                 if (carSuccessfullyRepaired){
                     // The car could be Repaired
-                    combustionCar.changeCarState(Car.State.OK);
+                    combustionCar.setCarState(Car.State.OK);
                 }
                 else{
                     // Nothing to do here :(
-                    combustionCar.changeCarState(Car.State.DAMAGED);
+                    combustionCar.setCarState(Car.State.DAMAGED);
                 }
             }
         }
@@ -171,11 +174,15 @@ public class Employee extends Person {
         }
     }
 
+    /* /////////////////////Enums/////////////////////////// */
+
     public enum TypeOfActivity{
         CUSTOMERSUPPORT,
         MAINTAINER,
         BOSS
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
 
 }
 

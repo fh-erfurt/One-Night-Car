@@ -101,7 +101,7 @@ public class CombustionCar extends Car {
         }
     }
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Fuel Level
      * @return The Combustion OneNightCar.Car current Fuel level
@@ -131,6 +131,10 @@ public class CombustionCar extends Car {
        return this.tankSize;
    }
 
+    public void setTankSize(double tankSize) {
+        this.tankSize = tankSize;
+    }
+
     /** Gets the Average of Consumption
      * @return The Combustion OneNightCar.Car Consumption
      */
@@ -138,22 +142,47 @@ public class CombustionCar extends Car {
        return this.consumption;
    }
 
+    public void setConsumption(double consumption) {
+        this.consumption = consumption;
+    }
+
+    public Transmission getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(Transmission transmission) {
+        this.transmission = transmission;
+    }
+
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    /* /////////////////////Methods/////////////////////////// */
+
     /** set the fuel level on 100 %
      * */
     public void getTanked(){
-       setFuelLevel(100);
+        setFuelLevel(100);
     }
 
+    /* /////////////////////Enums/////////////////////////// */
 
     public enum  Transmission{
         MANUAL,
         AUTOMATIC
     }
 
-
     public enum FuelType{
         PETROL,
         DIESEL
     }
+
+    /* /////////////////////Overrides/////////////////////////// */
+
 }
 

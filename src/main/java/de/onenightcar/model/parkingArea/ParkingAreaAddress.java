@@ -20,7 +20,7 @@ public class ParkingAreaAddress extends AbstractDatabaseEntity {
     private String street;
     private String streetNumber;
 
-    /* /////////////////////Methods/////////////////////////// */
+    /* /////////////////////Constructors/////////////////////////// */
 
     /** Creates a ParkingAreaAddress with specified Address.
      * @param ZIP Address’s ZIP
@@ -28,9 +28,7 @@ public class ParkingAreaAddress extends AbstractDatabaseEntity {
      * @param street Address’s street name
      * @param streetNumber Address’s street number (With the possibility for Letters)
      */
-
     public ParkingAreaAddress(String ZIP, String city, String street, String streetNumber) {
-
         this.ZIP            = ZIP;
         this.city           = city;
         this.street         = street;
@@ -47,10 +45,11 @@ public class ParkingAreaAddress extends AbstractDatabaseEntity {
         this.streetNumber = "25";
     }
 
+    /* /////////////////////Getter/Setters/////////////////////////// */
+
     /**gets the ZIP
      * @return ZIP
      */
-
     public String getZIP() {
         try {
             return this.ZIP;
@@ -60,24 +59,39 @@ public class ParkingAreaAddress extends AbstractDatabaseEntity {
             return "00000";
         }
     }
+
+    public void setZIP(String ZIP) {
+        this.ZIP = ZIP;
+    }
+
     /**gets the City
      * @return City
      */
-
     public String getCity() {return this.city;}
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     /**gets the Street
      * @return Street
      */
-
     public String getStreet() {return this.street;}
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
     /**gets the street number
      * @return street number
      */
-
     public String getStreetNumber() {return this.streetNumber;}
 
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
+    /* /////////////////////Overrides/////////////////////////// */
 
     @Override
     public String toString() {

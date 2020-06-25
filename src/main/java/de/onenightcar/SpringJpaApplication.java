@@ -18,38 +18,5 @@ public class SpringJpaApplication {
 		SpringApplication.run(SpringJpaApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner demo(PaymentMethodRepository repository) {
-		return (args) -> {
-			// Save a couple Payment Methods
-			repository.save(new PaymentMethod());
-			repository.save(new PaymentMethod());
-			repository.save(new PaymentMethod());
-			repository.save(new PaymentMethod());
 
-			// fetch all paymentMethod
-			log.info("PaymentMethod found with findAll():");
-			log.info("-------------------------------");
-			for (PaymentMethod paymentMethod : repository.findAll()) {
-				log.info(paymentMethod.toString());
-			}
-			log.info("");
-
-			// fetch an individual paymentMethod by ID
-			PaymentMethod paymentMethod = repository.findById(1L);
-			log.info("PaymentMethod found with findById(1L):");
-			log.info("--------------------------------");
-			log.info(paymentMethod.toString());
-			log.info("");
-
-			// fetch customers by last name
-			log.info("PaymentMethod found with findByCardNumber('0000 0000 0000 0000'):");
-			log.info("--------------------------------------------");
-			repository.findByCardNumber("0000 0000 0000 0000").forEach(pm -> {
-				log.info(pm.toString());
-			});
-
-			log.info("");
-		};
-	}
 }
