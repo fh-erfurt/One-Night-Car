@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -20,6 +22,8 @@ public class Employee extends Person {
     /* /////////////////////Attributes///////////////////////// */
     static Logger log = LoggerFactory.getLogger(Employee.class);
     private float salary;
+
+    @Enumerated(EnumType.STRING)
     private TypeOfActivity typeOfActivity;
 
     /* /////////////////////Constructors/////////////////////////// */
@@ -44,7 +48,7 @@ public class Employee extends Person {
     /** Creates a Customer with default Values.
      * It is used to increment speed of UnitTests.
      */
-    public Employee( ){
+    public Employee(){
         this.firstName = "Peter";
         this.surname = "Bossmann";
         this.dateOfBirth = LocalDateTime.of(1964,4,4,00,00);

@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer</title>
+</head>
+<body>
+
+<h1>Customer</h1>
+<table>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Date Of Birth</th>
+        <th>Customer Level</th>
+        <th>Payment Method</th>
+    </tr>
+    <tr>
+        <td th:text="${customer.firstName}"></td>
+        <td th:text="${customer.surname}"></td>
+        <td th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}"></td>
+        <td th:text="${customer.customerLevel}"></td>
+        <td th:text="${customer.paymentMethod.cardType}"></td>
+    </tr>
+</table>
+
+<div th:each="electricRental : ${electricRentals}"> Electric Rental
+    <div th:text="${electricRental.rentalPrice}">
+    </div>
+</div>
+<div th:each="fuelRental : ${fuelRentals}"> Fuel Rental
+    <div th:text="${fuelRental.rentalPrice}">
+    </div>
+</div>
+</body>
+</html>
