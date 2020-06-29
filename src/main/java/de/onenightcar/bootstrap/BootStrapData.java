@@ -331,5 +331,24 @@ public class BootStrapData implements CommandLineRunner {
         log.info("Number of Electric Rentals added: " + electricRentalRepository.count() );
 
 
+        ///////MixedPackage///////
+
+        //Customer+Rentals//
+
+        customer1.getElectricRentals().add(electricRental1);
+        customer1.getFuelRentals().add(fuelRental1);
+
+        customer2.getElectricRentals().add(electricRental2);
+
+        customer3.getFuelRentals().add(fuelRental2);
+
+        customerRepository.save(customer1);
+        customerRepository.save(customer2);
+        customerRepository.save(customer3);
+
+
+        ////////////////////////////////////////////////////////
+
+        log.info("Data Successfully added with BootStrap");
     }
 }

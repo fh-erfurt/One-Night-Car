@@ -107,4 +107,15 @@ public class ElectricRental extends Rental {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "ElectricRental{" +
+                "rentalPrice=" + rentalPrice +
+                ", odometerBefore=" + odometerBefore +
+                ", odometerAfter=" + odometerAfter +
+                ", date=" + date +
+                ", departure=" + departure +
+                ", arrival=" + arrival +
+                '}';
+    }
 }

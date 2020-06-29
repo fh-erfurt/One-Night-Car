@@ -323,4 +323,10 @@ public class Customer extends Person {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                ", firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'';
+    }
 }
