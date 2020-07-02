@@ -222,7 +222,7 @@ public class Customer extends Person {
     public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar,
                                     LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
         try {
-            // TODO check if its the right customer without the class attribute
+            // TODO if (electricRental.getCustomer().id == this.id)
             //if (electricRental.getCustomerID() == this.customerID) {
                 if (Admin.approveRentalModification(electricRental)) {
                     ElectricRental newElectricRental = new ElectricRental(electricCar, date,
