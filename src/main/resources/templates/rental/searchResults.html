@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title> Search Results</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12" th:text="'Date: ' + ${date}" style="font-size: larger">PlaceHolder</div>
+        </div>
+        <div class="row">
+            <div class="col-md-auto">Station</div>
+            <div class="col-md-auto">Car</div>
+            <div class="col-md-auto">Fuel Type</div>
+            <div class="col-md-auto">Charge/Fuel - Level</div>
+            <div class="col-md-auto">Price (Hour)</div>
+            <div class="col-md-auto">Availability</div>
+        </div>
+
+        <div th:each="fuelParkingArea : ${fuelParkingAreas}">aaaa
+            <div class="row" th:each="combustionCar : ${fuelParkingArea.carsInStation}">
+                <div class="col-md-auto" th:text="${fuelParkingArea}"></div>
+                <div class="col-md-auto" th:text="${combustionCar.model}"></div>
+                <div class="col-md-auto" th:text="${combustionCar.fuelType}"></div>
+                <div class="col-md-auto" th:text="${combustionCar.fuelLevel}"></div>
+                <div class="col-md-auto" th:text="${combustionCar.price}"></div>
+                <div class="col-md-auto"> nope</div>
+                <div class="col-md-auto"><button>Rent!</button></div>
+            </div>
+        </div>
+        <div th:each="electricParkingArea : ${electricParkingAreas}">
+            <div class="row" th:each="electricCar : ${electricParkingArea.carsInStation}">
+                <div class="col-md-auto" th:text="${electricParkingArea}"></div>
+                <div class="col-md-auto" th:text="${electricCar.model}"></div>
+                <div class="col-md-auto" >Electric</div>
+                <div class="col-md-auto" th:text="${electricCar.chargePercent}"></div>
+                <div class="col-md-auto" th:text="${electricCar.price}"></div>
+                <div class="col-md-auto"> nope</div>
+                <div class="col-md-auto"><button>Rent!</button></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

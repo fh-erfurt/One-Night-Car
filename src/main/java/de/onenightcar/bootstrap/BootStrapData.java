@@ -346,6 +346,15 @@ public class BootStrapData implements CommandLineRunner {
         customerRepository.save(customer2);
         customerRepository.save(customer3);
 
+        //ParkingArea+Cars//
+
+        parkingArea1.carsInStation.add(combustionCar1);
+        parkingArea1.carsInStation.add(combustionCar2);
+        parkingArea2.carsInStation.add(combustionCar3);
+
+        electricParkingArea1.electricCarsInStation.add(electricCar1);
+        electricParkingArea1.electricCarsInStation.add(electricCar2);
+
 
         ////////////////////////////////////////////////////////
 
