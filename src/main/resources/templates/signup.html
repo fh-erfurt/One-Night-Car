@@ -1,23 +1,25 @@
+<!--
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign Up</title>
 </head>
 <body>
 
 <div>
-    <h2>Login</h2>
+    <h2>SignUp</h2>
     <h3>pleas enter your e-mail and Password</h3>
-    <form th:action="@{/login}" th:object="@{/loginForm}" method="post">
+    <form action="#" th:action="@{/signup}" th:object="${}" method="post">
         <label for="email">E-Mail:</label>
-        <input type="text" id="email" name="email" placeholder="E-Mail"><br><br>
+        <input type="text" id="email" name="email" placeholder="E-Mail" th:field="*{g}"><br><br>
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password" placeholder="Password"><br><br>
+        <input type="text" id="password" name="password" placeholder="Password" th:field="*{password}"><br><br>
         <input type="submit" value="Submit">
     </form>
 </div>
 
 </body>
 </html>
+-->

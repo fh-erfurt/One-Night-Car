@@ -26,7 +26,7 @@ class EmployeeTest {
         LocalDateTime dateOfBirth;
         dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
         PersonAddress thisAddress = new PersonAddress();
-        Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
+        Employee john = new Employee("John", "Schmidt", dateOfBirth, "john12@gmail.com", "12345678", thisAddress,
                  2000, Employee.TypeOfActivity.MAINTAINER);
 
         ElectricParkingArea Area1 = new ElectricParkingArea();
@@ -44,7 +44,7 @@ class EmployeeTest {
         LocalDateTime dateOfBirth;
         dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
         PersonAddress thisAddress = new PersonAddress();
-        Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
+        Employee john = new Employee("John", "Schmidt", dateOfBirth, "john123@gmail.com", "12345678", thisAddress,
                  2000, Employee.TypeOfActivity.MAINTAINER);
 
 

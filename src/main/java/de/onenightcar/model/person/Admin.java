@@ -33,9 +33,9 @@ public class Admin extends Employee {
      * @param salary A Float representing the Admin salary
      * @param typeOfActivity a TypeOfActivity representing the activity of the OneNightCar.Person
      */
-    public Admin(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress,
+    public Admin(String firstName, String surname, LocalDateTime dateOfBirth, String mail, String userPassword, PersonAddress personAddress,
                  float salary, TypeOfActivity typeOfActivity) {
-        super(firstName, surname, dateOfBirth, personAddress, salary, typeOfActivity);
+        super(firstName, surname, dateOfBirth, mail, userPassword, personAddress, salary, typeOfActivity);
     }
 
     /* /////////////////////Methods/////////////////////////// */

@@ -124,9 +124,9 @@ public class BootStrapData implements CommandLineRunner {
         LocalDateTime customer2DOB = LocalDateTime.of(1992, 2, 29,0,0);
         LocalDateTime customer3DOB = LocalDateTime.of(1990, 12, 31, 0,0);
 
-        Customer customer1 = new Customer("Max", "Musterman", customer1DOB, pa1, Customer.CustomerLevel.NEWUSER, pm1);
-        Customer customer2 = new Customer("Maria", "Musterfrau", customer2DOB, pa2, Customer.CustomerLevel.REGULARUSER, pm2);
-        Customer customer3 = new Customer("Sher", "Lock", customer3DOB, pa3, Customer.CustomerLevel.SUPERUSER, pm3);
+        Customer customer1 = new Customer("Max", "Musterman", customer1DOB, "Max@gmail.com", "12345678", pa1, Customer.CustomerLevel.NEWUSER, pm1);
+        Customer customer2 = new Customer("Maria", "Musterfrau", customer2DOB, "maria@gmail.com", "12345678", pa2, Customer.CustomerLevel.REGULARUSER, pm2);
+        Customer customer3 = new Customer("Sher", "Lock", customer3DOB, "sher@gmail.com", "12345678", pa3, Customer.CustomerLevel.SUPERUSER, pm3);
 
         try{
             customerRepository.save(customer1);
@@ -145,9 +145,9 @@ public class BootStrapData implements CommandLineRunner {
         LocalDateTime employee2DOB = LocalDateTime.of(1965, 7, 17,0,0);
         LocalDateTime employee3DOB = LocalDateTime.of(1992, 12, 31,0,0);
 
-        Employee employee1 = new Employee("John", "Doe", employee1DOB, ea1, 1600.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
-        Employee employee2 = new Employee("Pepito", "Perez", employee2DOB, ea2, 1800.00f, Employee.TypeOfActivity.MAINTAINER);
-        Employee employee3 = new Employee("Mike", "Bossman", employee3DOB, ea3, 1800.00f, Employee.TypeOfActivity.BOSS);
+        Employee employee1 = new Employee("John", "Doe", employee1DOB, "john@gmail.com", "12345678", ea1, 1600.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
+        Employee employee2 = new Employee("Pepito", "Perez", employee2DOB, "Pepito@gmail.com", "12345678", ea2, 1800.00f, Employee.TypeOfActivity.MAINTAINER);
+        Employee employee3 = new Employee("Mike", "Bossman", employee3DOB, "mike@gmail.com", "12345678", ea3, 1800.00f, Employee.TypeOfActivity.BOSS);
 
         try{
             employeeRepository.save(employee1);
@@ -165,7 +165,7 @@ public class BootStrapData implements CommandLineRunner {
         PersonAddress adminAddress = new PersonAddress("99084", "Erfurt", "Stotternheimstrasse", "52");
 
 
-        Admin admin = new Admin("Administrator","Admin", adminDOB, adminAddress, 1999.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
+        Admin admin = new Admin("Administrator","Admin", adminDOB, "admin@gmail.com", "12345678", adminAddress, 1999.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
 
         try{
             personAddressRepository.save(admin.getPersonAddress());

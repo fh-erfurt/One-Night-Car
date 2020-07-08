@@ -34,9 +34,11 @@ public class Employee extends Person {
      * @param salary A Float representing the Employee salary
      * @param typeOfActivity a TypeOfActivity representing what the Employee does
      */
-    public Employee(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress, float salary, TypeOfActivity typeOfActivity){
+    public Employee(String firstName, String surname, LocalDateTime dateOfBirth, String mail, String userPassword, PersonAddress personAddress, float salary, TypeOfActivity typeOfActivity){
         this.firstName = firstName;
         this.surname = surname;
+        this.mail= mail;
+        this.userPassword = userPassword;
         this.dateOfBirth = dateOfBirth;
         this.personAddress = personAddress;
         this.salary = salary;
@@ -49,6 +51,8 @@ public class Employee extends Person {
     public Employee(){
         this.firstName = "Peter";
         this.surname = "Bossmann";
+        this.mail= "peter@gmail.com";
+        this.userPassword = "12345678";
         this.dateOfBirth = LocalDateTime.of(1964,4,4,00,00);
         this.personAddress = new PersonAddress();
         this.salary = 10000;

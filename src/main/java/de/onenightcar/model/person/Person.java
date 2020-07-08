@@ -21,6 +21,8 @@ public abstract class Person extends AbstractDatabaseEntity {
     protected String firstName;
     protected String surname;
     protected LocalDateTime dateOfBirth;
+    protected String mail;
+    protected String userPassword;
 
     @OneToOne
     protected PersonAddress personAddress;
@@ -41,6 +43,22 @@ public abstract class Person extends AbstractDatabaseEntity {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     /** Gets the Persons DOB.

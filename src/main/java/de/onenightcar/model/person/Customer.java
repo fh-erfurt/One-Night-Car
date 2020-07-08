@@ -43,10 +43,12 @@ public class Customer extends Person {
      * @param customerLevel A CustomerLevel representing Customers Level
      * @param paymentMethod A PaymentMethod representing Customers Payment Method
      */
-    public Customer(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress, CustomerLevel customerLevel, PaymentMethod paymentMethod){
+    public Customer(String firstName, String surname, LocalDateTime dateOfBirth, String mail, String userPassword, PersonAddress personAddress, CustomerLevel customerLevel, PaymentMethod paymentMethod){
         this.firstName = firstName;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
+        this.mail = mail;
+        this.userPassword = userPassword;
         this.personAddress = personAddress;
         this.customerLevel = customerLevel;
         this.paymentMethod = paymentMethod;
@@ -62,6 +64,8 @@ public class Customer extends Person {
         this.firstName = "Max";
         this.surname = "Mustermann";
         this.dateOfBirth = LocalDateTime.of(1990,12,31,00,00);
+        this.mail = "max@gmail.com";
+        this.userPassword = "12345678";
         this.personAddress = new PersonAddress();
         this.customerLevel = CustomerLevel.REGULARUSER;
         this.paymentMethod = new PaymentMethod();
