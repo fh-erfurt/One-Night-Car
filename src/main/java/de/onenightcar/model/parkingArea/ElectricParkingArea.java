@@ -25,13 +25,13 @@ public class ElectricParkingArea extends ParkingArea {
     static Logger log = LoggerFactory.getLogger(ElectricParkingArea.class);
 
     @OneToMany
-    protected List<ElectricCar> electricCarsInStation;
+    public List<ElectricCar> electricCarsInStation;
 
     @OneToMany
-    protected List<ElectricCar> availableElectricCars;
+    public List<ElectricCar> availableElectricCars;
 
     @OneToMany
-    protected List<ElectricCar> notAvailableElectricCars;
+    public List<ElectricCar> notAvailableElectricCars;
 
     private int maxElectricCarCapacity;
 

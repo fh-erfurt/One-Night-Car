@@ -78,7 +78,6 @@ public class Customer extends Person {
      */
     public CustomerLevel getCustomerLevel(){
         return this.customerLevel;
-
     }
 
     /** Sets the Customer Level.
@@ -222,8 +221,7 @@ public class Customer extends Person {
     public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar,
                                     LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
         try {
-            // TODO if (electricRental.getCustomer().id == this.id)
-            //if (electricRental.getCustomerID() == this.customerID) {
+            if (electricRental.getCustomer().getId() == this.getId()) {
                 if (Admin.approveRentalModification(electricRental)) {
                     ElectricRental newElectricRental = new ElectricRental(electricCar, date,
                             departure, arrival, this);
@@ -232,7 +230,7 @@ public class Customer extends Person {
                     // Add the new OneNightCar.Rental
                     this.electricRentals.add(newElectricRental);
                 }
-            //}
+            }
         }
         catch(Exception e){
             System.out.print("Electric Car couldn't be modified!");
@@ -243,12 +241,12 @@ public class Customer extends Person {
      * @param electricRental an ElectricRental representing which OneNightCar.Rental is being cancelled
      */
     public void cancelElectricRental(ElectricRental electricRental){
-        // TODO check if its the right customer without the class attribute
-        //if (electricRental.getCustomerID() == this.customerID){
+         if (electricRental.getCustomer().getId() == this.getId()) {
             if (Admin.approveRentalModification(electricRental)){
                 this.electricRentals.remove(electricRental);
                 Admin.deleteElectricRental(electricRental);
             }
+         }
             log.info("ElectricRental canceled!");
         //}
     }
@@ -282,8 +280,7 @@ public class Customer extends Person {
      */
     public void modifyARegularRental(FuelRental fuelRental, CombustionCar combustionCar,
                                      LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
-        // TODO check if its the right customer without the class attribute
-        // if (fuelRental.getCustomerID() == this.customerID){
+        if (fuelRental.getCustomer().getId() == this.getId()) {
             if (Admin.approveRentalModification(fuelRental)){
                 FuelRental newFuelRental = new FuelRental( combustionCar, date, departure, arrival, this);
                 // Remove the old OneNightCar.Rental
@@ -293,21 +290,20 @@ public class Customer extends Person {
                 log.info("Rental modified.");
                 log.info(String.valueOf(newFuelRental));
             }
-       // }
+        }
     }
 
     /** Ask the Admin to Cancel an existing Fuel OneNightCar.Rental made by this Customer
      * @param fuelRental an ElectricRental representing which OneNightCar.Rental is being cancelled
      */
     public void cancelFuelRental(FuelRental fuelRental){
-        // TODO check if its the right customer without the class attribute
-        // if (fuelRental.getCustomerID() == this.customerID){
+        if (fuelRental.getCustomer().getId() == this.getId()) {
             if (Admin.approveRentalModification(fuelRental)){
                 this.fuelRentals.remove(fuelRental);
                 Admin.deleteFuelRental(fuelRental);
             }
 //            this.fuelRentals.remove(fuelRental);
-        // }
+        }
     }
 
     /** Simulates the Situation in which a customer damages an Electric OneNightCar.Car

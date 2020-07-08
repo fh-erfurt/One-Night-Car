@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search for your dream car</title>
+    <style>
+        .PageHeader {
+            margin: auto;
+            text-align: center;
+            font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+        }
+
+        div.form
+        {
+            display: block;
+            text-align: center;
+            padding: 70px 0;
+        }
+        form
+        {
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1 class="PageHeader">Search for your dream car!</h1>
+<div class="form">
+<form name="Search by car">
+    <h4>Select your city</h4>
+    <select id="city" name="city" class="center">
+        <option value="Erfurt">Erfurt</option>
+        <option value="Hamburg">Hamburg</option>
+        <option value="Berlin">Berlin</option>
+        <option value="Köln">Köln</option>
+        <option value="München">München</option>
+    </select>
+
+    <h4>Select the starting date</h4>
+    <input type="datetime-local">
+
+    <h4>Select the fuel-type</h4>
+    <select>
+        <option value="combustion">Combustion</option>
+        <option value="electric">Electric</option>
+    </select>
+</form>
+</div>
+</body>
+</html>
