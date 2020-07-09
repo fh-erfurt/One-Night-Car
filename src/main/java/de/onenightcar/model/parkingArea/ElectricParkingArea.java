@@ -19,14 +19,8 @@ public class ElectricParkingArea extends ParkingArea {
 
     /* /////////////////////Attributes///////////////////////// */
 
-    @OneToMany
+    @OneToMany(mappedBy = "electricParkingArea")
     public List<ElectricCar> electricCarsInStation;
-
-    @OneToMany
-    public List<ElectricCar> availableElectricCars;
-
-    @OneToMany
-    public List<ElectricCar> notAvailableElectricCars;
 
     private int maxElectricCarCapacity;
 
@@ -39,26 +33,22 @@ public class ElectricParkingArea extends ParkingArea {
      * @param maxElectricCarCapacity An integer representing the max. Capacity of Cars in ElectricParkingArea
      */
     public ElectricParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity,
-                               int maxElectricCarCapacity) {
-        super(parkingAreaAddress,maxCapacity);
+                               int maxElectricCarCapacity, String name) {
+        super(parkingAreaAddress,maxCapacity, name);
 
         this.parkingAreaAddress = parkingAreaAddress;
         this.maxCapacity = maxCapacity;
         this.maxElectricCarCapacity = maxElectricCarCapacity;
         this.electricCarsInStation = new ArrayList<ElectricCar>();
-        this.availableElectricCars = new ArrayList<ElectricCar>();
-        this.notAvailableElectricCars = new ArrayList<ElectricCar>();
     }
 
     /** Creates an ElectricParkingArea with default values.
      * It is used to increment speed of UnitTests.
      */
     public ElectricParkingArea(){
-        super(new ParkingAreaAddress(), 100);
+        super(new ParkingAreaAddress(), 100, "TestDataElectric");
 
         this.electricCarsInStation = new ArrayList<ElectricCar>();
-        this.availableElectricCars = new ArrayList<ElectricCar>();
-        this.notAvailableElectricCars = new ArrayList<ElectricCar>();
         this.maxElectricCarCapacity = 100;
     }
 
@@ -86,22 +76,6 @@ public class ElectricParkingArea extends ParkingArea {
         this.electricCarsInStation = electricCarsInStation;
     }
 
-    public List<ElectricCar> getAvailableElectricCars() {
-        return availableElectricCars;
-    }
-
-    public void setAvailableElectricCars(List<ElectricCar> availableElectricCars) {
-        this.availableElectricCars = availableElectricCars;
-    }
-
-    public List<ElectricCar> getNotAvailableElectricCars() {
-        return notAvailableElectricCars;
-    }
-
-    public void setNotAvailableElectricCars(List<ElectricCar> notAvailableElectricCars) {
-        this.notAvailableElectricCars = notAvailableElectricCars;
-    }
-
     /* /////////////////////Methods/////////////////////////// */
 
     /**adds an electric car to the station
@@ -111,7 +85,6 @@ public class ElectricParkingArea extends ParkingArea {
 
         try {
             electricCarsInStation.add(electricCar);
-            availableElectricCars.add(electricCar);
         }
         catch(Exception e){
             System.out.print("Assigning Electric Car to station has failed!");
@@ -131,7 +104,6 @@ public class ElectricParkingArea extends ParkingArea {
      */
     public void removeElectricCarFromStation(ElectricCar electricCar){
         electricCarsInStation.remove(electricCar);
-        availableElectricCars.remove(electricCar);
     }
 
     /** gets the Index(id) of an electric car in the station

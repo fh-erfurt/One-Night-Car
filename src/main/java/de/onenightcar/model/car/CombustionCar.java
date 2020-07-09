@@ -3,9 +3,7 @@ package de.onenightcar.model.car;
 import de.onenightcar.model.parkingArea.ParkingArea;
 import de.onenightcar.model.person.Customer;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 /** Represents a Combustion OneNightCar.Car
  * extent OneNightCar.Car
@@ -30,6 +28,9 @@ public class CombustionCar extends Car {
     private double tankSize;    // in liter
     private double fuelLevel;   // in percent
     private double consumption; // the Consumption in 100 Km
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ParkingArea parkingArea;
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -92,6 +93,14 @@ public class CombustionCar extends Car {
         else{
             System.out.println("there is no more place in this park!");
         }
+    }
+
+    public ParkingArea getParkingArea() {
+        return parkingArea;
+    }
+
+    public void setParkingArea(ParkingArea parkingArea) {
+        this.parkingArea = parkingArea;
     }
 
     /* /////////////////////Getter/Setters/////////////////////////// */
@@ -175,5 +184,43 @@ public class CombustionCar extends Car {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "CombustionCar{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CombustionCar that = (CombustionCar) o;
+
+        if (Double.compare(that.tankSize, tankSize) != 0) return false;
+        if (Double.compare(that.fuelLevel, fuelLevel) != 0) return false;
+        if (Double.compare(that.consumption, consumption) != 0) return false;
+        if (transmission != that.transmission) return false;
+        if (fuelType != that.fuelType) return false;
+        return parkingArea.equals(that.parkingArea);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = transmission.hashCode();
+        result = 31 * result + fuelType.hashCode();
+        temp = Double.doubleToLongBits(tankSize);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(fuelLevel);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(consumption);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + parkingArea.hashCode();
+        return result;
+    }
 }
 

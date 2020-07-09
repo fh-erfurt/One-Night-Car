@@ -1,9 +1,12 @@
 package de.onenightcar.model.car;
 
 import de.onenightcar.model.parkingArea.ElectricParkingArea;
+import de.onenightcar.model.parkingArea.ParkingArea;
 import de.onenightcar.model.person.Customer;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 /** Represents a Electric OneNightCar.Car
  * extent OneNightCar.Car
@@ -19,6 +22,9 @@ public class ElectricCar extends Car {
 
     private float electricalRange;         //in Km
     private float chargePercent;           //current
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ElectricParkingArea electricParkingArea;
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -102,6 +108,14 @@ public class ElectricCar extends Car {
 
     public void setElectricalRange(float range) { this.electricalRange = range;}
 
+    public ElectricParkingArea getElectricParkingArea() {
+        return electricParkingArea;
+    }
+
+    public void setElectricParkingArea(ElectricParkingArea electricParkingArea) {
+        this.electricParkingArea = electricParkingArea;
+    }
+
     /* /////////////////////Methods/////////////////////////// */
 
     /** set the Charge on 100 %
@@ -112,4 +126,31 @@ public class ElectricCar extends Car {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "ElectricCar{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ElectricCar that = (ElectricCar) o;
+
+        if (Float.compare(that.electricalRange, electricalRange) != 0) return false;
+        if (Float.compare(that.chargePercent, chargePercent) != 0) return false;
+        return electricParkingArea.equals(that.electricParkingArea);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (electricalRange != +0.0f ? Float.floatToIntBits(electricalRange) : 0);
+        result = 31 * result + (chargePercent != +0.0f ? Float.floatToIntBits(chargePercent) : 0);
+        result = 31 * result + electricParkingArea.hashCode();
+        return result;
+    }
 }

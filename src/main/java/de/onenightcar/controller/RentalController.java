@@ -1,6 +1,7 @@
 package de.onenightcar.controller;
 
 import de.onenightcar.bootstrap.BootStrapData;
+import de.onenightcar.model.parkingArea.ParkingArea;
 import de.onenightcar.repositories.carRespository.CarLocationRepository;
 import de.onenightcar.repositories.carRespository.CombustionCarRepository;
 import de.onenightcar.repositories.carRespository.ElectricCarRepository;
@@ -59,12 +60,19 @@ public class RentalController {
         this.parkingAreaAddressRepository = parkingAreaAddressRepository;
     }
 
+
+
     //Fuel Type: 0->Any // 1-> Combustion // 2->Electric
     //Date: Integer: day of the year (1-365) to simplify things (Should be calculated on last page)
     @RequestMapping(path = "/search-results/{city}/{date}/{fuel-type}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public String searchResultsFuel(Model model, @PathVariable("city") String city, @PathVariable("date") int date,
                                 @PathVariable("fuel-type") int fuelType) {
+        Iterable<ParkingArea> pas= parkingAreaRepository.getAllByParkingAreaAddressCity("Erfurt");
+
+        for(ParkingArea pa: pas) {
+            log.info("Parking Area" + pa.carsInStation);
+        }
 
         model.addAttribute("date", date);
 
