@@ -70,6 +70,8 @@ public class ElectricCar extends Car {
                 10999, Customer.CustomerLevel.NEWUSER , 69.00f);
         this.electricalRange = 200.00f;
         this.chargePercent= 100.00f;
+        this.odometer = 0;
+        this.chargePercent = 100;
         if(electricParkingArea.numberOfElectricCarsAssignedToStation() < electricParkingArea.getMaxElectricCarCapacity()) {
             electricParkingArea.assignElectricCarToStation(this);
         }

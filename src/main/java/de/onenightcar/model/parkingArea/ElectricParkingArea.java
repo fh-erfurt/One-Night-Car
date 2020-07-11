@@ -47,7 +47,6 @@ public class ElectricParkingArea extends ParkingArea {
      */
     public ElectricParkingArea(){
         super(new ParkingAreaAddress(), 100, "TestDataElectric");
-
         this.electricCarsInStation = new ArrayList<ElectricCar>();
         this.maxElectricCarCapacity = 100;
     }
@@ -116,4 +115,12 @@ public class ElectricParkingArea extends ParkingArea {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "ElectricParkingArea{" +
+                "maxElectricCarCapacity=" + maxElectricCarCapacity +
+                ", parkingAreaAddress=" + parkingAreaAddress +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

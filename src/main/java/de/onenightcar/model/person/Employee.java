@@ -5,6 +5,7 @@ import de.onenightcar.model.car.*;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -34,7 +35,7 @@ public class Employee extends Person {
      * @param salary A Float representing the Employee salary
      * @param typeOfActivity a TypeOfActivity representing what the Employee does
      */
-    public Employee(String firstName, String surname, LocalDateTime dateOfBirth, String mail, String userPassword, PersonAddress personAddress, float salary, TypeOfActivity typeOfActivity){
+    public Employee(String firstName, String surname, LocalDate dateOfBirth, String mail, String userPassword, PersonAddress personAddress, float salary, TypeOfActivity typeOfActivity){
         this.firstName = firstName;
         this.surname = surname;
         this.mail= mail;
@@ -53,7 +54,7 @@ public class Employee extends Person {
         this.surname = "Bossmann";
         this.mail= "peter@gmail.com";
         this.userPassword = "12345678";
-        this.dateOfBirth = LocalDateTime.of(1964,4,4,00,00);
+        this.dateOfBirth = LocalDate.of(1964,4,4);
         this.personAddress = new PersonAddress();
         this.salary = 10000;
         this.typeOfActivity = TypeOfActivity.BOSS;

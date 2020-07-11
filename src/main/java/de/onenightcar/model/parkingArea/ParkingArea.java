@@ -171,6 +171,14 @@ public class ParkingArea extends AbstractDatabaseEntity {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "ParkingArea{" +
+                "parkingAreaAddress=" + parkingAreaAddress +
+                ", maxCapacity=" + maxCapacity +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
 
 

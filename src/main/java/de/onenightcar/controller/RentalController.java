@@ -11,6 +11,7 @@ import de.onenightcar.repositories.parkingAreaRepository.ParkingAreaRepository;
 import de.onenightcar.repositories.personRepository.*;
 import de.onenightcar.repositories.rentalRepository.ElectricRentalRepository;
 import de.onenightcar.repositories.rentalRepository.FuelRentalRepository;
+import de.onenightcar.repositories.rentalRepository.RentalTimeSlotRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ public class RentalController {
 
     private final ElectricRentalRepository electricRentalRepository;
     private final FuelRentalRepository fuelRentalRepository;
+    private final RentalTimeSlotRepository rentalTimeSlotRepository;
 
     private final CustomerRepository customerRepository;
     private final EmployeeRepository employeeRepository;
@@ -44,9 +46,16 @@ public class RentalController {
     private final ParkingAreaAddressRepository parkingAreaAddressRepository;
 
 
-    public RentalController(ElectricRentalRepository electricRentalRepository, FuelRentalRepository fuelRentalRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, AdminRepository adminRepository, PaymentMethodRepository paymentMethodRepository, PersonAddressRepository personAddressRepository, CombustionCarRepository combustionCarRepository, ElectricCarRepository electricCarRepository, CarLocationRepository carLocationRepository, ElectricParkingAreaRepository electricParkingAreaRepository, ParkingAreaRepository parkingAreaRepository, ParkingAreaAddressRepository parkingAreaAddressRepository) {
+    public RentalController(ElectricRentalRepository electricRentalRepository, FuelRentalRepository fuelRentalRepository,
+                            RentalTimeSlotRepository rentalTimeSlotRepository, CustomerRepository customerRepository,
+                            EmployeeRepository employeeRepository, AdminRepository adminRepository,
+                            PaymentMethodRepository paymentMethodRepository, PersonAddressRepository personAddressRepository,
+                            CombustionCarRepository combustionCarRepository, ElectricCarRepository electricCarRepository,
+                            CarLocationRepository carLocationRepository, ElectricParkingAreaRepository electricParkingAreaRepository,
+                            ParkingAreaRepository parkingAreaRepository, ParkingAreaAddressRepository parkingAreaAddressRepository) {
         this.electricRentalRepository = electricRentalRepository;
         this.fuelRentalRepository = fuelRentalRepository;
+        this.rentalTimeSlotRepository = rentalTimeSlotRepository;
         this.customerRepository = customerRepository;
         this.employeeRepository = employeeRepository;
         this.adminRepository = adminRepository;
@@ -59,8 +68,6 @@ public class RentalController {
         this.parkingAreaRepository = parkingAreaRepository;
         this.parkingAreaAddressRepository = parkingAreaAddressRepository;
     }
-
-
 
     //Fuel Type: 0->Any // 1-> Combustion // 2->Electric
     //Date: Integer: day of the year (1-365) to simplify things (Should be calculated on last page)
@@ -75,6 +82,7 @@ public class RentalController {
         }
 
         model.addAttribute("date", date);
+        model.addAttribute("timeslots", rentalTimeSlotRepository.findAll());
 
         if(fuelType == 0){
             model.addAttribute("electricParkingAreas", electricParkingAreaRepository.getAllByParkingAreaAddressCity(city));

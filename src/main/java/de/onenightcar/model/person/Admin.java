@@ -3,6 +3,7 @@ package de.onenightcar.model.person;
 import de.onenightcar.model.rental.*;
 
 import javax.persistence.Entity;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.logging.*;
@@ -33,7 +34,7 @@ public class Admin extends Employee {
      * @param salary A Float representing the Admin salary
      * @param typeOfActivity a TypeOfActivity representing the activity of the OneNightCar.Person
      */
-    public Admin(String firstName, String surname, LocalDateTime dateOfBirth, String mail, String userPassword, PersonAddress personAddress,
+    public Admin(String firstName, String surname, LocalDate dateOfBirth, String mail, String userPassword, PersonAddress personAddress,
                  float salary, TypeOfActivity typeOfActivity) {
         super(firstName, surname, dateOfBirth, mail, userPassword, personAddress, salary, typeOfActivity);
     }

@@ -5,8 +5,12 @@ import de.onenightcar.model.person.Customer;
 
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Represents a FuelRental
  * @author OneNightCar
@@ -21,6 +25,9 @@ public class FuelRental extends Rental {
     private double fuelLevelBefore;
     private double fuelLevelAfter;
 
+    @OneToMany(mappedBy = "fuelRental")
+    protected List<RentalTimeSlot> timeSlotsList = new ArrayList<>();
+
     @OneToOne
     private CombustionCar combustionCar;
 
@@ -30,18 +37,22 @@ public class FuelRental extends Rental {
 
     /** Creates a rental entry with parameters for a combustion car
      * @param date The date a rental has been created
-     * @param departure  the date and time at which the customer started the rental
-     * @param arrival the date and time at which the customer ended the rental
      * @param combustionCar a Combustion OneNightCar.Car
+     * @param customer Who is making the rental
+     * @param timeSlotsList which timeslots are being used
      */
-    public FuelRental(CombustionCar combustionCar, LocalDateTime date,
-                      LocalDateTime departure, LocalDateTime arrival, Customer customer){
-        super(date, departure, arrival, customer);
-        this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
+    public FuelRental(CombustionCar combustionCar, LocalDate date, Customer customer, List<RentalTimeSlot> timeSlotsList){
+        super(date, customer);
         this.odometerBefore = combustionCar.getOdometer();
         this.fuelLevelBefore = combustionCar.getFuelLevel();
         this.fuelLevelAfter = combustionCar.getFuelLevel();
         this.combustionCar = combustionCar;
+        this.timeSlotsList = timeSlotsList;
+        //add this Rental to the given timeslots
+        for(int i = 0; i < timeSlotsList.size(); i++) {
+            this.timeSlotsList.get(i).setFuelRental(this);
+        }
+        this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
     }
 
     /**
@@ -49,13 +60,13 @@ public class FuelRental extends Rental {
      * @param combustionCar the car itself, object of the class ElectricCar
      * @param date at what time was the rental made
      */
-    public FuelRental(LocalDateTime date, CombustionCar combustionCar, Customer customer){
-        super(customer);
-        this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
+    public FuelRental(LocalDate date, CombustionCar combustionCar, Customer customer){
+        super(date, customer);
         this.odometerBefore = combustionCar.getOdometer();
         this.fuelLevelBefore = combustionCar.getFuelLevel();
         this.fuelLevelAfter = getFuelLevelAfter();
         this.combustionCar = combustionCar;
+        this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
     }
 
     /* /////////////////////Getter/Setters/////////////////////////// */
@@ -104,13 +115,30 @@ public class FuelRental extends Rental {
 
     /* /////////////////////Methods/////////////////////////// */
 
+    private int calculateElapsedHours() {
+        return this.timeSlotsList.size();
+    }
+
     /**
      * Takes the price of a car and multiplies it with the elapsed hours
      * @param CombustionCar is the car rented by the customer
      * @return the total price of the rental
      */
     public float calculateRentalPriceForCombustion (CombustionCar CombustionCar) {
-        return calculateElapsedDays() * CombustionCar.getPrice();
+        return calculateElapsedHours() * CombustionCar.getPrice();
+    }
+
+    /** Sets the odometer to the value after the rental
+     * Based on a simulated drive
+     */
+    public void setOdometerAfter(){
+        try {
+            //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
+            this.odometerAfter = odometerBefore + ((calculateElapsedHours() * 32));
+        }
+        catch(Exception e){
+            System.out.print("Set Odometer has failed!");
+        }
     }
 
     /* /////////////////////Overrides/////////////////////////// */

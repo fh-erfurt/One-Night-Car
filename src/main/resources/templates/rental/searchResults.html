@@ -32,7 +32,14 @@
                         <div class="col-md-1" th:text="${combustionCar.fuelType}">b</div>
                         <div class="col-md-1" th:text="${combustionCar.fuelLevel}">b</div>
                         <div class="col-md-1" th:text="${combustionCar.price}">b</div>
-                        <div class="col-md-6"> nope</div>
+                        <div class="col-md-6">
+                            <form>
+                                <span th:each="timeslot : ${timeslots}">
+<!--                                    <span th:text="${timeslot.departureTime} + ' - ' + ${timeslot.arrivalTime}"></span>-->
+                                    <input type="checkbox" id="fuel-timeslot" name="timeslot" th:value="${timeslot.id}">
+                                </span>
+                            </form>
+                        </div>
                         <div class="col-md-1"><button>Rent!</button></div>
                     </div>
                 </div>
@@ -47,7 +54,14 @@
                         <div class="col-md-1" >ELECTRIC</div>
                         <div class="col-md-1" th:text="${electricCar.chargePercent}">a</div>
                         <div class="col-md-1" th:text="${electricCar.price}">a</div>
-                        <div class="col-md-6"> nope</div>
+                        <div class="col-md-6">
+                            <form>
+                                <span th:each="timeslot : ${timeslots}">
+<!--                                    <span th:text="${timeslot.departureTime} + ' - ' + ${timeslot.arrivalTime}"></span>-->
+                                    <input type="checkbox" id="electric-timeslot" name="timeslot" th:value="${timeslot.id}">
+                                </span>
+                            </form>
+                        </div>
                         <div class="col-md-1"><button>Rent!</button></div>
                     </div>
                 </div>

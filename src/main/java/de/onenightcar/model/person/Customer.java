@@ -5,6 +5,7 @@ import de.onenightcar.model.rental.*;
 import de.onenightcar.model.car.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ public class Customer extends Person {
     /* /////////////////////Attributes///////////////////////// */
 
     @OneToMany
-    public List<FuelRental> fuelRentals;
+    public List<FuelRental> fuelRentals = new ArrayList<>();
 
     @OneToMany
-    public List<ElectricRental> electricRentals;
+    public List<ElectricRental> electricRentals = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private CustomerLevel customerLevel;
@@ -43,7 +44,7 @@ public class Customer extends Person {
      * @param customerLevel A CustomerLevel representing Customers Level
      * @param paymentMethod A PaymentMethod representing Customers Payment Method
      */
-    public Customer(String firstName, String surname, LocalDateTime dateOfBirth, String mail, String userPassword, PersonAddress personAddress, CustomerLevel customerLevel, PaymentMethod paymentMethod){
+    public Customer(String firstName, String surname, LocalDate dateOfBirth, String mail, String userPassword, PersonAddress personAddress, CustomerLevel customerLevel, PaymentMethod paymentMethod){
         this.firstName = firstName;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
@@ -52,10 +53,11 @@ public class Customer extends Person {
         this.personAddress = personAddress;
         this.customerLevel = customerLevel;
         this.paymentMethod = paymentMethod;
-        this.fuelRentals = new ArrayList<FuelRental>();
-        this.electricRentals = new ArrayList<ElectricRental>();
     }
 
+    public Customer(List<ElectricRental> electricRentals) {
+        this.electricRentals = electricRentals;
+    }
 
     /** Creates a Customer with default Values.
      * It is used to increment speed of UnitTests.
@@ -63,14 +65,12 @@ public class Customer extends Person {
     public Customer(){
         this.firstName = "Max";
         this.surname = "Mustermann";
-        this.dateOfBirth = LocalDateTime.of(1990,12,31,00,00);
+        this.dateOfBirth = LocalDate.of(1990,12,31);
         this.mail = "max@gmail.com";
         this.userPassword = "12345678";
         this.personAddress = new PersonAddress();
         this.customerLevel = CustomerLevel.REGULARUSER;
         this.paymentMethod = new PaymentMethod();
-        this.fuelRentals = new ArrayList<FuelRental>();
-        this.electricRentals = new ArrayList<ElectricRental>();
     }
 
     /* /////////////////////Getter/Setters/////////////////////////// */
@@ -125,7 +125,7 @@ public class Customer extends Person {
         this.paymentMethod = paymentMethod;
     }
 
-    public void setPaymentMethod(String cardNumber, PaymentMethod.CardType cardType, LocalDateTime validThrough, String CCV){
+    public void setPaymentMethod(String cardNumber, PaymentMethod.CardType cardType, LocalDate validThrough, String CCV){
         this.paymentMethod.setCardNumber(cardNumber);
         this.paymentMethod.setCardType(cardType);
         this.paymentMethod.setValidThrough(validThrough);
@@ -172,10 +172,13 @@ public class Customer extends Person {
      * @return An int representing the index on the List, if not found, returns -1
      */
     public int getElectricCarIndexInElectricRentalList(ElectricCar electricCar){
-        for (int indexInList = 0; indexInList < electricRentals.size(); indexInList ++)
-            if(electricRentals.get(indexInList).getElectricCar() == electricCar){
-                return indexInList;
+        if( this.electricRentals.size() > 0 ) {
+            for (int indexInList = 0; indexInList < this.electricRentals.size(); indexInList++) {
+                if (electricRentals.get(indexInList).getElectricCar() == electricCar) {
+                    return indexInList;
+                }
             }
+        }
         return -1;
     }
 
@@ -184,7 +187,7 @@ public class Customer extends Person {
      * @return An int representing the index on the List
      */
     public int getCombustionCarIndexInFuelRentalList(CombustionCar combustionCar){
-        for (int indexInList = 0; indexInList < fuelRentals.size(); indexInList ++)
+        for (int indexInList = 0; indexInList <= fuelRentals.size(); indexInList++)
             if(fuelRentals.get(indexInList).getCombustionCar() == combustionCar){
                 return indexInList;
             }
@@ -195,35 +198,31 @@ public class Customer extends Person {
      * Creates a new Electric OneNightCar.Rental of a Vehicle and this Customer
      * @param electricCar   an ElectricCar representing an electric car the Customer wants to book
      * @param date          a LocalDate representing the date of the Booking
-     * @param departure the date and time at which the customer started the rental
-     * @param arrival the date and time at which the customer ended the rental
      */
-    public void rentAnElectricCar(ElectricCar electricCar,  LocalDateTime date,
-                                  LocalDateTime departure, LocalDateTime arrival) {
+    public void rentAnElectricCar(ElectricCar electricCar, LocalDate date,
+                                  List<RentalTimeSlot> timeSlotsList) {
+        ElectricRental electricRental = new ElectricRental(electricCar, date, this, timeSlotsList);
         try {
-            ElectricRental electricRental = new ElectricRental(electricCar, date,
-                    departure, arrival, this);
             this.electricRentals.add(electricRental);
         }
         catch(Exception e){
-            System.out.print("Rental couldn't be executed!");
+            System.out.print("Rental couldn't be executed!" + e);
+            System.out.printf("%n");
         }
     }
 
     /** Ask permission to Admin to Modify an existing Electrical OneNightCar.Rental made by this Customer
      * @param electricRental the OneNightCar.Rental that wants to be modified
      * @param date          a LocalDate representing the date of the Booking
-     * @param departure the date and time at which the customer started the rental
-     * @param arrival the date and time at which the customer ended the rental
      * @param electricCar which electric car rental is being modified
      */
     public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar,
-                                    LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
+                                    LocalDate date, List<RentalTimeSlot> timeSlotsList) {
         try {
             if (electricRental.getCustomer().getId() == this.getId()) {
                 if (Admin.approveRentalModification(electricRental)) {
                     ElectricRental newElectricRental = new ElectricRental(electricCar, date,
-                            departure, arrival, this);
+                                                             this, timeSlotsList);
                     // Remove the old OneNightCar.Rental
                     this.electricRentals.remove(electricRental);
                     // Add the new OneNightCar.Rental
@@ -232,7 +231,7 @@ public class Customer extends Person {
             }
         }
         catch(Exception e){
-            System.out.print("Electric Car couldn't be modified!");
+            System.out.print("Electric Car couldn't be modified!" + e);
         }
     }
 
@@ -252,32 +251,28 @@ public class Customer extends Person {
      * Creates a new OneNightCar.Rental of a Vehicle and this Customer
      * @param combustionCar   an CombustionCar representing the car the Customer wants to book
      * @param date          a LocalDate representing the date of the Booking
-     * @param departure the date and time at which the customer started the rental
-     * @param arrival the date and time at which the customer ended the rental
      */
      public void rentAFuelCar(CombustionCar combustionCar,
-                              LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
+                              LocalDate date, List<RentalTimeSlot> timeSlotsList) {
+         FuelRental fuelRental = new FuelRental(combustionCar, date, this, timeSlotsList);
          try {
-             FuelRental fuelRental = new FuelRental(combustionCar, date, departure, arrival, this);
              this.fuelRentals.add(fuelRental);
          }
          catch(Exception e){
-             System.out.print("Rental could not be executed!");
+             System.out.print("Rental could not be executed!" + e);
          }
      }
 
     /** Ask permission to Admin to Modify an existing Electrical OneNightCar.Rental made by this Customer
      * @param fuelRental the OneNightCar.Rental that wants to be modified
      * @param date          a LocalDate representing the date of the Booking
-     * @param departure the date and time at which the customer started the rental
-     * @param arrival the date and time at which the customer ended the rental
      * @param combustionCar which cars OneNightCar.Rental need to be modified
      */
     public void modifyARegularRental(FuelRental fuelRental, CombustionCar combustionCar,
-                                     LocalDateTime date, LocalDateTime departure, LocalDateTime arrival) {
+                                     LocalDate date, List<RentalTimeSlot> timeSlotsList) {
         if (fuelRental.getCustomer().getId() == this.getId()) {
             if (Admin.approveRentalModification(fuelRental)){
-                FuelRental newFuelRental = new FuelRental( combustionCar, date, departure, arrival, this);
+                FuelRental newFuelRental = new FuelRental( combustionCar, date, this, timeSlotsList);
                 // Remove the old OneNightCar.Rental
                 this.fuelRentals.remove(fuelRental);
                 // Add the new OneNightCar.Rental
@@ -326,7 +321,10 @@ public class Customer extends Person {
     @Override
     public String toString() {
         return "Customer{" +
-                ", firstName='" + firstName + '\'' +
-                ", surname='" + surname + '\'';
+                "firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", mail='" + mail + '\'' +
+                '}';
     }
 }

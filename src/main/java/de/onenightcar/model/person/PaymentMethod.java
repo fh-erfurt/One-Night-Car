@@ -3,6 +3,7 @@ package de.onenightcar.model.person;
 import de.onenightcar.util.AbstractDatabaseEntity;
 
 import javax.persistence.Entity;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /** Represents a PaymentMethod
@@ -18,7 +19,7 @@ public class PaymentMethod extends AbstractDatabaseEntity {
 
     private String cardNumber;
     private CardType cardType;
-    private LocalDateTime validThrough;
+    private LocalDate validThrough;
     private String CCV;
 
     /** Creates a PaymentMethod with specified PaymentMethod.
@@ -27,7 +28,7 @@ public class PaymentMethod extends AbstractDatabaseEntity {
      * @param validThrough PaymentMethod’s Date (Until when the Card is Valid)
      * @param CCV PaymentMethod’s CCV (Security Code on the back)
      */
-    public PaymentMethod(String cardNumber, CardType cardType, LocalDateTime validThrough, String CCV){
+    public PaymentMethod(String cardNumber, CardType cardType, LocalDate validThrough, String CCV){
         this.cardNumber = cardNumber;
         this.cardType = cardType;
         this.validThrough = validThrough;
@@ -40,7 +41,7 @@ public class PaymentMethod extends AbstractDatabaseEntity {
     public PaymentMethod(){
         this.cardNumber = "0000 0000 0000 0000";
         this.cardType = CardType.CREDIT;
-        this.validThrough = LocalDateTime.of(2020,01,31,00,00);
+        this.validThrough = LocalDate.of(2020,01,31);
         this.CCV = "999";
     }
 
@@ -82,14 +83,14 @@ public class PaymentMethod extends AbstractDatabaseEntity {
     /** Gets the PaymentMethod Valid Through.
      * @return A Gregorian Calendar representing the PaymentMethod Valid Through
      */
-    public LocalDateTime getValidThrough(){
+    public LocalDate getValidThrough(){
         return this.validThrough;
     }
 
     /** Sets the PaymentMethod Valid Through.
      * @param validThrough A Gregorian Calendar containing the PaymentMethod Valid Through
      */
-    public void setValidThrough(LocalDateTime validThrough){
+    public void setValidThrough(LocalDate validThrough){
         this.validThrough = validThrough;
     }
 

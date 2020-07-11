@@ -15,7 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
@@ -40,22 +44,17 @@ public class BootStrapData implements CommandLineRunner {
     private final ElectricCarRepository electricCarRepository;
 
     //RentalPackage
+    private final RentalTimeSlotRepository rentalTimeSlotRepository;
     private final ElectricRentalRepository electricRentalRepository;
     private final FuelRentalRepository fuelRentalRepository;
 
-    public BootStrapData(PaymentMethodRepository paymentMethodRepository,
-                         CustomerRepository customerRepository,
-                         EmployeeRepository employeeRepository,
-                         PersonAddressRepository personAddressRepository,
-                         AdminRepository adminRepository,
-                         ElectricParkingAreaRepository electricParkingAreaRepository,
-                         ParkingAreaRepository parkingAreaRepository,
-                         ParkingAreaAddressRepository parkingAreaAddressRepository,
-                         CarLocationRepository carLocationRepository,
-                         CombustionCarRepository combustionCarRepository,
-                         ElectricCarRepository electricCarRepository,
-                         ElectricRentalRepository electricRentalRepository,
-                         FuelRentalRepository fuelRentalRepository) {
+    public BootStrapData(PaymentMethodRepository paymentMethodRepository, CustomerRepository customerRepository,
+                         EmployeeRepository employeeRepository, PersonAddressRepository personAddressRepository,
+                         AdminRepository adminRepository, ElectricParkingAreaRepository electricParkingAreaRepository,
+                         ParkingAreaRepository parkingAreaRepository, ParkingAreaAddressRepository parkingAreaAddressRepository,
+                         CarLocationRepository carLocationRepository, CombustionCarRepository combustionCarRepository,
+                         ElectricCarRepository electricCarRepository, RentalTimeSlotRepository rentalTimeSlotRepository,
+                         ElectricRentalRepository electricRentalRepository, FuelRentalRepository fuelRentalRepository) {
         this.paymentMethodRepository = paymentMethodRepository;
         this.customerRepository = customerRepository;
         this.employeeRepository = employeeRepository;
@@ -67,6 +66,7 @@ public class BootStrapData implements CommandLineRunner {
         this.carLocationRepository = carLocationRepository;
         this.combustionCarRepository = combustionCarRepository;
         this.electricCarRepository = electricCarRepository;
+        this.rentalTimeSlotRepository = rentalTimeSlotRepository;
         this.electricRentalRepository = electricRentalRepository;
         this.fuelRentalRepository = fuelRentalRepository;
     }
@@ -81,7 +81,7 @@ public class BootStrapData implements CommandLineRunner {
         //Payment Method
 
         PaymentMethod pm1 = new PaymentMethod();
-        LocalDateTime validTrough = LocalDateTime.of(2021, 2,20,10,10);
+        LocalDate validTrough = LocalDate.of(2021, 2,20);
         PaymentMethod pm2 = new PaymentMethod("1111 1111 1111 1111", PaymentMethod.CardType.DEBIT, validTrough, "225");
         PaymentMethod pm3 = new PaymentMethod("2222 2222 2222 2222", PaymentMethod.CardType.CREDIT, validTrough, "225");
 
@@ -120,9 +120,9 @@ public class BootStrapData implements CommandLineRunner {
 
         //Customer
 
-        LocalDateTime customer1DOB = LocalDateTime.of(1988, 2, 29,0,0);
-        LocalDateTime customer2DOB = LocalDateTime.of(1992, 2, 29,0,0);
-        LocalDateTime customer3DOB = LocalDateTime.of(1990, 12, 31, 0,0);
+        LocalDate customer1DOB = LocalDate.of(1988, 2, 29);
+        LocalDate customer2DOB = LocalDate.of(1992, 2, 29);
+        LocalDate customer3DOB = LocalDate.of(1990, 12, 31);
 
         Customer customer1 = new Customer("Max", "Musterman", customer1DOB, "Max@gmail.com", "12345678", pa1, Customer.CustomerLevel.NEWUSER, pm1);
         Customer customer2 = new Customer("Maria", "Musterfrau", customer2DOB, "maria@gmail.com", "12345678", pa2, Customer.CustomerLevel.REGULARUSER, pm2);
@@ -141,9 +141,9 @@ public class BootStrapData implements CommandLineRunner {
 
         //Employee
 
-        LocalDateTime employee1DOB = LocalDateTime.of(1970, 3, 31,0,0);
-        LocalDateTime employee2DOB = LocalDateTime.of(1965, 7, 17,0,0);
-        LocalDateTime employee3DOB = LocalDateTime.of(1992, 12, 31,0,0);
+        LocalDate employee1DOB = LocalDate.of(1970, 3, 31);
+        LocalDate employee2DOB = LocalDate.of(1965, 7, 17);
+        LocalDate employee3DOB = LocalDate.of(1992, 12, 31);
 
         Employee employee1 = new Employee("John", "Doe", employee1DOB, "john@gmail.com", "12345678", ea1, 1600.00f, Employee.TypeOfActivity.CUSTOMERSUPPORT);
         Employee employee2 = new Employee("Pepito", "Perez", employee2DOB, "Pepito@gmail.com", "12345678", ea2, 1800.00f, Employee.TypeOfActivity.MAINTAINER);
@@ -161,7 +161,7 @@ public class BootStrapData implements CommandLineRunner {
 
         //Admin
 
-        LocalDateTime adminDOB = LocalDateTime.of(1986, 9, 30,0,0);
+        LocalDate adminDOB = LocalDate.of(1986, 9, 30);
         PersonAddress adminAddress = new PersonAddress("99084", "Erfurt", "Stotternheimstrasse", "52");
 
 
@@ -346,18 +346,101 @@ public class BootStrapData implements CommandLineRunner {
 
         ///////RentalPackage///////
 
+        //Rental Time Slots
+
+        LocalTime lt0 = LocalTime.of( 0,0 );
+        LocalTime lt1 = LocalTime.of( 1, 0);
+        LocalTime lt2 = LocalTime.of( 2,0 );
+        LocalTime lt3 = LocalTime.of( 3, 0);
+        LocalTime lt4 = LocalTime.of( 4,0 );
+        LocalTime lt5 = LocalTime.of( 5, 0);
+        LocalTime lt6 = LocalTime.of( 6,0 );
+        LocalTime lt7 = LocalTime.of( 7, 0);
+        LocalTime lt8 = LocalTime.of( 8,0 );
+        LocalTime lt9 = LocalTime.of( 9, 0);
+        LocalTime lt10 = LocalTime.of( 10,0 );
+        LocalTime lt11 = LocalTime.of( 11, 0);
+        LocalTime lt12 = LocalTime.of( 12,0 );
+        LocalTime lt13 = LocalTime.of( 13, 0);
+        LocalTime lt14 = LocalTime.of( 14,0 );
+        LocalTime lt15 = LocalTime.of( 15, 0);
+        LocalTime lt16 = LocalTime.of( 16,0 );
+        LocalTime lt17 = LocalTime.of( 17, 0);
+        LocalTime lt18 = LocalTime.of( 18,0 );
+        LocalTime lt19 = LocalTime.of( 19, 0);
+        LocalTime lt20 = LocalTime.of( 20,0 );
+        LocalTime lt21 = LocalTime.of( 21, 0);
+        LocalTime lt22 = LocalTime.of( 22,0 );
+        LocalTime lt23 = LocalTime.of( 23, 0);
+
+        RentalTimeSlot rts1 = new RentalTimeSlot(lt0, lt1);
+        RentalTimeSlot rts2 = new RentalTimeSlot(lt1, lt2);
+        RentalTimeSlot rts3 = new RentalTimeSlot(lt2, lt3);
+        RentalTimeSlot rts4 = new RentalTimeSlot(lt3, lt4);
+        RentalTimeSlot rts5 = new RentalTimeSlot(lt4, lt5);
+        RentalTimeSlot rts6 = new RentalTimeSlot(lt5, lt6);
+        RentalTimeSlot rts7 = new RentalTimeSlot(lt6, lt7);
+        RentalTimeSlot rts8 = new RentalTimeSlot(lt7, lt8);
+        RentalTimeSlot rts9 = new RentalTimeSlot(lt8, lt9);
+        RentalTimeSlot rts10 = new RentalTimeSlot(lt9, lt10);
+        RentalTimeSlot rts11 = new RentalTimeSlot(lt10, lt11);
+        RentalTimeSlot rts12 = new RentalTimeSlot(lt11, lt12);
+        RentalTimeSlot rts13 = new RentalTimeSlot(lt12, lt13);
+        RentalTimeSlot rts14 = new RentalTimeSlot(lt13, lt14);
+        RentalTimeSlot rts15 = new RentalTimeSlot(lt14, lt15);
+        RentalTimeSlot rts16 = new RentalTimeSlot(lt15, lt16);
+        RentalTimeSlot rts17 = new RentalTimeSlot(lt16, lt17);
+        RentalTimeSlot rts18 = new RentalTimeSlot(lt17, lt18);
+        RentalTimeSlot rts19 = new RentalTimeSlot(lt18, lt19);
+        RentalTimeSlot rts20 = new RentalTimeSlot(lt19, lt20);
+        RentalTimeSlot rts21 = new RentalTimeSlot(lt20, lt21);
+        RentalTimeSlot rts22 = new RentalTimeSlot(lt21, lt22);
+        RentalTimeSlot rts23 = new RentalTimeSlot(lt22, lt23);
+        RentalTimeSlot rts24 = new RentalTimeSlot(lt23, lt0);
+
+        rentalTimeSlotRepository.save(rts1);
+        rentalTimeSlotRepository.save(rts2);
+        rentalTimeSlotRepository.save(rts3);
+        rentalTimeSlotRepository.save(rts4);
+        rentalTimeSlotRepository.save(rts5);
+        rentalTimeSlotRepository.save(rts6);
+        rentalTimeSlotRepository.save(rts7);
+        rentalTimeSlotRepository.save(rts8);
+        rentalTimeSlotRepository.save(rts9);
+        rentalTimeSlotRepository.save(rts10);
+        rentalTimeSlotRepository.save(rts11);
+        rentalTimeSlotRepository.save(rts12);
+        rentalTimeSlotRepository.save(rts13);
+        rentalTimeSlotRepository.save(rts14);
+        rentalTimeSlotRepository.save(rts15);
+        rentalTimeSlotRepository.save(rts16);
+        rentalTimeSlotRepository.save(rts17);
+        rentalTimeSlotRepository.save(rts18);
+        rentalTimeSlotRepository.save(rts19);
+        rentalTimeSlotRepository.save(rts20);
+        rentalTimeSlotRepository.save(rts21);
+        rentalTimeSlotRepository.save(rts22);
+        rentalTimeSlotRepository.save(rts23);
+        rentalTimeSlotRepository.save(rts24);
+
+        log.info("Number of Rentals time slots added: " + rentalTimeSlotRepository.count() );
+
         //Fuel Rental
 
-        LocalDateTime timeNow = LocalDateTime.now();
-        LocalDateTime departure1 = LocalDateTime.of(2020, 9, 8 , 10,10);
-        LocalDateTime arrival1 = LocalDateTime.of(2020, 9, 11 , 10,10);
+        LocalDate rentalTime1 = LocalDate.of(2020,8,10);
+        LocalDate rentalTime2 = LocalDate.of(2020,8,11);
 
-        LocalDateTime departure2 = LocalDateTime.of(2020, 12, 23 , 10,10);
-        LocalDateTime arrival2 = LocalDateTime.of(2021, 1, 7 , 10,10);
+        List<RentalTimeSlot> fuelRental1TimeSlots = new ArrayList<>();
+        fuelRental1TimeSlots.add(rts8);
+        fuelRental1TimeSlots.add(rts9);
+        fuelRental1TimeSlots.add(rts10);
 
+        List<RentalTimeSlot> fuelRental2TimeSlots = new ArrayList<>();
+        fuelRental2TimeSlots.add(rts13);
+        fuelRental2TimeSlots.add(rts14);
 
-        FuelRental fuelRental1 = new FuelRental(combustionCar1, timeNow, departure1, arrival1, customer3);
-        FuelRental fuelRental2 = new FuelRental(combustionCar2, timeNow, departure2, arrival2, customer1);
+        FuelRental fuelRental1 = new FuelRental(combustionCar1, rentalTime1, customer3, fuelRental1TimeSlots);
+        FuelRental fuelRental2 = new FuelRental(combustionCar2, rentalTime2, customer1, fuelRental2TimeSlots);
 
         try{
             fuelRentalRepository.save(fuelRental1);
@@ -370,8 +453,24 @@ public class BootStrapData implements CommandLineRunner {
         log.info("Number of Rentals added: " + fuelRentalRepository.count() );
 
         //Electric Rental
-        ElectricRental electricRental1 = new ElectricRental(electricCar1, customer1);
-        ElectricRental electricRental2 = new ElectricRental(electricCar2, customer2);
+
+        LocalDate rentalTime3 = LocalDate.of(2020,8,10);
+        LocalDate rentalTime4 = LocalDate.of(2020,8,8);
+
+        List<RentalTimeSlot> electricRental1TimeSlots = new ArrayList<>();
+        electricRental1TimeSlots.add(rts10);
+        electricRental1TimeSlots.add(rts11);
+        electricRental1TimeSlots.add(rts12);
+        electricRental1TimeSlots.add(rts13);
+        electricRental1TimeSlots.add(rts14);
+        electricRental1TimeSlots.add(rts15);
+        electricRental1TimeSlots.add(rts16);
+
+        List<RentalTimeSlot> electricRental2TimeSlots = new ArrayList<>();
+        electricRental2TimeSlots.add(rts19);
+
+        ElectricRental electricRental1 = new ElectricRental(electricCar1, rentalTime3, customer1, electricRental1TimeSlots);
+        ElectricRental electricRental2 = new ElectricRental(electricCar2, rentalTime4, customer2, electricRental2TimeSlots);
 
         try{
             electricRentalRepository.save(electricRental1);
