@@ -10,63 +10,68 @@
     <title> Search Results</title>
 </head>
 <body style="font-size: small">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12" th:text="'Date: ' + ${date}" style="font-size: larger">PlaceHolder</div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Station</th>
+            <th scope="col">Car</th>
+            <th scope="col">Fuel Type</th>
+            <th scope="col">Charge/Fuel - Level</th>
+            <th scope="col">Price (Hour)</th>
+            <th scope="col" colspan="24">Availability (From-To)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="fuelParkingArea : ${fuelParkingAreas}">
+            <tr th:each="combustionCar : ${fuelParkingArea.carsInStation}">
+                <th scope="row" th:text="${fuelParkingArea.name}"></th>
+                <td th:text="${combustionCar.brand} + ' ' + ${combustionCar.model}"></td>
+                <td th:text="${combustionCar.fuelType}"></td>
+                <td th:text="${combustionCar.fuelLevel}"></td>
+                <td th:text="${combustionCar.price}"></td>
+                <form>
+                    <td>
+                        <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
+                            <input class="form-check-input" type="checkbox" id="fuel-timeslot" th:value="${timeslot}">
+                            <label class="form-check-label" for="fuel-timeslot" th:text="${#temporals.format(timeslot.departureTime, 'HH')} + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"></label>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-dark">Rent</button>
+                    </td>
+                </form>
+            </tr>
         </div>
-        <div class="row">
-            <div class="col-md-1">Station</div>
-            <div class="col-md-1">Car</div>
-            <div class="col-md-1">Fuel Type</div>
-            <div class="col-md-1">Charge/Fuel - Level</div>
-            <div class="col-md-1">Price (Hour)</div>
-            <div class="col-md-6">Availability</div>
-        </div>
+        <div th:each="electricParkingArea : ${electricParkingAreas}">
+            <tr th:each="electricCar : ${electricParkingArea.electricCarsInStation}">
+                <th scope="row" th:text="${electricParkingArea.name}"></th>
+                <td th:text="${electricCar.brand} + ' ' + ${electricCar.model}"></td>
+                <td> ELECTRIC </td>
+                <td th:text="${electricCar.chargePercent}"></td>
+                <td th:text="${electricCar.price}"></td>
 
-        <div class="row" th:each="fuelParkingArea : ${fuelParkingAreas}">
-            <div class="col-md-12">
-                <div th:each="combustionCar : ${fuelParkingArea.carsInStation}">
-                    <div class="row">
-                        <div class="col-md-1" th:text="${fuelParkingArea.name}">b</div>
-                        <div class="col-md-1" th:text="${combustionCar.brand} + ' ' + ${combustionCar.model}">b</div>
-                        <div class="col-md-1" th:text="${combustionCar.fuelType}">b</div>
-                        <div class="col-md-1" th:text="${combustionCar.fuelLevel}">b</div>
-                        <div class="col-md-1" th:text="${combustionCar.price}">b</div>
-                        <div class="col-md-6">
-                            <form>
-                                <span th:each="timeslot : ${timeslots}">
-<!--                                    <span th:text="${timeslot.departureTime} + ' - ' + ${timeslot.arrivalTime}"></span>-->
-                                    <input type="checkbox" id="fuel-timeslot" name="timeslot" th:value="${timeslot.id}">
-                                </span>
-                            </form>
+                <form th:action="@{/rental/rentACar}" th:object="${electricRental}" method="post">
+                    <td>
+                        <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
+                            <input class="form-check-input" type="checkbox"
+                                   th:value="${timeslot}"
+                                   th:field="*{timeSlotsList}">
+                            <label class="form-check-label"
+                                   th:text="${#temporals.format(timeslot.departureTime, 'HH')} + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
+                                   th:for="${#ids.prev('timeSlotsList')}">
+                            </label>
                         </div>
-                        <div class="col-md-1"><button>Rent!</button></div>
-                    </div>
-                </div>
-            </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-dark">Rent</button>
+                    </td>
+                    <div th:field="*{electricCar}" th:value="${electricCar}" style="display: none"></div>
+                    <div th:field="*{date}" th:value="${date}"style="display: none"></div>
+                    <div th:field="*{customer}" th:value="${customer}" style="display: none"></div>
+                </form>
+            </tr>
         </div>
-        <div class="row" th:each="electricParkingArea : ${electricParkingAreas}">
-            <div class="col-md-12">
-                <div th:each="electricCar : ${electricParkingArea.electricCarsInStation}">
-                    <div class="row">
-                        <div class="col-md-1" th:text="${electricParkingArea.name}">a</div>
-                        <div class="col-md-1" th:text="${electricCar.brand} +  ' ' + ${electricCar.model}">a</div>
-                        <div class="col-md-1" >ELECTRIC</div>
-                        <div class="col-md-1" th:text="${electricCar.chargePercent}">a</div>
-                        <div class="col-md-1" th:text="${electricCar.price}">a</div>
-                        <div class="col-md-6">
-                            <form>
-                                <span th:each="timeslot : ${timeslots}">
-<!--                                    <span th:text="${timeslot.departureTime} + ' - ' + ${timeslot.arrivalTime}"></span>-->
-                                    <input type="checkbox" id="electric-timeslot" name="timeslot" th:value="${timeslot.id}">
-                                </span>
-                            </form>
-                        </div>
-                        <div class="col-md-1"><button>Rent!</button></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </tbody>
+    </table>
 </body>
 </html>

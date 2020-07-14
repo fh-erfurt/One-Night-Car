@@ -1,7 +1,11 @@
 package de.onenightcar.controller;
 
 import de.onenightcar.bootstrap.BootStrapData;
+import de.onenightcar.controller.formValidators.ElectricRentalFormValidator;
 import de.onenightcar.model.parkingArea.ParkingArea;
+import de.onenightcar.model.rental.ElectricRental;
+import de.onenightcar.model.rental.Rental;
+import de.onenightcar.model.rental.RentalTimeSlot;
 import de.onenightcar.repositories.carRespository.CarLocationRepository;
 import de.onenightcar.repositories.carRespository.CombustionCarRepository;
 import de.onenightcar.repositories.carRespository.ElectricCarRepository;
@@ -17,9 +21,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.swing.text.html.parser.Entity;
+import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/rental")
@@ -73,35 +84,46 @@ public class RentalController {
     //Date: Integer: day of the year (1-365) to simplify things (Should be calculated on last page)
     @RequestMapping(path = "/search-results/{city}/{date}/{fuel-type}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public String searchResultsFuel(Model model, @PathVariable("city") String city, @PathVariable("date") int date,
-                                @PathVariable("fuel-type") int fuelType) {
-        Iterable<ParkingArea> pas= parkingAreaRepository.getAllByParkingAreaAddressCity("Erfurt");
+    public ModelAndView searchResultsFuel(@PathVariable("city") String city, @PathVariable("date") int date,
+                                          @PathVariable("fuel-type") int fuelType) {
 
-        for(ParkingArea pa: pas) {
-            log.info("Parking Area" + pa.carsInStation);
-        }
+        List<RentalTimeSlot> rentalTimeSlots = (List<RentalTimeSlot>) rentalTimeSlotRepository.findAll();
 
-        model.addAttribute("date", date);
-        model.addAttribute("timeslots", rentalTimeSlotRepository.findAll());
+        ModelAndView mav = new ModelAndView("rental/searchResults");
+
+        mav.addObject("date", LocalDate.of(2020, 07, 02));
+        mav.addObject("customer", customerRepository.getById(10l));
+        mav.addObject("mdate", date);
+        mav.addObject("rentalTimeSlots", rentalTimeSlots);
 
         if(fuelType == 0){
-            model.addAttribute("electricParkingAreas", electricParkingAreaRepository.getAllByParkingAreaAddressCity(city));
-            model.addAttribute("fuelParkingAreas", parkingAreaRepository.getAllByParkingAreaAddressCity(city));
+            mav.addObject("electricParkingAreas", electricParkingAreaRepository.getAllByParkingAreaAddressCity(city));
+            mav.addObject("fuelParkingAreas", parkingAreaRepository.getAllByParkingAreaAddressCity(city));
             //TODO: After doing the needed change in the Repository - reEnable
 //            model.addAttribute("not-available-electric-rentals", electricRentalRepository.getAllByDate_DayOfYear(date));
 //            model.addAttribute("not-available-fuel-rentals", fuelRentalRepository.getAllByDate_DayOfYear(date));
         }
         else if (fuelType == 1) {
-            model.addAttribute("fuelParkingAreas", parkingAreaRepository.getAllByParkingAreaAddressCity(city));
+            mav.addObject("fuelParkingAreas", parkingAreaRepository.getAllByParkingAreaAddressCity(city));
             //TODO: After doing the needed change in the Repository - reEnable
 //            model.addAttribute("not-available-fuel-rentals", fuelRentalRepository.getAllByDate_DayOfYear(date));
         }
         else if (fuelType == 2) {
-            model.addAttribute("electricParkingAreas", electricParkingAreaRepository.getAllByParkingAreaAddressCity(city));
+            mav.addObject("electricParkingAreas", electricParkingAreaRepository.getAllByParkingAreaAddressCity(city));
             //TODO: After doing the needed change in the Repository - reEnable
 //            model.addAttribute("not-available-electric-rentals", electricRentalRepository.getAllByDate_DayOfYear(date));
         }
 
-        return "rental/searchResults";
+        return mav;
     }
+
+
+    @PostMapping("/rentACar")
+    public String checkElectricRental(@ModelAttribute ElectricRental electricRental) {
+
+        System.out.println(electricRental);
+        return "/";
+    }
+
+
 }

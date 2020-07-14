@@ -142,4 +142,41 @@ public class FuelRental extends Rental {
     }
 
     /* /////////////////////Overrides/////////////////////////// */
+
+    @Override
+    public String toString() {
+        return "FuelRental{" +
+                "rentalPrice=" + rentalPrice +
+                ", odometerBefore=" + odometerBefore +
+                ", odometerAfter=" + odometerAfter +
+                ", rentalDate=" + rentalDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FuelRental that = (FuelRental) o;
+
+        if (Double.compare(that.fuelLevelBefore, fuelLevelBefore) != 0) return false;
+        if (Double.compare(that.fuelLevelAfter, fuelLevelAfter) != 0) return false;
+        if (timeSlotsList != null ? !timeSlotsList.equals(that.timeSlotsList) : that.timeSlotsList != null)
+            return false;
+        return combustionCar != null ? combustionCar.equals(that.combustionCar) : that.combustionCar == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(fuelLevelBefore);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(fuelLevelAfter);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (timeSlotsList != null ? timeSlotsList.hashCode() : 0);
+        result = 31 * result + (combustionCar != null ? combustionCar.hashCode() : 0);
+        return result;
+    }
 }
