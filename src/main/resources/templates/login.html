@@ -10,11 +10,12 @@
 <div>
     <h2>Login</h2>
     <h3>pleas enter your e-mail and Password</h3>
-    <form action="#" th:action="@{/login}" th:object="${loginForm}" method="post">
-        <label for="email">E-Mail:</label>
-        <input type="text" id="email" name="username" placeholder="E-Mail"><br><br>
+    <form action="#" th:action="@{/login}" th:object="${customers}" th:each="customer : ${customers}" method="post">
+
+        <label for="email" >E-Mail:</label>
+        <input type="text" th:field="${customer.getMail()}" id="email" th:field="" name="username"><br><br>
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password" placeholder="Password" ><br><br>
+        <input type="text"  th:field="${customer.getUserPassword()}" id="password" name="password" placeholder="Password" ><br><br>
         <input type="submit" value="Submit">
     </form>
 </div>
