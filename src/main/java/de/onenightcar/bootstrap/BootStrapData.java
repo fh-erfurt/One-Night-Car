@@ -566,6 +566,10 @@ public class BootStrapData implements CommandLineRunner {
 
         log.info("Relation between Parking Areas and Cars established");
 
+        //Rental + Rental Slots//
+
+
+
         ////////////////////////////////////////////////////////
 
         log.info("Data Successfully added with BootStrap");

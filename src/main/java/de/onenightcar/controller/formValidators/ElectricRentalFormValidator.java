@@ -2,40 +2,34 @@ package de.onenightcar.controller.formValidators;
 
 import de.onenightcar.model.car.ElectricCar;
 import de.onenightcar.model.person.Customer;
-import de.onenightcar.model.rental.RentalTimeSlot;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Arrays;
 
 public class ElectricRentalFormValidator {
 
     @NotNull
-    private ElectricCar electricCar;
+    private Long electricCarId;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @NotNull
-    private Customer customer;
+    private Long customerId;
 
     @NotNull
-    private List<RentalTimeSlot> timeSlotsList;
+    private Long[] timeSlotsListId;
 
-    public ElectricRentalFormValidator(ElectricCar electricCar, LocalDate date, Customer customer, List<RentalTimeSlot> timeSlotsList) {
-        this.electricCar = electricCar;
-        this.date = date;
-        this.customer = customer;
-        this.timeSlotsList = timeSlotsList;
+    public Long getElectricCarId() {
+        return electricCarId;
     }
 
-    public ElectricCar getElectricCar() {
-        return electricCar;
-    }
-
-    public void setElectricCar(ElectricCar electricCar) {
-        this.electricCar = electricCar;
+    public void setElectricCarId(Long electricCarId) {
+        this.electricCarId = electricCarId;
     }
 
     public LocalDate getDate() {
@@ -46,29 +40,29 @@ public class ElectricRentalFormValidator {
         this.date = date;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Long getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
     }
 
-    public List<RentalTimeSlot> getTimeSlotsList() {
-        return timeSlotsList;
+    public Long[] getTimeSlotsListId() {
+        return timeSlotsListId;
     }
 
-    public void setTimeSlotsList(List<RentalTimeSlot> timeSlotsList) {
-        this.timeSlotsList = timeSlotsList;
+    public void setTimeSlotsListId(Long[] timeSlotsList) {
+        this.timeSlotsListId = timeSlotsList;
     }
 
     @Override
     public String toString() {
         return "ElectricRentalFormValidator{" +
-                "electricCar=" + electricCar +
+                "electricCarId=" + electricCarId +
                 ", date=" + date +
-                ", customer=" + customer +
-                ", timeSlotsList=" + timeSlotsList +
+                ", customerId=" + customerId +
+                ", timeSlotsListId=" + Arrays.toString(timeSlotsListId) +
                 '}';
     }
 }

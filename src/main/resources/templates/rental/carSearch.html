@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title> Car Search </title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="title">
+            <h5>Search your perfect Match</h5>
+        </div>
+        <div class="input-wrapper">
+            <form action='#' th:action="@{/rental/search-results}" th:object="${carSearchForm}" method='post'>
+                <select th:field="*{city}" id="city-selection">
+                    <div th:each="city : ${cities}">
+                        <option th:value="${city}" th:text="${city}"></option>
+                    </div>
+                </select>
+                <input type="date" th:field="*{date}">
+                <select th:field="*{fuel}" id="fuel-type">
+                    <option th:value="0">Any</option>
+                    <option th:value="1">Combustion</option>
+                    <option th:value="2">Electric</option>
+                </select>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+</body>

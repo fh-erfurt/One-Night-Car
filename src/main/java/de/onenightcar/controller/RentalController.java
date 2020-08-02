@@ -1,9 +1,12 @@
 package de.onenightcar.controller;
 
 import de.onenightcar.bootstrap.BootStrapData;
+import de.onenightcar.controller.formValidators.CarSearchForm;
 import de.onenightcar.controller.formValidators.ElectricRentalFormValidator;
 import de.onenightcar.model.parkingArea.ParkingArea;
+import de.onenightcar.model.parkingArea.ParkingAreaAddress;
 import de.onenightcar.model.rental.ElectricRental;
+import de.onenightcar.model.rental.FuelRental;
 import de.onenightcar.model.rental.Rental;
 import de.onenightcar.model.rental.RentalTimeSlot;
 import de.onenightcar.repositories.carRespository.CarLocationRepository;
@@ -80,49 +83,93 @@ public class RentalController {
         this.parkingAreaAddressRepository = parkingAreaAddressRepository;
     }
 
-    //Fuel Type: 0->Any // 1-> Combustion // 2->Electric
-    //Date: Integer: day of the year (1-365) to simplify things (Should be calculated on last page)
-    @RequestMapping(path = "/search-results/{city}/{date}/{fuel-type}", method = RequestMethod.GET)
+    @RequestMapping(path = "/car-search", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public ModelAndView searchResultsFuel(@PathVariable("city") String city, @PathVariable("date") int date,
-                                          @PathVariable("fuel-type") int fuelType) {
+    public ModelAndView searchPage() {
 
-        List<RentalTimeSlot> rentalTimeSlots = (List<RentalTimeSlot>) rentalTimeSlotRepository.findAll();
+        //Get all different cities from the Database
+        List<String> parkingAreaCities = parkingAreaAddressRepository.getDistinctCity();
 
+        //Create the Model and View and add the view
+        ModelAndView mav = new ModelAndView("rental/carSearch");
+
+        //Add the needed object for the rendering of the view
+        //The object that should be popullated in the form of the view
+        mav.addObject("carSearchForm", new CarSearchForm());
+        mav.addObject("cities", parkingAreaCities);
+
+        return mav;
+    }
+
+    @RequestMapping(path = "/search-results", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView searchResults(@ModelAttribute CarSearchForm carSearchForm, Model model) {
+
+        //Create the Model and View and add the view
         ModelAndView mav = new ModelAndView("rental/searchResults");
 
-        mav.addObject("date", LocalDate.of(2020, 07, 02));
-        mav.addObject("customer", customerRepository.getById(10l));
-        mav.addObject("mdate", date);
+        //Create the needed objects for the rendering of the view
+        List<RentalTimeSlot> rentalTimeSlots = (List<RentalTimeSlot>) rentalTimeSlotRepository.findAll();
+        LocalDate date = carSearchForm.getDate();
+        int fuelType = carSearchForm.getFuel();
+        String city = carSearchForm.getCity();
+
+//        //Search for already occupied rental slots
+//        List<FuelRental> dayFuelRentals = fuelRentalRepository.getAllByDate(date);
+//        List<ElectricRental> dayElectricRentals = electricRentalRepository.getAllByDate(date);
+//
+//        //If there are any Rentals already made for the day
+//        if(dayElectricRentals.size() > 0 || dayFuelRentals.size() > 0) {
+//            if (dayElectricRentals.size() > 0) {
+//                for (int i = 0; i < dayElectricRentals.size(); i++) {
+//                    dayElectricRentals.get(i).getTimeSlotsList()
+//                }
+//            }
+//            if (dayFuelRentals.size() > 0) {
+//
+//            }
+//        } else {
+//            //All possible rental time slot for the day
+//            mav.addObject("rentalTimeSlots", rentalTimeSlots);
+//        }
+
+        //All possible rental time slot for the day
         mav.addObject("rentalTimeSlots", rentalTimeSlots);
 
+        //Add the objects to the view
+        //The wanted date for the rental
+        mav.addObject("date", date);
+        //TODO: Somehow access to the Customer who is logged in
+        mav.addObject("customer", customerRepository.getById(10l));
+        //The needed validator for the rental form
+        mav.addObject("electricRentalFormValidator", new ElectricRentalFormValidator());
+
+
+        //Define which parking areas should be shown and add them to the view
         if(fuelType == 0){
             mav.addObject("electricParkingAreas", electricParkingAreaRepository.getAllByParkingAreaAddressCity(city));
             mav.addObject("fuelParkingAreas", parkingAreaRepository.getAllByParkingAreaAddressCity(city));
-            //TODO: After doing the needed change in the Repository - reEnable
-//            model.addAttribute("not-available-electric-rentals", electricRentalRepository.getAllByDate_DayOfYear(date));
-//            model.addAttribute("not-available-fuel-rentals", fuelRentalRepository.getAllByDate_DayOfYear(date));
         }
         else if (fuelType == 1) {
             mav.addObject("fuelParkingAreas", parkingAreaRepository.getAllByParkingAreaAddressCity(city));
-            //TODO: After doing the needed change in the Repository - reEnable
-//            model.addAttribute("not-available-fuel-rentals", fuelRentalRepository.getAllByDate_DayOfYear(date));
         }
         else if (fuelType == 2) {
             mav.addObject("electricParkingAreas", electricParkingAreaRepository.getAllByParkingAreaAddressCity(city));
-            //TODO: After doing the needed change in the Repository - reEnable
-//            model.addAttribute("not-available-electric-rentals", electricRentalRepository.getAllByDate_DayOfYear(date));
         }
 
         return mav;
     }
 
 
-    @PostMapping("/rentACar")
-    public String checkElectricRental(@ModelAttribute ElectricRental electricRental) {
+    @PostMapping("/confirm-rental")
+    public ModelAndView checkElectricRental(@ModelAttribute ElectricRentalFormValidator electricRentalFormValidator) {
 
-        System.out.println(electricRental);
-        return "/";
+        log.info(electricRentalFormValidator.toString());
+        ModelAndView mav = new ModelAndView("rental/confirmRental");
+
+        mav.addObject("electricRentalFormValidator", electricRentalFormValidator);
+
+        return mav;
     }
 
 

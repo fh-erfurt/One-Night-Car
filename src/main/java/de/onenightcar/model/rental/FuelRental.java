@@ -5,10 +5,10 @@ import de.onenightcar.model.person.Customer;
 
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class FuelRental extends Rental {
     private double fuelLevelBefore;
     private double fuelLevelAfter;
 
-    @OneToMany(mappedBy = "fuelRental")
+    @ManyToMany
     protected List<RentalTimeSlot> timeSlotsList = new ArrayList<>();
 
     @OneToOne
@@ -49,9 +49,7 @@ public class FuelRental extends Rental {
         this.combustionCar = combustionCar;
         this.timeSlotsList = timeSlotsList;
         //add this Rental to the given timeslots
-        for(int i = 0; i < timeSlotsList.size(); i++) {
-            this.timeSlotsList.get(i).setFuelRental(this);
-        }
+        this.timeSlotsList = timeSlotsList;
         this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
     }
 

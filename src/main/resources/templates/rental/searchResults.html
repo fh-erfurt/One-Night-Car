@@ -50,24 +50,23 @@
                 <td th:text="${electricCar.chargePercent}"></td>
                 <td th:text="${electricCar.price}"></td>
 
-                <form th:action="@{/rental/rentACar}" th:object="${electricRental}" method="post">
+                <form action=# th:action="@{/rental/confirm-rental}" th:object="${electricRentalFormValidator}" method="post">
                     <td>
                         <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
-                            <input class="form-check-input" type="checkbox"
-                                   th:value="${timeslot}"
-                                   th:field="*{timeSlotsList}">
-                            <label class="form-check-label"
-                                   th:text="${#temporals.format(timeslot.departureTime, 'HH')} + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
-                                   th:for="${#ids.prev('timeSlotsList')}">
+                            <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
+                            <label class="form-check-label" th:text="${#temporals.format(timeslot.departureTime, 'HH')} + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
+                                   th:for="${#ids.prev('timeSlotsListId')}">
                             </label>
+                        </div>
+                        <div>
+                            <input type="hidden"  th:value="${electricCar.id}"  name="electricCarId">       </input>
+                            <input type="hidden"  th:value="${date}"            name="date"         >       </input>
+                            <input type="hidden"  th:value="${customer.id}"     name="customerId"   >       </input>
                         </div>
                     </td>
                     <td>
-                        <button class="btn btn-dark">Rent</button>
+                        <button class="btn btn-dark" type="submit">Rent</button>
                     </td>
-                    <div th:field="*{electricCar}" th:value="${electricCar}" style="display: none"></div>
-                    <div th:field="*{date}" th:value="${date}"style="display: none"></div>
-                    <div th:field="*{customer}" th:value="${customer}" style="display: none"></div>
                 </form>
             </tr>
         </div>
