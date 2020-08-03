@@ -26,7 +26,7 @@ public class FuelRental extends Rental {
     private double fuelLevelAfter;
 
     @ManyToMany
-    protected List<RentalTimeSlot> timeSlotsList = new ArrayList<>();
+    protected List<RentalTimeSlot> timeSlotsList;
 
     @OneToOne
     private CombustionCar combustionCar;
@@ -109,6 +109,14 @@ public class FuelRental extends Rental {
 
     public void setFuelLevelAfter(double fuelLevelAfter) {
         this.fuelLevelAfter = fuelLevelAfter;
+    }
+
+    public List<RentalTimeSlot> getTimeSlotsList() {
+        return timeSlotsList;
+    }
+
+    public void setTimeSlotsList(List<RentalTimeSlot> timeSlotsList) {
+        this.timeSlotsList = timeSlotsList;
     }
 
     /* /////////////////////Methods/////////////////////////// */

@@ -10,8 +10,16 @@
     <title>Confirm Rental</title>
 </head>
 <body>
-    <p th:text="${electricRentalFormValidator.electricCarId}"></p>
-    <p th:text="${electricRentalFormValidator.date}"></p>
-    <p th:text="${electricRentalFormValidator.customerId}"></p>
-    <p th:text="${electricRentalFormValidator.timeSlotsListId[0]}">a</p>
+    <th:block th:if="${electricRentalFormValidator}">
+        <p th:text="${electricRentalFormValidator.electricCarId}"></p>
+        <p th:text="${electricRentalFormValidator.date}"></p>
+        <p th:text="${electricRentalFormValidator.customerId}"></p>
+        <p th:text="${electricRentalFormValidator.timeSlotsListId[0]}">a</p>
+    </th:block>
+    <th:block th:if="${fuelRentalFormValidator}">
+        <p th:text="${fuelRentalFormValidator.fuelCarId}"></p>
+        <p th:text="${fuelRentalFormValidator.date}"></p>
+        <p th:text="${fuelRentalFormValidator.customerId}"></p>
+        <p th:text="${fuelRentalFormValidator.timeSlotsListId[0]}">a</p>
+    </th:block>
 </body>
