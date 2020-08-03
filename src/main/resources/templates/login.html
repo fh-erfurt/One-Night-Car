@@ -17,24 +17,14 @@
     <form action="#" th:action="@{/login}" th:object="${customers}" method="post">
 
         <label>E-Mail</label>
-        <input type="email" th:each="customer : ${customers}" th:field="${customer.getMail()}">
+        <input type="email" th:field="*{email}" placeholder="E-Mail">
 
         <label>Password</label>
-        <input type="password" th:each="customer : ${customers}" th:field="${customer.getUserPassword()}">
+        <input type="password" th:field="*{password}" placeholder="Password">
 
-        <button type="submit">Login</button>
-
-
+        <br><button type="submit">Login</button>
 
 
-        <!--<label for="email" >E-Mail:</label>
-        <input type="text" id="email" th:each="customer : ${customers}" th:field="${customer.getMail()}" name="username"><br><br>
-        <span th:if=""></span>
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password" placeholder="Password" ><br><br>
-        <span th:each="customer : ${customers}" th:if="${customer.getUserPassword()}" ></span>
-
-        <input type="submit" value="Submit">-->
     </form>
 </div>
 

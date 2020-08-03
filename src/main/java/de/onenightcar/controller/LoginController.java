@@ -1,18 +1,20 @@
 package de.onenightcar.controller;
 
 import de.onenightcar.bootstrap.BootStrapData;
+import de.onenightcar.controller.formValidators.LoginForm;
 import de.onenightcar.model.person.Customer;
 import de.onenightcar.repositories.personRepository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 @Controller
@@ -30,20 +32,35 @@ public class LoginController implements WebMvcConfigurer {
     }
 
     @GetMapping("/login")
-    public String loginForm(Model model) {
-        model.addAttribute("customers", customerRepository.findAll());
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView loginForm() {
 
-        return "login";
+        ModelAndView mav = new ModelAndView("login");
+
+        mav.addObject("customers", new LoginForm());
+
+        return mav;
     }
 
     // receives the Form object that was populated by the form.
     @PostMapping("/login")
-    public String loginSubmit(@ModelAttribute("customers") CustomerRepository customerRepository, ModelMap model, BindingResult bindingResult) {
-        if(bindingResult.hasErrors())
-        {
-            return "Error";
-        }
-        return "index";
+    @ResponseStatus(HttpStatus.OK)
+    public String loginSubmit(@ModelAttribute LoginForm loginForm, Model model) {
+        String email = loginForm.getEmail();
+        String password = loginForm.getPassword();
+         AtomicBoolean valid = new AtomicBoolean(false);
+         boolean validate = false;
+
+        List<Customer> customers = (List<Customer>) customerRepository.findAll();
+        customers.forEach(customer -> {
+            if(customer.getMail() == email && customer.getUserPassword() == password)
+            {
+               valid.set(true);
+            }
+        });
+        validate = valid.get();
+
+        return validate ? "index" : "login";
     }
 
 }
