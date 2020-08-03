@@ -4,8 +4,9 @@ import de.onenightcar.util.AbstractDatabaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 public class RentalTimeSlot extends AbstractDatabaseEntity {
@@ -15,11 +16,11 @@ public class RentalTimeSlot extends AbstractDatabaseEntity {
     private LocalTime departureTime;
     private LocalTime arrivalTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private FuelRental fuelRental;
+    @ManyToMany(mappedBy = "timeSlotsList")
+    private List<FuelRental> fuelRental;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ElectricRental electricRental;
+    @ManyToMany(mappedBy = "timeSlotsList")
+    private List<ElectricRental> electricRental;
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -29,13 +30,6 @@ public class RentalTimeSlot extends AbstractDatabaseEntity {
     public RentalTimeSlot(LocalTime departureTime, LocalTime arrivalTime) {
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
-    }
-
-    public RentalTimeSlot(LocalTime departureTime, LocalTime arrivalTime, FuelRental fuelRental, ElectricRental electricRental) {
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
-        this.fuelRental = fuelRental;
-        this.electricRental = electricRental;
     }
 
     /* /////////////////////Getter/Setters/////////////////////////// */
@@ -56,19 +50,19 @@ public class RentalTimeSlot extends AbstractDatabaseEntity {
         this.arrivalTime = arrivalTime;
     }
 
-    public FuelRental getFuelRental() {
+    public List<FuelRental> getFuelRental() {
         return fuelRental;
     }
 
-    public void setFuelRental(FuelRental fuelRental) {
+    public void setFuelRental(List<FuelRental> fuelRental) {
         this.fuelRental = fuelRental;
     }
 
-    public ElectricRental getElectricRental() {
+    public List<ElectricRental> getElectricRental() {
         return electricRental;
     }
 
-    public void setElectricRental(ElectricRental electricRental) {
+    public void setElectricRental(List<ElectricRental> electricRental) {
         this.electricRental = electricRental;
     }
 
@@ -82,5 +76,28 @@ public class RentalTimeSlot extends AbstractDatabaseEntity {
                 ", fuelRental=" + fuelRental +
                 ", electricRental=" + electricRental +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RentalTimeSlot that = (RentalTimeSlot) o;
+
+        if (departureTime != null ? !departureTime.equals(that.departureTime) : that.departureTime != null)
+            return false;
+        if (arrivalTime != null ? !arrivalTime.equals(that.arrivalTime) : that.arrivalTime != null) return false;
+        if (fuelRental != null ? !fuelRental.equals(that.fuelRental) : that.fuelRental != null) return false;
+        return electricRental != null ? electricRental.equals(that.electricRental) : that.electricRental == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = departureTime != null ? departureTime.hashCode() : 0;
+        result = 31 * result + (arrivalTime != null ? arrivalTime.hashCode() : 0);
+        result = 31 * result + (fuelRental != null ? fuelRental.hashCode() : 0);
+        result = 31 * result + (electricRental != null ? electricRental.hashCode() : 0);
+        return result;
     }
 }

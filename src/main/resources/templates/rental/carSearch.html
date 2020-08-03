@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Car Search</title>
+
+</head>
+
+<body>
+    <div class="mx-auto" style="width: 400px; padding-top: 1%;">
+        <h2>Find your perfect Match</h2>
+    </div>
+    <div class="wrapper">
+        <div style="padding: 1% 10% 10%;">
+            <form action='#' th:action="@{/rental/search-results}" th:object="${carSearchForm}" method='post'>
+                <div class="form-group">
+                    <label for="city-selection" class="col-sm-2 col-form-label">City</label>
+                    <select th:field="*{city}" id="city-selection" class="custom-select">
+                        <div th:each="city : ${cities}">
+                            <option th:value="${city}" th:text="${city}"></option>
+                        </div>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rental-date" class="col-sm-2 col-form-label">Date</label>
+                    <input type="date" th:field="*{date}" id="rental-date" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="fuel-type" class="col-sm-2 col-form-label">Fuel Type</label>
+                    <select th:field="*{fuel}" id="fuel-type" class="custom-select">
+                        <option th:value="0">Any</option>
+                        <option th:value="1">Combustion</option>
+                        <option th:value="2">Electric</option>
+                    </select>
+                </div>
+
+                <div class="mx-auto" style="padding-top: 3%; width: 100px;">
+                    <button class="btn btn-dark btn-lg" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

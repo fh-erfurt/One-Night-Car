@@ -4,11 +4,8 @@ import de.onenightcar.model.car.ElectricCar;
 import de.onenightcar.model.person.Customer;
 
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +27,8 @@ public class ElectricRental extends Rental {
     @OneToOne
     private ElectricCar electricCar;
 
-    @OneToMany(mappedBy = "electricRental")
-    private List<RentalTimeSlot> timeSlotsList = new ArrayList<>();
+    @ManyToMany
+    private List<RentalTimeSlot> timeSlotsList;
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -52,9 +49,7 @@ public class ElectricRental extends Rental {
         this.electricCar = electricCar;
         this.timeSlotsList = timeSlotsList;
         //add this Rental to the given timeslots
-        for(int i = 0; i < timeSlotsList.size(); i++) {
-            this.timeSlotsList.get(i).setElectricRental(this);
-        }
+        this.timeSlotsList = timeSlotsList;
         this.rentalPrice = calculateRentalPriceForElectric(electricCar);
     }
 
@@ -157,5 +152,27 @@ public class ElectricRental extends Rental {
                 ", odometerAfter=" + odometerAfter +
                 ", date=" + rentalDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ElectricRental that = (ElectricRental) o;
+
+        if (Float.compare(that.chargePercentBefore, chargePercentBefore) != 0) return false;
+        if (Float.compare(that.chargePercentAfter, chargePercentAfter) != 0) return false;
+        if (electricCar != null ? !electricCar.equals(that.electricCar) : that.electricCar != null) return false;
+        return timeSlotsList != null ? timeSlotsList.equals(that.timeSlotsList) : that.timeSlotsList == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (chargePercentBefore != +0.0f ? Float.floatToIntBits(chargePercentBefore) : 0);
+        result = 31 * result + (chargePercentAfter != +0.0f ? Float.floatToIntBits(chargePercentAfter) : 0);
+        result = 31 * result + (electricCar != null ? electricCar.hashCode() : 0);
+        result = 31 * result + (timeSlotsList != null ? timeSlotsList.hashCode() : 0);
+        return result;
     }
 }

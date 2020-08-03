@@ -5,10 +5,10 @@ import de.onenightcar.model.person.Customer;
 
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +25,8 @@ public class FuelRental extends Rental {
     private double fuelLevelBefore;
     private double fuelLevelAfter;
 
-    @OneToMany(mappedBy = "fuelRental")
-    protected List<RentalTimeSlot> timeSlotsList = new ArrayList<>();
+    @ManyToMany
+    protected List<RentalTimeSlot> timeSlotsList;
 
     @OneToOne
     private CombustionCar combustionCar;
@@ -49,9 +49,7 @@ public class FuelRental extends Rental {
         this.combustionCar = combustionCar;
         this.timeSlotsList = timeSlotsList;
         //add this Rental to the given timeslots
-        for(int i = 0; i < timeSlotsList.size(); i++) {
-            this.timeSlotsList.get(i).setFuelRental(this);
-        }
+        this.timeSlotsList = timeSlotsList;
         this.rentalPrice = calculateRentalPriceForCombustion(combustionCar);
     }
 
@@ -113,6 +111,14 @@ public class FuelRental extends Rental {
         this.fuelLevelAfter = fuelLevelAfter;
     }
 
+    public List<RentalTimeSlot> getTimeSlotsList() {
+        return timeSlotsList;
+    }
+
+    public void setTimeSlotsList(List<RentalTimeSlot> timeSlotsList) {
+        this.timeSlotsList = timeSlotsList;
+    }
+
     /* /////////////////////Methods/////////////////////////// */
 
     private int calculateElapsedHours() {
@@ -142,4 +148,41 @@ public class FuelRental extends Rental {
     }
 
     /* /////////////////////Overrides/////////////////////////// */
+
+    @Override
+    public String toString() {
+        return "FuelRental{" +
+                "rentalPrice=" + rentalPrice +
+                ", odometerBefore=" + odometerBefore +
+                ", odometerAfter=" + odometerAfter +
+                ", rentalDate=" + rentalDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FuelRental that = (FuelRental) o;
+
+        if (Double.compare(that.fuelLevelBefore, fuelLevelBefore) != 0) return false;
+        if (Double.compare(that.fuelLevelAfter, fuelLevelAfter) != 0) return false;
+        if (timeSlotsList != null ? !timeSlotsList.equals(that.timeSlotsList) : that.timeSlotsList != null)
+            return false;
+        return combustionCar != null ? combustionCar.equals(that.combustionCar) : that.combustionCar == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(fuelLevelBefore);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(fuelLevelAfter);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (timeSlotsList != null ? timeSlotsList.hashCode() : 0);
+        result = 31 * result + (combustionCar != null ? combustionCar.hashCode() : 0);
+        return result;
+    }
 }
