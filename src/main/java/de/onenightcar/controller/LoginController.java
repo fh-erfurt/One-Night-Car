@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
-
+import java.util.Optional;
 
 
 @Controller
@@ -33,22 +33,16 @@ public class LoginController implements WebMvcConfigurer {
     public String loginForm(Model model) {
         model.addAttribute("customers", customerRepository.findAll());
 
-        // just to test
-        customerRepository.findAll().forEach(customer -> {
-            String mail = customer.getMail();
-            String password = customer.getUserPassword();
-
-        });
         return "login";
     }
 
     // receives the Form object that was populated by the form.
     @PostMapping("/login")
-    public String loginSubmit(@ModelAttribute   Customer customer,  BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "login";
+    public String loginSubmit(@ModelAttribute("customers") CustomerRepository customerRepository, ModelMap model, BindingResult bindingResult) {
+        if(bindingResult.hasErrors())
+        {
+            return "Error";
         }
-
         return "index";
     }
 
