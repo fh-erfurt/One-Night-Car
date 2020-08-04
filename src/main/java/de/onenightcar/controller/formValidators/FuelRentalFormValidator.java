@@ -2,24 +2,25 @@ package de.onenightcar.controller.formValidators;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Arrays;
 
 public class FuelRentalFormValidator {
 
-    @NotNull
+    @NotNull (message = "Not valid value")
     private Long fuelCarId;
 
-    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent (message = "Not valid date")
     private LocalDate date;
 
-    @NotNull
+    @NotNull (message = "Not valid value")
     private Long customerId;
 
-    @NotNull
+    @NotEmpty (message = "Not valid value")
     private Long[] timeSlotsListId;
 
     public Long getFuelCarId() {

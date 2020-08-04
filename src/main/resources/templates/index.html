@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,8 +9,27 @@
 
     <title>One Night Car</title>
 </head>
+
 <body>
+<nav>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/rental/car-search}">Rent a Car</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+        </li>
+    </ul>
+</nav>
 <div class="container">
+    <th:block th:if="${rentalDone}">
+        <div class="alert alert-success" role="alert">
+            Rental made successfully
+        </div>
+    </th:block>
     <div class="row">
         <div class="col-12" style="text-align: center">
             <h1>Welcome to One Night Car</h1>

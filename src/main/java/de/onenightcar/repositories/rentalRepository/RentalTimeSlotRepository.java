@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 
 public interface RentalTimeSlotRepository extends CrudRepository<RentalTimeSlot, Long> {
-
+    RentalTimeSlot getById(Long id);
 }

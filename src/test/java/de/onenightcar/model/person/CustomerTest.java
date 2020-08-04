@@ -134,7 +134,7 @@ class CustomerTest {
         max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, date, rentalTimeSlotList);
 
         LocalTime lt = LocalTime.of(8,0);
-        LocalDate ld = LocalDate.of(2020, 8, 3);
+        LocalDate ld = LocalDate.now();
 
         assertEquals(lt, max.electricRentals.get(0).getTimeSlotsList().get(0).getDepartureTime());
         assertEquals(ld, max.electricRentals.get(0).getRentalDate());

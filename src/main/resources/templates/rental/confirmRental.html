@@ -10,16 +10,88 @@
     <title>Confirm Rental</title>
 </head>
 <body>
-    <th:block th:if="${electricRentalFormValidator}">
-        <p th:text="${electricRentalFormValidator.electricCarId}"></p>
-        <p th:text="${electricRentalFormValidator.date}"></p>
-        <p th:text="${electricRentalFormValidator.customerId}"></p>
-        <p th:text="${electricRentalFormValidator.timeSlotsListId[0]}">a</p>
+    <th:block th:if="${isElectric}">
+        <div class="mx-auto" style="width: 300px; padding-top: 1%;">
+            <h2>Your Electric Rental</h2>
+        </div>
+        <div class="mx-auto" style="width: 50%; margin-top: 5%">
+            <form action='#' th:action="@{/rental/eRentalConfirmed}" th:object="${eRentalAfterCheckForm}" method='post'>
+<!--             Hidden Values to send the form-->
+                <th:block>
+                    <input type="hidden"  th:value="${electricRentalElectricCar.id}"    name="electricCar"       >
+                    <input type="hidden"  th:value="${electricRentalDate}"              name="localDate"         >
+                    <input type="hidden"  th:value="${electricRentalCustomer.id}"       name="customer"          >
+                    <th:block th:each="timeslot : ${electricRentalTimeSlots}">
+                        <input type="hidden"  th:value="${timeslot.id}"                    name="rentalTimeSlots"   >
+                    </th:block>
+                </th:block>
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h3>Rental Summary</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:text="'Car: '  + ${electricRentalElectricCar.getBrand()} + ' ' + ${electricRentalElectricCar.getModel()}"></li>
+                        <li class="list-group-item" th:text="'Date: '  + ${electricRentalDate}"></li>
+                        <li class="list-group-item" th:text="'Station: '  + ${electricRentalStation.city} + ' - '
+                                                                          + ${electricRentalStation.street} + ' '
+                                                                          + ${electricRentalStation.streetNumber}"></li>
+                        <li class="list-group-item">
+                            <p>Time Slots: </p>
+                            <p th:each="timeslot : ${electricRentalTimeSlots}" th:text="${#temporals.format(timeslot.departureTime, 'HH')}
+                                                                                + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"></p>
+                        </li>
+                        <li class="list-group-item" th:text="'Total Price: '  + ${electricRentalPrice} + '€'"></li>
+                    </ul>
+                    <div class="card-footer">
+                        <div style="width: 100%; display: flex; justify-content: space-evenly">
+                            <button class="btn btn-success btn-lg" type="submit">Rent!</button>
+                            <a th:href="@{/rental/car-search}" class="btn btn-dark btn-lg">Back To Search</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </th:block>
-    <th:block th:if="${fuelRentalFormValidator}">
-        <p th:text="${fuelRentalFormValidator.fuelCarId}"></p>
-        <p th:text="${fuelRentalFormValidator.date}"></p>
-        <p th:text="${fuelRentalFormValidator.customerId}"></p>
-        <p th:text="${fuelRentalFormValidator.timeSlotsListId[0]}">a</p>
+    <th:block th:if="${isFuel}">
+        <div class="mx-auto" style="width: 200px; padding-top: 1%;">
+            <h2>Your Rental</h2>
+        </div>
+        <div class="mx-auto" style="width: 50%; margin-top: 5%">
+            <form action='#' th:action="@{/rental/cRentalConfirmed}" th:object="${cRentalAfterCheckForm}" method='post'>
+<!--             Hidden Values to send the form-->
+                <th:block>
+                    <input type="hidden"  th:value="${fuelRentalCombustionCar.id}"          name="combustionCar"     >
+                    <input type="hidden"  th:value="${fuelRentalDate}"                      name="localDate"         >
+                    <input type="hidden"  th:value="${fuelRentalCustomer.id}"               name="customer"          >
+                    <th:block th:each="timeslot : ${fuelRentalTimeSlots}">
+                        <input type="hidden"  th:value="${timeslot.id}"                    name="rentalTimeSlots"   >
+                    </th:block>
+                </th:block>
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h3>Rental Summary</h3>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:text="'Car: '  + ${fuelRentalCombustionCar.getBrand()} + ' ' + ${fuelRentalCombustionCar.getModel()}"></li>
+                        <li class="list-group-item" th:text="'Date: '  + ${fuelRentalDate}"></li>
+                        <li class="list-group-item" th:text="'Station: '  + ${fuelRentalStation.city} + ' - '
+                                                                          + ${fuelRentalStation.street} + ' '
+                                                                          + ${fuelRentalStation.streetNumber}"></li>
+                        <li class="list-group-item">
+                            <p>Time Slots: </p>
+                            <p th:each="timeslot : ${fuelRentalTimeSlots}" th:text="${#temporals.format(timeslot.departureTime, 'HH')}
+                                                                                    + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"></p>
+                        </li>
+                        <li class="list-group-item" th:text="'Total Price: '  + ${fuelRentalPrice} + '€'"></li>
+                    </ul>
+                    <div class="card-footer">
+                        <div style="width: 100%; display: flex; justify-content: space-evenly">
+                            <button class="btn btn-success btn-lg" type="submit">Rent!</button>
+                            <a th:href="@{/rental/car-search}" class="btn btn-dark btn-lg">Back To Search</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </th:block>
 </body>

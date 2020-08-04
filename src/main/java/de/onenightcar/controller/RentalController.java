@@ -1,13 +1,13 @@
 package de.onenightcar.controller;
 
 import de.onenightcar.bootstrap.BootStrapData;
-import de.onenightcar.controller.formValidators.CarSearchForm;
-import de.onenightcar.controller.formValidators.ElectricRentalFormValidator;
-import de.onenightcar.controller.formValidators.FuelRentalFormValidator;
+import de.onenightcar.controller.formValidators.*;
 import de.onenightcar.model.car.CombustionCar;
 import de.onenightcar.model.car.ElectricCar;
+import de.onenightcar.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.model.parkingArea.ParkingArea;
 import de.onenightcar.model.parkingArea.ParkingAreaAddress;
+import de.onenightcar.model.person.Customer;
 import de.onenightcar.model.rental.ElectricRental;
 import de.onenightcar.model.rental.FuelRental;
 import de.onenightcar.model.rental.Rental;
@@ -22,6 +22,7 @@ import de.onenightcar.repositories.personRepository.*;
 import de.onenightcar.repositories.rentalRepository.ElectricRentalRepository;
 import de.onenightcar.repositories.rentalRepository.FuelRentalRepository;
 import de.onenightcar.repositories.rentalRepository.RentalTimeSlotRepository;
+import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -109,7 +110,8 @@ public class RentalController {
 
     @RequestMapping(path = "/search-results", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public ModelAndView searchResults(@ModelAttribute CarSearchForm carSearchForm, Model model) {
+    public ModelAndView searchResults(@ModelAttribute CarSearchForm carSearchForm) {
+
 
         //////Values received from the form in car search page//////
         int fuelType = carSearchForm.getFuel();
@@ -227,10 +229,41 @@ public class RentalController {
     @PostMapping("/confirm-e-rental")
     public ModelAndView checkElectricRental(@ModelAttribute ElectricRentalFormValidator electricRentalFormValidator) {
 
-        log.info(electricRentalFormValidator.toString());
+        //////Create the Model and View and add the view//////
         ModelAndView mav = new ModelAndView("rental/confirmRental");
 
-        mav.addObject("electricRentalFormValidator", electricRentalFormValidator);
+        //Retrieve the data from the body
+        long electricCarId  =   electricRentalFormValidator.getElectricCarId();
+        long customerId =       electricRentalFormValidator.getCustomerId();
+        LocalDate rentalDate  = electricRentalFormValidator.getDate();
+        Long[] slotsIds =       electricRentalFormValidator.getTimeSlotsListId();
+
+        //Fetch the objects from the database
+        //Car
+        ElectricCar rentalElectricCar = electricCarRepository.GetOneByID(electricCarId);
+
+        //Customer
+        Customer rentalCustomer = customerRepository.getById(customerId);
+
+        //Timeslots
+        List<RentalTimeSlot> rentalTimeSlots = new ArrayList<RentalTimeSlot>();
+        for (int i = 0; i < slotsIds.length; i++) {
+            RentalTimeSlot rs = rentalTimeSlotRepository.getById(slotsIds[i]);
+            rentalTimeSlots.add(rs);
+        }
+
+        //Parking Area Address
+        ParkingAreaAddress parkingAreaAddress = electricParkingAreaRepository.getById(rentalElectricCar.getElectricParkingArea().getId()).getParkingAreaAddress();
+
+        //Bind the parameter to the view
+        mav.addObject("isElectric",             true);
+        mav.addObject("electricRentalElectricCar",          rentalElectricCar);
+        mav.addObject("electricRentalCustomer",             rentalCustomer);
+        mav.addObject("electricRentalDate",                 rentalDate);
+        mav.addObject("electricRentalTimeSlots",            rentalTimeSlots);
+        mav.addObject("electricRentalStation",              parkingAreaAddress);
+        mav.addObject("electricRentalPrice",                (rentalElectricCar.getPrice() * rentalTimeSlots.size()));
+        mav.addObject("eRentalAfterCheckForm",              new ERentalAfterCheckForm());
 
         return mav;
     }
@@ -238,13 +271,112 @@ public class RentalController {
     @PostMapping("/confirm-c-rental")
     public ModelAndView checkFuelRental(@ModelAttribute FuelRentalFormValidator fuelRentalFormValidator) {
 
-        log.info(fuelRentalFormValidator.toString());
+        //////Create the Model and View and add the view//////
         ModelAndView mav = new ModelAndView("rental/confirmRental");
 
-        mav.addObject("fuelRentalFormValidator", fuelRentalFormValidator);
+        //Retrieve the data from the body
+        long fuelCarId  = fuelRentalFormValidator.getFuelCarId();
+        long customerId = fuelRentalFormValidator.getCustomerId();
+        LocalDate rentalDate  = fuelRentalFormValidator.getDate();
+        Long[] slotsIds = fuelRentalFormValidator.getTimeSlotsListId();
+
+        //Fetch the objects from the database
+        //Car
+        CombustionCar rentalCombustionCar = combustionCarRepository.GetOneByID(fuelCarId);
+
+        //Customer
+        Customer rentalCustomer = customerRepository.getById(customerId);
+
+        //Timeslots
+        List<RentalTimeSlot> rentalTimeSlots = new ArrayList<RentalTimeSlot>();
+        for (int i = 0; i < slotsIds.length; i++) {
+            RentalTimeSlot rs = rentalTimeSlotRepository.getById(slotsIds[i]);
+            rentalTimeSlots.add(rs);
+        }
+
+        //Parking Area Address
+        ParkingAreaAddress parkingAreaAddress = parkingAreaRepository.getById(rentalCombustionCar.getParkingArea().getId()).getParkingAreaAddress();
+
+
+        //Bind the parameter to the view
+        mav.addObject("isFuel",                         true);
+        mav.addObject("fuelRentalCombustionCar",        rentalCombustionCar);
+        mav.addObject("fuelRentalCustomer",             rentalCustomer);
+        mav.addObject("fuelRentalDate",                 rentalDate);
+        mav.addObject("fuelRentalTimeSlots",            rentalTimeSlots);
+        mav.addObject("fuelRentalStation",              parkingAreaAddress);
+        mav.addObject("fuelRentalPrice",                (rentalCombustionCar.getPrice() * rentalTimeSlots.size()));
+        mav.addObject("cRentalAfterCheckForm",          new CRentalAfterCheckForm());
 
         return mav;
     }
 
+    @PostMapping("/eRentalConfirmed")
+    public ModelAndView confirmElectricRental(@ModelAttribute ERentalAfterCheckForm eRentalAfterCheckForm) {
 
+        //Fetch the variables from the form
+        long electricCarId      = eRentalAfterCheckForm.getElectricCar();
+        long customerId         = eRentalAfterCheckForm.getCustomer();
+        LocalDate localDate     = eRentalAfterCheckForm.getLocalDate();
+        Long[] slotsIds         = eRentalAfterCheckForm.getRentalTimeSlots();
+
+        //Fetch the objects from the database
+        //Car
+        ElectricCar electricCar = electricCarRepository.GetOneByID(electricCarId);
+
+        //Customer
+        Customer customer = customerRepository.getById(customerId);
+
+        //Timeslots
+        List<RentalTimeSlot> rentalTimeSlots = new ArrayList<RentalTimeSlot>();
+        for (int i = 0; i < slotsIds.length; i++) {
+            RentalTimeSlot rs = rentalTimeSlotRepository.getById(slotsIds[i]);
+            rentalTimeSlots.add(rs);
+        }
+
+        //Create a Rental
+        ElectricRental electricRental = new ElectricRental(electricCar, localDate, customer, rentalTimeSlots);
+
+        //Save it the database
+        electricRentalRepository.save(electricRental);
+
+        ModelAndView mav = new ModelAndView("index");
+        mav.addObject("rentalDone", true);
+        return mav;
+    }
+
+    @PostMapping("/cRentalConfirmed")
+    public ModelAndView confirmFuelRental(@ModelAttribute CRentalAfterCheckForm cRentalAfterCheckForm) {
+
+        //Fetch the variables from the form
+        long fuelCarId          = cRentalAfterCheckForm.getCombustionCar();
+        long customerId         = cRentalAfterCheckForm.getCustomer();
+        LocalDate localDate     = cRentalAfterCheckForm.getLocalDate();
+        Long[] slotsIds         = cRentalAfterCheckForm.getRentalTimeSlots();
+
+        //Fetch the objects from the database
+        //Car
+        CombustionCar combustionCar = combustionCarRepository.GetOneByID(fuelCarId);
+
+        //Customer
+        Customer customer = customerRepository.getById(customerId);
+
+
+        //Timeslots
+        List<RentalTimeSlot> rentalTimeSlots = new ArrayList<RentalTimeSlot>();
+        for (int i = 0; i < slotsIds.length; i++) {
+            RentalTimeSlot rs = rentalTimeSlotRepository.getById(slotsIds[i]);
+            rentalTimeSlots.add(rs);
+        }
+
+        //Create a Rental
+        FuelRental fuelRental = new FuelRental(combustionCar, localDate, customer, rentalTimeSlots);
+
+        //Save it the database
+        fuelRentalRepository.save(fuelRental);
+
+        ModelAndView mav = new ModelAndView("index");
+        mav.addObject("rentalDone", true);
+        return mav;
+    }
 }

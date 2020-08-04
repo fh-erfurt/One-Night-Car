@@ -71,13 +71,13 @@
                         </th:block>
 
                         <th:block>
-                            <input type="hidden"  th:value="${combustionCar.id}"    name="fuelCarId">           </input>
-                            <input type="hidden"  th:value="${date}"                name="date"         >       </input>
-                            <input type="hidden"  th:value="${customer.id}"         name="customerId"   >       </input>
+                            <input type="hidden"  th:value="${combustionCar.id}"    name="fuelCarId"    >
+                            <input type="hidden"  th:value="${date}"                name="date"         >
+                            <input type="hidden"  th:value="${customer.id}"         name="customerId"   >
                         </th:block>
                     </td>
                     <td>
-                        <button class="btn btn-dark btn-lg" type="submit">Rent</button>
+                        <button class="btn btn-success" type="submit">Rent</button>
                     </td>
                 </form>
             </tr>
@@ -127,18 +127,21 @@
                         </th:block>
 
                         <th:block>
-                            <input type="hidden"  th:value="${electricCar.id}"  name="electricCarId">       </input>
-                            <input type="hidden"  th:value="${date}"            name="date"         >       </input>
-                            <input type="hidden"  th:value="${customer.id}"     name="customerId"   >       </input>
+                            <input type="hidden"  th:value="${electricCar.id}"  name="electricCarId">
+                            <input type="hidden"  th:value="${date}"            name="date"         >
+                            <input type="hidden"  th:value="${customer.id}"     name="customerId"   >
                         </th:block>
                     </td>
                     <td>
-                        <button class="btn btn-dark btn-lg" type="submit">Rent</button>
+                        <button class="btn btn-success" type="submit">Rent</button>
                     </td>
                 </form>
             </tr>
         </div>
         </tbody>
     </table>
+    <div class="mx-auto" style="width: 220px; padding-top: 1% ">
+        <a th:href="@{/rental/car-search}" class="btn btn-dark btn-lg">Back To Search</a>
+    </div>
 </body>
 </html>

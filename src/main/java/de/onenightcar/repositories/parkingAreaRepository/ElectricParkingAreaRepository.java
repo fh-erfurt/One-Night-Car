@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ElectricParkingAreaRepository extends CrudRepository<ElectricParkingArea, Long> {
     Iterable<ElectricParkingArea> getAllByParkingAreaAddressCity(String city);
+
+    ElectricParkingArea getById(Long id);
 }

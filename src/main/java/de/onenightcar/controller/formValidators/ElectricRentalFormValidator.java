@@ -5,23 +5,26 @@ import de.onenightcar.model.person.Customer;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Arrays;
 
 public class ElectricRentalFormValidator {
 
-    @NotNull
+    @NotNull (message = "Not valid value")
     private Long electricCarId;
 
-    @NotNull
+    @NotNull (message = "Not valid value")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent (message = "Not valid date")
     private LocalDate date;
 
-    @NotNull
+    @NotNull (message = "Not valid value")
     private Long customerId;
 
-    @NotNull
+    @NotEmpty (message = "Not valid value")
     private Long[] timeSlotsListId;
 
     public Long getElectricCarId() {
