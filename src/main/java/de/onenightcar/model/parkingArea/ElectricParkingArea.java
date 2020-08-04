@@ -31,6 +31,7 @@ public class ElectricParkingArea extends ParkingArea {
      * @param parkingAreaAddress A ParkingAreaAddress representing the address of the parking Area
      * @param maxCapacity An integer representing the max. Capacity of Cars in OneNightCar.ParkingArea
      * @param maxElectricCarCapacity An integer representing the max. Capacity of Cars in ElectricParkingArea
+     * @param name name of the ParkingArea
      */
     public ElectricParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity,
                                int maxElectricCarCapacity, String name) {
@@ -105,13 +106,6 @@ public class ElectricParkingArea extends ParkingArea {
         electricCarsInStation.remove(electricCar);
     }
 
-    /** gets the Index(id) of an electric car in the station
-     * @param electricCar an Electric OneNightCar.Car
-     * @return Index(id)
-     */
-    public int getElectricCarID(ElectricCar electricCar) {
-        return electricCarsInStation.indexOf(electricCar);
-    }
 
     /* /////////////////////Overrides/////////////////////////// */
 

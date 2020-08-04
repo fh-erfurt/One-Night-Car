@@ -40,6 +40,8 @@ public class Customer extends Person {
      * @param firstName A String representing Customers first Name
      * @param surname A String representing Customers Surname
      * @param dateOfBirth A LocalDateTime representing Customers DOB
+     * @param mail A user E-Mail
+     * @param userPassword Password to use it in Login
      * @param personAddress A PersonAddress representing Customers Address
      * @param customerLevel A CustomerLevel representing Customers Level
      * @param paymentMethod A PaymentMethod representing Customers Payment Method
@@ -96,9 +98,6 @@ public class Customer extends Person {
         return this.electricRentals;
     }
 
-    public void setElectricRentals(List<ElectricRental> electricRentals) {
-        this.electricRentals = electricRentals;
-    }
 
     /** Gets the Fuel Rentals.
      * @return An ArrayList representing Fuel Rentals
@@ -107,9 +106,6 @@ public class Customer extends Person {
         return this.fuelRentals;
     }
 
-    public void setFuelRentals(List<FuelRental> fuelRentals) {
-        this.fuelRentals = fuelRentals;
-    }
 
     /** Gets the Customer Payment Method.
      * @return A PaymentMethod representing Payment Method of a Customer
@@ -215,6 +211,7 @@ public class Customer extends Person {
      * @param electricRental the OneNightCar.Rental that wants to be modified
      * @param date          a LocalDate representing the date of the Booking
      * @param electricCar which electric car rental is being modified
+     * @param timeSlotsList a List of Time Slots
      */
     public void modifyAnElectricRental(ElectricRental electricRental, ElectricCar electricCar,
                                     LocalDate date, List<RentalTimeSlot> timeSlotsList) {
@@ -251,6 +248,7 @@ public class Customer extends Person {
      * Creates a new OneNightCar.Rental of a Vehicle and this Customer
      * @param combustionCar   an CombustionCar representing the car the Customer wants to book
      * @param date          a LocalDate representing the date of the Booking
+     * @param timeSlotsList a List of Time Slots
      */
      public void rentAFuelCar(CombustionCar combustionCar,
                               LocalDate date, List<RentalTimeSlot> timeSlotsList) {
@@ -267,6 +265,7 @@ public class Customer extends Person {
      * @param fuelRental the OneNightCar.Rental that wants to be modified
      * @param date          a LocalDate representing the date of the Booking
      * @param combustionCar which cars OneNightCar.Rental need to be modified
+     * @param timeSlotsList a List of Time Slots
      */
     public void modifyARegularRental(FuelRental fuelRental, CombustionCar combustionCar,
                                      LocalDate date, List<RentalTimeSlot> timeSlotsList) {

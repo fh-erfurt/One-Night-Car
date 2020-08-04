@@ -55,8 +55,9 @@ public class FuelRental extends Rental {
 
     /**
      * A constructor that uses default values
-     * @param combustionCar the car itself, object of the class ElectricCar
      * @param date at what time was the rental made
+     * @param combustionCar the car itself, object of the class ElectricCar
+     * @param customer a Customer Object
      */
     public FuelRental(LocalDate date, CombustionCar combustionCar, Customer customer){
         super(date, customer);
@@ -99,24 +100,9 @@ public class FuelRental extends Rental {
         this.combustionCar = combustionCar;
     }
 
-    public double getFuelLevelBefore() {
-        return fuelLevelBefore;
-    }
-
-    public void setFuelLevelBefore(double fuelLevelBefore) {
-        this.fuelLevelBefore = fuelLevelBefore;
-    }
-
-    public void setFuelLevelAfter(double fuelLevelAfter) {
-        this.fuelLevelAfter = fuelLevelAfter;
-    }
 
     public List<RentalTimeSlot> getTimeSlotsList() {
         return timeSlotsList;
-    }
-
-    public void setTimeSlotsList(List<RentalTimeSlot> timeSlotsList) {
-        this.timeSlotsList = timeSlotsList;
     }
 
     /* /////////////////////Methods/////////////////////////// */

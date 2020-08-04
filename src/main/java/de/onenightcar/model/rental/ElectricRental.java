@@ -56,6 +56,7 @@ public class ElectricRental extends Rental {
     /**
      * A constructor that uses default values
      * @param electricCar the car itself, object of the class ElectricCar
+     * @param customer A Customer Object
      */
     public ElectricRental(ElectricCar electricCar, Customer customer){
         super(customer);
@@ -85,17 +86,6 @@ public class ElectricRental extends Rental {
         }
     }
 
-    public float getChargePercentBefore() {
-        return chargePercentBefore;
-    }
-
-    public void setChargePercentBefore(float chargePercentBefore) {
-        this.chargePercentBefore = chargePercentBefore;
-    }
-
-    public void setChargePercentAfter(float chargePercentAfter) {
-        this.chargePercentAfter = chargePercentAfter;
-    }
 
     public void setElectricCar(ElectricCar electricCar) {
         this.electricCar = electricCar;
@@ -103,10 +93,6 @@ public class ElectricRental extends Rental {
 
     public List<RentalTimeSlot> getTimeSlotsList() {
         return timeSlotsList;
-    }
-
-    public void setTimeSlotsList(List<RentalTimeSlot> timeSlotsList) {
-        this.timeSlotsList = timeSlotsList;
     }
 
     /* /////////////////////Methods/////////////////////////// */

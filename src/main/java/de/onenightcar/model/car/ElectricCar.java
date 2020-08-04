@@ -43,6 +43,7 @@ public class ElectricCar extends Car {
      * @param price A float representing the costs of the OneNightCar.Car per Day
      * @param electricalRange A float representing the range the car can drive before it needs to be recharged
      * @param chargePercent A float representing the electric OneNightCar.Car charge
+     * @param electricParkingArea an electricParkingArea Object
      */
     public ElectricCar(Type type, String brand, String model, State state,
                        long odometer, double GPSLatitude, double GPSLongitude, Customer.CustomerLevel customerLevel,
@@ -63,7 +64,7 @@ public class ElectricCar extends Car {
     /**
      /** Creates an Electric OneNightCar.Car OneNightCar.Car  with default Values.
      * It is used to increment speed of UnitTests.
-     * @param electricParkingArea A CarManagementSystem with the management from the Packet OneNightCar.Car
+     * @param electricParkingArea an ElectricParkingArea Object
      */
     public ElectricCar( ElectricParkingArea electricParkingArea){
         super(Type.MINI,"BMW","i3", State.PERFECT, 50.9787, 11.03283,
@@ -108,12 +109,9 @@ public class ElectricCar extends Car {
         return this.electricalRange;
     }
 
-    public void setElectricalRange(float range) { this.electricalRange = range;}
-
-    public ElectricParkingArea getElectricParkingArea() {
-        return electricParkingArea;
-    }
-
+    /** Change the Electric OneNightCar.Car ParkingArea .
+     * @param electricParkingArea a float representing the new charge level
+     */
     public void setElectricParkingArea(ElectricParkingArea electricParkingArea) {
         this.electricParkingArea = electricParkingArea;
     }

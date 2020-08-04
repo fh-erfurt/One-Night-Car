@@ -14,7 +14,7 @@
 <div>
     <h2>Login</h2>
     <h3>pleas enter your e-mail and Password</h3>
-    <form action="#" th:action="@{/login}" th:object="${customers}" method="post">
+    <form action="#" th:action="@{/login}" th:object="${loginForm}" method="post">
 
         <label>E-Mail</label>
         <input type="email" th:field="*{email}" placeholder="E-Mail">

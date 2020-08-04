@@ -8,17 +8,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+
 
 
 @Controller
-public class LoginController implements WebMvcConfigurer {
+public class LoginController extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(BootStrapData.class);
 
 
@@ -37,7 +36,7 @@ public class LoginController implements WebMvcConfigurer {
 
         ModelAndView mav = new ModelAndView("login");
 
-        mav.addObject("customers", new LoginForm());
+        mav.addObject("loginForm", new LoginForm());
 
         return mav;
     }
@@ -45,22 +44,32 @@ public class LoginController implements WebMvcConfigurer {
     // receives the Form object that was populated by the form.
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
-    public String loginSubmit(@ModelAttribute LoginForm loginForm, Model model) {
+    public ModelAndView loginSubmit(@ModelAttribute LoginForm loginForm, HttpSession session) {
         String email = loginForm.getEmail();
         String password = loginForm.getPassword();
-         AtomicBoolean valid = new AtomicBoolean(false);
-         boolean validate = false;
-
+        System.out.println("data From the Form: " + email + " " + password);
+        ModelAndView mav = new ModelAndView("login");
         List<Customer> customers = (List<Customer>) customerRepository.findAll();
         customers.forEach(customer -> {
-            if(customer.getMail() == email && customer.getUserPassword() == password)
+            if(email.equals(customer.getMail()) && password.equals(customer.getUserPassword()))
             {
-               valid.set(true);
+                session.setAttribute("username", email);
+                mav.setViewName("index");
+                return;
             }
         });
-        validate = valid.get();
+        System.out.println(mav);
+        return mav;
+    }
 
-        return validate ? "index" : "login";
+    @GetMapping("/logout")
+    public String logout(HttpSession session)
+    {
+        if(session.getAttribute("username") == null || session.getAttribute("username").equals(""))
+        {
+            session.removeAttribute("username");
+        }
+        return "login";
     }
 
 }
