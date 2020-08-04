@@ -84,6 +84,18 @@ public class ParkingArea extends AbstractDatabaseEntity {
         this.name = name;
     }
 
+    public ParkingAreaAddress getParkingAreaAddress() {
+        return parkingAreaAddress;
+    }
+
+    public void setParkingAreaAddress(ParkingAreaAddress parkingAreaAddress) {
+        this.parkingAreaAddress = parkingAreaAddress;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
     /* /////////////////////Methods/////////////////////////// */
 
     /**

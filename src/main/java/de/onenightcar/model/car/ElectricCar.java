@@ -116,6 +116,14 @@ public class ElectricCar extends Car {
         this.electricParkingArea = electricParkingArea;
     }
 
+    public void setElectricalRange(float electricalRange) {
+        this.electricalRange = electricalRange;
+    }
+
+    public ElectricParkingArea getElectricParkingArea() {
+        return electricParkingArea;
+    }
+
     /* /////////////////////Methods/////////////////////////// */
 
     /** set the Charge on 100 %

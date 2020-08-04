@@ -156,6 +156,14 @@ public class CombustionCar extends Car {
         this.fuelType = fuelType;
     }
 
+    public void setTankSize(double tankSize) {
+        this.tankSize = tankSize;
+    }
+
+    public void setConsumption(double consumption) {
+        this.consumption = consumption;
+    }
+
     /* /////////////////////Methods/////////////////////////// */
 
     /** set the fuel level on 100 %
