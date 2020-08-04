@@ -12,15 +12,17 @@
 
 </head>
 
-<body>
-    <div class="mx-auto" style="width: 400px; padding-top: 1%;">
-        <h2>Find your perfect Match</h2>
+<body th:style="'background: url(../assets/img/background.jfif) center center no-repeat; background-size: cover;'">
+    <div class="mx-auto" style="width: 30%; background: rgba(0,0,0,0.5); padding-bottom: 20px; color: white;">
+        <div class="mx-auto" style="padding-top: 1%; width: 340px">
+            <h2>Find your perfect Match</h2>
+        </div>
     </div>
-    <div class="wrapper">
-        <div style="padding: 1% 10% 10%;">
+    <div class="wrapper" style="background: rgba(0,0,0,0.5); color:white;">
+        <div style="padding: 2% 10%;">
             <form action='#' th:action="@{/rental/search-results}" th:object="${carSearchForm}" method='post'>
                 <div class="form-group">
-                    <label for="city-selection" class="col-sm-2 col-form-label">City</label>
+                    <label for="city-selection" class="col-sm-2 col-form-label">City:</label>
                     <select th:field="*{city}" id="city-selection" class="custom-select">
                         <div th:each="city : ${cities}">
                             <option th:value="${city}" th:text="${city}"></option>
@@ -29,12 +31,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="rental-date" class="col-sm-2 col-form-label">Date</label>
+                    <label for="rental-date" class="col-sm-2 col-form-label" >Date:</label>
                     <input type="date" th:field="*{date}" id="rental-date" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="fuel-type" class="col-sm-2 col-form-label">Fuel Type</label>
+                    <label for="fuel-type" class="col-sm-2 col-form-label">Fuel Type:</label>
                     <select th:field="*{fuel}" id="fuel-type" class="custom-select">
                         <option th:value="0">Any</option>
                         <option th:value="1">Combustion</option>
@@ -43,7 +45,7 @@
                 </div>
 
                 <div class="mx-auto" style="padding-top: 3%; width: 100px;">
-                    <button class="btn btn-dark btn-lg" type="submit">Search</button>
+                    <button class="btn btn-light btn-lg" type="submit">Search</button>
                 </div>
             </form>
         </div>

@@ -104,6 +104,7 @@ public class RentalController {
         //The object that should be populated in the form of the view
         mav.addObject("carSearchForm", new CarSearchForm());
         mav.addObject("cities", parkingAreaCities);
+        mav.addObject("currentDate", LocalDate.now());
 
         return mav;
     }

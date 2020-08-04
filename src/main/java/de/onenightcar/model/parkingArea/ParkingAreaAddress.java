@@ -75,6 +75,22 @@ public class ParkingAreaAddress extends AbstractDatabaseEntity {
      */
     public String getStreet() {return this.street;}
 
+    public void setZIP(String ZIP) {
+        this.ZIP = ZIP;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(String streetNumber) {
+        this.streetNumber = streetNumber;
+    }
+
     /* /////////////////////Overrides/////////////////////////// */
 
     @Override
