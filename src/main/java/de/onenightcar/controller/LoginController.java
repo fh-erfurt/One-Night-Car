@@ -1,22 +1,23 @@
 package de.onenightcar.controller;
 
 import de.onenightcar.bootstrap.BootStrapData;
+import de.onenightcar.controller.formValidators.LoginForm;
 import de.onenightcar.model.person.Customer;
 import de.onenightcar.repositories.personRepository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
-import java.util.Optional;
 
 
 @Controller
-public class LoginController implements WebMvcConfigurer {
+public class LoginController extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(BootStrapData.class);
 
 
@@ -30,20 +31,45 @@ public class LoginController implements WebMvcConfigurer {
     }
 
     @GetMapping("/login")
-    public String loginForm(Model model) {
-        model.addAttribute("customers", customerRepository.findAll());
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView loginForm() {
 
-        return "login";
+        ModelAndView mav = new ModelAndView("login");
+
+        mav.addObject("loginForm", new LoginForm());
+
+        return mav;
     }
 
     // receives the Form object that was populated by the form.
     @PostMapping("/login")
-    public String loginSubmit(@ModelAttribute("customers") CustomerRepository customerRepository, ModelMap model, BindingResult bindingResult) {
-        if(bindingResult.hasErrors())
+    @ResponseStatus(HttpStatus.OK)
+    public ModelAndView loginSubmit(@ModelAttribute LoginForm loginForm, HttpSession session) {
+        String email = loginForm.getEmail();
+        String password = loginForm.getPassword();
+        System.out.println("data From the Form: " + email + " " + password);
+        ModelAndView mav = new ModelAndView("login");
+        List<Customer> customers = (List<Customer>) customerRepository.findAll();
+        customers.forEach(customer -> {
+            if(email.equals(customer.getMail()) && password.equals(customer.getUserPassword()))
+            {
+                session.setAttribute("username", email);
+                mav.setViewName("index");
+                return;
+            }
+        });
+        System.out.println(mav);
+        return mav;
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session)
+    {
+        if(session.getAttribute("username") == null || session.getAttribute("username").equals(""))
         {
-            return "Error";
+            session.removeAttribute("username");
         }
-        return "index";
+        return "login";
     }
 
 }

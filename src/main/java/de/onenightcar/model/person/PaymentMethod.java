@@ -80,13 +80,6 @@ public class PaymentMethod extends AbstractDatabaseEntity {
         this.cardType = cardType;
     }
 
-    /** Gets the PaymentMethod Valid Through.
-     * @return A Gregorian Calendar representing the PaymentMethod Valid Through
-     */
-    public LocalDate getValidThrough(){
-        return this.validThrough;
-    }
-
     /** Sets the PaymentMethod Valid Through.
      * @param validThrough A Gregorian Calendar containing the PaymentMethod Valid Through
      */

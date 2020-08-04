@@ -31,6 +31,8 @@ public class Employee extends Person {
      * @param firstName A String representing Employee first Name
      * @param surname A String representing Employee Surname
      * @param dateOfBirth A LocalDateTime representing Employee DOB
+     * @param mail a User's E-Mail
+     * @param userPassword User's Password
      * @param personAddress A PersonAddress representing Employee Address
      * @param salary A Float representing the Employee salary
      * @param typeOfActivity a TypeOfActivity representing what the Employee does
@@ -63,7 +65,7 @@ public class Employee extends Person {
     /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Employee TypeOfActivity.
-     * @return A TypeOfActivity representing the activity of an Employee
+     * @return TypeOfActivity representing the activity of an Employee
      */
     public TypeOfActivity getTypeOfActivity(){
         return this.typeOfActivity;
@@ -76,24 +78,8 @@ public class Employee extends Person {
         this.typeOfActivity = typeOfActivity;
     }
 
-    /** Gets the Employee salary.
-     * @return A float representing the salary of an Employee
-     */
-    public float getSalary(){
-        return this.salary;
-    }
 
-    /** Sets the Employee new salary.
-     * @param salary A float representing the new salary of an Employee
-     */
-    public void setSalary(float salary){
-        try {
-            this.salary = salary;
-        }
-        catch(Exception e){
-            System.out.print("Salary couldn't be set, check Salary!");
-        }
-    }
+
 
     /* /////////////////////Methods/////////////////////////// */
 

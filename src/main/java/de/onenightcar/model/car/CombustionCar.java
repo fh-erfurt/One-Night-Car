@@ -53,6 +53,7 @@ public class CombustionCar extends Car {
      * @param consumption A double representing the consumption of the OneNightCar.Car in 100 km
      * @param transmission An enum representing the Transmission of the OneNightCar.Car (Manuel, Automatic)
      * @param fuelType an enum representing the Fuel Type of the OneNightCar.Car (Petrol, Diesel)
+     * @param parkingArea an ParkingArea object
      */
     public CombustionCar(Type type, String brand, String model, State state,
                          double GPSLatitude, double GPSLongitude, long odometer,
@@ -131,9 +132,6 @@ public class CombustionCar extends Car {
        return this.tankSize;
    }
 
-    public void setTankSize(double tankSize) {
-        this.tankSize = tankSize;
-    }
 
     /** Gets the Average of Consumption
      * @return The Combustion OneNightCar.Car Consumption
@@ -141,10 +139,6 @@ public class CombustionCar extends Car {
    public double getConsumption(){
        return this.consumption;
    }
-
-    public void setConsumption(double consumption) {
-        this.consumption = consumption;
-    }
 
     public Transmission getTransmission() {
         return transmission;

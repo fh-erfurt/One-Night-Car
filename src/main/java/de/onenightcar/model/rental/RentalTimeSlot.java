@@ -8,6 +8,13 @@ import javax.persistence.ManyToMany;
 import java.time.LocalTime;
 import java.util.List;
 
+/** Represents a Time Slots
+ * @author OneNightCar
+ * @version 2.0
+ * @since 1.0
+ */
+
+
 @Entity
 public class RentalTimeSlot extends AbstractDatabaseEntity {
 
@@ -26,7 +33,11 @@ public class RentalTimeSlot extends AbstractDatabaseEntity {
 
     public RentalTimeSlot() {
     }
-
+    /**
+     * Creates a OneNightCar.Rental entry for a rental of an electric OneNightCar.Car
+     * @param departureTime the Departure Time of the wanted rental
+     * @param arrivalTime the Arrival Time of the planned Rental
+     */
     public RentalTimeSlot(LocalTime departureTime, LocalTime arrivalTime) {
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
@@ -36,10 +47,6 @@ public class RentalTimeSlot extends AbstractDatabaseEntity {
 
     public LocalTime getDepartureTime() {
         return departureTime;
-    }
-
-    public void setDepartureTime(LocalTime departureTime) {
-        this.departureTime = departureTime;
     }
 
     public LocalTime getArrivalTime() {

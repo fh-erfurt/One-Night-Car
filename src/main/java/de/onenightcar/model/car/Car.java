@@ -84,9 +84,13 @@ public abstract class Car extends AbstractDatabaseEntity {
         return this.state;
     }
 
+    /** Gets the OneNightCar.Car type.
+     * @return the OneNightCar.Car type
+     */
     public Type getType() {
         return type;
     }
+
 
     public void setType(Type type) {
         this.type = type;
@@ -158,10 +162,6 @@ public abstract class Car extends AbstractDatabaseEntity {
      */
     public CarLocation getCarLocation(){
         return this.carLocation;
-    }
-
-    public void setCarLocation(CarLocation carLocation) {
-        this.carLocation = carLocation;
     }
 
     public void setCarLocation(double GPSLatitude, double GPSLongitude){

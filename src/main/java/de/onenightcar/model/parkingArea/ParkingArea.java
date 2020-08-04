@@ -35,6 +35,7 @@ public class ParkingArea extends AbstractDatabaseEntity {
      * creates an OneNightCar.ParkingArea Constructor with Parameters to use it in the Child class.
      * @param parkingAreaAddress A ParkingAreaAddress representing the address of the Parking Area
      * @param maxCapacity An integer to represent the maximum capacity of the Parking Area
+     * @param name name of the ParkingArea
      */
     public ParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity, String name) {
         this.maxCapacity = maxCapacity;
@@ -61,9 +62,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
      */
     public int getMaxCapacity() {return this.maxCapacity;}
 
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
-    }
 
     /**
      * Shows all Cars in the Station
@@ -77,16 +75,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
         this.carsInStation = carsInStation;
     }
 
-    /**
-     * gets the address of the Parking Area
-     * @return parkingAreaAddress
-     */
-    public ParkingAreaAddress getParkingAreaAddress() {return this.parkingAreaAddress;}
-
-
-    public void setParkingAreaAddress(ParkingAreaAddress parkingAreaAddress) {
-        this.parkingAreaAddress = parkingAreaAddress;
-    }
 
     public String getName() {
         return name;
@@ -159,14 +147,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
      */
     public int numberOfCarsAssignedToStation() {
         return carsInStation.size();
-    }
-
-    /** gets the Index(id) of the combustionCar list
-     * @return  the Index of combustionCarList
-     * @param combustionCar a Combustion OneNightCar.Car
-     * */
-    public int getCombustionCarID(CombustionCar combustionCar) {
-        return carsInStation.indexOf(combustionCar);
     }
 
     /* /////////////////////Overrides/////////////////////////// */

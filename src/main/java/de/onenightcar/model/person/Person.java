@@ -5,7 +5,7 @@ import de.onenightcar.util.AbstractDatabaseEntity;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 
 /** Represents a Person
@@ -113,7 +113,6 @@ public abstract class Person extends AbstractDatabaseEntity {
         this.surname = surname;
     }
 
-    /* /////////////////////Overrides/////////////////////////// */
 
 }
 

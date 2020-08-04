@@ -50,6 +50,7 @@ public abstract class Rental extends AbstractDatabaseEntity {
     }
 
     /** Default Constructor for OneNightCar.Rental
+     * @param customer a Customer Object
      */
     protected Rental(Customer customer){
         this.customer = customer;
@@ -66,28 +67,13 @@ public abstract class Rental extends AbstractDatabaseEntity {
         this.rentalPrice = rentalPrice;
     }
 
-    public long getOdometerBefore() {
-        return odometerBefore;
-    }
-
-    public void setOdometerBefore(long odometerBefore) {
-        this.odometerBefore = odometerBefore;
-    }
 
     public long getOdometerAfter() {
         return odometerAfter;
     }
 
-    public void setOdometerAfter(long odometerAfter) {
-        this.odometerAfter = odometerAfter;
-    }
-
     public LocalDate getRentalDate() {
         return rentalDate;
-    }
-
-    public void setRentalDate(LocalDate date) {
-        this.rentalDate = date;
     }
 
     public Customer getCustomer() {
@@ -97,9 +83,5 @@ public abstract class Rental extends AbstractDatabaseEntity {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
-    /* /////////////////////Methods/////////////////////////// */
-
-    /* /////////////////////Overrides/////////////////////////// */
 
 }
