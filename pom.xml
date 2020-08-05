@@ -57,6 +57,20 @@
 			<version>2.9.2</version>
 		</dependency>
 
+		<!-- Switch back from Spring Boot 2.x standard HikariCP to Tomcat JDBC,
+        configured later in Heroku (see https://stackoverflow.com/a/49970142/4964553) -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+		</dependency>
+
+		<!-- PostgreSQL used in Staging and Production environment, e.g. on Heroku -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.2</version>
+		</dependency>
+
 <!--Somehow the tests doesnt work with this dependency (Made with initializr)-->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->

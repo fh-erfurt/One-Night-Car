@@ -22,22 +22,14 @@ import de.onenightcar.repositories.personRepository.*;
 import de.onenightcar.repositories.rentalRepository.ElectricRentalRepository;
 import de.onenightcar.repositories.rentalRepository.FuelRentalRepository;
 import de.onenightcar.repositories.rentalRepository.RentalTimeSlotRepository;
-import org.dom4j.rule.Mode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.swing.text.html.parser.Entity;
-import javax.validation.Valid;
-import java.sql.Struct;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -341,6 +333,10 @@ public class RentalController {
         //Save it the database
         electricRentalRepository.save(electricRental);
 
+        //Add rental to customers list
+        customer.electricRentals.add(electricRental);
+        customerRepository.save(customer);
+
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("rentalDone", true);
         return mav;
@@ -375,6 +371,10 @@ public class RentalController {
 
         //Save it the database
         fuelRentalRepository.save(fuelRental);
+
+        //Add rental to customers list
+        customer.fuelRentals.add(fuelRental);
+        customerRepository.save(customer);
 
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("rentalDone", true);
