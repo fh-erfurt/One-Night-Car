@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>404: Page not found</title>
     <style>
         body {
-            background-image: url('../assets/img/404.jpg');
+            background-size: cover;
+            background: url('../assets/img/404.jpg') no-repeat fixed center center;
+        }
+
+        h1 {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>404: Page not found </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>404: Page not found </h1>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

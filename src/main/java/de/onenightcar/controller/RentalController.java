@@ -22,6 +22,7 @@ import de.onenightcar.repositories.personRepository.*;
 import de.onenightcar.repositories.rentalRepository.ElectricRentalRepository;
 import de.onenightcar.repositories.rentalRepository.FuelRentalRepository;
 import de.onenightcar.repositories.rentalRepository.RentalTimeSlotRepository;
+import de.onenightcar.util.CookieHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -84,7 +87,9 @@ public class RentalController {
 
     @RequestMapping(path = "/car-search", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public ModelAndView searchPage() {
+    public ModelAndView searchPage(HttpServletRequest request) {
+
+        Cookie[] cookies = request.getCookies();
 
         //Get all different cities from the Database
         List<String> parkingAreaCities = parkingAreaAddressRepository.getDistinctCity();
@@ -92,19 +97,31 @@ public class RentalController {
         //Create the Model and View and add the view
         ModelAndView mav = new ModelAndView("rental/carSearch");
 
-        //Add the needed object for the rendering of the view
-        //The object that should be populated in the form of the view
-        mav.addObject("carSearchForm", new CarSearchForm());
-        mav.addObject("cities", parkingAreaCities);
-        mav.addObject("currentDate", LocalDate.now());
+        if(!CookieHelper.proveCookieExistence(cookies, "userId")) {
+            mav.setViewName("index");
+            mav.addObject("error", true);
+            mav.addObject("errorText", "You should be Logged in to do that!");
+            mav.addObject("loggedIn", false);
+        }
+
+        else
+        {
+            //Add the needed object for the rendering of the view
+            //The object that should be populated in the form of the view
+            mav.addObject("carSearchForm", new CarSearchForm());
+            mav.addObject("cities", parkingAreaCities);
+            mav.addObject("currentDate", LocalDate.now());
+            mav.addObject("loggedIn", true);
+        }
 
         return mav;
     }
 
     @RequestMapping(path = "/search-results", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public ModelAndView searchResults(@ModelAttribute CarSearchForm carSearchForm) {
+    public ModelAndView searchResults(@ModelAttribute CarSearchForm carSearchForm, HttpServletRequest request) {
 
+        Cookie[] cookies = request.getCookies();
 
         //////Values received from the form in car search page//////
         int fuelType = carSearchForm.getFuel();
@@ -122,8 +139,9 @@ public class RentalController {
             //The wanted date for the rental
             mav.addObject("date", date);
 
-            //TODO: Somehow access to the Customer who is logged in
-            mav.addObject("customer", customerRepository.getById(10l));
+            //Retrieve the correct user from the logged in user
+            Long customerId = CookieHelper.getUserCookieId(cookies, "userId");
+            mav.addObject("customer", customerRepository.getById(customerId));
 
             //Define which parking areas should be shown and add them to the view
             if(fuelType == 0){
@@ -214,6 +232,7 @@ public class RentalController {
                     mav.addObject("notAvailableElectricTimes", hashtable);
                 }
             }
+        mav.addObject("loggedIn", true);
 
         return mav;
     }
@@ -257,6 +276,7 @@ public class RentalController {
         mav.addObject("electricRentalStation",              parkingAreaAddress);
         mav.addObject("electricRentalPrice",                (rentalElectricCar.getPrice() * rentalTimeSlots.size()));
         mav.addObject("eRentalAfterCheckForm",              new ERentalAfterCheckForm());
+        mav.addObject("loggedIn",               true);
 
         return mav;
     }
@@ -300,6 +320,7 @@ public class RentalController {
         mav.addObject("fuelRentalStation",              parkingAreaAddress);
         mav.addObject("fuelRentalPrice",                (rentalCombustionCar.getPrice() * rentalTimeSlots.size()));
         mav.addObject("cRentalAfterCheckForm",          new CRentalAfterCheckForm());
+        mav.addObject("loggedIn",                       true);
 
         return mav;
     }
@@ -339,6 +360,7 @@ public class RentalController {
 
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("rentalDone", true);
+        mav.addObject("loggedIn", true);
         return mav;
     }
 
@@ -378,6 +400,7 @@ public class RentalController {
 
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("rentalDone", true);
+        mav.addObject("loggedIn", true);
         return mav;
     }
 }

@@ -3,13 +3,15 @@ package de.onenightcar.controller;
 import de.onenightcar.controller.formValidators.LoginForm;
 import de.onenightcar.model.person.Customer;
 import de.onenightcar.repositories.personRepository.*;
+import de.onenightcar.util.CookieHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.*;
 import java.util.List;
-
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 @Controller
@@ -34,8 +36,11 @@ public class LoginController extends HttpServlet {
 
         Cookie[] cookies = request.getCookies();
 
-        if(cookies != null){
+        if(CookieHelper.proveCookieExistence(cookies, "userId")) {
             mav.setViewName("index");
+            mav.addObject("error", true);
+            mav.addObject("errorText", "You are already Logged in!");
+            mav.addObject("loggedIn", false);
         }else{
             mav.addObject("loginForm", new LoginForm());
         }
@@ -47,15 +52,21 @@ public class LoginController extends HttpServlet {
     @PostMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public ModelAndView loginSubmit(@ModelAttribute LoginForm loginForm, HttpServletResponse response) {
+        //Retrieve the Data from the form
         String email = loginForm.getEmail();
         String password = loginForm.getPassword();
-        System.out.println("data From the Form: " + email + " " + password);
+
         ModelAndView mav = new ModelAndView("login");
+
         List<Customer> customers = (List<Customer>) customerRepository.findAll();
+
+        AtomicBoolean foundUser = new AtomicBoolean(false);
+
         customers.forEach(customer -> {
             if(email.equals(customer.getMail()) && password.equals(customer.getUserPassword()))
             {
                 String userId = customer.getId().toString();
+                foundUser.set(true);
 
                 Cookie cookie = new Cookie("userId", userId);
                 cookie.setMaxAge(24 * 60 * 60);     //one Day
@@ -66,12 +77,22 @@ public class LoginController extends HttpServlet {
 
 
                 mav.setViewName("index");
-                return;
             }
         });
-        System.out.println(mav);
+
+        if(foundUser.get() == false){
+            mav.addObject("error", true);
+            mav.addObject("errorMessage", "No user found with that Mail / Wrong Password");
+        }
+
+
+
+        if(mav.getViewName() == "index") {
+            mav.addObject("loggedIn", true);
+        }
+        else {
+            mav.addObject("loggedIn", false);
+        }
         return mav;
     }
-
-
 }

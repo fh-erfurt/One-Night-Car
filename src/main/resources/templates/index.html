@@ -14,32 +14,61 @@
                 </button>
             </div>
         </th:block>
+        <th:block th:if="${error}">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <p th:text="${errorText}"></p>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </th:block>
         <div class="row">
             <div class="col-12" style="text-align: center">
                 <h2 style="font-family: 'Bungee', cursive; padding-top: 1%;">Welcome to One Night Car</h2>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row" style="height: 20%">
-            <div class="col-12" style="text-align: center; width: 200px; height: 200px;">
-                <img th:src="@{/logo/logo.png}" alt="One Night Car Logo"/>
+    <th:block th:if="${loggedIn}">
+        <div class="container">
+            <div class="row" style="height: 20%">
+                <div class="col-12" style="text-align: center; width: 200px; height: 200px;">
+                    <img th:src="@{/logo/logo.png}" alt="One Night Car Logo"/>
+                </div>
+            </div>
+            <div class="row" style="height: 10%">
+                <div class="col-12" style="text-align: center; padding: 5%; background: rgba(0,0,0,0.5); color: white;">
+                    <h3>Great to have you back!!</h3>
+                </div>
+            </div>
+            <div class="row" style="height: 100px;">
+                <div class="col-12" style="text-align: center; margin-top: 20px">
+                    <button class="btn btn-dark btn-lg">Want to know more about us?</button>
+                </div>
             </div>
         </div>
-        <div class="row" style="height: 200px">
-            <div class="col-6" style="text-align: center; padding: 10%;">
-                <button class="btn btn-info btn-lg">Log In</button>
+    </th:block>
+    <th:block th:unless="${loggedIn}">
+        <div class="container">
+            <div class="row" style="height: 20%">
+                <div class="col-12" style="text-align: center; width: 200px; height: 200px;">
+                    <img th:src="@{/logo/logo.png}" alt="One Night Car Logo"/>
+                </div>
             </div>
-            <div class="col-6" style="text-align: center; padding: 10%;">
-                <button class="btn btn-info btn-lg">Sign Up</button>
+            <div class="row" style="height: 200px">
+                <div class="col-6" style="text-align: center; padding: 10%;">
+                    <a class="btn btn-info btn-lg" th:href="@{/login}">Log in</a>
+                </div>
+                <div class="col-6" style="text-align: center; padding: 10%;">
+                    <a class="btn btn-info btn-lg" th:href="@{/signup}">Sign Up</a>
+                </div>
+            </div>
+            <div class="row" style="height: 200px;">
+                <div class="col-12" style="text-align: center; padding: 10%;">
+                    <button class="btn btn-dark btn-lg">Want to know more about us?</button>
+                </div>
             </div>
         </div>
-        <div class="row" style="height: 200px;">
-            <div class="col-12" style="text-align: center; padding: 10%;">
-                <button class="btn btn-dark btn-lg">Want to know more about us?</button>
-            </div>
-        </div>
-    </div>
+    </th:block>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
