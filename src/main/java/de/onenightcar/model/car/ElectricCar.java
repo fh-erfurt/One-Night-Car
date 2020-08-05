@@ -1,12 +1,12 @@
 package de.onenightcar.model.car;
 
 import de.onenightcar.model.parkingArea.ElectricParkingArea;
-import de.onenightcar.model.person.Admin;
+import de.onenightcar.model.parkingArea.ParkingArea;
 import de.onenightcar.model.person.Customer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 /** Represents a Electric OneNightCar.Car
  * extent OneNightCar.Car
@@ -20,10 +20,11 @@ public class ElectricCar extends Car {
 
     /* /////////////////////Attributes/////////////////////////// */
 
-    static Logger log = LoggerFactory.getLogger(ElectricCar.class);
-
     private float electricalRange;         //in Km
     private float chargePercent;           //current
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ElectricParkingArea electricParkingArea;
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -42,6 +43,7 @@ public class ElectricCar extends Car {
      * @param price A float representing the costs of the OneNightCar.Car per Day
      * @param electricalRange A float representing the range the car can drive before it needs to be recharged
      * @param chargePercent A float representing the electric OneNightCar.Car charge
+     * @param electricParkingArea an electricParkingArea Object
      */
     public ElectricCar(Type type, String brand, String model, State state,
                        long odometer, double GPSLatitude, double GPSLongitude, Customer.CustomerLevel customerLevel,
@@ -62,13 +64,15 @@ public class ElectricCar extends Car {
     /**
      /** Creates an Electric OneNightCar.Car OneNightCar.Car  with default Values.
      * It is used to increment speed of UnitTests.
-     * @param electricParkingArea A CarManagementSystem with the management from the Packet OneNightCar.Car
+     * @param electricParkingArea an ElectricParkingArea Object
      */
     public ElectricCar( ElectricParkingArea electricParkingArea){
         super(Type.MINI,"BMW","i3", State.PERFECT, 50.9787, 11.03283,
                 10999, Customer.CustomerLevel.NEWUSER , 69.00f);
         this.electricalRange = 200.00f;
         this.chargePercent= 100.00f;
+        this.odometer = 0;
+        this.chargePercent = 100;
         if(electricParkingArea.numberOfElectricCarsAssignedToStation() < electricParkingArea.getMaxElectricCarCapacity()) {
             electricParkingArea.assignElectricCarToStation(this);
         }
@@ -92,11 +96,9 @@ public class ElectricCar extends Car {
     public void setChargePercent(float chargePercent){
         try {
             this.chargePercent = chargePercent;
-            log.info("Set charge percentage to ", chargePercent);
         }
         catch(Exception e){
             System.out.print("Setting charge percent has failed!");
-            log.error("Error setting charge percent to ", chargePercent);
         }
     }
 
@@ -107,7 +109,20 @@ public class ElectricCar extends Car {
         return this.electricalRange;
     }
 
-    public void setElectricalRange(float range) { this.electricalRange = range;}
+    /** Change the Electric OneNightCar.Car ParkingArea .
+     * @param electricParkingArea a float representing the new charge level
+     */
+    public void setElectricParkingArea(ElectricParkingArea electricParkingArea) {
+        this.electricParkingArea = electricParkingArea;
+    }
+
+    public void setElectricalRange(float electricalRange) {
+        this.electricalRange = electricalRange;
+    }
+
+    public ElectricParkingArea getElectricParkingArea() {
+        return electricParkingArea;
+    }
 
     /* /////////////////////Methods/////////////////////////// */
 
@@ -119,4 +134,31 @@ public class ElectricCar extends Car {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "ElectricCar{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ElectricCar that = (ElectricCar) o;
+
+        if (Float.compare(that.electricalRange, electricalRange) != 0) return false;
+        if (Float.compare(that.chargePercent, chargePercent) != 0) return false;
+        return electricParkingArea.equals(that.electricParkingArea);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (electricalRange != +0.0f ? Float.floatToIntBits(electricalRange) : 0);
+        result = 31 * result + (chargePercent != +0.0f ? Float.floatToIntBits(chargePercent) : 0);
+        result = 31 * result + electricParkingArea.hashCode();
+        return result;
+    }
 }

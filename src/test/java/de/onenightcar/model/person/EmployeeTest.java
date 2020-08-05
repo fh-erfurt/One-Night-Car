@@ -5,6 +5,7 @@ import de.onenightcar.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.model.parkingArea.ParkingArea;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,10 +24,10 @@ class EmployeeTest {
 
     @Test
     void an_employee_repairs_an_electric_car(){
-        LocalDateTime dateOfBirth;
-        dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
+        LocalDate dateOfBirth;
+        dateOfBirth = LocalDate.of(1985,2,20);
         PersonAddress thisAddress = new PersonAddress();
-        Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
+        Employee john = new Employee("John", "Schmidt", dateOfBirth, "john12@gmail.com", "12345678", thisAddress,
                  2000, Employee.TypeOfActivity.MAINTAINER);
 
         ElectricParkingArea Area1 = new ElectricParkingArea();
@@ -41,10 +42,10 @@ class EmployeeTest {
 
     @Test
     void an_employee_refuels_a_combustion_car(){
-        LocalDateTime dateOfBirth;
-        dateOfBirth = LocalDateTime.of(1985,2,20,00,00);
+        LocalDate dateOfBirth;
+        dateOfBirth = LocalDate.of(1985,2,20);
         PersonAddress thisAddress = new PersonAddress();
-        Employee john = new Employee("John", "Schmidt", dateOfBirth, thisAddress,
+        Employee john = new Employee("John", "Schmidt", dateOfBirth, "john123@gmail.com", "12345678", thisAddress,
                  2000, Employee.TypeOfActivity.MAINTAINER);
 
 

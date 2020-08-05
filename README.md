@@ -6,6 +6,10 @@
 ### Teammitglieder
 Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 
+
+## Was wir gemacht haben
+Wir haben unser Datenmodell genutzt und eine Weboberfläche für dieses gebaut. Man kann sich auf der Oberfläche einloggen und Autos mieten. Zudem gibt es eine Profilübersicht für jeden Kunden, in der aktive Mietverträge angezeigt werden.
+
 ## Packages
 * OneNightCar.Person: Beinhaltet alle Informationen von Kunden, Mitarbeiter und Admins. Zuständig: Alejandro Restrepo Klinge (@mrrestre)
 ![Package OneNightCar.Person](/diagrammen/packagePerson.png)
@@ -42,9 +46,6 @@ One-Night-OneNightCar.Car CarSharing Verwaltungsystem
 * Mitarbeiter einstellen : Ein neues Objekt der Klasse Mitarbeiter wird instanziiert
 * Kundensupport: Ein Mitarbeiter wird einem Kunden zugeordnet mittels Funktion und löst dessen Problem
 * Neues Auto bereitstellen: Ein Objekt der Klasse ElectricCar oder CombustionCar wird instanziiert
-
-## Anforderungsbeschreibung(Grob)
-Ziel des Projektes war es ein System zu entwerfen, welches als Grundlage für eine Serveranwendung im Folgesemester dient. Unser Projektteam hat es sich zur Aufgabe gemacht, ein Carsharing Verwaltungssystem zu programmieren, welches aus insgesamt vier Subsystemem besteht und jedes Subsystem war einem Mietglied des Teams zugeordnet.
 
 ## Abgrenzung(Das System soll nicht:)
 Rechnungswesen: Das System soll keine Lohnzahlungen an OneNightCar.Person, sowie Rechnungen und deren Abwicklung von Kunden- oder Herstellerkäufen verwalten. Dies übernimmt ein externer Dienstleister.

@@ -7,15 +7,18 @@ import org.slf4j.LoggerFactory;
 import de.onenightcar.model.person.Customer;
 
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Represents an ElectricRental
  * @author OneNightCar
  * @version 1.0
  * @since 1.0
  */
+
 @Entity
 public class ElectricRental extends Rental {
 
@@ -29,6 +32,9 @@ public class ElectricRental extends Rental {
     @OneToOne
     private ElectricCar electricCar;
 
+    @ManyToMany
+    private List<RentalTimeSlot> timeSlotsList;
+
     /* /////////////////////Constructors/////////////////////////// */
 
     // Needed to be able to create the entity
@@ -37,29 +43,36 @@ public class ElectricRental extends Rental {
     /**
      * Creates a OneNightCar.Rental entry for a rental of an electric OneNightCar.Car
      * @param electricCar the car itself, object of the class ElectricCar
-     * @param date the date of the rental
-     * @param departure the date and time at which the customer started the rental
-     * @param arrival the date and time at which the customer ended the rental
+     * @param rentalDate the date of the rental
+     * @param customer Who is making the rental
+     * @param timeSlotsList which timeslots are being used
      */
-    public ElectricRental(ElectricCar electricCar, LocalDateTime date, LocalDateTime departure,
-                          LocalDateTime arrival, Customer customer){
-        super(date, departure, arrival, customer);
-        this.rentalPrice = calculateRentalPriceForElectric(electricCar);
+    public ElectricRental(ElectricCar electricCar, LocalDate rentalDate, Customer customer, List<RentalTimeSlot> timeSlotsList){
+        super(rentalDate, customer);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
         this.electricCar = electricCar;
+        this.timeSlotsList = timeSlotsList;
+        //add this Rental to the given timeslots
+        this.timeSlotsList = timeSlotsList;
+        this.rentalPrice = calculateRentalPriceForElectric(electricCar);
     }
 
     /**
      * A constructor that uses default values
      * @param electricCar the car itself, object of the class ElectricCar
+     * @param customer A Customer Object
      */
     public ElectricRental(ElectricCar electricCar, Customer customer){
         super(customer);
-        this.rentalPrice = calculateRentalPriceForElectric(electricCar);
         this.odometerBefore = electricCar.getOdometer();
         this.chargePercentBefore = electricCar.getChargePercent();
         this.electricCar = electricCar;
+        this.timeSlotsList = new ArrayList<>();
+        LocalTime lt1 = LocalTime.of(8,0);
+        LocalTime lt2 = LocalTime.of(9,0);
+        this.timeSlotsList.add(new RentalTimeSlot(lt1, lt2));
+        this.rentalPrice = calculateRentalPriceForElectric(electricCar);
     }
 
     /* /////////////////////Getter/Setters/////////////////////////// */
@@ -71,33 +84,43 @@ public class ElectricRental extends Rental {
      */
     public void setChargePercentAfter (ElectricCar electricCar) {
         if ((this.odometerAfter - this.odometerBefore) > electricCar.getElectricalRange()) {
-            this.chargePercentAfter = -1;
+            this.chargePercentAfter = 0;
         }
         else {
             this.chargePercentAfter = (electricCar.getElectricalRange() - (this.odometerAfter - this.odometerBefore)) / electricCar.getElectricalRange();
         }
     }
 
-    public float getChargePercentBefore() {
-        return chargePercentBefore;
-    }
-
-    public void setChargePercentBefore(float chargePercentBefore) {
-        this.chargePercentBefore = chargePercentBefore;
-    }
-
-    public void setChargePercentAfter(float chargePercentAfter) {
-        this.chargePercentAfter = chargePercentAfter;
-    }
 
     public void setElectricCar(ElectricCar electricCar) {
         this.electricCar = electricCar;
     }
 
+    public List<RentalTimeSlot> getTimeSlotsList() {
+        return timeSlotsList;
+    }
+
     /* /////////////////////Methods/////////////////////////// */
 
+    public int calculateElapsedHours() {
+        return this.timeSlotsList.size();
+    }
+
     private float calculateRentalPriceForElectric(ElectricCar ElectricCar) {
-        return calculateElapsedDays() * ElectricCar.getPrice();
+        return calculateElapsedHours() * ElectricCar.getPrice();
+    }
+
+    /** Sets the odometer to the value after the rental
+     * Based on a simulated drive
+     */
+    public void setOdometerAfter(){
+        try {
+            //Calculates the driven amount of kilometres by using the average speed of a car in Munich (as it can't be inspected)
+            this.odometerAfter = odometerBefore + ((calculateElapsedHours() * 32));
+        }
+        catch(Exception e){
+            System.out.print("Set Odometer has failed!");
+        }
     }
 
     public ElectricCar getElectricCar() {
@@ -118,9 +141,29 @@ public class ElectricRental extends Rental {
                 "rentalPrice=" + rentalPrice +
                 ", odometerBefore=" + odometerBefore +
                 ", odometerAfter=" + odometerAfter +
-                ", date=" + date +
-                ", departure=" + departure +
-                ", arrival=" + arrival +
+                ", date=" + rentalDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ElectricRental that = (ElectricRental) o;
+
+        if (Float.compare(that.chargePercentBefore, chargePercentBefore) != 0) return false;
+        if (Float.compare(that.chargePercentAfter, chargePercentAfter) != 0) return false;
+        if (electricCar != null ? !electricCar.equals(that.electricCar) : that.electricCar != null) return false;
+        return timeSlotsList != null ? timeSlotsList.equals(that.timeSlotsList) : that.timeSlotsList == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (chargePercentBefore != +0.0f ? Float.floatToIntBits(chargePercentBefore) : 0);
+        result = 31 * result + (chargePercentAfter != +0.0f ? Float.floatToIntBits(chargePercentAfter) : 0);
+        result = 31 * result + (electricCar != null ? electricCar.hashCode() : 0);
+        result = 31 * result + (timeSlotsList != null ? timeSlotsList.hashCode() : 0);
+        return result;
     }
 }

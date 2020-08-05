@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body th:style="'background: url(../assets/img/background.jfif) center center no-repeat; background-size: cover; background-attachment: fixed;'">
+    <nav th:replace="fragments :: nav"></nav>
+
+    <div class="mx-auto" style="width: 30%; background: rgba(0,0,0,0.5); padding-bottom: 20px; color: white;">
+        <div class="row">
+            <div class="col-12" style="text-align: center">
+                <h2 style="font-family: 'Bungee', cursive; padding-top: 1%;">Find your perfect Match</h2>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper" style="background: rgba(0,0,0,0.5); color:white;">
+        <div style="padding: 2% 10%;">
+            <form action='#' th:action="@{/rental/search-results}" th:object="${carSearchForm}" method='post'>
+                <div class="form-group">
+                    <label for="city-selection" class="col-sm-2 col-form-label">City:</label>
+                    <select th:field="*{city}" id="city-selection" class="custom-select">
+                        <div th:each="city : ${cities}">
+                            <option th:value="${city}" th:text="${city}"></option>
+                        </div>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rental-date" class="col-sm-2 col-form-label" >Date:</label>
+                    <input type="date" th:field="*{date}" id="rental-date" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="fuel-type" class="col-sm-2 col-form-label">Fuel Type:</label>
+                    <select th:field="*{fuel}" id="fuel-type" class="custom-select">
+                        <option th:value="0">Any</option>
+                        <option th:value="1">Combustion</option>
+                        <option th:value="2">Electric</option>
+                    </select>
+                </div>
+
+                <div class="mx-auto" style="padding-top: 3%; width: 100px;">
+                    <button class="btn btn-light btn-lg" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>

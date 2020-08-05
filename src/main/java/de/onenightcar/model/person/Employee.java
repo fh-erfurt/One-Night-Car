@@ -1,12 +1,11 @@
 package de.onenightcar.model.person;
 
 import de.onenightcar.model.car.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -20,7 +19,7 @@ import java.util.Random;
 public class Employee extends Person {
 
     /* /////////////////////Attributes///////////////////////// */
-    static Logger log = LoggerFactory.getLogger(Employee.class);
+
     private float salary;
 
     @Enumerated(EnumType.STRING)
@@ -32,13 +31,17 @@ public class Employee extends Person {
      * @param firstName A String representing Employee first Name
      * @param surname A String representing Employee Surname
      * @param dateOfBirth A LocalDateTime representing Employee DOB
+     * @param mail a User's E-Mail
+     * @param userPassword User's Password
      * @param personAddress A PersonAddress representing Employee Address
      * @param salary A Float representing the Employee salary
      * @param typeOfActivity a TypeOfActivity representing what the Employee does
      */
-    public Employee(String firstName, String surname, LocalDateTime dateOfBirth, PersonAddress personAddress, float salary, TypeOfActivity typeOfActivity){
+    public Employee(String firstName, String surname, LocalDate dateOfBirth, String mail, String userPassword, PersonAddress personAddress, float salary, TypeOfActivity typeOfActivity){
         this.firstName = firstName;
         this.surname = surname;
+        this.mail= mail;
+        this.userPassword = userPassword;
         this.dateOfBirth = dateOfBirth;
         this.personAddress = personAddress;
         this.salary = salary;
@@ -51,7 +54,9 @@ public class Employee extends Person {
     public Employee(){
         this.firstName = "Peter";
         this.surname = "Bossmann";
-        this.dateOfBirth = LocalDateTime.of(1964,4,4,00,00);
+        this.mail= "peter@gmail.com";
+        this.userPassword = "12345678";
+        this.dateOfBirth = LocalDate.of(1964,4,4);
         this.personAddress = new PersonAddress();
         this.salary = 10000;
         this.typeOfActivity = TypeOfActivity.BOSS;
@@ -60,7 +65,7 @@ public class Employee extends Person {
     /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Employee TypeOfActivity.
-     * @return A TypeOfActivity representing the activity of an Employee
+     * @return TypeOfActivity representing the activity of an Employee
      */
     public TypeOfActivity getTypeOfActivity(){
         return this.typeOfActivity;
@@ -73,27 +78,8 @@ public class Employee extends Person {
         this.typeOfActivity = typeOfActivity;
     }
 
-    /** Gets the Employee salary.
-     * @return A float representing the salary of an Employee
-     */
-    public float getSalary(){
-        return this.salary;
-    }
 
-    /** Sets the Employee new salary.
-     * @param salary A float representing the new salary of an Employee
-     */
-    public void setSalary(float salary){
-        try {
-            this.salary = salary;
-            log.info("Set salary to ", salary);
-        }
-        catch(Exception e){
-            System.out.print("Salary couldn't be set, check Salary!");
-            log.error("Salary couldn't be set to", salary);
 
-        }
-    }
 
     /* /////////////////////Methods/////////////////////////// */
 
@@ -173,7 +159,6 @@ public class Employee extends Person {
             if(this.typeOfActivity == TypeOfActivity.MAINTAINER) {
                 /* *********** Goes to the Tanking Station and refuels the car ********** */
                 combustionCar.setFuelLevel(100);
-                log.info("Set FuelLevel to 100.");
             }
         }
     }

@@ -6,15 +6,38 @@ import de.onenightcar.model.car.ElectricCar;
 import de.onenightcar.model.parkingArea.ElectricParkingArea;
 import de.onenightcar.model.parkingArea.ParkingArea;
 import de.onenightcar.model.rental.ElectricRental;
+import de.onenightcar.model.rental.RentalTimeSlot;
+import org.apache.tomcat.jni.Local;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerTest {
+
+    private List<RentalTimeSlot> rentalTimeSlotList;
+
+    @BeforeEach
+    public void init() {
+        LocalDate date = LocalDate.of(2020, 07, 11);
+
+        RentalTimeSlot rentalTimeSlot1 = new RentalTimeSlot(LocalTime.of(8,0), LocalTime.of(9,0));
+        RentalTimeSlot rentalTimeSlot2 = new RentalTimeSlot(LocalTime.of(9,0), LocalTime.of(10,0));
+
+        this.rentalTimeSlotList = new ArrayList<>();
+
+        rentalTimeSlotList.add(rentalTimeSlot1);
+        rentalTimeSlotList.add(rentalTimeSlot2);
+    }
 
     @Test
     void the_customer_level_may_be_changed() {
@@ -28,7 +51,7 @@ class CustomerTest {
     @Test
     void the_payment_method_may_be_changed() {
         Customer max = new Customer();
-        LocalDateTime testCalendar = LocalDateTime.of(2025,2,20,10,10);
+        LocalDate testCalendar = LocalDate.of(2025,2,20);
         PaymentMethod paymentMethod = new PaymentMethod("0000 1111 2222 3333", PaymentMethod.CardType.DEBIT, testCalendar, "123");
 
         max.setPaymentMethod(paymentMethod);
@@ -50,21 +73,18 @@ class CustomerTest {
     void the_right_index_should_be_returned_with_the_given_car () {
         Customer max = new Customer();
 
+        ElectricParkingArea area1 = new ElectricParkingArea();
+
+        LocalDate ld = LocalDate.of(2020,07,12);
+
+        ElectricCar car1 = new ElectricCar(area1);
+        ElectricCar car2 = new ElectricCar(area1);
+        ElectricCar car3 = new ElectricCar(area1);
 
 
-        ElectricParkingArea Area1 = new ElectricParkingArea();
-
-        ElectricCar car1 = new ElectricCar(Area1);
-        ElectricCar car2 = new ElectricCar(Area1);
-        ElectricCar car3 = new ElectricCar(Area1);
-
-        ElectricRental testRental1 = new ElectricRental(car1, max);
-        ElectricRental testRental2 = new ElectricRental(car2, max);
-        ElectricRental testRental3 = new ElectricRental(car3, max);
-
-        max.getElectricRentals().add(testRental1);
-        max.getElectricRentals().add(testRental2);
-        max.getElectricRentals().add(testRental3);
+        max.rentAnElectricCar(car1, ld, rentalTimeSlotList);
+        max.rentAnElectricCar(car2, ld, rentalTimeSlotList);
+        max.rentAnElectricCar(car3, ld, rentalTimeSlotList);
 
         assertEquals(0,max.getElectricCarIndexInElectricRentalList(car1));
         assertEquals(1,max.getElectricCarIndexInElectricRentalList(car2));
@@ -74,7 +94,6 @@ class CustomerTest {
     @Test
     void a_customer_damages_a_car () {
         Customer max = new Customer();
-
 
         ParkingArea parkingArea = new ParkingArea();
 
@@ -89,18 +108,13 @@ class CustomerTest {
     void a_customer_is_able_to_rent_a_combustion_car () {
         Customer max = new Customer();
 
-
         ParkingArea parkingArea = new ParkingArea();
 
         CombustionCar combustionCar = new CombustionCar(parkingArea);
-        LocalDateTime date = LocalDateTime.now();
 
-        LocalDateTime departure;
-        departure = LocalDateTime.of(2020,03,15,00,00);
-        LocalDateTime arrival;
-        arrival= LocalDateTime.of(2020,03,18,00,00);
+        LocalDate date = LocalDate.of(2020,07,12);
 
-        max.rentAFuelCar(combustionCar,  date, departure, arrival);
+        max.rentAFuelCar(combustionCar, date, rentalTimeSlotList);
 
         assertEquals(1, max.getFuelRentals().size());
     }
@@ -109,24 +123,21 @@ class CustomerTest {
     void a_customer_is_able_to_modify_an_electric_rental () {
         Customer max = new Customer();
 
-        LocalDateTime date = LocalDateTime.now();
-        LocalDateTime departure;
-        departure = LocalDateTime.of(2020,03,15,00,00);
-        LocalDateTime arrival;
-        arrival= LocalDateTime.of(2020,03,18,00,00);
+        LocalDate date = LocalDate.now();
 
         ElectricParkingArea Area1 = new ElectricParkingArea();
 
         ElectricCar car1 = new ElectricCar(Area1);
 
-        max.rentAnElectricCar(car1, date, departure, arrival);
+        max.rentAnElectricCar(car1, date, rentalTimeSlotList);
 
+        max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, date, rentalTimeSlotList);
 
-        max.modifyAnElectricRental(max.getElectricRentalWithIndex(0), car1, date, LocalDateTime.of(2020, 3, 16, 00,00),
-                LocalDateTime.of(2020, 3, 19, 00,00));
+        LocalTime lt = LocalTime.of(8,0);
+        LocalDate ld = LocalDate.now();
 
-        assertEquals(16, max.electricRentals.get(0).getDeparture().getDayOfMonth());
-        assertEquals(19, max.electricRentals.get(0).getArrival().getDayOfMonth());
+        assertEquals(lt, max.electricRentals.get(0).getTimeSlotsList().get(0).getDepartureTime());
+        assertEquals(ld, max.electricRentals.get(0).getRentalDate());
     }
 
     @Test
@@ -135,15 +146,9 @@ class CustomerTest {
 
         ParkingArea parkingArea = new ParkingArea();
 
-        LocalDateTime departure;
-        departure = LocalDateTime.of(2020,03,15,00,00);
-        LocalDateTime arrival;
-        arrival= LocalDateTime.of(2020,03,18,00,00);
-
         CombustionCar combustionCar = new CombustionCar(parkingArea);
-        LocalDateTime date = LocalDateTime.now();
-        max.rentAFuelCar(combustionCar, date, departure, arrival);
-
+        LocalDate date = LocalDate.now();
+        max.rentAFuelCar(combustionCar, date, rentalTimeSlotList);
 
         max.cancelFuelRental(max.getFuelRentalWithIndex(0));
 

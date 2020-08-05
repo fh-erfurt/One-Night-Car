@@ -6,9 +6,7 @@ import de.onenightcar.model.person.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 /** Represents a Combustion OneNightCar.Car
  * extent OneNightCar.Car
@@ -36,6 +34,9 @@ public class CombustionCar extends Car {
     private double fuelLevel;   // in percent
     private double consumption; // the Consumption in 100 Km
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ParkingArea parkingArea;
+
     /* /////////////////////Constructors/////////////////////////// */
 
     // Needed to be able to create the entity
@@ -57,6 +58,7 @@ public class CombustionCar extends Car {
      * @param consumption A double representing the consumption of the OneNightCar.Car in 100 km
      * @param transmission An enum representing the Transmission of the OneNightCar.Car (Manuel, Automatic)
      * @param fuelType an enum representing the Fuel Type of the OneNightCar.Car (Petrol, Diesel)
+     * @param parkingArea an ParkingArea object
      */
     public CombustionCar(Type type, String brand, String model, State state,
                          double GPSLatitude, double GPSLongitude, long odometer,
@@ -101,6 +103,14 @@ public class CombustionCar extends Car {
         }
     }
 
+    public ParkingArea getParkingArea() {
+        return parkingArea;
+    }
+
+    public void setParkingArea(ParkingArea parkingArea) {
+        this.parkingArea = parkingArea;
+    }
+
     /* /////////////////////Getter/Setters/////////////////////////// */
 
     /** Gets the Fuel Level
@@ -131,9 +141,6 @@ public class CombustionCar extends Car {
        return this.tankSize;
    }
 
-    public void setTankSize(double tankSize) {
-        this.tankSize = tankSize;
-    }
 
     /** Gets the Average of Consumption
      * @return The Combustion OneNightCar.Car Consumption
@@ -141,10 +148,6 @@ public class CombustionCar extends Car {
    public double getConsumption(){
        return this.consumption;
    }
-
-    public void setConsumption(double consumption) {
-        this.consumption = consumption;
-    }
 
     public Transmission getTransmission() {
         return transmission;
@@ -160,6 +163,14 @@ public class CombustionCar extends Car {
 
     public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
+    }
+
+    public void setTankSize(double tankSize) {
+        this.tankSize = tankSize;
+    }
+
+    public void setConsumption(double consumption) {
+        this.consumption = consumption;
     }
 
     /* /////////////////////Methods/////////////////////////// */
@@ -184,5 +195,43 @@ public class CombustionCar extends Car {
 
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "CombustionCar{" +
+                "brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CombustionCar that = (CombustionCar) o;
+
+        if (Double.compare(that.tankSize, tankSize) != 0) return false;
+        if (Double.compare(that.fuelLevel, fuelLevel) != 0) return false;
+        if (Double.compare(that.consumption, consumption) != 0) return false;
+        if (transmission != that.transmission) return false;
+        if (fuelType != that.fuelType) return false;
+        return parkingArea.equals(that.parkingArea);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = transmission.hashCode();
+        result = 31 * result + fuelType.hashCode();
+        temp = Double.doubleToLongBits(tankSize);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(fuelLevel);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(consumption);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + parkingArea.hashCode();
+        return result;
+    }
 }
 

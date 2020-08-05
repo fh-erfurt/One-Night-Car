@@ -60,9 +60,6 @@ public class ParkingAreaAddress extends AbstractDatabaseEntity {
         }
     }
 
-    public void setZIP(String ZIP) {
-        this.ZIP = ZIP;
-    }
 
     /**gets the City
      * @return City
@@ -78,14 +75,17 @@ public class ParkingAreaAddress extends AbstractDatabaseEntity {
      */
     public String getStreet() {return this.street;}
 
+    public void setZIP(String ZIP) {
+        this.ZIP = ZIP;
+    }
+
     public void setStreet(String street) {
         this.street = street;
     }
 
-    /**gets the street number
-     * @return street number
-     */
-    public String getStreetNumber() {return this.streetNumber;}
+    public String getStreetNumber() {
+        return streetNumber;
+    }
 
     public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;

@@ -19,19 +19,15 @@ public class ParkingArea extends AbstractDatabaseEntity {
     /* /////////////////////Attributes///////////////////////// */
 
     // ArrayList in case the number of cars in station changes
-    @OneToMany
+    @OneToMany(mappedBy = "parkingArea")
     public List<CombustionCar> carsInStation;
-
-    @OneToMany
-    public List<CombustionCar> availableCars;
-
-    @OneToMany
-    public List<CombustionCar> notAvailableCars;
 
     @OneToOne
     protected ParkingAreaAddress parkingAreaAddress;
 
     protected int maxCapacity;
+
+    protected String name;
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -39,14 +35,13 @@ public class ParkingArea extends AbstractDatabaseEntity {
      * creates an OneNightCar.ParkingArea Constructor with Parameters to use it in the Child class.
      * @param parkingAreaAddress A ParkingAreaAddress representing the address of the Parking Area
      * @param maxCapacity An integer to represent the maximum capacity of the Parking Area
+     * @param name name of the ParkingArea
      */
-    public ParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity) {
-
+    public ParkingArea(ParkingAreaAddress parkingAreaAddress, int maxCapacity, String name) {
         this.maxCapacity = maxCapacity;
         this.parkingAreaAddress = parkingAreaAddress;
         this.carsInStation = new ArrayList<CombustionCar>();
-        this.availableCars = new ArrayList<CombustionCar>();
-        this.notAvailableCars = new ArrayList<CombustionCar>();
+        this.name = name;
     }
 
     /** Creates a OneNightCar.ParkingArea with default Values.
@@ -56,8 +51,7 @@ public class ParkingArea extends AbstractDatabaseEntity {
         this.maxCapacity = 100;
         this.parkingAreaAddress = new ParkingAreaAddress();
         this.carsInStation = new ArrayList<CombustionCar>();
-        this.availableCars = new ArrayList<CombustionCar>();
-        this.notAvailableCars = new ArrayList<CombustionCar>();
+        this.name = "TestData";
     }
 
     /* /////////////////////Getter/Setters/////////////////////////// */
@@ -68,9 +62,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
      */
     public int getMaxCapacity() {return this.maxCapacity;}
 
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
-    }
 
     /**
      * Shows all Cars in the Station
@@ -84,31 +75,25 @@ public class ParkingArea extends AbstractDatabaseEntity {
         this.carsInStation = carsInStation;
     }
 
-    public List<CombustionCar> getAvailableCars() {
-        return availableCars;
+
+    public String getName() {
+        return name;
     }
 
-    public void setAvailableCars(List<CombustionCar> availableCars) {
-        this.availableCars = availableCars;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<CombustionCar> getNotAvailableCars() {
-        return notAvailableCars;
+    public ParkingAreaAddress getParkingAreaAddress() {
+        return parkingAreaAddress;
     }
-
-    public void setNotAvailableCars(List<CombustionCar> notAvailableCars) {
-        this.notAvailableCars = notAvailableCars;
-    }
-
-    /**
-     * gets the address of the Parking Area
-     * @return parkingAreaAddress
-     */
-    public ParkingAreaAddress getParkingAreaAddress() {return this.parkingAreaAddress;}
-
 
     public void setParkingAreaAddress(ParkingAreaAddress parkingAreaAddress) {
         this.parkingAreaAddress = parkingAreaAddress;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
     }
 
     /* /////////////////////Methods/////////////////////////// */
@@ -120,7 +105,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
     public void assignCarToStation(CombustionCar combustionCar) {
         //carManagementSystem.getCarIDFromCombustion(combustionCar);
         this.carsInStation.add(combustionCar);
-        this.availableCars.add(combustionCar);
     }
 
     /**
@@ -147,7 +131,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
         try {
             //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
             carsInStation.remove(combustionCar);
-            availableCars.remove(combustionCar);
         }
         catch(Exception e){
             System.out.print("Removing Car from Station has not worked!");
@@ -160,8 +143,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
      */
     public void carIsBeingUsed(CombustionCar combustionCar) {
         //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
-        availableCars.remove(combustionCar);
-        notAvailableCars.add(combustionCar);
     }
 
     /**
@@ -170,8 +151,6 @@ public class ParkingArea extends AbstractDatabaseEntity {
      */
     public void carIsNoLongerBeingUsed(CombustionCar combustionCar) {
         //int currentCarIndex = getIndexInStationCarIDList(combustionCar);
-        availableCars.add(combustionCar);
-        notAvailableCars.remove(combustionCar);
     }
 
     /**
@@ -182,16 +161,16 @@ public class ParkingArea extends AbstractDatabaseEntity {
         return carsInStation.size();
     }
 
-    /** gets the Index(id) of the combustionCar list
-     * @return  the Index of combustionCarList
-     * @param combustionCar a Combustion OneNightCar.Car
-     * */
-    public int getCombustionCarID(CombustionCar combustionCar) {
-        return carsInStation.indexOf(combustionCar);
-    }
-
     /* /////////////////////Overrides/////////////////////////// */
 
+    @Override
+    public String toString() {
+        return "ParkingArea{" +
+                "parkingAreaAddress=" + parkingAreaAddress +
+                ", maxCapacity=" + maxCapacity +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
 
 

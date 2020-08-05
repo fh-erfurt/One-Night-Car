@@ -4,7 +4,8 @@ import de.onenightcar.util.AbstractDatabaseEntity;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 
 /** Represents a Person
@@ -20,7 +21,9 @@ public abstract class Person extends AbstractDatabaseEntity {
 
     protected String firstName;
     protected String surname;
-    protected LocalDateTime dateOfBirth;
+    protected LocalDate dateOfBirth;
+    protected String mail;
+    protected String userPassword;
 
     @OneToOne
     protected PersonAddress personAddress;
@@ -43,14 +46,30 @@ public abstract class Person extends AbstractDatabaseEntity {
         this.surname = surname;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
     /** Gets the Persons DOB.
      * @return A LocalDateTime representing the Date of Birth of a person
      */
-    public LocalDateTime getDateOfBirth(){
+    public LocalDate getDateOfBirth(){
         return this.dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -94,7 +113,6 @@ public abstract class Person extends AbstractDatabaseEntity {
         this.surname = surname;
     }
 
-    /* /////////////////////Overrides/////////////////////////// */
 
 }
 
