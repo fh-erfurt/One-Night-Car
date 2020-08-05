@@ -59,5 +59,3 @@ Um zu wissen was zu machen war und wer was machen soll, haben wir zusammen eine 
 ![Plan](/diagrammen/planPA.jpg)
 ![Plan](/diagrammen/planPerson.jpg)
 ![Plan](/diagrammen/planRental.jpg)
-
-Hallo
