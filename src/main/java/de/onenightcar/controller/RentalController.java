@@ -341,6 +341,10 @@ public class RentalController {
         //Save it the database
         electricRentalRepository.save(electricRental);
 
+        //Add rental to customers list
+        customer.electricRentals.add(electricRental);
+        customerRepository.save(customer);
+
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("rentalDone", true);
         return mav;
@@ -375,6 +379,10 @@ public class RentalController {
 
         //Save it the database
         fuelRentalRepository.save(fuelRental);
+
+        //Add rental to customers list
+        customer.fuelRentals.add(fuelRental);
+        customerRepository.save(customer);
 
         ModelAndView mav = new ModelAndView("index");
         mav.addObject("rentalDone", true);
