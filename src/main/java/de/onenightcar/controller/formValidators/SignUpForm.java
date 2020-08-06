@@ -1,8 +1,9 @@
 package de.onenightcar.controller.formValidators;
 
-import de.onenightcar.model.person.PaymentMethod;
-import de.onenightcar.model.person.PersonAddress;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 
@@ -13,11 +14,19 @@ public class SignUpForm {
     private String lastName;
     private String email;
     private String password;
+
+    @NotNull(message = "Not valid value")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent(message = "Not valid date")
     private LocalDate dateOfBirth;
 
     //payment Method Data
-    private PaymentMethod.CardType cardType;
+    private int cardType;
     private String cardNumber;
+
+    @NotNull (message = "Not valid value")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @FutureOrPresent (message = "Not valid date")
     private LocalDate expiredDate;
     private String CCV;
 
@@ -37,11 +46,11 @@ public class SignUpForm {
         this.cardNumber = cardNumber;
     }
 
-    public PaymentMethod.CardType getCardType() {
+    public int getCardType() {
         return cardType;
     }
 
-    public void setCardType(PaymentMethod.CardType cardType) {
+    public void setCardType(int cardType) {
         this.cardType = cardType;
     }
 

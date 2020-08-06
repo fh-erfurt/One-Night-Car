@@ -1,5 +1,7 @@
 package de.onenightcar.controller;
 
+import de.onenightcar.controller.formValidators.ProfileForm;
+import de.onenightcar.model.rental.FuelRental;
 import de.onenightcar.repositories.personRepository.CustomerRepository;
 import de.onenightcar.repositories.personRepository.EmployeeRepository;
 import de.onenightcar.repositories.personRepository.PaymentMethodRepository;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Controller
@@ -98,6 +101,8 @@ public class ProfileController {
         Long customerId = CookieHelper.getUserCookieId(cookies, "userId");
         mav.addObject("customer", customerRepository.getById(customerId));
 
+        List<FuelRental> dayFuelRentals = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
+
 
 
         if(!CookieHelper.proveCookieExistence(cookies, "userId")) {
@@ -111,9 +116,10 @@ public class ProfileController {
         {
             //Add the needed object for the rendering of the view
             //The object that should be populated in the form of the view
+            mav.addObject("profileForm", new ProfileForm());
             mav.addObject("fuelRental", fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
-            mav.addObject("electricRentalA" ,electricRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
-            mav.addObject("customers", customerRepository.getById(customerId));
+            mav.addObject("electricRental" ,electricRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
+            mav.addObject("customer", customerRepository.getById(customerId));
             mav.addObject("currentDate", LocalDate.now());
             mav.addObject("loggedIn", true);
         }

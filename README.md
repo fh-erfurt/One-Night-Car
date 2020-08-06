@@ -10,23 +10,38 @@ Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 ## Was wir gemacht haben
 Wir haben unser Datenmodell genutzt und eine Weboberfläche für dieses gebaut. Man kann sich auf der Oberfläche einloggen und Autos mieten. Zudem gibt es eine Profilübersicht für jeden Kunden, in der aktive Mietverträge angezeigt werden.
 
-## Packages
-* OneNightCar.Person: Beinhaltet alle Informationen von Kunden, Mitarbeiter und Admins. Zuständig: Alejandro Restrepo Klinge (@mrrestre)
-![Package OneNightCar.Person](/diagrammen/packagePerson.png)
+## Tools
+wir haben während der Projektlaufzeit mit verschiedenen Tools gearbeitet wie: Spring-boot, Servlet, Thymeleaf, JUnit und SQL Datenbank.
 
-* OneNightCar.Rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen. Zuständig: Pascal Giese (@pascalgiese)
-  * Electric OneNightCar.Rental: Mieten eines elektrischen Autos
-  * Fuel OneNightCar.Rental: Mieten eines benzinbetriebenen Autos 
-![Package OneNightCar.Rental](/diagrammen/packageRental.png)
+## Projektstruktur
+das Projekt ist in MVC Pattern geteilt:
+#### Model:
+enthält logische Struktur von Daten geteilt in verschiedene Packages und jede Package hat die logische verbundene Klassen.
+* Package OneNightCar.person: Beinhaltet alle Informationen von Kunden, Mitarbeiter und Admins.
+![Package OneNightCar.Person](/diagrammen/PersonPackage.png)
+* Package OneNightCar.car: Beinhaltet alle Informationen von Autos
+![Package OneNightCar.Car](/diagrammen/CarPackage.png)
+* Package OneNightCar.parkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen.
+![Package Parking Area](/diagrammen/ParkingAreaPackage.png)
+*Package OneNightCar.rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen
+![Package OneNightCar.Rental](/diagrammen/RentalPackage.png)
 
-* OneNightCar.ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: Benito Grauel (@TheBenitoo)
-  * Electric OneNightCar.ParkingArea: beschreibt eine ParkinArea mit (bengrenzter Anzahl) Anschlüssen für elektrische Autos
-  * Fuel OneNightCar.Rental: beschreibt eine gewönliche OneNightCar.ParkingArea 
-![Package Parking Area](/diagrammen/packageParkingArea.png)
+#### Controller:
+ist zuständig für die Interaktion zwischen Präsentationsschicht und Daten
+* MainController
+* Login-, Logout-, signupController: zur Bearbeitung der genannten Forms
+* RentalController: hier wird der Prozess des Automietens behandelt, fängt mit Autosuchen an dann das gewünschte Auto in bestimmten Zeiten wählen und dann mieten
 
-* OneNightCar.Car: Beinhaltet alle Informationen von Autos. Zuständig: Ahmad Abo Louha (@AhmadAboLouha)
-  * Electric OneNightCar.Car: haben verschiedene Eigenschaften als andere Autos
-![Package OneNightCar.Car](/diagrammen/packageCar.png)
+es wurde auch Klassen erstellt, um die Daten aus verschiedenen Forms zu bearbeiten zBs. LoginForm, CarSearchForm, SignUpForm...
+
+#### View:
+enthält die grafische Darstellung der Daten in Art von Html seiten
+##### Seiten
+* index
+* carSearch
+* login
+* signup
+* about Us
 
 ## Produkte
 One-Night-OneNightCar.Car CarSharing Verwaltungsystem
@@ -46,18 +61,9 @@ One-Night-OneNightCar.Car CarSharing Verwaltungsystem
 * Mitarbeiter einstellen : Ein neues Objekt der Klasse Mitarbeiter wird instanziiert
 * Kundensupport: Ein Mitarbeiter wird einem Kunden zugeordnet mittels Funktion und löst dessen Problem
 * Neues Auto bereitstellen: Ein Objekt der Klasse ElectricCar oder CombustionCar wird instanziiert
+* neue Kunde registrieren
 
 ## Abgrenzung(Das System soll nicht:)
 Rechnungswesen: Das System soll keine Lohnzahlungen an OneNightCar.Person, sowie Rechnungen und deren Abwicklung von Kunden- oder Herstellerkäufen verwalten. Dies übernimmt ein externer Dienstleister.
 
 Zahlung: Über externen Dienstleister PayPal oder SofortÜberweisung: Am Ende des Miet- vorgangs, wird der Käufer dorthin weitergeleitet, Shop gibt Käufer- und Bestelldaten an Paypal o.Ä. weiter und erhält eine Status-Rückmeldung.
-
-## Protokoll
-Um zu wissen was zu machen war und wer was machen soll, haben wir zusammen eine Excel-Datei erstellt, indem alle Instanzvariablen und Methoden für jede Klasse stehen. Idee ist folgende: Alles erstmal auflisten, dann bei implementieren die Zellen ständig mit den richtigen Farben bemalen.
-
-![Plan](/diagrammen/planGuide.jpg)
-![Plan](/diagrammen/planCars.jpg)
-![Plan](/diagrammen/planPA.jpg)
-![Plan](/diagrammen/planPerson.jpg)
-![Plan](/diagrammen/planRental.jpg)
-

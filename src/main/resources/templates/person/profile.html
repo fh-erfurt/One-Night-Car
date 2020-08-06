@@ -105,15 +105,15 @@
             color: #302e2e;
         }
 
-        /*table {*/
+        table {
 
-        /*    border-collapse: collpase;*/
-        /*    border-spacing: 0;*/
-        /*    border-width: thin 0 0 thin;*/
-        /*    margin: 0 0 1em;*/
-        /*    table-layout: auto;*/
-        /*    width: 100%;*/
-        /*}*/
+            /*border-collapse: collpase;*/
+            border-spacing: 0;
+            border-width: thin 0 0 thin;
+            margin: 0 0 1em;
+            table-layout: auto;
+            width: 100%;
+        }
         th, td {
             height: 6em;
             font-weight: bold;
@@ -220,11 +220,11 @@
     </tr>
 
     <tr  th:each="fuelCar : ${fuelRental}">
-        <td th:text="${fuelCar.combustionCar}"></td>
-<!--        <td th:text="${electricCar.rentalPrice}"></td>-->
-<!--        <td th:text="${electricCar.rentalDate}"></td>-->
-<!--        <td th:text="${electricCar.electricCar}"></td>-->
-<!--        <td th:text="${electricCar.id}"></td>-->
+        <td th:text="${fuelCar.id}"></td>
+        <td th:text="${fuelCar.rentalPrice}"></td>
+        <td th:text="${fuelCar.getRentalDate()}"></td>
+        <td th:text="${fuelCar.getCreated()}"></td>
+        <td th:text="${fuelCar.customer}"></td>
     </tr>
 
 </table>
@@ -240,28 +240,29 @@
 <!--</div>-->
 
 
-<!--<div class="boxProfile">-->
-<!--    <div class="boxLeft">-->
-<!--        <a href="">-->
-<!--            <div th:value="${customer.getFirstName()} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>-->
-<!--            <div th:value="${customer.id}"></div>-->
-<!--        </a>-->
+<div th:each="profile : ${customer}" class="boxProfile">
+    <div  class="boxLeft">
+        <a href="">
+            <div th:text="${customer.firstName} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>
+            <div th:text="${customer.id}"></div>
+        </a>
 
 
-<!--        <a href="">-->
-<!--            <div th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>-->
-<!--        </a>-->
+        <a href="">
+            <div th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>
+        </a>
 
 
-<!--        <a href="">-->
-<!--            <div th:text="${customer.customerLevel}" class="box21 fonts sizebig bold">UserLvl</div>-->
-<!--        </a>-->
+        <a href="">
+            <div th:text="${customer.customerLevel}" class="box21 fonts sizebig bold">UserLvl</div>
+        </a>
 
 
-<!--        <a href="">-->
-<!--            <div class="box21 fonts sizebig bold">Change payment method</div>-->
-<!--        </a>-->
-<!--    </div>-->
+        <a href="">
+            <div class="box21 fonts sizebig bold">Change payment method</div>
+        </a>
+    </div>
+</div>
 
 <!--    <div class="boxRight">-->
 <!--        <table>-->
