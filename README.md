@@ -23,8 +23,17 @@ enthält logische Struktur von Daten geteilt in verschiedene Packages und jede P
 ![Package OneNightCar.Car](/diagrammen/CarPackage.png)
 * Package OneNightCar.parkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen.
 ![Package Parking Area](/diagrammen/ParkingAreaPackage.png)
-*Package OneNightCar.rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen
+* Package OneNightCar.rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen
 ![Package OneNightCar.Rental](/diagrammen/RentalPackage.png)
+
+#### Repository
+für jede Klasse wurde eine Repository erstellt um die Daten zu speichern und in/von Datenbank zu schreiben und zu lesen.
+in BootStrapDate werden instanzen erstellt und in die Datenbank gegschickt um die im GUI zu nutzen
+
+#### Datenbank
+mySql Datenbank benutzt und local durch phpMyAdmin Server gesteuert
+
+![Package OneNightCar.Rental](/diagrammen/DB.jpeg)
 
 #### Controller:
 ist zuständig für die Interaktion zwischen Präsentationsschicht und Daten
@@ -38,10 +47,20 @@ es wurde auch Klassen erstellt, um die Daten aus verschiedenen Forms zu bearbeit
 enthält die grafische Darstellung der Daten in Art von Html seiten
 ##### Seiten
 * index
+![Package OneNightCar.Person](/diagrammen/index.png)
 * carSearch
+![Package OneNightCar.Person](/diagrammen/carSearch.png)
 * login
+![Package OneNightCar.Person](/diagrammen/login.png)
+* 404
+![Package OneNightCar.Person](/diagrammen/404.png)
 * signup
-* about Us
+* imprint
+* ...
+
+## Online Server
+das Projekt wurde auf Heroku Server derployed und durch den Link erreichbar
+http://onenightcar.herokuapp.com/
 
 ## Produkte
 One-Night-OneNightCar.Car CarSharing Verwaltungsystem
