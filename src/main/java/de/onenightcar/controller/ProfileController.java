@@ -1,7 +1,7 @@
 package de.onenightcar.controller;
 
-import de.onenightcar.controller.formValidators.FuelRentalFormValidator;
 import de.onenightcar.controller.formValidators.ProfileForm;
+import de.onenightcar.model.rental.FuelRental;
 import de.onenightcar.repositories.carRespository.CombustionCarRepository;
 import de.onenightcar.repositories.carRespository.ElectricCarRepository;
 import de.onenightcar.repositories.personRepository.CustomerRepository;
@@ -14,7 +14,6 @@ import de.onenightcar.util.CookieHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Controller
@@ -57,9 +57,11 @@ public class ProfileController {
 
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public ModelAndView getProfile(HttpServletRequest request, Model model) {
+    public ModelAndView getProfile(HttpServletRequest request) {
 
 
+//        long fuelCarId  = fuelRentalFormValidator.getFuelCarId();
+//        CombustionCar rentalCombustionCar = combustionCarRepository.GetOneByID(fuelCarId);
 
         //////Create the Model and View and add the view//////
         ModelAndView mav = new ModelAndView("/person/profile");
@@ -74,11 +76,18 @@ public class ProfileController {
         mav.addObject("customer", customerRepository.getById(customerId));
 
 
-        mav.addObject("fuelRentalFormValidator", new FuelRentalFormValidator());
+//        mav.addObject("fuelRentalFormValidator", new FuelRentalFormValidator());
         mav.addObject("CustomerCarRentals", fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
+        mav.addObject("CustomerCarRentalsElectric", electricRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
 
 
-//        mav.addObject("combustionCars", combustionCarRepository.GetOneByID());
+//        mav.addObject("combustionCarBrand", rentalCombustionCar.getBrand());
+
+
+//        List fuelCarId  = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
+//
+//        CombustionCar fuelCarID = fuelCarId.get(1).;
+//        CombustionCar rentalCombustionCar = combustionCarRepository.GetOneByID(fuelCarID);
 
 
 
@@ -86,12 +95,11 @@ public class ProfileController {
 
 
 
-
-
-
-
-//        List<FuelRental> dayFuelRental = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
+        List<FuelRental> dayFuelRental = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
 //        List<CombustionCar> CarsList = combustionCarRepository.getById(fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
+//        long fuelCarId  = fuelRentalRepository.getAllByCustomer();
+//        CombustionCar rentalCombustionCar = (CombustionCar) combustionCarRepository.getAllByFuelRental(dayFuelRental);
+//        mav.addObject("CarModel", rentalCombustionCar.getBrand());
 
 //        List<CombustionCar> combustionIDs= combustionCarRepository.GetOneByID(41);
 

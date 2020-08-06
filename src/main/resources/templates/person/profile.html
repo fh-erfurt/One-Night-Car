@@ -326,34 +326,36 @@
             <th scope="col">Station</th>
             <th scope="col">Car</th>
             <th scope="col">Fuel Type</th>
-            <th scope="col">Charge/Fuel - Level</th>
-            <th scope="col">Price (Hour)</th>
-            <th scope="col">Availability (From-To)</th>
+            <th scope="col">Price</th>
+            <th scope="col">Rental Date</th>
+            <th scope="col">Card Number</th>
         </tr>
         </thead>
         <tbody>
         <div th:each="fuelCarRentals : ${CustomerCarRentals}">
-            <tr th:each="combustionCars : ${fuelCarRentals.combustionCar}">
-                <th scope="row" th:text="${fuelCarRentals.rentalPrice}"></th>
-<!--                <td th:text="${} + ' ' + ${}"></td>-->
-<!--                <td th:text="${}"></td>-->
-<!--                <td th:text="${}"></td>-->
-<!--                <td th:text="${}"></td>-->
+            <tr th:each="combustionCars : ${CustomerCarRentals}">
+                <th scope="row" th:text="${fuelCarRentals.combustionCar.parkingArea.name}"></th>
+                <td th:text="${fuelCarRentals.combustionCar.getBrand()} + ' ' + ${fuelCarRentals.combustionCar.getModel()}"></td>
+                <td th:text="${fuelCarRentals.combustionCar.fuelType}"></td>
+                <td th:text="${fuelCarRentals.rentalPrice}"></td>
+                <td th:text="${fuelCarRentals.rentalDate}"></td>
+                <td th:text="${fuelCarRentals.customer.paymentMethod.cardNumber}"></td>
 
 
             </tr>
         </div>
-<!--        <div th:each="electricParkingArea : ${electricParkingAreas}">-->
-<!--            <tr th:each="electricCar : ${electricParkingArea.electricCarsInStation}">-->
-<!--                <th scope="row" th:text="${electricParkingArea.name}"></th>-->
-<!--                <td th:text="${electricCar.brand} + ' ' + ${electricCar.model}"></td>-->
-<!--                <td> ELECTRIC </td>-->
-<!--                <td th:text="${electricCar.chargePercent}"></td>-->
-<!--                <td th:text="${electricCar.price}"></td>-->
+        <div th:each="electricRentals : ${CustomerCarRentalsElectric}">
+            <tr th:each="electricCars : ${CustomerCarRentalsElectric}">
+                <th scope="row" th:text="${electricCars.electricCar.electricParkingArea.name}"></th>
+                <td th:text="${electricCars.electricCar.brand} + ' ' + ${electricCars.electricCar.model}"></td>
+                <td> ELECTRIC </td>
+                <td th:text="${electricCars.rentalPrice}"></td>
+                <td th:text="${electricCars.rentalDate}"></td>
+                <td th:text="${electricCars.customer.paymentMethod.cardNumber}"></td>
 
 
-<!--            </tr>-->
-<!--        </div>-->
+            </tr>
+        </div>
         </tbody>
 
     </table>

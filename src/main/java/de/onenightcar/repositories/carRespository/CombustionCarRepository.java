@@ -9,7 +9,8 @@ public interface CombustionCarRepository extends CrudRepository<CombustionCar, L
     @Query("from CombustionCar cc where cc.id=:id")
     CombustionCar GetOneByID(@Param("id") Long id);
 
-    CombustionCar getById(Long id);
+//    @Query("from CombustionCar cc where cc.id=:id")
+//    List<CombustionCar> getAllByID();
 
 //    @Query("from Combustion_Car cr where cr.combustion_car_id=:")
 //    List<CombustionCar> getAllByCombustionCarID(CombustionCar combustionCar);
