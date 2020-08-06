@@ -30,12 +30,18 @@ enthält logische Struktur von Daten geteilt in verschiedene Packages und jede P
 ist zuständig für die Interaktion zwischen Präsentationsschicht und Daten
 * MainController
 * Login-, Logout-, signupController: zur Bearbeitung der genannten Forms
-* 
+* RentalController: hier wird der Prozess des Automietens behandelt, fängt mit Autosuchen an dann das gewünschte Auto in bestimmten Zeiten wählen und dann mieten
+
+es wurde auch Klassen erstellt, um die Daten aus verschiedenen Forms zu bearbeiten zBs. LoginForm, CarSearchForm, SignUpForm...
+
 #### View:
 enthält die grafische Darstellung der Daten in Art von Html seiten
 ##### Seiten
-* index.html: 
-
+* index
+* carSearch
+* login
+* signup
+* about Us
 
 ## Produkte
 One-Night-OneNightCar.Car CarSharing Verwaltungsystem
@@ -55,18 +61,9 @@ One-Night-OneNightCar.Car CarSharing Verwaltungsystem
 * Mitarbeiter einstellen : Ein neues Objekt der Klasse Mitarbeiter wird instanziiert
 * Kundensupport: Ein Mitarbeiter wird einem Kunden zugeordnet mittels Funktion und löst dessen Problem
 * Neues Auto bereitstellen: Ein Objekt der Klasse ElectricCar oder CombustionCar wird instanziiert
+* neue Kunde registrieren
 
 ## Abgrenzung(Das System soll nicht:)
 Rechnungswesen: Das System soll keine Lohnzahlungen an OneNightCar.Person, sowie Rechnungen und deren Abwicklung von Kunden- oder Herstellerkäufen verwalten. Dies übernimmt ein externer Dienstleister.
 
 Zahlung: Über externen Dienstleister PayPal oder SofortÜberweisung: Am Ende des Miet- vorgangs, wird der Käufer dorthin weitergeleitet, Shop gibt Käufer- und Bestelldaten an Paypal o.Ä. weiter und erhält eine Status-Rückmeldung.
-
-## Protokoll
-Um zu wissen was zu machen war und wer was machen soll, haben wir zusammen eine Excel-Datei erstellt, indem alle Instanzvariablen und Methoden für jede Klasse stehen. Idee ist folgende: Alles erstmal auflisten, dann bei implementieren die Zellen ständig mit den richtigen Farben bemalen.
-
-![Plan](/diagrammen/planGuide.jpg)
-![Plan](/diagrammen/planCars.jpg)
-![Plan](/diagrammen/planPA.jpg)
-![Plan](/diagrammen/planPerson.jpg)
-![Plan](/diagrammen/planRental.jpg)
-

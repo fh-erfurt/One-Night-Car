@@ -48,18 +48,22 @@ public class SignUpController {
     @ResponseStatus(HttpStatus.CREATED)
     public ModelAndView addCustomer(@ModelAttribute SignUpForm signUpForm)
     {
-        // retrieve the data from the Form
+        //********** retrieve the data from the Form
+        // Customer Information
         String firstName= signUpForm.getFirstName();
         String lastName = signUpForm.getLastName();
         String email = signUpForm.getEmail();
         String password = signUpForm.getPassword();
         LocalDate DOB = signUpForm.getDateOfBirth();
 
+        //payment Method Information
         String cardNumber = signUpForm.getCardNumber();
-        PaymentMethod.CardType cardType = signUpForm.getCardType();
+        int cardTypeInt = signUpForm.getCardType();
+        PaymentMethod.CardType cardType = PaymentMethod.CardType.DEBIT;
         LocalDate expireDate = signUpForm.getExpiredDate();
         String CCV = signUpForm.getCCV();
 
+        // Address Information
         String ZIP = signUpForm.getZIP();
         String city = signUpForm.getCity();
         String street = signUpForm.getStreet();
@@ -72,6 +76,10 @@ public class SignUpController {
         && DOB != null && cardNumber != null && expireDate != null && CCV != null
         && ZIP != null && city != null && street != null && streetNumber != null)
         {
+            if(cardTypeInt == 1){
+                cardType = PaymentMethod.CardType.CREDIT;
+            }
+
             PaymentMethod newPaymentMethod = new PaymentMethod(cardNumber, cardType, expireDate, CCV);
             PersonAddress newPersonAddress = new PersonAddress(ZIP, city, street, streetNumber);
             Customer newCustomer = new Customer(firstName, lastName, DOB, email, password, newPersonAddress, Customer.CustomerLevel.NEWUSER, newPaymentMethod);
@@ -80,7 +88,7 @@ public class SignUpController {
             personAddressRepository.save(newPersonAddress);
             customerRepository.save(newCustomer);
 
-            mav.setViewName("login");
+            mav.setViewName("index");
         }else{
             mav.addObject("error", true);
             mav.addObject("errorMessage", "all Fields must be filled");

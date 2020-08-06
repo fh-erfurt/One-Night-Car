@@ -11,7 +11,7 @@ public class PaymentMethodTest {
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.setCardNumber("0000 0000 0000 0002");
 
-//        assertEquals("0000 0000 0000 0001", paymentMethod.getCardNumber());
+        assertEquals("0000 0000 0000 0002", paymentMethod.getCardNumber());
     }
 
 }

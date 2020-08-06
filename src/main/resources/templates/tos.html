@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
 
 <head th:replace="fragments :: head"></head>
 
 <body>
+    <main class="flex-shrink-0" role="main">
+        <nav th:replace="fragments :: nav"></nav>
 
-<nav th:replace="fragments :: nav"></nav>
+        <h1>Our terms of service</h1>
+        <p>Don't be a douchebag and all will work out</p>
+    </main>
 
-<h1>Our terms of service</h1>
-<p>Don't be a douchebag and all will work out</p>
+    <footer th:replace="fragments :: footer"></footer>
+
 </body>
 </html>

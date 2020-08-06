@@ -1,148 +1,152 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
 
 <head th:replace="fragments :: head"></head>
 
-<body style="font-size: small" th:style="'background: url(../assets/img/background-results.jfif) center center no-repeat; background-size: cover; background-attachment: fixed;'">
-    <nav th:replace="fragments :: nav"></nav>
-    <div class="row">
-        <div class="col-12" style="text-align: center; color: white">
-            <h2 style="font-family: 'Bungee', cursive; padding-top: 1%; padding-bottom: 1%;">Search Results</h2>
-        </div>
-    </div>
-    <table class="table table-striped" style="background: rgba(255,255,255,0.8);">
-        <thead>
-            <tr>
-                <th scope="col">Station</th>
-                <th scope="col">Car</th>
-                <th scope="col">Fuel Type</th>
-                <th scope="col">Charge/Fuel - Level</th>
-                <th scope="col">Price (Hour)</th>
-                <th scope="col">Availability (From-To)</th>
-            </tr>
-        </thead>
-        <tbody>
-        <div th:each="fuelParkingArea : ${fuelParkingAreas}">
-            <tr th:each="combustionCar : ${fuelParkingArea.carsInStation}">
-                <th scope="row" th:text="${fuelParkingArea.name}"></th>
-                <td th:text="${combustionCar.brand} + ' ' + ${combustionCar.model}"></td>
-                <td th:text="${combustionCar.fuelType}"></td>
-                <td th:text="${combustionCar.fuelLevel}"></td>
-                <td th:text="${combustionCar.price}"></td>
+<body class="d-flex flex-column h-100" style="font-size: small" th:style="'background: url(../assets/img/background-results.jfif) center center no-repeat; background-size: cover; background-attachment: fixed;'">
+    <main class="flex-shrink-0" role="main">
 
-                <form action=# th:action="@{/rental/confirm-c-rental}" th:object="${fuelRentalFormValidator}" method="post">
-                    <td>
-<!--                    Is there a list of not available fuel cars-->
-                        <th:block th:if="${notAvailableFuelTimes}">
-                            <th:block th:each="element : ${notAvailableFuelTimes}">
-<!--                            Is the current Car in the list of not available-->
-                                <th:block th:if="${element.key} == ${combustionCar}">
-<!--                                Loop and generate just the available check-boxes-->
-                                    <div class="form-check form-check-inline" th:each="value : ${element.value}">
-                                        <input class="form-check-input" type="checkbox" th:value="${value.id}" th:field="*{timeSlotsListId}">
-                                        <label class="form-check-label" th:text="   ${#temporals.format(value.departureTime, 'HH')}
-                                                                                    + ' - ' + ${#temporals.format(value.arrivalTime, 'HH')}"
-                                                                                    th:for="${#ids.prev('timeSlotsListId')}"></label>
-                                    </div>
-                                </th:block>
-<!--                            Is the current Car not in the list of the not available-->
-                                <th:block th:unless="${element.key} == ${combustionCar}">
-<!--                                Loop thought the list of timeslots-->
-                                    <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
-                                        <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
-                                        <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
-                                                                                    + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
-                                                                                    th:for="${#ids.prev('timeSlotsListId')}"></label>
-                                    </div>
+        <nav th:replace="fragments :: nav"></nav>
+        <div class="row" style="margin-right: 0px">
+            <div class="col-12" style="text-align: center; color: white; padding-right: 0;">
+                <h2 style="font-family: 'Bungee', cursive; padding-top: 1%; padding-bottom: 1%;">Search Results</h2>
+            </div>
+        </div>
+        <table class="table table-striped" style="background: rgba(255,255,255,0.8);">
+            <thead>
+                <tr>
+                    <th scope="col">Station</th>
+                    <th scope="col">Car</th>
+                    <th scope="col">Fuel Type</th>
+                    <th scope="col">Charge/Fuel - Level</th>
+                    <th scope="col">Price (Hour)</th>
+                    <th scope="col">Availability (From-To)</th>
+                </tr>
+            </thead>
+            <tbody>
+            <div th:each="fuelParkingArea : ${fuelParkingAreas}">
+                <tr th:each="combustionCar : ${fuelParkingArea.carsInStation}">
+                    <th scope="row" th:text="${fuelParkingArea.name}"></th>
+                    <td th:text="${combustionCar.brand} + ' ' + ${combustionCar.model}"></td>
+                    <td th:text="${combustionCar.fuelType}"></td>
+                    <td th:text="${combustionCar.fuelLevel}"></td>
+                    <td th:text="${combustionCar.price}"></td>
+
+                    <form action=# th:action="@{/rental/confirm-c-rental}" th:object="${fuelRentalFormValidator}" method="post">
+                        <td>
+    <!--                    Is there a list of not available fuel cars-->
+                            <th:block th:if="${notAvailableFuelTimes}">
+                                <th:block th:each="element : ${notAvailableFuelTimes}">
+    <!--                            Is the current Car in the list of not available-->
+                                    <th:block th:if="${element.key} == ${combustionCar}">
+    <!--                                Loop and generate just the available check-boxes-->
+                                        <div class="form-check form-check-inline" th:each="value : ${element.value}">
+                                            <input class="form-check-input" type="checkbox" th:value="${value.id}" th:field="*{timeSlotsListId}">
+                                            <label class="form-check-label" th:text="   ${#temporals.format(value.departureTime, 'HH')}
+                                                                                        + ' - ' + ${#temporals.format(value.arrivalTime, 'HH')}"
+                                                                                        th:for="${#ids.prev('timeSlotsListId')}"></label>
+                                        </div>
+                                    </th:block>
+    <!--                            Is the current Car not in the list of the not available-->
+                                    <th:block th:unless="${element.key} == ${combustionCar}">
+    <!--                                Loop thought the list of timeslots-->
+                                        <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
+                                            <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
+                                            <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
+                                                                                        + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
+                                                                                        th:for="${#ids.prev('timeSlotsListId')}"></label>
+                                        </div>
+                                    </th:block>
                                 </th:block>
                             </th:block>
-                        </th:block>
-                        <th:block th:unless="${notAvailableFuelTimes}">
-                            <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
-                                <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
-                                <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
-                                                                                    + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
-                                       th:for="${#ids.prev('timeSlotsListId')}"></label>
-                            </div>
-                        </th:block>
+                            <th:block th:unless="${notAvailableFuelTimes}">
+                                <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
+                                    <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
+                                    <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
+                                                                                        + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
+                                           th:for="${#ids.prev('timeSlotsListId')}"></label>
+                                </div>
+                            </th:block>
 
-                        <th:block>
-                            <input type="hidden"  th:value="${combustionCar.id}"    name="fuelCarId"    >
-                            <input type="hidden"  th:value="${date}"                name="date"         >
-                            <input type="hidden"  th:value="${customer.id}"         name="customerId"   >
-                        </th:block>
-                    </td>
-                    <td>
-                        <button class="btn btn-dark" type="submit">Rent</button>
-                    </td>
-                </form>
-            </tr>
-        </div>
-        <div th:each="electricParkingArea : ${electricParkingAreas}">
-            <tr th:each="electricCar : ${electricParkingArea.electricCarsInStation}">
-                <th scope="row" th:text="${electricParkingArea.name}"></th>
-                <td th:text="${electricCar.brand} + ' ' + ${electricCar.model}"></td>
-                <td> ELECTRIC </td>
-                <td th:text="${electricCar.chargePercent}"></td>
-                <td th:text="${electricCar.price}"></td>
+                            <th:block>
+                                <input type="hidden"  th:value="${combustionCar.id}"    name="fuelCarId"    >
+                                <input type="hidden"  th:value="${date}"                name="date"         >
+                                <input type="hidden"  th:value="${customer.id}"         name="customerId"   >
+                            </th:block>
+                        </td>
+                        <td>
+                            <button class="btn btn-dark" type="submit">Rent</button>
+                        </td>
+                    </form>
+                </tr>
+            </div>
+            <div th:each="electricParkingArea : ${electricParkingAreas}">
+                <tr th:each="electricCar : ${electricParkingArea.electricCarsInStation}">
+                    <th scope="row" th:text="${electricParkingArea.name}"></th>
+                    <td th:text="${electricCar.brand} + ' ' + ${electricCar.model}"></td>
+                    <td> ELECTRIC </td>
+                    <td th:text="${electricCar.chargePercent}"></td>
+                    <td th:text="${electricCar.price}"></td>
 
-                <form action=# th:action="@{/rental/confirm-e-rental}" th:object="${electricRentalFormValidator}" method="post">
-                    <td>
-<!--                    Is there a list of not available electrical cars-->
-                        <th:block th:if="${notAvailableElectricTimes}">
-                            <th:block th:each="element : ${notAvailableElectricTimes}">
-<!--                                Is the current Car in the list of not available-->
-                                <th:block th:if="${element.key} == ${electricCar}">
-<!--                                    Loop and generate just the available check-boxes-->
-                                    <div class="form-check form-check-inline" th:each="value : ${element.value}">
-                                        <input class="form-check-input" type="checkbox" th:value="${value.id}" th:field="*{timeSlotsListId}">
-                                        <label class="form-check-label" th:text="   ${#temporals.format(value.departureTime, 'HH')}
-                                                                                    + ' - ' + ${#temporals.format(value.arrivalTime, 'HH')}"
-                                                                                    th:for="${#ids.prev('timeSlotsListId')}"></label>
-                                    </div>
-                                </th:block>
-<!--                                Is the current Car not in the list of the not available-->
-                                <th:block th:unless="${element.key} == ${electricCar}">
-<!--                                  Loop thought the list of timeslots-->
-                                    <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
-                                        <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
-                                        <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
-                                                                                    + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
-                                                                                    th:for="${#ids.prev('timeSlotsListId')}"></label>
-                                    </div>
+                    <form action=# th:action="@{/rental/confirm-e-rental}" th:object="${electricRentalFormValidator}" method="post">
+                        <td>
+    <!--                    Is there a list of not available electrical cars-->
+                            <th:block th:if="${notAvailableElectricTimes}">
+                                <th:block th:each="element : ${notAvailableElectricTimes}">
+    <!--                                Is the current Car in the list of not available-->
+                                    <th:block th:if="${element.key} == ${electricCar}">
+    <!--                                    Loop and generate just the available check-boxes-->
+                                        <div class="form-check form-check-inline" th:each="value : ${element.value}">
+                                            <input class="form-check-input" type="checkbox" th:value="${value.id}" th:field="*{timeSlotsListId}">
+                                            <label class="form-check-label" th:text="   ${#temporals.format(value.departureTime, 'HH')}
+                                                                                        + ' - ' + ${#temporals.format(value.arrivalTime, 'HH')}"
+                                                                                        th:for="${#ids.prev('timeSlotsListId')}"></label>
+                                        </div>
+                                    </th:block>
+    <!--                                Is the current Car not in the list of the not available-->
+                                    <th:block th:unless="${element.key} == ${electricCar}">
+    <!--                                  Loop thought the list of timeslots-->
+                                        <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
+                                            <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
+                                            <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
+                                                                                        + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
+                                                                                        th:for="${#ids.prev('timeSlotsListId')}"></label>
+                                        </div>
+                                    </th:block>
                                 </th:block>
                             </th:block>
-                        </th:block>
-                        <th:block th:unless="${notAvailableElectricTimes}">
-                            <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
-                                <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
-                                <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
-                                                                                    + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
-                                       th:for="${#ids.prev('timeSlotsListId')}"></label>
-                            </div>
-                        </th:block>
+                            <th:block th:unless="${notAvailableElectricTimes}">
+                                <div class="form-check form-check-inline" th:each="timeslot : ${rentalTimeSlots}">
+                                    <input class="form-check-input" type="checkbox" th:value="${timeslot.id}" th:field="*{timeSlotsListId}">
+                                    <label class="form-check-label" th:text="   ${#temporals.format(timeslot.departureTime, 'HH')}
+                                                                                        + ' - ' + ${#temporals.format(timeslot.arrivalTime, 'HH')}"
+                                           th:for="${#ids.prev('timeSlotsListId')}"></label>
+                                </div>
+                            </th:block>
 
-                        <th:block>
-                            <input type="hidden"  th:value="${electricCar.id}"  name="electricCarId">
-                            <input type="hidden"  th:value="${date}"            name="date"         >
-                            <input type="hidden"  th:value="${customer.id}"     name="customerId"   >
-                        </th:block>
-                    </td>
-                    <td>
-                        <button class="btn btn-dark" type="submit">Rent</button>
-                    </td>
-                </form>
-            </tr>
+                            <th:block>
+                                <input type="hidden"  th:value="${electricCar.id}"  name="electricCarId">
+                                <input type="hidden"  th:value="${date}"            name="date"         >
+                                <input type="hidden"  th:value="${customer.id}"     name="customerId"   >
+                            </th:block>
+                        </td>
+                        <td>
+                            <button class="btn btn-dark" type="submit">Rent</button>
+                        </td>
+                    </form>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+        <div class="mx-auto" style="width: 220px; padding-top: 1%; margin-bottom: 20px; ">
+            <a th:href="@{/rental/car-search}" class="btn btn-light btn-lg">Back To Search</a>
         </div>
-        </tbody>
-    </table>
-    <div class="mx-auto" style="width: 220px; padding-top: 1%; margin-bottom: 20px; ">
-        <a th:href="@{/rental/car-search}" class="btn btn-light btn-lg">Back To Search</a>
-    </div>
+    </main>
+
+    <footer th:replace="fragments :: footer"></footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
-<footer th:replace="fragments :: footer"></footer>
 </html>

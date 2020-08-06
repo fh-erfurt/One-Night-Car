@@ -53,7 +53,7 @@ class ElectricParkingAreaTest {
         ElectricParkingArea Area1 = new ElectricParkingArea();
 
 
-        Area1.setMaxElectricCarCapacity(-2);
+        Area1.setMaxElectricCarCapacity(100);
 
         assertEquals(100,Area1.getMaxElectricCarCapacity());
 
