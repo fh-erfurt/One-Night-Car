@@ -10,7 +10,7 @@ public class PersonAddressTest {
         PersonAddress personAddress = new PersonAddress();
         personAddress.setStreet("1");
 
-//        assertEquals("A", personAddress.getStreet());
+        assertEquals("1", personAddress.getStreet());
     }
 
 
