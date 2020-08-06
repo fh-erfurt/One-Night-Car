@@ -287,104 +287,104 @@
             height: 100%;
             ">
 
-<table style="border-spacing: 0;
-            /*border-width: thin 0 0 thin;*/
-            /*margin: 0 0 1em;*/
-            table-layout: auto;
-            align: center;
-            width: 100%;
-            border: 3px solid #cccccc;
-            margin-top: 10em;
-            color: #cccccc;
-            background: rgba(0,0,0,0.5);">
-    <tr>
-        <td>Automarke</td>
-        <td>Preis</td>
-        <td>Rented</td>
-        <td>Von</td>
-        <td>Bis</td>
-        <td>Electric</td>
-    </tr>
+<!--<table style="border-spacing: 0;-->
+<!--            /*border-width: thin 0 0 thin;*/-->
+<!--            /*margin: 0 0 1em;*/-->
+<!--            table-layout: auto;-->
+<!--            align: center;-->
+<!--            width: 100%;-->
+<!--            border: 3px solid #cccccc;-->
+<!--            margin-top: 10em;-->
+<!--            color: #cccccc;-->
+<!--            background: rgba(0,0,0,0.5);">-->
+<!--    <tr>-->
+<!--        <td>Automarke</td>-->
+<!--        <td>Preis</td>-->
+<!--        <td>Rented</td>-->
+<!--        <td>Von</td>-->
+<!--        <td>Bis</td>-->
+<!--        <td>Electric</td>-->
+<!--    </tr>-->
 
-    <tr  th:each="fuelCar : ${fuelRental}">
-        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.combustionCar}"></td>
-        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
-        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
-        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
-        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
-    </tr>
+<!--    <tr  th:each="fuelCar : ${fuelRental}">-->
+<!--        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.combustionCar}"></td>-->
+<!--        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>-->
+<!--        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>-->
+<!--        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>-->
+<!--        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>-->
+<!--    </tr>-->
 
-</table>
-</div>
-
-
-
-
-
-
-<!--<div class="">-->
-<!--    <img class="boxLogoProfile center" src="./images/OneNightCarLogo2.png" alt="Bild1" style="width:40%">-->
+<!--</table>-->
 <!--</div>-->
 
 
-<!--    <div class="boxRight">-->
-<!--        <table>-->
-<!--            <tr th:each="profile : ${electricRental}">-->
-<!--                <td th:text="${profile.carName}">Automarke</td>-->
-<!--                <td>Preis</td>-->
-<!--                <td>Rented</td>-->
-<!--                <td>Von</td>-->
-<!--                <td>Bis</td>-->
-<!--                <td>Electric</td>-->
-<!--            </tr>-->
-<!--            <div th:each="electricRental : ${customer.electricRentals}"></div>-->
-<!--            <tr  th:each="electricCar : ${electricRentals}">-->
-<!--                <td th:text="${customer.getElectricRentals()}"</td>-->
-<!--                <td th:text="${electricCar.rentalPrice}"></td>-->
-<!--                <td th:text="${electricCar.rentalDate}"></td>-->
-<!--                <td th:text="${electricCar.electricCar}"></td>-->
-<!--                <td th:text="${electricCar.id}"></td>-->
-<!--            </tr>-->
-<!--    </div>-->
-<!--    </table>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--    <div class="boxRight">-->
-
-<!--        <table style="text-align:center;">-->
-<!--            <caption>Upcomming rentals</caption>-->
-<!--            <tr th:each="electricRental : ${electricRentals}">-->
-<!--                <td>Datum</td>-->
-<!--                <td>Von</td>-->
-<!--                <td>Bis</td>-->
-<!--                <td>Auto</td>-->
-<!--                <td th:text="${electricRental.rentalPrice}">Betrag</td>-->
-<!--                <td>Modify</td>-->
-<!--                <td>X</td>-->
-<!--            </tr>-->
-<!--            <tr th:each="fuelRental : ${fuelRentals}">-->
-<!--                <td th:text="${fuelRental.getCreated()}">Datum</td>-->
-<!--                <td th:text="${fuelRental.combustionCar}">Auto</td>-->
-<!--                <td th:text="${fuelRental.rentalPrice}">Betrag</td>-->
-<!--                <td>Modify</td>-->
-<!--                <td>X</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>Datum</td>-->
-<!--                <td>Von</td>-->
-<!--                <td>Bis</td>-->
-<!--                <td>Auto</td>-->
-<!--                <td>Betrag</td>-->
-<!--                <td>Modify</td>-->
-<!--                <td>X</td>-->
-<!--            </tr>-->
-<!--        </table>-->
-
-<!--    </div>-->
 
 
-<!--</div>-->
+    <table class="table table-striped" style="background: rgba(255,255,255,0.8);">
+        <thead>
+        <tr>
+            <th scope="col">Station</th>
+            <th scope="col">Car</th>
+            <th scope="col">Fuel Type</th>
+            <th scope="col">Charge/Fuel - Level</th>
+            <th scope="col">Price (Hour)</th>
+            <th scope="col">Availability (From-To)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="fuelCarRentals : ${CustomerCarRentals}">
+            <tr th:each="combustionCars : ${fuelCarRentals.combustionCar}">
+                <th scope="row" th:text="${fuelCarRentals.rentalPrice}"></th>
+<!--                <td th:text="${} + ' ' + ${}"></td>-->
+<!--                <td th:text="${}"></td>-->
+<!--                <td th:text="${}"></td>-->
+<!--                <td th:text="${}"></td>-->
+
+
+            </tr>
+        </div>
+<!--        <div th:each="electricParkingArea : ${electricParkingAreas}">-->
+<!--            <tr th:each="electricCar : ${electricParkingArea.electricCarsInStation}">-->
+<!--                <th scope="row" th:text="${electricParkingArea.name}"></th>-->
+<!--                <td th:text="${electricCar.brand} + ' ' + ${electricCar.model}"></td>-->
+<!--                <td> ELECTRIC </td>-->
+<!--                <td th:text="${electricCar.chargePercent}"></td>-->
+<!--                <td th:text="${electricCar.price}"></td>-->
+
+
+<!--            </tr>-->
+<!--        </div>-->
+        </tbody>
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

@@ -1,7 +1,7 @@
 package de.onenightcar.controller;
 
+import de.onenightcar.controller.formValidators.FuelRentalFormValidator;
 import de.onenightcar.controller.formValidators.ProfileForm;
-import de.onenightcar.model.rental.FuelRental;
 import de.onenightcar.repositories.carRespository.CombustionCarRepository;
 import de.onenightcar.repositories.carRespository.ElectricCarRepository;
 import de.onenightcar.repositories.personRepository.CustomerRepository;
@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Controller
@@ -55,46 +54,12 @@ public class ProfileController {
         this.electricCarRepository = electricCarRepository;
     }
 
-//    @RequestMapping(path = "/profile/{id}", method = RequestMethod.GET)
-//    @ResponseStatus(HttpStatus.OK)
-//    public String getCustomerWithID(Model model, @PathVariable("id") Long id) {
-//
-//        model.addAttribute("customer", customerRepository.getById(id));
-//        model.addAttribute("fuelRentals", fuelRentalRepository.getAllByCustomer(customerRepository.getById(id)));
-//        model.addAttribute("electricRentals", electricRentalRepository.getAllByCustomer(customerRepository.getById(id)));
-//
-//        return "person/profile";
-//
-//
-//    }
-
-//    @RequestMapping(path = "/profile/{id}", method = RequestMethod.GET)
-//    @ResponseStatus(HttpStatus.OK)
-//    public String getProfileWithID(org.springframework.ui.Model model, @PathVariable("id") Long id) {
-//
-//        model.addAttribute("customer", customerRepository.getById(id));
-//        model.addAttribute("fuelRentals", fuelRentalRepository.getAllByCustomer(customerRepository.getById(id)));
-//        model.addAttribute("electricRentals", electricRentalRepository.getAllByCustomer(customerRepository.getById(id)));
-//
-//        return "person/profile";
-//    }
-
-//@RequestMapping(path = "/profile", method = RequestMethod.GET)
-//@ResponseStatus(HttpStatus.OK)
-//public String getPaymentMethods(Model model) {
-//
-//    model.addAttribute("paymentMethods", paymentMethodRepository.findAll());
-//
-//    return "person/profile";
-//}
 
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public ModelAndView getProfile(HttpServletRequest request, Model model) {
 
-//        model.addAttribute("customer", customerRepository.getById(id));
-//        model.addAttribute("fuelRentals", fuelRentalRepository.getAllByCustomer(customerRepository.getById(id)));
-//        model.addAttribute("electricRentals", electricRentalRepository.getAllByCustomer(customerRepository.getById(id)));
+
 
         //////Create the Model and View and add the view//////
         ModelAndView mav = new ModelAndView("/person/profile");
@@ -109,10 +74,26 @@ public class ProfileController {
         mav.addObject("customer", customerRepository.getById(customerId));
 
 
+        mav.addObject("fuelRentalFormValidator", new FuelRentalFormValidator());
+        mav.addObject("CustomerCarRentals", fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
 
-        List<FuelRental> dayFuelRental = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
+
+//        mav.addObject("combustionCars", combustionCarRepository.GetOneByID());
+
+
+
+
+
+
+
+
+
+
+
+//        List<FuelRental> dayFuelRental = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
 //        List<CombustionCar> CarsList = combustionCarRepository.getById(fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
 
+//        List<CombustionCar> combustionIDs= combustionCarRepository.GetOneByID(41);
 
         if(!CookieHelper.proveCookieExistence(cookies, "userId")) {
             mav.setViewName("index");
