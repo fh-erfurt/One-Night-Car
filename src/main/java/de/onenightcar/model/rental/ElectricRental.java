@@ -1,6 +1,9 @@
 package de.onenightcar.model.rental;
 
 import de.onenightcar.model.car.ElectricCar;
+import de.onenightcar.model.person.Admin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import de.onenightcar.model.person.Customer;
 
 
@@ -20,6 +23,8 @@ import java.util.List;
 public class ElectricRental extends Rental {
 
     /* /////////////////////Attributes///////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(ElectricRental.class);
 
     private float chargePercentBefore;
     private float chargePercentAfter;

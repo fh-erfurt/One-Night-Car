@@ -1,8 +1,11 @@
 package de.onenightcar.model.car;
 
+import de.onenightcar.model.person.Admin;
 import de.onenightcar.model.person.Customer;
 import de.onenightcar.model.rental.Rental;
 import de.onenightcar.util.AbstractDatabaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,6 +23,8 @@ import javax.persistence.OneToOne;
 public abstract class Car extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes/////////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(Car.class);
 
     // A car does not change it Type, its enough when we save just a String whit the Car Type
     @Enumerated(EnumType.STRING)
@@ -75,6 +80,7 @@ public abstract class Car extends AbstractDatabaseEntity {
      */
     public void setCarState(State newCarState) {
         this.state = newCarState;
+        log.info("Car state change to ", newCarState);
     }
 
     /** Gets the OneNightCar.Car State.

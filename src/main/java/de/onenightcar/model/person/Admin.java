@@ -8,6 +8,12 @@ import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.logging.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RestController;
+
+
 /** Represents an Admin
  * @author OneNightCar
  * @version 2.0
@@ -15,11 +21,11 @@ import java.util.logging.*;
  */
 
 @Entity
+@RestController
 public class Admin extends Employee {
 
     /* /////////////////////Attributes///////////////////////// */
-
-    private final static Logger logr = Logger.getLogger( Logger.GLOBAL_LOGGER_NAME );
+ static Logger log = LoggerFactory.getLogger(Admin.class);
 
     /* /////////////////////Constructors/////////////////////////// */
 
@@ -41,40 +47,6 @@ public class Admin extends Employee {
 
     /* /////////////////////Methods/////////////////////////// */
 
-    private static void setupLogger() {
-        LogManager.getLogManager().reset();
-        logr.setLevel(Level.ALL);
-
-        ConsoleHandler ch = new ConsoleHandler();
-        ch.setLevel(Level.SEVERE);
-        logr.addHandler(ch);
-
-        try {
-            FileHandler fh = new FileHandler("myLogger.log", true);
-            fh.setLevel(Level.FINE);
-            logr.addHandler(fh);
-        } catch (java.io.IOException e) {
-            // don't stop my program but log out to console.
-            logr.log(Level.SEVERE, "File logger not working.", e);
-        }
-         /*
-         Different Levels in order
-          OFF
-          SEVERE
-          WARNING
-          INFO
-          CONFIG
-          FINE
-          FINER
-          FINEST
-          ALL
-        */
-    }
-
-    //Logging try
-    public static void main(String[] args) throws java.io.IOException {
-        setupLogger();
-    }
 
     /** Random boolean generator.
      * @return a random Boolean
@@ -82,6 +54,7 @@ public class Admin extends Employee {
     private static boolean getRandomBoolean(){
         Random random = new Random();
         return random.nextBoolean();
+
     }
 
     /** Function to check if an admin permits a modification
@@ -92,6 +65,7 @@ public class Admin extends Employee {
      */
     public static boolean approveRentalModification(ElectricRental electricRental){
         return true;
+
     }
 
     /** Function to check if an admin permits a modification
@@ -111,6 +85,8 @@ public class Admin extends Employee {
         fuelRental = null;
         //Call the Garbage Collector
         System.gc();
+        log.warn("Fuel rental was removed");
+        log.info(String.valueOf(fuelRental));
     }
 
     /** Function to erase a FuelRental
@@ -120,6 +96,8 @@ public class Admin extends Employee {
         electricRental = null;
         //Call the Garbage Collector
         System.gc();
+        log.warn("Electric rental was removed");
+        log.info(String.valueOf(electricRental));
     }
 
     /** Resolves a Problem where nobody else can make the Customer happy
@@ -137,10 +115,11 @@ public class Admin extends Employee {
             employee = null;
             //Call the Garbage Collector
             System.gc();
+            log.info("Delete Employee successful");
         }
         catch(Exception e){
-            System.out.print("Employee could not be removed or does not exist!");
-            logr.log(Level.SEVERE, "An error accured!", e);
+            System.out.print(e +"Employee could not be removed or does not exist!");
+            log.error("Employee Employee could not be removed or does not exist!");
             //
         }
     }
@@ -152,6 +131,7 @@ public class Admin extends Employee {
         customer = null;
         //Call the Garbage Collector
         System.gc();
+        log.info("Customer deleted!");
     }
 
     /* /////////////////////Overrides/////////////////////////// */

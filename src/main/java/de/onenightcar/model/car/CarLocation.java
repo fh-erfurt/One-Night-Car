@@ -1,6 +1,9 @@
 package de.onenightcar.model.car;
 
+import de.onenightcar.model.person.Admin;
 import de.onenightcar.util.AbstractDatabaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 
@@ -15,6 +18,8 @@ import javax.persistence.Entity;
 public class CarLocation extends AbstractDatabaseEntity {
 
     /* /////////////////////Attributes/////////////////////////// */
+
+    static Logger log = LoggerFactory.getLogger(CarLocation.class);
 
     private double GPSLatitude;
     private double GPSLongitude;
@@ -43,9 +48,11 @@ public class CarLocation extends AbstractDatabaseEntity {
     public  void setGPSLatitude(double latitude){
         try {
             GPSLatitude = latitude;
+            log.info("GPS latitude set to ", latitude);
         }
         catch(Exception e){
             System.out.print("Latitude inadmissible!");
+            log.error("Latitude inadmissible ", latitude, e);
         }
     }
 
@@ -56,6 +63,7 @@ public class CarLocation extends AbstractDatabaseEntity {
      */
     public void setGPSLongitude(double longitude){
         GPSLongitude= longitude;
+        log.info("GPS longitude set to ", longitude);
     }
 
     /* /////////////////////Overrides/////////////////////////// */
