@@ -2,10 +2,9 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <title> profile </title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
     <style>
         .boxProfile {
             background-color: rgba(204, 204, 204, 0.9);
@@ -99,7 +98,7 @@
             text-align: justify;
         }
 
-        table, th, td, caption {
+        table, td, caption {
             border: 3px solid #302e2e;
             margin-top: 10em;
             color: #302e2e;
@@ -208,6 +207,32 @@
 
 <!--</div>-->
 
+<div th:each="profile : ${customer}" class="boxProfile">
+    <div  class="boxLeft">
+        <a href="">
+            <div th:text="${customer.firstName} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>
+            <div th:text="${customer.id}"></div>
+        </a>
+
+
+        <a href="">
+            <div th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>
+        </a>
+
+
+        <a href="">
+            <div th:text="${customer.customerLevel}" class="box21 fonts sizebig bold">UserLvl</div>
+        </a>
+
+
+        <a href="">
+            <div class="box21 fonts sizebig bold">Change payment method</div>
+        </a>
+    </div>
+</div>
+
+
+
 <div class="boxRight">
 <table>
     <tr>
@@ -239,30 +264,6 @@
 <!--    <img class="boxLogoProfile center" src="./images/OneNightCarLogo2.png" alt="Bild1" style="width:40%">-->
 <!--</div>-->
 
-
-<div th:each="profile : ${customer}" class="boxProfile">
-    <div  class="boxLeft">
-        <a href="">
-            <div th:text="${customer.firstName} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>
-            <div th:text="${customer.id}"></div>
-        </a>
-
-
-        <a href="">
-            <div th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>
-        </a>
-
-
-        <a href="">
-            <div th:text="${customer.customerLevel}" class="box21 fonts sizebig bold">UserLvl</div>
-        </a>
-
-
-        <a href="">
-            <div class="box21 fonts sizebig bold">Change payment method</div>
-        </a>
-    </div>
-</div>
 
 <!--    <div class="boxRight">-->
 <!--        <table>-->
