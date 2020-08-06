@@ -3,13 +3,10 @@ package de.onenightcar.model.rental;
 import de.onenightcar.model.car.CombustionCar;
 import de.onenightcar.model.person.Customer;
 
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 /** Represents a FuelRental
@@ -94,6 +91,10 @@ public class FuelRental extends Rental {
             System.out.print("CombustionCar doesn't exist!");
             return combustionCar;
         }
+    }
+
+    public String getCombustionCarBrand(CombustionCar combustionCar) {
+        return this.combustionCar.getBrand();
     }
 
     public void setCombustionCar(CombustionCar combustionCar) {

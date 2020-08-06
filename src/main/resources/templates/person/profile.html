@@ -86,9 +86,9 @@
             margin-top: 30px; /* Add a top margin to avoid content overlay */
         }
 
-        .fonts{
-            font-family: "Montserrat", serif;
-        }
+        /*.fonts{*/
+        /*    font-family: "Montserrat", serif;*/
+        /*}*/
 
 
 
@@ -113,12 +113,12 @@
             table-layout: auto;
             width: 100%;
         }
-        th, td {
+        td {
             height: 6em;
             font-weight: bold;
             text-align: center;
         }
-        th, caption {
+        caption {
 
             font-weight: 700;
         }
@@ -193,9 +193,9 @@
     </style>
 </head>
 
-<body th:style="'background: url(../assets/img/background.jfif) center center no-repeat; background-size: cover; background-attachment: fixed;'">
+<body th:style="'background: url(../assets/img/index-bg.jfif) center center no-repeat; background-size: cover; background-attachment: fixed;'">
 <nav th:replace="fragments :: nav"></nav>
-<h1>Profile!!!</h1>
+<h1>Ihr Profil</h1>
 
 <!--<div class="col-12" style="text-align: left" >-->
 <!--    <tr th:each="profile : ${customer}" >-->
@@ -207,34 +207,96 @@
 
 <!--</div>-->
 
-<div th:each="profile : ${customer}" class="boxProfile">
-    <div  class="boxLeft">
+<div  th:each="profile : ${customer}">
+    <div  style="width: 100%;
+            margin: 0 auto;
+            /*padding: 5;*/
+            height: auto;
+            float: left;
+            background: rgba(0,0,0,0.5);">
+
         <a href="">
-            <div th:text="${customer.firstName} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>
-            <div th:text="${customer.id}"></div>
+            <div style=";
+  /*border:6px solid #cccccc;*/
+  color: #cccccc;
+  text-align: center;
+  /*width: 300px;*/
+  /*height: 100px;*/
+  /*padding: 1.4em;*/
+  /*margin-bottom: 5em;*/
+  /*margin-left: 2em;*/
+  font-size:3em;
+  overflow: auto;
+  border-radius: 25px;" th:text="${customer.firstName} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>
+
         </a>
 
 
         <a href="">
-            <div th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>
+            <div style="
+  color: #cccccc;
+  text-align: center;
+  /*width: 300px;*/
+  /*height: 100px;*/
+  /*padding: 1.4em;*/
+  /*margin-bottom: 5em;*/
+  /*margin-left: 2em;*/
+  font-size:3em;
+  overflow: auto;
+  border-radius: 25px;" th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>
         </a>
 
 
         <a href="">
-            <div th:text="${customer.customerLevel}" class="box21 fonts sizebig bold">UserLvl</div>
+            <div style="
+  color: #cccccc;
+  text-align: center;
+  /*width: 300px;*/
+  /*height: 100px;*/
+  /*padding: 1.4em;*/
+  /*margin-bottom: 5em;*/
+  /*margin-left: 2em;*/
+  font-size:3em;
+  overflow: auto;
+  border-radius: 25px;" th:text="${customer.mail}" class="box21 fonts sizebig bold">UserLvl</div>
         </a>
 
 
         <a href="">
-            <div class="box21 fonts sizebig bold">Change payment method</div>
+            <div style="
+  /*color: #ccccc;*/
+  text-align: center;
+  /*width: 300px;*/
+  /*height: 100px;*/
+  /*padding: 1.4em;*/
+  /*margin-bottom: 5em;*/
+  /*margin-left: 2em;*/
+  font-size:3em;
+  overflow: auto;
+  border-radius: 25px;">Change payment method</div>
         </a>
     </div>
 </div>
 
 
 
-<div class="boxRight">
-<table>
+<div style="width: 100%;
+            /*margin: 0 auto;*/
+            /*al*/
+            padding: 5px;
+            height: 100%;
+            ">
+
+<table style="border-spacing: 0;
+            /*border-width: thin 0 0 thin;*/
+            /*margin: 0 0 1em;*/
+            table-layout: auto;
+            align: center;
+            width: 100%;
+            border: 3px solid #cccccc;
+            margin-top: 10em;
+            color: #cccccc;
+            background: rgba(0,0,0,0.5);">
     <tr>
         <td>Automarke</td>
         <td>Preis</td>
@@ -245,11 +307,11 @@
     </tr>
 
     <tr  th:each="fuelCar : ${fuelRental}">
-        <td th:text="${fuelCar.id}"></td>
-        <td th:text="${fuelCar.rentalPrice}"></td>
-        <td th:text="${fuelCar.getRentalDate()}"></td>
-        <td th:text="${fuelCar.getCreated()}"></td>
-        <td th:text="${fuelCar.customer}"></td>
+        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.combustionCar}"></td>
+        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
+        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
+        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
+        <td style="height: 6em; font-weight: bold;text-align: center; border: 3px solid #cccccc; margin-top: 10em; color: #cccccc;" th:text="${fuelCar.rentalPrice}"></td>
     </tr>
 
 </table>

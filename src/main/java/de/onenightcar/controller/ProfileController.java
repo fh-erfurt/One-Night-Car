@@ -2,6 +2,8 @@ package de.onenightcar.controller;
 
 import de.onenightcar.controller.formValidators.ProfileForm;
 import de.onenightcar.model.rental.FuelRental;
+import de.onenightcar.repositories.carRespository.CombustionCarRepository;
+import de.onenightcar.repositories.carRespository.ElectricCarRepository;
 import de.onenightcar.repositories.personRepository.CustomerRepository;
 import de.onenightcar.repositories.personRepository.EmployeeRepository;
 import de.onenightcar.repositories.personRepository.PaymentMethodRepository;
@@ -36,16 +38,21 @@ public class ProfileController {
     private final PersonAddressRepository personAddressRepository;
     private final FuelRentalRepository fuelRentalRepository;
     private final ElectricRentalRepository electricRentalRepository;
+    private final CombustionCarRepository combustionCarRepository;
+    private final ElectricCarRepository electricCarRepository;
 
 
 
-    public ProfileController(PaymentMethodRepository paymentMethodRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, PersonAddressRepository personAddressRepository, FuelRentalRepository fuelRentalRepository, ElectricRentalRepository electricRentalRepository) {
+    public ProfileController(PaymentMethodRepository paymentMethodRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, PersonAddressRepository personAddressRepository,
+                             FuelRentalRepository fuelRentalRepository, ElectricRentalRepository electricRentalRepository, CombustionCarRepository combustionCarRepository, ElectricCarRepository electricCarRepository) {
         this.paymentMethodRepository = paymentMethodRepository;
         this.customerRepository = customerRepository;
         this.employeeRepository = employeeRepository;
         this.personAddressRepository = personAddressRepository;
         this.fuelRentalRepository = fuelRentalRepository;
         this.electricRentalRepository = electricRentalRepository;
+        this.combustionCarRepository = combustionCarRepository;
+        this.electricCarRepository = electricCarRepository;
     }
 
 //    @RequestMapping(path = "/profile/{id}", method = RequestMethod.GET)
@@ -101,8 +108,10 @@ public class ProfileController {
         Long customerId = CookieHelper.getUserCookieId(cookies, "userId");
         mav.addObject("customer", customerRepository.getById(customerId));
 
-        List<FuelRental> dayFuelRentals = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
 
+
+        List<FuelRental> dayFuelRental = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
+//        List<CombustionCar> CarsList = combustionCarRepository.getById(fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
 
 
         if(!CookieHelper.proveCookieExistence(cookies, "userId")) {
@@ -117,6 +126,7 @@ public class ProfileController {
             //Add the needed object for the rendering of the view
             //The object that should be populated in the form of the view
             mav.addObject("profileForm", new ProfileForm());
+//            mav.addObject("combustionCar", CombustionCarRepository.get);
             mav.addObject("fuelRental", fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
             mav.addObject("electricRental" ,electricRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
             mav.addObject("customer", customerRepository.getById(customerId));

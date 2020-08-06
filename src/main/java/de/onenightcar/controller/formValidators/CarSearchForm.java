@@ -19,6 +19,8 @@ public class CarSearchForm {
     @NotNull(message = "Not valid value")
     private int fuel = 0;
 
+    private int combustionCarID;
+
     public String getCity() {
         return city;
     }
@@ -41,5 +43,9 @@ public class CarSearchForm {
 
     public void setFuel(int fuel) {
         this.fuel = fuel;
+    }
+
+    public int getCombustionCarID() {
+        return combustionCarID;
     }
 }
