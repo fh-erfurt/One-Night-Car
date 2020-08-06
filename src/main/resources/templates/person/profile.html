@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title> profile </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
+    <style>
+        .boxProfile {
+            background-color: rgba(204, 204, 204, 0.9);
+
+            width: 86%;
+            /* margin-left: 20em;
+             margin-top: 30em;*/
+            margin: 0 auto;
+            padding: 5px;
+            margin-top: 10em;
+            height: 60%;
+            border-radius: 25px;
+        }
+
+        body{
+            /*background-image: url("../images/Hintergrund3.jpg");*/
+            /*background-color:#FFFFFF;*/
+            /*background-position: center;*/
+            /*background-repeat: no-repeat;*/
+            /*background-size: cover;*/
+            /*background-attachment: fixed;*/
+            /*margin: 0;*/
+
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .text-center {
+            text-align: center;
+
+        }
+
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100em;
+
+        }
+
+        .last {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        .right {
+            display: block;
+            float: right;
+            width: 50%;
+            position: relative;
+            margin-right:5em;
+
+        }
+
+
+        .logo{
+            text-decoration: none;
+            font-weight: bold;
+            color: #FFFFFF;
+            font-size: 30px;
+            height: 30px;
+        }
+
+        /*header{*/
+        /*    z-index: 1000000;*/
+        /*    background-color: #FFFFFF;*/
+        /*    height: 0px;*/
+
+        /*    top: 0;*/
+        /*    width: 100%;*/
+        /*}*/
+
+        .main {
+            margin-top: 30px; /* Add a top margin to avoid content overlay */
+        }
+
+        .fonts{
+            font-family: "Montserrat", serif;
+        }
+
+
+
+
+        .text-block {
+            hyphens: auto;
+            text-align: justify;
+        }
+
+        table, th, td, caption {
+            border: 3px solid #302e2e;
+            margin-top: 10em;
+            color: #302e2e;
+        }
+
+        /*table {*/
+
+        /*    border-collapse: collpase;*/
+        /*    border-spacing: 0;*/
+        /*    border-width: thin 0 0 thin;*/
+        /*    margin: 0 0 1em;*/
+        /*    table-layout: auto;*/
+        /*    width: 100%;*/
+        /*}*/
+        th, td {
+            height: 6em;
+            font-weight: bold;
+            text-align: center;
+        }
+        th, caption {
+
+            font-weight: 700;
+        }
+
+        /*/////////////////// BOXES ///////////////////*/
+        .boxProfile {
+            background-color: rgba(204, 204, 204, 0.9);
+
+            width: 86%;
+            /* margin-left: 20em;
+             margin-top: 30em;*/
+            margin: 0 auto;
+            padding: 5px;
+            margin-top: 10em;
+            height: 60%;
+            border-radius: 25px;
+        }
+
+        .boxLeft {
+
+
+            width: 40%;
+            /* margin-left: 20em;
+             margin-top: 30em;*/
+            margin: 0 auto;
+            padding: 5px;
+
+            height: 100%;
+            float: left;
+        }
+
+        .boxRight {
+
+
+            width: 60%;
+            /* margin-left: 20em;
+             margin-top: 30em;*/
+            margin: 0 auto;
+            padding: 5px;
+
+            height: 100%;
+            float: right;
+        }
+
+        .box {
+
+            width: 50%;
+            /* margin-left: 20em;
+             margin-top: 30em;*/
+            margin: 0 auto;
+            padding: 5px;
+            margin-top: 20em;
+
+
+
+        }
+
+
+        .boxLogo {
+            margin-top: 25em;
+        }
+
+        .boxLogoProfile {
+            margin-top: 8em;
+        }
+
+        .boxLogo2 {
+            border: 5px solid  #ffffff;
+            margin-left: 23%;
+        }
+
+    </style>
+</head>
+
+<body th:style="'background: url(../assets/img/background.jfif) center center no-repeat; background-size: cover; background-attachment: fixed;'">
+<nav th:replace="fragments :: nav"></nav>
+<h1>Profile!!!</h1>
+
+<!--<div class="col-12" style="text-align: left" >-->
+<!--    <tr th:each="profile : ${customer}" >-->
+<!--        <h3 th:text="${customer.firstName}">First Name</h3>-->
+<!--        <h3 th:text="${customer.surname}">LastName</h3>-->
+<!--        <h3 th:text="${customer.dateOfBirth}">Date Of Birth</h3>-->
+<!--        <h3 th:text="${customer.paymentMethod}">Customer Level</h3>-->
+<!--    </tr>-->
+
+<!--</div>-->
+
+<div class="boxRight">
+<table>
+    <tr>
+        <td>Automarke</td>
+        <td>Preis</td>
+        <td>Rented</td>
+        <td>Von</td>
+        <td>Bis</td>
+        <td>Electric</td>
+    </tr>
+
+    <tr  th:each="fuelCar : ${fuelRental}">
+        <td th:text="${fuelCar.combustionCar}"></td>
+<!--        <td th:text="${electricCar.rentalPrice}"></td>-->
+<!--        <td th:text="${electricCar.rentalDate}"></td>-->
+<!--        <td th:text="${electricCar.electricCar}"></td>-->
+<!--        <td th:text="${electricCar.id}"></td>-->
+    </tr>
+
+</table>
+</div>
+
+
+
+
+
+
+<!--<div class="">-->
+<!--    <img class="boxLogoProfile center" src="./images/OneNightCarLogo2.png" alt="Bild1" style="width:40%">-->
+<!--</div>-->
+
+
+<!--<div class="boxProfile">-->
+<!--    <div class="boxLeft">-->
+<!--        <a href="">-->
+<!--            <div th:value="${customer.getFirstName()} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>-->
+<!--            <div th:value="${customer.id}"></div>-->
+<!--        </a>-->
+
+
+<!--        <a href="">-->
+<!--            <div th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>-->
+<!--        </a>-->
+
+
+<!--        <a href="">-->
+<!--            <div th:text="${customer.customerLevel}" class="box21 fonts sizebig bold">UserLvl</div>-->
+<!--        </a>-->
+
+
+<!--        <a href="">-->
+<!--            <div class="box21 fonts sizebig bold">Change payment method</div>-->
+<!--        </a>-->
+<!--    </div>-->
+
+<!--    <div class="boxRight">-->
+<!--        <table>-->
+<!--            <tr th:each="profile : ${electricRental}">-->
+<!--                <td th:text="${profile.carName}">Automarke</td>-->
+<!--                <td>Preis</td>-->
+<!--                <td>Rented</td>-->
+<!--                <td>Von</td>-->
+<!--                <td>Bis</td>-->
+<!--                <td>Electric</td>-->
+<!--            </tr>-->
+<!--            <div th:each="electricRental : ${customer.electricRentals}"></div>-->
+<!--            <tr  th:each="electricCar : ${electricRentals}">-->
+<!--                <td th:text="${customer.getElectricRentals()}"</td>-->
+<!--                <td th:text="${electricCar.rentalPrice}"></td>-->
+<!--                <td th:text="${electricCar.rentalDate}"></td>-->
+<!--                <td th:text="${electricCar.electricCar}"></td>-->
+<!--                <td th:text="${electricCar.id}"></td>-->
+<!--            </tr>-->
+<!--    </div>-->
+<!--    </table>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--    <div class="boxRight">-->
+
+<!--        <table style="text-align:center;">-->
+<!--            <caption>Upcomming rentals</caption>-->
+<!--            <tr th:each="electricRental : ${electricRentals}">-->
+<!--                <td>Datum</td>-->
+<!--                <td>Von</td>-->
+<!--                <td>Bis</td>-->
+<!--                <td>Auto</td>-->
+<!--                <td th:text="${electricRental.rentalPrice}">Betrag</td>-->
+<!--                <td>Modify</td>-->
+<!--                <td>X</td>-->
+<!--            </tr>-->
+<!--            <tr th:each="fuelRental : ${fuelRentals}">-->
+<!--                <td th:text="${fuelRental.getCreated()}">Datum</td>-->
+<!--                <td th:text="${fuelRental.combustionCar}">Auto</td>-->
+<!--                <td th:text="${fuelRental.rentalPrice}">Betrag</td>-->
+<!--                <td>Modify</td>-->
+<!--                <td>X</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Datum</td>-->
+<!--                <td>Von</td>-->
+<!--                <td>Bis</td>-->
+<!--                <td>Auto</td>-->
+<!--                <td>Betrag</td>-->
+<!--                <td>Modify</td>-->
+<!--                <td>X</td>-->
+<!--            </tr>-->
+<!--        </table>-->
+
+<!--    </div>-->
+
+
+<!--</div>-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
