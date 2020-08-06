@@ -10,23 +10,32 @@ Ahmad Abo Louha, Pascal Giese, Benito Grauel, Alejandro Restrepo Klinge
 ## Was wir gemacht haben
 Wir haben unser Datenmodell genutzt und eine Weboberfläche für dieses gebaut. Man kann sich auf der Oberfläche einloggen und Autos mieten. Zudem gibt es eine Profilübersicht für jeden Kunden, in der aktive Mietverträge angezeigt werden.
 
-## Packages
-* OneNightCar.Person: Beinhaltet alle Informationen von Kunden, Mitarbeiter und Admins. Zuständig: Alejandro Restrepo Klinge (@mrrestre)
-![Package OneNightCar.Person](/diagrammen/packagePerson.png)
+## Tools
+wir haben während der Projektlaufzeit mit verschiedenen Tools gearbeitet wie: Spring-boot, Servlet, Thymeleaf, JUnit und SQL Datenbank.
 
-* OneNightCar.Rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen. Zuständig: Pascal Giese (@pascalgiese)
-  * Electric OneNightCar.Rental: Mieten eines elektrischen Autos
-  * Fuel OneNightCar.Rental: Mieten eines benzinbetriebenen Autos 
-![Package OneNightCar.Rental](/diagrammen/packageRental.png)
+## Projektstruktur
+das Projekt ist in MVC Pattern geteilt:
+#### Model:
+enthält logische Struktur von Daten geteilt in verschiedene Packages und jede Package hat die logische verbundene Klassen.
+* Package OneNightCar.person: Beinhaltet alle Informationen von Kunden, Mitarbeiter und Admins.
+![Package OneNightCar.Person](/diagrammen/PersonPackage.png)
+* Package OneNightCar.car: Beinhaltet alle Informationen von Autos
+![Package OneNightCar.Car](/diagrammen/CarPackage.png)
+* Package OneNightCar.parkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen.
+![Package Parking Area](/diagrammen/ParkingAreaPackage.png)
+*Package OneNightCar.rental: Beinhaltet alle Informationen von den verschiedenen Rentaltypen
+![Package OneNightCar.Rental](/diagrammen/RentalPackage.png)
 
-* OneNightCar.ParkingArea: Beinhaltet alle Informationen von den verschiedenen ParkingAreas. Hat eine maximale Anzahl von Autos die dazu gehören dürfen. Zuständig: Benito Grauel (@TheBenitoo)
-  * Electric OneNightCar.ParkingArea: beschreibt eine ParkinArea mit (bengrenzter Anzahl) Anschlüssen für elektrische Autos
-  * Fuel OneNightCar.Rental: beschreibt eine gewönliche OneNightCar.ParkingArea 
-![Package Parking Area](/diagrammen/packageParkingArea.png)
+#### Controller:
+ist zuständig für die Interaktion zwischen Präsentationsschicht und Daten
+* MainController
+* Login-, Logout-, signupController: zur Bearbeitung der genannten Forms
+* 
+#### View:
+enthält die grafische Darstellung der Daten in Art von Html seiten
+##### Seiten
+* index.html: 
 
-* OneNightCar.Car: Beinhaltet alle Informationen von Autos. Zuständig: Ahmad Abo Louha (@AhmadAboLouha)
-  * Electric OneNightCar.Car: haben verschiedene Eigenschaften als andere Autos
-![Package OneNightCar.Car](/diagrammen/packageCar.png)
 
 ## Produkte
 One-Night-OneNightCar.Car CarSharing Verwaltungsystem
