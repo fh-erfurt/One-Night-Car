@@ -21,80 +21,19 @@
 <!--    </tr>-->
 
 <!--</div>-->
+<!--1-->
+<!--<div  th:each="profile : ${customer}">-->
+<!--    <div  style="width: 100%;-->
+<!--            margin: 0 auto;-->
+<!--            /*padding: 5;*/-->
+<!--            height: auto;-->
+<!--            float: left;-->
+<!--            background: rgba(0,0,0,0.5);">-->
 
-<div  th:each="profile : ${customer}">
-    <div  style="width: 100%;
-            margin: 0 auto;
-            /*padding: 5;*/
-            height: auto;
-            float: left;
-            background: rgba(0,0,0,0.5);">
-
-        <a href="">
-            <div style=";
-  /*border:6px solid #cccccc;*/
-  color: #cccccc;
-  text-align: center;
-  /*width: 300px;*/
-  /*height: 100px;*/
-  /*padding: 1.4em;*/
-  /*margin-bottom: 5em;*/
-  /*margin-left: 2em;*/
-  font-size:3em;
-  overflow: auto;
-  border-radius: 25px;" th:text="${customer.firstName} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>
-
-        </a>
-
-
-        <a href="">
-            <div style="
-  color: #cccccc;
-  text-align: center;
-  /*width: 300px;*/
-  /*height: 100px;*/
-  /*padding: 1.4em;*/
-  /*margin-bottom: 5em;*/
-  /*margin-left: 2em;*/
-  font-size:3em;
-  overflow: auto;
-  border-radius: 25px;" th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>
-        </a>
-
-
-        <a href="">
-            <div style="
-  color: #cccccc;
-  text-align: center;
-  /*width: 300px;*/
-  /*height: 100px;*/
-  /*padding: 1.4em;*/
-  /*margin-bottom: 5em;*/
-  /*margin-left: 2em;*/
-  font-size:3em;
-  overflow: auto;
-  border-radius: 25px;" th:text="${customer.mail}" class="box21 fonts sizebig bold">UserLvl</div>
-        </a>
-
-
-
-            <div style="
-  color: #cccccc;
-  text-align: center;
-  /*width: 300px;*/
-  /*height: 100px;*/
-  /*padding: 1.4em;*/
-  /*margin-bottom: 5em;*/
-  /*margin-left: 2em;*/
-  font-size:3em;
-  overflow: auto;
-  border-radius: 25px;" th:text="${customer.electricRentals.size()} + ' Electric Rental(s) ' + ' and ' + ${customer.fuelRentals.size()} + ' Fuel Rental(s)'" class="box21 fonts sizebig bold"> Size Electric Rental</div>
-
-    </div>
-
-
-<!--        <div style="-->
-<!--  /*color: #ccccc;*/-->
+<!--        <a href="">-->
+<!--            <div style=";-->
+<!--  /*border:6px solid #cccccc;*/-->
+<!--  color: #cccccc;-->
 <!--  text-align: center;-->
 <!--  /*width: 300px;*/-->
 <!--  /*height: 100px;*/-->
@@ -103,10 +42,71 @@
 <!--  /*margin-left: 2em;*/-->
 <!--  font-size:3em;-->
 <!--  overflow: auto;-->
-<!--  border-radius: 25px;" th:text="${customer.fuelRentals.size()} + 'Fuel Rentals'" class="box21 fonts sizebig bold">Size Fuel Rental</div>-->
+<!--  border-radius: 25px;" th:text="${customer.firstName} + ' ' + ${customer.surname}" class="box21 fonts sizebig bold"></div>-->
 
-</div>
+<!--        </a>-->
 
+
+<!--        <a href="">-->
+<!--            <div style="-->
+<!--  color: #cccccc;-->
+<!--  text-align: center;-->
+<!--  /*width: 300px;*/-->
+<!--  /*height: 100px;*/-->
+<!--  /*padding: 1.4em;*/-->
+<!--  /*margin-bottom: 5em;*/-->
+<!--  /*margin-left: 2em;*/-->
+<!--  font-size:3em;-->
+<!--  overflow: auto;-->
+<!--  border-radius: 25px;" th:text="${#temporals.format(customer.dateOfBirth, 'dd-MM-yyyy')}" class="box21 fonts sizebig bold">BDate</div>-->
+<!--        </a>-->
+
+
+<!--        <a href="">-->
+<!--            <div style="-->
+<!--  color: #cccccc;-->
+<!--  text-align: center;-->
+<!--  /*width: 300px;*/-->
+<!--  /*height: 100px;*/-->
+<!--  /*padding: 1.4em;*/-->
+<!--  /*margin-bottom: 5em;*/-->
+<!--  /*margin-left: 2em;*/-->
+<!--  font-size:3em;-->
+<!--  overflow: auto;-->
+<!--  border-radius: 25px;" th:text="${customer.mail}" class="box21 fonts sizebig bold">UserLvl</div>-->
+<!--        </a>-->
+
+
+
+<!--            <div style="-->
+<!--  color: #cccccc;-->
+<!--  text-align: center;-->
+<!--  /*width: 300px;*/-->
+<!--  /*height: 100px;*/-->
+<!--  /*padding: 1.4em;*/-->
+<!--  /*margin-bottom: 5em;*/-->
+<!--  /*margin-left: 2em;*/-->
+<!--  font-size:3em;-->
+<!--  overflow: auto;-->
+<!--  border-radius: 25px;" th:text="${customer.electricRentals.size()} + ' Electric Rental(s) ' + ' and ' + ${customer.fuelRentals.size()} + ' Fuel Rental(s)'" class="box21 fonts sizebig bold"> Size Electric Rental</div>-->
+
+<!--    </div>-->
+
+
+<!--&lt;!&ndash;        <div style="&ndash;&gt;-->
+<!--&lt;!&ndash;  /*color: #ccccc;*/&ndash;&gt;-->
+<!--&lt;!&ndash;  text-align: center;&ndash;&gt;-->
+<!--&lt;!&ndash;  /*width: 300px;*/&ndash;&gt;-->
+<!--&lt;!&ndash;  /*height: 100px;*/&ndash;&gt;-->
+<!--&lt;!&ndash;  /*padding: 1.4em;*/&ndash;&gt;-->
+<!--&lt;!&ndash;  /*margin-bottom: 5em;*/&ndash;&gt;-->
+<!--&lt;!&ndash;  /*margin-left: 2em;*/&ndash;&gt;-->
+<!--&lt;!&ndash;  font-size:3em;&ndash;&gt;-->
+<!--&lt;!&ndash;  overflow: auto;&ndash;&gt;-->
+<!--&lt;!&ndash;  border-radius: 25px;" th:text="${customer.fuelRentals.size()} + 'Fuel Rentals'" class="box21 fonts sizebig bold">Size Fuel Rental</div>&ndash;&gt;-->
+
+<!--</div>-->
+<!--2-->
 
 
 
