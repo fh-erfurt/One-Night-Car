@@ -76,32 +76,14 @@ public class ProfileController {
         mav.addObject("customer", customerRepository.getById(customerId));
 
 
-//        mav.addObject("fuelRentalFormValidator", new FuelRentalFormValidator());
+
         mav.addObject("CustomerCarRentals", fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
         mav.addObject("CustomerCarRentalsElectric", electricRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
 
 
-//        mav.addObject("combustionCarBrand", rentalCombustionCar.getBrand());
-
-
-//        List fuelCarId  = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
-//
-//        CombustionCar fuelCarID = fuelCarId.get(1).;
-//        CombustionCar rentalCombustionCar = combustionCarRepository.GetOneByID(fuelCarID);
-
-
-
-
-
-
 
         List<FuelRental> dayFuelRental = fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId));
-//        List<CombustionCar> CarsList = combustionCarRepository.getById(fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
-//        long fuelCarId  = fuelRentalRepository.getAllByCustomer();
-//        CombustionCar rentalCombustionCar = (CombustionCar) combustionCarRepository.getAllByFuelRental(dayFuelRental);
-//        mav.addObject("CarModel", rentalCombustionCar.getBrand());
 
-//        List<CombustionCar> combustionIDs= combustionCarRepository.GetOneByID(41);
 
         if(!CookieHelper.proveCookieExistence(cookies, "userId")) {
             mav.setViewName("index");

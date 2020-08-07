@@ -10,7 +10,7 @@
 
 <body th:style="'background: url(../assets/img/index-bg.jfif) center center no-repeat; background-size: cover; background-attachment: fixed;'">
 <nav th:replace="fragments :: nav"></nav>
-<h1>Ihr Profil</h1>
+<h1 style="text-align: center; font-weight: bolder">Ihr Profil</h1>
 
 <!--<div class="col-12" style="text-align: left" >-->
 <!--    <tr th:each="profile : ${customer}" >-->
@@ -77,9 +77,9 @@
         </a>
 
 
-        <a href="">
+
             <div style="
-  /*color: #ccccc;*/
+  color: #cccccc;
   text-align: center;
   /*width: 300px;*/
   /*height: 100px;*/
@@ -88,10 +88,25 @@
   /*margin-left: 2em;*/
   font-size:3em;
   overflow: auto;
-  border-radius: 25px;">Change payment method</div>
-        </a>
+  border-radius: 25px;" th:text="${customer.electricRentals.size()} + ' Electric Rental(s) ' + ' and ' + ${customer.fuelRentals.size()} + ' Fuel Rental(s)'" class="box21 fonts sizebig bold"> Size Electric Rental</div>
+
     </div>
+
+
+<!--        <div style="-->
+<!--  /*color: #ccccc;*/-->
+<!--  text-align: center;-->
+<!--  /*width: 300px;*/-->
+<!--  /*height: 100px;*/-->
+<!--  /*padding: 1.4em;*/-->
+<!--  /*margin-bottom: 5em;*/-->
+<!--  /*margin-left: 2em;*/-->
+<!--  font-size:3em;-->
+<!--  overflow: auto;-->
+<!--  border-radius: 25px;" th:text="${customer.fuelRentals.size()} + 'Fuel Rentals'" class="box21 fonts sizebig bold">Size Fuel Rental</div>-->
+
 </div>
+
 
 
 
@@ -145,7 +160,9 @@
     </table>
 
 
-
+<!--<footer style="position: absolute;-->
+<!--  bottom: 0;-->
+<!--  width: 100%;" th:replace="fragments :: footer"></footer>-->
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
