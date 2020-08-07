@@ -61,7 +61,7 @@ public class ProfileController {
 //        CombustionCar rentalCombustionCar = combustionCarRepository.GetOneByID(fuelCarId);
 
         //////Create the Model and View and add the view//////
-        ModelAndView mav = new ModelAndView("/person/profile");
+        ModelAndView mav = new ModelAndView("person/profile");
 
         Cookie[] cookies = request.getCookies();
 
