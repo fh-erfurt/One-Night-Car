@@ -1,6 +1,5 @@
 package de.onenightcar.controller;
 
-import de.onenightcar.controller.formValidators.ProfileForm;
 import de.onenightcar.model.rental.FuelRental;
 import de.onenightcar.repositories.carRespository.CombustionCarRepository;
 import de.onenightcar.repositories.carRespository.ElectricCarRepository;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -68,8 +66,6 @@ public class ProfileController {
 
         Cookie[] cookies = request.getCookies();
 
-//        //Get all different cities from the Database
-//        List<String> parkingAreaCities = parkingAreaAddressRepository.getDistinctCity();
 
         //Retrieve the correct user from the logged in user
         Long customerId = CookieHelper.getUserCookieId(cookies, "userId");
@@ -96,12 +92,9 @@ public class ProfileController {
         {
             //Add the needed object for the rendering of the view
             //The object that should be populated in the form of the view
-            mav.addObject("profileForm", new ProfileForm());
-//            mav.addObject("combustionCar", CombustionCarRepository.get);
             mav.addObject("fuelRental", fuelRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
             mav.addObject("electricRental" ,electricRentalRepository.getAllByCustomer(customerRepository.getById(customerId)));
             mav.addObject("customer", customerRepository.getById(customerId));
-            mav.addObject("currentDate", LocalDate.now());
             mav.addObject("loggedIn", true);
         }
 
